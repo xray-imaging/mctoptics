@@ -11,6 +11,4 @@ Content
    about
    install
    usage
-   tomoStreamApp
-   api
-   credits
+   mctOpticsApp

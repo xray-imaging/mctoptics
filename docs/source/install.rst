@@ -4,13 +4,13 @@ Install directions
 
 .. _areadetector: https://cars9.uchicago.edu/software/epics/areaDetector.html
 
-The computer performing the tomographic reconstruction must have CUDA/GPU installed. **tomostream** consists of two modules
-TomoScanApp and tomostream tools.
+The computer performing the tomographic reconstruction must have CUDA/GPU installed. **mctoptics** consists of two modules
+TomoScanApp and mctoptics tools.
 
-TomoScanApp
-===========
+mctOpticsApp
+============
 
-Provides all the EPICS PVs needed by **tomostream**. To install TomoScanApp follow these steps:
+Provides all the EPICS PVs needed by **mctoptics**. To install TomoScanApp follow these steps:
 
 Build a minimal synApps
 -----------------------
@@ -25,7 +25,7 @@ To build a minimal synApp::
 - Edit the assemble_synApps.sh script as follows:
     - Set FULL_CLONE=True
     - Set EPICS_BASE to point to the location of EPICS base.  This could be on APSshare (the default), or a local version you built.
-    - For tomostream you only need BUSY and AUTOSAVE.  You can comment out all of the other modules (ALLENBRADLEY, ALIVE, etc.)
+    - For mctoptics you only need BUSY and AUTOSAVE.  You can comment out all of the other modules (ALLENBRADLEY, ALIVE, etc.)
 
 - Run::
 
@@ -39,25 +39,25 @@ To build a minimal synApp::
     
     ASYN=$(SUPPORT)/asyn-4-32).
 
-- Clone the tomostream module into synApps/support::
+- Clone the mctoptics module into synApps/support::
     
-    $ git clone https://github.com/tomography/tomostream.git
+    $ git clone https://github.com/tomography/mctoptics.git
 
-- Edit tomostream/configure/RELEASE to comment out this line::
+- Edit mctoptics/configure/RELEASE to comment out this line::
     
     ASYN=$(SUPPORT)/asyn-4-38
 
-- Edit tomostream/tomoStreamApp/src/Makefile to comment out this line::
+- Edit mctoptics/tomoStreamApp/src/Makefile to comment out this line::
     
     tomoStreamApp_LIBS += asyn
 
 - Edit configure/RELEASE add this line to the end::
     
-    TOMOSTREAM=$(SUPPORT)/tomostream
+    MCTOPTICS=$(SUPPORT)/mctoptics
 
 - Edit Makefile add this line to the end of the MODULE_LIST::
     
-    MODULE_LIST += TOMOSTREAM
+    MODULE_LIST += MCTOPTICS
 
 - Run the following commands::
 
@@ -67,23 +67,23 @@ To build a minimal synApp::
 Testing the installation
 ------------------------
 
-- Edit /epics/synApps/support/tomostream/configure
+- Edit /epics/synApps/support/mctoptics/configure
     - Set EPICS_BASE to point to the location of EPICS base:
     - EPICS_BASE=/APSshare/epics/base-3.15.6
 
 - Start the epics ioc and associated medm screen with::
 
-    $ cd ~/epics/synApps/support/tomostream/iocBoot/iocTomoStream
+    $ cd ~/epics/synApps/support/mctoptics/iocBoot/iocMCTOptics
     $ start_IOC
     $ start_medm
 
 
-tomostream python tools
+mctoptics python tools
 =======================
 
 ::
 
-    $ cd ~/epics/synApps/support/tomostream/
+    $ cd ~/epics/synApps/support/mctoptics/
     $ python setup.py install
 
 Testing the installation
@@ -91,7 +91,7 @@ Testing the installation
 
 ::
 
-    $ cd ~/epics/synApps/support/tomostream/iocBoot/iocTomoStream
-    $ python -i start_tomostream.py
+    $ cd ~/epics/synApps/support/mctoptics/iocBoot/iocMCTOptics
+    $ python -i start_mctoptics.py
 
 
