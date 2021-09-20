@@ -1,12 +1,12 @@
 
 file {
-	name="/local/fast/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
 	object {
-		x=1418
-		y=223
+		x=1077
+		y=164
 		width=1500
 		height=1310
 	}
@@ -9213,4 +9213,40 @@ composite {
 			align="horiz. centered"
 		}
 	}
+}
+text {
+	object {
+		x=486
+		y=1104
+		width=230
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Table"
+}
+text {
+	object {
+		x=662
+		y=1104
+		width=230
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="slits"
+}
+text {
+	object {
+		x=807
+		y=1143
+		width=230
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="multilayer"
 }
