@@ -1,4 +1,4 @@
-file "$(TOP)/db/txmOptics.template"
+file "$(TOP)/db/mctOptics.template"
 {
 pattern
 {  P,      R,     CAMERA,     BEAM_READY,    READY_VALUE, CLOSE_FAST_SHUTTER,        CLOSE_FAST_VALUE,   OPEN_FAST_SHUTTER,        OPEN_FAST_VALUE,      SHUTTER_STATUS,               BPM,       SHAKER,       VALVES_PLC,      CRL_RELAYS,
