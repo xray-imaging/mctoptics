@@ -1,3 +1,3 @@
-tomoStream.template
-===================
-.. literalinclude:: ../../tomoStreamApp/Db/tomoStream.template
+mctOptics.template
+==================
+.. literalinclude:: ../../mctOpticsApp/Db/mctOptics.template

@@ -39,8 +39,7 @@ extensions = [
     'sphinx.ext.viewcode']
 
 bibtex_bibfiles = [
-    'bibtex/ref.bib',
-    'bibtex/cite.bib'
+
     ]
 
 # Napoleon settings

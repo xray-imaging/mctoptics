@@ -10,5 +10,4 @@ Content
 
    about
    install
-   usage
    mctOpticsApp
