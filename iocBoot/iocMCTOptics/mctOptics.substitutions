@@ -2,5 +2,5 @@ file "$(TOP)/db/mctOptics.template"
 {
 pattern
 {  P,      R,     CAMERA_MOTOR, LENS_MOTOR, SHUTTER_MOTOR}
-{2bm:, MCTOptics:,    2bmb:m1,    2bmb:m2,     2bmb:m1}
+{2bm:, MCTOptics:,    2bmb:m1,    2bmb:m2,     2bmb:m6}
 }
