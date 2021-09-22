@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main_tomoscan.adl"
 	version=030111
 }
 display {
 	object {
-		x=1531
-		y=258
+		x=1521
+		y=250
 		width=1550
 		height=1310
 	}
@@ -409,22 +409,12 @@ text {
 		name="tomoScan_2BM.adl"
 		args="P=$(TS), R=$(TS_R), BEAMLINE=$(TS_BEAMLINE)"
 	}
-	display[2] {
-		label="tomoScanStream"
-		name="tomoScan.adl"
-		args=" P=$(TSS), R=$(TSS_R), BEAMLINE=$(TSS_BEAMLINE)"
-	}
-	display[3] {
-		label="tomoScanStream 2-BM"
-		name="tomoScan_2BM.adl"
-		args="P=$(TSS), R=$(TSS_R), BEAMLINE=$(TSS_BEAMLINE)"
-	}
 	display[4] {
 		args=" "
 	}
 	clr=0
 	bclr=53
-	label="- 4"
+	label="- 2"
 }
 text {
 	object {
