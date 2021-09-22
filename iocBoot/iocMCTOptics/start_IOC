@@ -1,4 +1,4 @@
-# Use this line to run the locally built mctOpticsApp
+# Use this line to run the locally built txmOpticsApp
 ../../bin/linux-x86_64/mctOpticsApp st.cmd
 
 # Use this line to run the xxx application on /APSshare
