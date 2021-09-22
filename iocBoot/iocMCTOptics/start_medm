@@ -1,7 +1,38 @@
-medm -x -macro "P=2bm:,R=MCTOptics:,MOTOR=m1, LOCK=M1:" ../../mctOpticsApp/op/adl/camera_select.adl &
-medm -x -macro "P=2bm:,R=MCTOptics:,MOTOR=m1, LOCK=M1:" ../../mctOpticsApp/op/adl/camera_select_setup.adl &
+#!/bin/csh
 
-medm -x -macro "P=2bm:,R=MCTOptics:,MOTOR=m1, LOCK=M1:" ../../mctOpticsApp/op/adl/lens_select.adl &
-medm -x -macro "P=2bm:,R=MCTOptics:,MOTOR=m1, LOCK=M1:" ../../mctOpticsApp/op/adl/lens_select_setup.adl &
+
+
+#medm -x -macro "P=2bm:,R=MCTOptics:,MOTOR=m1, LOCK=M1:" ../../mctOpticsApp/op/adl/camera_select.adl &
+#medm -x -macro "P=2bm:,R=MCTOptics:,MOTOR=m1, LOCK=M1:" ../../mctOpticsApp/op/adl/camera_select_setup.adl &
+
+#medm -x -macro "P=2bm:,R=MCTOptics:,MOTOR=m1, LOCK=M1:" ../../mctOpticsApp/op/adl/lens_select.adl &
+#medm -x -macro "P=2bm:,R=MCTOptics:,MOTOR=m1, LOCK=M1:" ../../mctOpticsApp/op/adl/lens_select_setup.adl &
+
+#medm -x -macro "P=2bm:,R=MCTOptics:,MOTOR=m1, LOCK=M1:" ../../mctOpticsApp/op/adl/shutter_select.adl &
+#medm -x -macro "P=2bm:,R=MCTOptics:,MOTOR=m1, LOCK=M1:" ../../mctOpticsApp/op/adl/shutter_select_setup.adl &
+
+setenv EPICS_APP_2BMTS /home/beams/USER2BMB/epics/synApps/support/tomoscan/
+setenv EPICS_APP_2BMB /net/s2dserv/xorApps/epics/synApps_5_8/ioc/2bmb
+setenv EPICS_APP_SPINNAKER /net/s2dserv/xorApps/PreBuilts/areaDetector-R3-10/ADSpinnaker-R3-1
+setenv EPICS_APP_GENICAM /net/s2dserv/xorApps/PreBuilts/areaDetector-R3-10/ADGenICam-R1-6
+setenv EPICS_APP_AD /net/s2dserv/xorApps/PreBuilts/areaDetector-R3-10/ADCore-R3-10
+
+
+set output = `perl $EPICS_APP_2BMB/release.pl $EPICS_APP_2BMB`
+$output
+
+#####################
+# prepare MEDM path
+#
+if (! ${?EPICS_DISPLAY_PATH}) setenv EPICS_DISPLAY_PATH '.'
+setenv EPICS_DISPLAY_PATH $EPICS_DISPLAY_PATH':'$EPICS_APP_SPINNAKER/spinnakerApp/op/adl
+setenv EPICS_DISPLAY_PATH $EPICS_DISPLAY_PATH':'$EPICS_APP_GENICAM/GenICamApp/op/adl
+setenv EPICS_DISPLAY_PATH $EPICS_DISPLAY_PATH':'$EPICS_APP_AD/ADApp/op/adl
+setenv EPICS_DISPLAY_PATH $EPICS_DISPLAY_PATH':'$SUPPORT/all_adl
+setenv EPICS_DISPLAY_PATH $EPICS_DISPLAY_PATH':'$EPICS_APP_2BMTS/tomoScanApp/op/adl
+
+medm -x -macro "P=2bm:,R=MCTOptics:,EPS=2bm:,FE=2bma:,Q1=A_shutter:,Q2=B_shutter:,P1=2bmb:,AD=2bmbPG1:,AD_CAM=cam1:,AD_HDF=HDF1:,AD_MODEL=PGR_GS3_U3_23S6M,TS=2bmb:,TS_R=TomoScan:,TS_BEAMLINE=tomoScan_2BM,TSS=2bmb:,TSS_R=TomoScanStream:,TS_BEAMLINE=tomoScanStream_2BM,M1=m63,M2=m57,M3=m100,M5=m76,M6=m77,M8=m54,M9=m53,M10=m1,M11=m2,M12=m3,M13=m4,M14=m5,M15=m7,M16=m8,M17=m14,M18=m16,M19=m13,M20=m15,M21=m9,AERO=2bmbAERO:,AERO_M1=m1,FE_M1=m13,FE_M2=m14,FE_M3=m15,FE_M4=m16,FE_M5=m11,FE_M6=m12,FE_M7=m9,FE_M8=m10,FE_M25=m25,FE_M28=m28,FE_M26=m26,FE_M27=m27,FE_M29=m29,FE_M32=m32,FE_M30=m30,FE_M31=m31,FE_M33=m8" ../../mctOpticsApp/op/adl/mct_main.adl &
+
+
 
 

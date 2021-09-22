@@ -1,19 +1,86 @@
 # Database for EPICS PVS for txm optics control
 # This database contains all of the PVs used by the txmoptics base class.
 
+record(ao, "$(P)$(R)ShutterPos0Put") {
+  field(OUT, "$(P)$(R)ShutterMotorOut.A PP MS")
+  field(DOL, "$(P)$(R)ShutterPos0.VAL NPP NMS")
+  field(OMSL, "closed_loop")
+  field(PREC, "3")
+}
+
+record(ao, "$(P)$(R)ShutterPos1Put") {
+  field(OUT, "$(P)$(R)ShutterMotorOut.A PP MS")
+  field(DOL, "$(P)$(R)ShutterPos1.VAL NPP NMS")
+  field(OMSL, "closed_loop")
+  field(PREC, "3")
+}
+
+record(fanout, "$(P)$(R)ShutterFO") {
+  field(SDIS, "$(P)$(R)ShutterNaming.VAL PP MS")
+  field(SELM, "Specified")
+  field(LNK5, "$(P)$(R)ShutterPos0Put.PROC PP MS")
+  field(LNK6, "$(P)$(R)ShutterPos1Put.PROC PP MS")
+}
+
+record(mbbo, "$(P)$(R)ShutterSelect") {
+  field(DTYP, "Raw Soft Channel")
+  field(NOBT, "3")
+  field(OUT, "$(P)$(R)ShutterFO.SELN PP MS")
+  field(ZRVL, "0x0")
+  field(ONVL, "0x1")
+  field(ZRST, "Pos. 0")
+  field(ONST, "Pos. 1")
+}
+
+record(ao, "$(P)$(R)ShutterPos0") {
+  field(PREC, "3")
+}
+
+record(ao, "$(P)$(R)ShutterPos1") {
+  field(PREC, "3")
+}
+
+record(stringout, "$(P)$(R)ShutterName0") {
+  field(PINI, "YES")
+  field(VAL, "Pos. 0")
+  field(OUT, "$(P)$(R)ShutterSelect.ZRST PP MS")
+}
+
+record(stringout, "$(P)$(R)ShutterName1") {
+  field(PINI, "YES")
+  field(VAL, "Pos. 1")
+  field(OUT, "$(P)$(R)ShutterSelect.ONST PP MS")
+}
+
+record(calc, "$(P)$(R)ShutterNaming") {
+  field(DESC, "Disable shutter select while naming")
+  field(CALC, "(a||b||c||d||e||f)?1:0")
+  field(INPA, "$(P)$(R)ShutterName0.PACT NPP NMS")
+  field(INPB, "$(P)$(R)ShutterName1.PACT NPP NMS")
+}
+
+record(bo, "$(P)$(R)ShutterLock") {
+  field(ZNAM, "Lock")
+  field(ONAM, "Unlock")
+}
+
+record(stringout, "$(P)$(R)ShutterMotorPVName")
+{
+   field(VAL,  "$(SHUTTER_MOTOR)")
+}
 
 record(ao, "$(P)$(R)CameraPos0Put") {
   field(OUT, "$(P)$(R)CameraMotorOut.A PP MS")
   field(DOL, "$(P)$(R)CameraPos0.VAL NPP NMS")
   field(OMSL, "closed_loop")
-  field(PREC, "3")
+  field(PREC, "4")
 }
 
 record(ao, "$(P)$(R)CameraPos1Put") {
   field(OUT, "$(P)$(R)CameraMotorOut.A PP MS")
   field(DOL, "$(P)$(R)CameraPos1.VAL NPP NMS")
   field(OMSL, "closed_loop")
-  field(PREC, "3")
+  field(PREC, "4")
 }
 
 record(fanout, "$(P)$(R)CameraFO") {
@@ -34,11 +101,11 @@ record(mbbo, "$(P)$(R)CameraSelect") {
 }
 
 record(ao, "$(P)$(R)CameraPos0") {
-  field(PREC, "3")
+  field(PREC, "4")
 }
 
 record(ao, "$(P)$(R)CameraPos1") {
-  field(PREC, "3")
+  field(PREC, "4")
 }
 
 record(stringout, "$(P)$(R)CameraName0") {
@@ -74,21 +141,21 @@ record(ao, "$(P)$(R)LensPos0Put") {
   field(OUT, "$(P)$(R)LensMotorOut.A PP MS")
   field(DOL, "$(P)$(R)LensPos0.VAL NPP NMS")
   field(OMSL, "closed_loop")
-  field(PREC, "3")
+  field(PREC, "4")
 }
 
 record(ao, "$(P)$(R)LensPos1Put") {
   field(OUT, "$(P)$(R)LensMotorOut.A PP MS")
   field(DOL, "$(P)$(R)LensPos1.VAL NPP NMS")
   field(OMSL, "closed_loop")
-  field(PREC, "3")
+  field(PREC, "4")
 }
 
 record(ao, "$(P)$(R)LensPos1Put") {
   field(OUT, "$(P)$(R)LensMotorOut.A PP MS")
   field(DOL, "$(P)$(R)LensPos1.VAL NPP NMS")
   field(OMSL, "closed_loop")
-  field(PREC, "3")
+  field(PREC, "4")
 }
 
 record(fanout, "$(P)$(R)LensFO") {
@@ -112,15 +179,15 @@ record(mbbo, "$(P)$(R)LensSelect") {
 }
 
 record(ao, "$(P)$(R)LensPos0") {
-  field(PREC, "3")
+  field(PREC, "4")
 }
 
 record(ao, "$(P)$(R)LensPos1") {
-  field(PREC, "3")
+  field(PREC, "4")
 }
 
 record(ao, "$(P)$(R)LensPos2") {
-  field(PREC, "3")
+  field(PREC, "4")
 }
 
 record(stringout, "$(P)$(R)LensName0") {
