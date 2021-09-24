@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=1046
-		y=217
+		x=1210
+		y=262
 		width=1550
 		height=1310
 	}
@@ -13970,8 +13970,8 @@ text {
 }
 composite {
 	object {
-		x=294
-		y=300
+		x=1459
+		y=1270
 		width=82
 		height=29
 	}
@@ -13979,8 +13979,8 @@ composite {
 	children {
 		text {
 			object {
-				x=296
-				y=303
+				x=1461
+				y=1273
 				width=80
 				height=26
 			}
@@ -13995,8 +13995,8 @@ composite {
 		}
 		text {
 			object {
-				x=294
-				y=300
+				x=1459
+				y=1270
 				width=80
 				height=26
 			}
