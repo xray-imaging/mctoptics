@@ -1,13 +1,18 @@
 # Database for EPICS PVS for txm optics control
 # This database contains all of the PVs used by the txmoptics base class.
 
-######################
-# TomoScan PV Prefixes
-######################
+#################################
+# TomoScan and Camera PV Prefixes
+#################################
 
 record(stringout, "$(P)$(R)TomoScanPVPrefix")
 {
    field(VAL,  "$(TOMOSCAN)")
+}
+
+record(stringout, "$(P)$(R)CameraPVPrefix")
+{
+   field(VAL,  "$(CAMERA)")
 }
 
 #####################

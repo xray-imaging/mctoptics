@@ -8,7 +8,7 @@ display {
 		x=943
 		y=116
 		width=456
-		height=160
+		height=185
 	}
 	clr=14
 	bclr=4
@@ -115,7 +115,7 @@ rectangle {
 		x=5
 		y=40
 		width=445
-		height=110
+		height=135
 	}
 	"basic attribute" {
 		clr=14
@@ -125,7 +125,7 @@ rectangle {
 "text entry" {
 	object {
 		x=220
-		y=75
+		y=100
 		width=225
 		height=20
 	}
@@ -141,7 +141,7 @@ rectangle {
 text {
 	object {
 		x=60
-		y=75
+		y=100
 		width=110
 		height=20
 	}
@@ -153,7 +153,7 @@ text {
 text {
 	object {
 		x=50
-		y=100
+		y=125
 		width=110
 		height=20
 	}
@@ -165,7 +165,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=100
+		y=125
 		width=225
 		height=20
 	}
@@ -181,7 +181,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=125
+		y=150
 		width=225
 		height=20
 	}
@@ -197,7 +197,7 @@ text {
 text {
 	object {
 		x=30
-		y=125
+		y=150
 		width=110
 		height=20
 	}
@@ -209,7 +209,7 @@ text {
 text {
 	object {
 		x=60
-		y=50
+		y=75
 		width=110
 		height=20
 	}
@@ -221,12 +221,40 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=50
+		y=75
 		width=225
 		height=20
 	}
 	control {
 		chan="$(P)$(R)TomoScanPVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=60
+		y=50
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Camera prefix"
+}
+"text entry" {
+	object {
+		x=220
+		y=50
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CameraPVPrefix"
 		clr=14
 		bclr=51
 	}

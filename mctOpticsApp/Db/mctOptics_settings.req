@@ -11,6 +11,7 @@
 # TomoScan PV Prefixes
 ######################
 $(P)$(R)TomoScanPVPrefix
+$(P)$(R)CameraPVPrefix
 
 #####################
 # Fast Shutter Select
