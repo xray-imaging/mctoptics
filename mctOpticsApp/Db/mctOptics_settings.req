@@ -7,33 +7,36 @@
 # but they are used by txmoptics.  
 # These PVs are not saved in the txmoptics configuration file.
 
+######################
+# TomoScan PV Prefixes
+######################
+$(P)$(R)TomoScanPVPrefix
 
-$(P)$(R)ShutterPos0Put
-$(P)$(R)ShutterPos1Put
-$(P)$(R)ShutterFO
+#####################
+# Fast Shutter Select
+#####################
 $(P)$(R)ShutterSelect
 $(P)$(R)ShutterPos0
 $(P)$(R)ShutterPos1
 $(P)$(R)ShutterName0
 $(P)$(R)ShutterName1
-$(P)$(R)ShutterNaming
 $(P)$(R)ShutterLock
 $(P)$(R)ShutterMotorPVName
-$(P)$(R)CameraPos0Put
-$(P)$(R)CameraPos1Put
-$(P)$(R)CameraFO
+
+###############################
+# Optique Peter camera selector
+###############################
 $(P)$(R)CameraSelect
 $(P)$(R)CameraPos0
 $(P)$(R)CameraPos1
 $(P)$(R)CameraName0
 $(P)$(R)CameraName1
-$(P)$(R)CameraNaming
 $(P)$(R)CameraLock
 $(P)$(R)CameraMotorPVName
-$(P)$(R)LensPos0Put
-$(P)$(R)LensPos1Put
-$(P)$(R)LensPos2Put
-$(P)$(R)LensFO
+
+#############################
+# Optique Peter lens selector
+#############################
 $(P)$(R)LensSelect
 $(P)$(R)LensPos0
 $(P)$(R)LensPos1
@@ -41,6 +44,5 @@ $(P)$(R)LensPos2
 $(P)$(R)LensName0
 $(P)$(R)LensName1
 $(P)$(R)LensName2
-$(P)$(R)LensNaming
 $(P)$(R)LensLock
 $(P)$(R)LensMotorPVName

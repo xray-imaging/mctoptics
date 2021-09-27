@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=1210
-		y=262
+		x=1200
+		y=254
 		width=1550
 		height=1310
 	}
@@ -14011,146 +14011,135 @@ composite {
 		}
 	}
 }
-composite {
+"text entry" {
+	object {
+		x=1113
+		y=1201
+		width=100
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)Energy"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1113
+		y=1251
+		width=100
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)Filters"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+menu {
+	object {
+		x=1113
+		y=1226
+		width=100
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)EnergyMode"
+		clr=14
+		bclr=51
+	}
+}
+text {
+	object {
+		x=986
+		y=1226
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy mode"
+}
+text {
+	object {
+		x=986
+		y=1201
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy (keV)"
+}
+text {
+	object {
+		x=986
+		y=1251
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Filters"
+}
+rectangle {
 	object {
 		x=977
 		y=1161
 		width=275
 		height=120
 	}
-	"composite name"=""
-	children {
-		"text entry" {
-			object {
-				x=1113
-				y=1201
-				width=100
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)Energy"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1113
-				y=1251
-				width=100
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)Filters"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		menu {
-			object {
-				x=1113
-				y=1226
-				width=100
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)EnergyMode"
-				clr=14
-				bclr=51
-			}
-		}
-		text {
-			object {
-				x=986
-				y=1226
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Energy mode"
-		}
-		text {
-			object {
-				x=986
-				y=1201
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Energy (keV)"
-		}
-		text {
-			object {
-				x=986
-				y=1251
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Filters"
-		}
-		rectangle {
-			object {
-				x=977
-				y=1161
-				width=275
-				height=120
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=5
-			}
-		}
-		rectangle {
-			object {
-				x=985
-				y=1169
-				width=260
-				height=20
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=1140
-				y=1169
-				width=100
-				height=20
-			}
-			"basic attribute" {
-				clr=54
-			}
-			textix="Energy"
-			align="horiz. centered"
-		}
-		text {
-			object {
-				x=987
-				y=1172
-				width=125
-				height=15
-			}
-			"basic attribute" {
-				clr=20
-			}
-			textix="$(TS_BEAMLINE)"
-		}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
 	}
+}
+rectangle {
+	object {
+		x=985
+		y=1169
+		width=260
+		height=20
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=1140
+		y=1169
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Energy"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=987
+		y=1172
+		width=125
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	textix="$(TS_BEAMLINE)"
 }
 composite {
 	object {
@@ -14965,4 +14954,31 @@ composite {
 			textix="$(TS_BEAMLINE)"
 		}
 	}
+}
+"related display" {
+	object {
+		x=793
+		y=953
+		width=50
+		height=20
+	}
+	display[0] {
+		label="Epics PV Names"
+		name="mctOpticsEPICS_PVs.adl"
+		args="P=$(P), R=$(R)"
+	}
+	clr=14
+	bclr=51
+}
+text {
+	object {
+		x=648
+		y=955
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Epics PV names"
 }

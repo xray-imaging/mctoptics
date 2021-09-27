@@ -1,31 +1,22 @@
 # Database for EPICS PVS for txm optics control
 # This database contains all of the PVs used by the txmoptics base class.
 
-record(ao, "$(P)$(R)ShutterPos0Put") {
-  field(OUT, "$(P)$(R)ShutterMotorOut.A PP MS")
-  field(DOL, "$(P)$(R)ShutterPos0.VAL NPP NMS")
-  field(OMSL, "closed_loop")
-  field(PREC, "3")
+######################
+# TomoScan PV Prefixes
+######################
+
+record(stringout, "$(P)$(R)TomoScanPVPrefix")
+{
+   field(VAL,  "$(TOMOSCAN)")
 }
 
-record(ao, "$(P)$(R)ShutterPos1Put") {
-  field(OUT, "$(P)$(R)ShutterMotorOut.A PP MS")
-  field(DOL, "$(P)$(R)ShutterPos1.VAL NPP NMS")
-  field(OMSL, "closed_loop")
-  field(PREC, "3")
-}
-
-record(fanout, "$(P)$(R)ShutterFO") {
-  field(SDIS, "$(P)$(R)ShutterNaming.VAL PP MS")
-  field(SELM, "Specified")
-  field(LNK5, "$(P)$(R)ShutterPos0Put.PROC PP MS")
-  field(LNK6, "$(P)$(R)ShutterPos1Put.PROC PP MS")
-}
+#####################
+# Fast Shutter Select
+#####################
 
 record(mbbo, "$(P)$(R)ShutterSelect") {
   field(DTYP, "Raw Soft Channel")
   field(NOBT, "3")
-  field(OUT, "$(P)$(R)ShutterFO.SELN PP MS")
   field(ZRVL, "0x0")
   field(ONVL, "0x1")
   field(ZRST, "Pos. 0")
@@ -51,14 +42,6 @@ record(stringout, "$(P)$(R)ShutterName1") {
   field(VAL, "Pos. 1")
   field(OUT, "$(P)$(R)ShutterSelect.ONST PP MS")
 }
-
-record(calc, "$(P)$(R)ShutterNaming") {
-  field(DESC, "Disable shutter select while naming")
-  field(CALC, "(a||b||c||d||e||f)?1:0")
-  field(INPA, "$(P)$(R)ShutterName0.PACT NPP NMS")
-  field(INPB, "$(P)$(R)ShutterName1.PACT NPP NMS")
-}
-
 record(bo, "$(P)$(R)ShutterLock") {
   field(ZNAM, "Lock")
   field(ONAM, "Unlock")
@@ -68,37 +51,18 @@ record(stringout, "$(P)$(R)ShutterMotorPVName")
 {
    field(VAL,  "$(SHUTTER_MOTOR)")
 }
-
-record(ao, "$(P)$(R)CameraPos0Put") {
-  field(OUT, "$(P)$(R)CameraMotorOut.A PP MS")
-  field(DOL, "$(P)$(R)CameraPos0.VAL NPP NMS")
-  field(OMSL, "closed_loop")
-  field(PREC, "4")
-}
-
-record(ao, "$(P)$(R)CameraPos1Put") {
-  field(OUT, "$(P)$(R)CameraMotorOut.A PP MS")
-  field(DOL, "$(P)$(R)CameraPos1.VAL NPP NMS")
-  field(OMSL, "closed_loop")
-  field(PREC, "4")
-}
-
-record(fanout, "$(P)$(R)CameraFO") {
-  field(SDIS, "$(P)$(R)CameraNaming.VAL PP MS")
-  field(SELM, "Specified")
-  field(LNK5, "$(P)$(R)CameraPos0Put.PROC PP MS")
-  field(LNK6, "$(P)$(R)CameraPos1Put.PROC PP MS")
-}
-
 record(mbbo, "$(P)$(R)CameraSelect") {
   field(DTYP, "Raw Soft Channel")
   field(NOBT, "3")
-  field(OUT, "$(P)$(R)CameraFO.SELN PP MS")
   field(ZRVL, "0x0")
   field(ONVL, "0x1")
   field(ZRST, "Pos. 0")
   field(ONST, "Pos. 1")
 }
+
+###############################
+# Optique Peter camera selector
+###############################
 
 record(ao, "$(P)$(R)CameraPos0") {
   field(PREC, "4")
@@ -119,14 +83,6 @@ record(stringout, "$(P)$(R)CameraName1") {
   field(VAL, "Pos. 1")
   field(OUT, "$(P)$(R)CameraSelect.ONST PP MS")
 }
-
-record(calc, "$(P)$(R)CameraNaming") {
-  field(DESC, "Disable camera select while naming")
-  field(CALC, "(a||b||c||d||e||f)?1:0")
-  field(INPA, "$(P)$(R)CameraName0.PACT NPP NMS")
-  field(INPB, "$(P)$(R)CameraName1.PACT NPP NMS")
-}
-
 record(bo, "$(P)$(R)CameraLock") {
   field(ZNAM, "Lock")
   field(ONAM, "Unlock")
@@ -137,38 +93,13 @@ record(stringout, "$(P)$(R)CameraMotorPVName")
    field(VAL,  "$(CAMERA_MOTOR)")
 }
 
-record(ao, "$(P)$(R)LensPos0Put") {
-  field(OUT, "$(P)$(R)LensMotorOut.A PP MS")
-  field(DOL, "$(P)$(R)LensPos0.VAL NPP NMS")
-  field(OMSL, "closed_loop")
-  field(PREC, "4")
-}
-
-record(ao, "$(P)$(R)LensPos1Put") {
-  field(OUT, "$(P)$(R)LensMotorOut.A PP MS")
-  field(DOL, "$(P)$(R)LensPos1.VAL NPP NMS")
-  field(OMSL, "closed_loop")
-  field(PREC, "4")
-}
-
-record(ao, "$(P)$(R)LensPos2Put") {
-  field(OUT, "$(P)$(R)LensMotorOut.A PP MS")
-  field(DOL, "$(P)$(R)LensPos2.VAL NPP NMS")
-  field(OMSL, "closed_loop")
-  field(PREC, "4")
-}
-
-record(fanout, "$(P)$(R)LensFO") {
-  field(SDIS, "$(P)$(R)LensNaming.VAL PP MS")
-  field(SELM, "Specified")
-  field(LNK5, "$(P)$(R)LensPos0Put.PROC PP MS")
-  field(LNK6, "$(P)$(R)LensPos1Put.PROC PP MS")
-}
+#############################
+# Optique Peter lens selector
+#############################
 
 record(mbbo, "$(P)$(R)LensSelect") {
   field(DTYP, "Raw Soft Channel")
   field(NOBT, "3")
-  field(OUT, "$(P)$(R)LensFO.SELN PP MS")
   field(ZRVL, "0x0")
   field(ONVL, "0x1")
   field(ONVL, "0x2")
@@ -207,19 +138,10 @@ record(stringout, "$(P)$(R)LensName2") {
   field(OUT, "$(P)$(R)LensSelect.TWST PP MS")
 }
 
-record(calc, "$(P)$(R)LensNaming") {
-  field(DESC, "Disable camera select while naming")
-  field(CALC, "(a||b||c||d||e||f)?1:0")
-  field(INPA, "$(P)$(R)LensName0.PACT NPP NMS")
-  field(INPB, "$(P)$(R)LensName1.PACT NPP NMS")
-  field(INPC, "$(P)$(R)LensName2.PACT NPP NMS")
-}
-
 record(bo, "$(P)$(R)LensLock") {
   field(ZNAM, "Lock")
   field(ONAM, "Unlock")
 }
-
 
 record(stringout, "$(P)$(R)LensMotorPVName")
 {
