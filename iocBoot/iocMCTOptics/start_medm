@@ -1,3 +1,6 @@
 #!/bin/csh
 
-medm -x -macro "P=2bm:,R=MCTOptics:" ../../mctOpticsApp/op/adl/shutter_select.adl ../../mctOpticsApp/op/adl/shutter_select_setup.adl ../../mctOpticsApp/op/adl/lens_select.adl ../../mctOpticsApp/op/adl/lens_select_setup.adl ../../mctOpticsApp/op/adl/camera_select.adl ../../mctOpticsApp/op/adl/camera_select_setup.adl &
+#medm -x -macro "P=2bm:,R=MCTOptics:" ../../mctOpticsApp/op/adl/shutter_select.adl ../../mctOpticsApp/op/adl/shutter_select_setup.adl ../../mctOpticsApp/op/adl/lens_select.adl ../../mctOpticsApp/op/adl/lens_select_setup.adl ../../mctOpticsApp/op/adl/camera_select.adl ../../mctOpticsApp/op/adl/camera_select_setup.adl &
+
+
+medm -x -macro "P=2bm:,R=MCTOptics:" ../../mctOpticsApp/op/adl/mctOptics.adl &
