@@ -70,8 +70,8 @@ master_doc = 'index'
 
 # General information about the project.
 Affiliation = u'Argonne National Laboratory'
-project = u'TomoStream'
-copyright = u'2020, ' + Affiliation
+project = u'mctOptics'
+copyright = u'2021, ' + Affiliation
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
