@@ -56,6 +56,11 @@ record(stringout, "$(P)$(R)ShutterMotorPVName")
 {
    field(VAL,  "$(SHUTTER_MOTOR)")
 }
+
+###############################
+# Optique Peter camera selector
+###############################
+
 record(mbbo, "$(P)$(R)CameraSelect") {
   field(DTYP, "Raw Soft Channel")
   field(NOBT, "3")
@@ -64,10 +69,6 @@ record(mbbo, "$(P)$(R)CameraSelect") {
   field(ZRST, "Pos. 0")
   field(ONST, "Pos. 1")
 }
-
-###############################
-# Optique Peter camera selector
-###############################
 
 record(ao, "$(P)$(R)CameraPos0") {
   field(PREC, "4")
