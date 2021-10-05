@@ -312,7 +312,6 @@ texinfo_documents = [
 autodoc_mock_imports = [
     'cupyx',
     'cupy',
-    'h5py',
     'time',
     'numpy',
     'scipy',
