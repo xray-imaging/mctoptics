@@ -161,13 +161,13 @@ class MCTOptics():
 
             if(self.epics_pvs['LensSelect'].value == 0):
                 lens_name = self.epics_pvs['LensName0'].value
-                self.epics_pvs['LensMotor'].put(lens_pos0, wait=True)
+                self.epics_pvs['LensMotor'].put(lens_pos0, wait=True, timeout=120)
             elif(self.epics_pvs['LensSelect'].value == 1):
                 lens_name = self.epics_pvs['LensName1'].value
-                self.epics_pvs['LensMotor'].put(lens_pos1, wait=True)
+                self.epics_pvs['LensMotor'].put(lens_pos1, wait=True, timeout=120)
             elif(self.epics_pvs['LensSelect'].value == 2):
                 lens_name = self.epics_pvs['LensName2'].value
-                self.epics_pvs['LensMotor'].put(lens_pos2, wait=True)
+                self.epics_pvs['LensMotor'].put(lens_pos2, wait=True, timeout=120)
             log.info('Lens: %s selected', lens_name)
             self.epics_pvs['CameraObjective'].put(lens_name)
         else:
@@ -188,10 +188,10 @@ class MCTOptics():
 
             if(self.epics_pvs['CameraSelect'].value == 0):
                 camera_name = self.epics_pvs['CameraName0'].value
-                self.epics_pvs['CameraMotor'].put(camera_pos0, wait=True)
+                self.epics_pvs['CameraMotor'].put(camera_pos0, wait=True, timeout=120)
             elif(self.epics_pvs['CameraSelect'].value == 1):
                 camera_name = self.epics_pvs['CameraName1'].value
-                self.epics_pvs['CameraMotor'].put(camera_pos1, wait=True)
+                self.epics_pvs['CameraMotor'].put(camera_pos1, wait=True, timeout=120)
 
             camera_pixel_size = -2
             if camera_name == 'Adimec':
@@ -220,10 +220,10 @@ class MCTOptics():
 
             if(self.epics_pvs['ShutterSelect'].value == 0):
                 shutter_name = self.epics_pvs['ShutterName0'].value
-                self.epics_pvs['ShutterMotor'].put(shutter_pos0, wait=True)
+                self.epics_pvs['ShutterMotor'].put(shutter_pos0, wait=True, timeout=120)
             elif(self.epics_pvs['ShutterSelect'].value == 1):
                 shutter_name = self.epics_pvs['ShutterName1'].value
-                self.epics_pvs['ShutterMotor'].put(shutter_pos1, wait=True)
+                self.epics_pvs['ShutterMotor'].put(shutter_pos1, wait=True, timeout=120)
 
             log.info('Shutter: %s', shutter_name)
         else:
