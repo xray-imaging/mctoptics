@@ -2,7 +2,6 @@ import pvaccess as pva
 import numpy as np
 import queue
 import time
-import h5py
 import threading
 import signal
 
