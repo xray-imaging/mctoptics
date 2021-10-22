@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/iocBoot/iocMCTOptics/../../mctOpticsApp/op/adl/mctOptics.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOptics.adl"
 	version=030111
 }
 display {
@@ -464,30 +464,41 @@ composite {
 		}
 	}
 }
-"related display" {
-	object {
-		x=374
-		y=303
-		width=20
-		height=20
-	}
-	display[0] {
-		label="MCT Main"
-		name="mct_main.adl"
-		args="P=2bm:,R=MCTOptics:,EPS=2bm:,FE=2bma:,Q1=A_shutter:,Q2=B_shutter:,P1=2bmb:,AD=2bmbSP2:,AD_CAM=cam1:,AD_HDF=HDF1:,AD_MODEL=PGR_GS3_U3_23S6M,TS=2bmb:,TS_R=TomoScan:,TS_BEAMLINE=tomoScan_2BM,M1=m63,M2=m57,M3=m100,M5=m76,M6=m77,M8=m54,M9=m53,M10=m1,M11=m2,M12=m3,M13=m4,M14=m5,M15=m7,M16=m8,M17=m14,M18=m16,M19=m13,M20=m15,M21=m9,M22=mXX,AERO=2bmbAERO:,AERO_M1=m1,FE_M1=m13,FE_M2=m14,FE_M3=m15,FE_M4=m16,FE_M5=m11,FE_M6=m12,FE_M7=m9,FE_M8=m10,FE_M25=m25,FE_M28=m28,FE_M26=m26,FE_M27=m27,FE_M29=m29,FE_M32=m32,FE_M30=<"
-	}
-	clr=0
-	bclr=53
-}
-text {
+composite {
 	object {
 		x=290
-		y=304
-		width=50
-		height=20
+		y=303
+		width=104
+		height=21
 	}
-	"basic attribute" {
-		clr=14
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=290
+				y=304
+				width=80
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="mct_main"
+		}
+		"related display" {
+			object {
+				x=374
+				y=303
+				width=20
+				height=20
+			}
+			display[0] {
+				label="MCT Main"
+				name="mct_main.adl"
+				args="P=2bm:,R=MCTOptics:,EPS=2bm:,FE=2bma:,Q1=A_shutter:,Q2=B_shutter:,P1=2bmb:,AD=2bmbSP2:,AD_CAM=cam1:,AD_HDF=HDF1:,AD_MODEL=PGR_GS3_U3_23S6M,TS=2bmb:,TS_R=TomoScan:,TS_BEAMLINE=tomoScan_2BM,M1=m63,M2=m57,M3=m100,M5=m76,M6=m77,M8=m54,M9=m53,M10=m1,M11=m2,M12=m3,M13=m4,M14=m5,M15=m7,M16=m8,M17=m14,M18=m16,M19=m13,M20=m15,M21=m9,M22=mXX,AERO=2bmbAERO:,AERO_M1=m1,FE_M1=m13,FE_M2=m14,FE_M3=m15,FE_M4=m16,FE_M5=m11,FE_M6=m12,FE_M7=m9,FE_M8=m10"
+			}
+			clr=0
+			bclr=53
+		}
 	}
-	textix="mct_main"
 }
