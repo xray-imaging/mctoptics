@@ -8,4 +8,4 @@ About
 .. _ImageJ: https://imagej.nih.gov/ij/
 .. _DXfile: https://dxfile.readthedocs.io/en/latest/source/xraytomo.html
 
-**mctOptics** supports microCT IOC running tomography experiments at beamline 2-BM of the Advanced Photon Source
+**mctOptics** is an EPICS IOC supporting the the Optique Peter systen installed at beamline 2-BM of the Advanced Photon Source.
