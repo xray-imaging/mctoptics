@@ -1,10 +1,13 @@
+import os
 import pvaccess as pva
 import numpy as np
 import queue
 import time
 import threading
 import signal
+import json
 
+from pathlib import Path
 from mctoptics import util
 from mctoptics import log
 from epics import PV
@@ -182,7 +185,7 @@ class MCTOptics():
             try:
                 scintillator_type      = lens_lookup[lens_name]['scintillator_type']
                 scintillator_thickness = lens_lookup[lens_name]['scintillator_thickness']
-                magnification          = lens_lookup[lens_name]['magnification']
+                magnification          = str(lens_lookup[lens_name]['magnification'])
                 tube_lens              = lens_lookup[lens_name]['tube_lens']
 
                 # update tomoScan PVs
