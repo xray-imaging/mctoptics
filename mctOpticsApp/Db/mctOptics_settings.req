@@ -13,7 +13,6 @@
 $(P)$(R)TomoScanPVPrefix
 $(P)$(R)CameraPVPrefix
 $(P)$(R)OverlayPluginPVPrefix
-$(P)$(R)ROIPluginPVPrefix
 
 #####################
 # Fast Shutter Select

@@ -48,8 +48,14 @@ class MCTOptics():
         #Define PVs from the camera IOC that we will need
         prefix = self.pv_prefixes['Camera']
         camera_prefix = prefix + 'cam1:'
-        self.control_pvs['ArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
-        self.control_pvs['ArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
+        self.control_pvs['CamArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
+        self.control_pvs['CamArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeY_RBV')
+
+        prefix = self.pv_prefixes['OverlayPlugin']
+        self.control_pvs['OPEnableCallbacks'] = PV(prefix + 'EnableCallbacks')
+        self.control_pvs['OP1Use']            = PV(prefix + '1:Use')        
+        self.control_pvs['OP1CenterX']        = PV(prefix + '1:CenterX')        
+        self.control_pvs['OP1CenterY']        = PV(prefix + '1:CenterY')        
 
         self.epics_pvs = {**self.config_pvs, **self.control_pvs}
 
@@ -282,27 +288,17 @@ class MCTOptics():
             log.error('Shutter: Locked')
 
     def cross_select(self):
-        """Moves the Optique Peter shutter.
+        """Plot the cross in imageJ.
         """
+    
 
-        print('OK CallBack')
-        return
-        if (self.epics_pvs['CrossSelect'].get() == 1):
-            shutter_pos0 = self.epics_pvs['ShutterPos0'].get()
-            shutter_pos1 = self.epics_pvs['ShutterPos1'].get()
-
-            shutter_select = self.epics_pvs['ShutterSelect'].get()
-            shutter_name = 'None'
-
-            log.info('Fast shutter')
-
-            if(self.epics_pvs['ShutterSelect'].get() == 0):
-                shutter_name = self.epics_pvs['ShutterName0'].get()
-                self.epics_pvs['ShutterMotor'].put(shutter_pos0, wait=True, timeout=120)
-            elif(self.epics_pvs['ShutterSelect'].get() == 1):
-                shutter_name = self.epics_pvs['ShutterName1'].get()
-                self.epics_pvs['ShutterMotor'].put(shutter_pos1, wait=True, timeout=120)
-
-            log.info('Shutter: %s', shutter_name)
+        if (self.epics_pvs['CrossSelect'].get() == 0):
+            sizex = int(self.epics_pvs['CamArraySizeXRBV'].get())
+            sizey = int(self.epics_pvs['CamArraySizeYRBV'].get())
+            self.epics_pvs['OP1CenterX'].put(sizex//2)
+            self.epics_pvs['OP1CenterY'].put(sizey//2)
+            self.control_pvs['OP1Use'].put(1)
+            log.info('Cross at %d %d is enable' % (sizex//2,sizey//2))
         else:
-            log.error('Shutter: Locked')
+            self.control_pvs['OP1Use'].put(0)
+            log.info('Cross is disabled')

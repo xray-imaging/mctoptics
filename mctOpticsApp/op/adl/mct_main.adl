@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=1083
-		y=64
+		x=675
+		y=192
 		width=1550
 		height=1310
 	}
@@ -11070,7 +11070,7 @@ composite {
 composite {
 	object {
 		x=998
-		y=79
+		y=106
 		width=100
 		height=123
 	}
@@ -11079,7 +11079,7 @@ composite {
 		text {
 			object {
 				x=1013
-				y=79
+				y=106
 				width=65
 				height=20
 			}
@@ -11092,7 +11092,7 @@ composite {
 		"choice button" {
 			object {
 				x=998
-				y=128
+				y=155
 				width=100
 				height=74
 			}
@@ -11105,7 +11105,7 @@ composite {
 		"choice button" {
 			object {
 				x=998
-				y=103
+				y=130
 				width=100
 				height=20
 			}
@@ -11121,7 +11121,7 @@ composite {
 composite {
 	object {
 		x=518
-		y=79
+		y=106
 		width=100
 		height=114
 	}
@@ -11130,7 +11130,7 @@ composite {
 		text {
 			object {
 				x=533
-				y=79
+				y=106
 				width=65
 				height=20
 			}
@@ -11143,7 +11143,7 @@ composite {
 		"choice button" {
 			object {
 				x=518
-				y=133
+				y=160
 				width=100
 				height=60
 			}
@@ -11156,7 +11156,7 @@ composite {
 		"choice button" {
 			object {
 				x=518
-				y=108
+				y=135
 				width=100
 				height=20
 			}
@@ -12499,7 +12499,7 @@ text {
 composite {
 	object {
 		x=512
-		y=195
+		y=221
 		width=104
 		height=20
 	}
@@ -12508,7 +12508,7 @@ composite {
 		"related display" {
 			object {
 				x=596
-				y=195
+				y=221
 				width=20
 				height=20
 			}
@@ -12523,7 +12523,7 @@ composite {
 		text {
 			object {
 				x=512
-				y=195
+				y=221
 				width=80
 				height=20
 			}
@@ -12538,7 +12538,7 @@ composite {
 composite {
 	object {
 		x=992
-		y=204
+		y=231
 		width=104
 		height=20
 	}
@@ -12547,7 +12547,7 @@ composite {
 		"related display" {
 			object {
 				x=1076
-				y=204
+				y=231
 				width=20
 				height=20
 			}
@@ -12562,7 +12562,7 @@ composite {
 		text {
 			object {
 				x=992
-				y=204
+				y=231
 				width=80
 				height=20
 			}
@@ -12660,40 +12660,30 @@ composite {
 		}
 	}
 }
-composite {
+"choice button" {
 	object {
-		x=717
-		y=943
-		width=100
-		height=123
+		x=522
+		y=72
+		width=90
+		height=25
 	}
-	"composite name"=""
-	children {
-		"choice button" {
-			object {
-				x=717
-				y=992
-				width=100
-				height=74
-			}
-			control {
-				chan="$(P)$(R)CrossSelect.VAL"
-				clr=14
-				bclr=51
-			}
-		}
-		text {
-			object {
-				x=735
-				y=943
-				width=65
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Cross"
-			align="horiz. centered"
-		}
+	control {
+		chan="$(P)$(R)CrossSelect.VAL"
+		clr=14
+		bclr=51
 	}
+	stacking="column"
+}
+text {
+	object {
+		x=537
+		y=50
+		width=65
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Cross"
+	align="horiz. centered"
 }

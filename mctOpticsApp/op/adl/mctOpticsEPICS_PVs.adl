@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOpticsEPICS_PVs.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOpticsEPICS_PVs.adl"
 	version=030111
 }
 display {
 	object {
-		x=933
-		y=108
+		x=923
+		y=100
 		width=456
-		height=230
+		height=210
 	}
 	clr=14
 	bclr=4
@@ -115,7 +115,7 @@ rectangle {
 		x=5
 		y=40
 		width=445
-		height=185
+		height=160
 	}
 	"basic attribute" {
 		clr=14
@@ -125,7 +125,7 @@ rectangle {
 "text entry" {
 	object {
 		x=220
-		y=150
+		y=125
 		width=225
 		height=20
 	}
@@ -141,7 +141,7 @@ rectangle {
 text {
 	object {
 		x=60
-		y=150
+		y=125
 		width=110
 		height=20
 	}
@@ -153,7 +153,7 @@ text {
 text {
 	object {
 		x=50
-		y=175
+		y=150
 		width=110
 		height=20
 	}
@@ -165,7 +165,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=175
+		y=150
 		width=225
 		height=20
 	}
@@ -181,7 +181,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=200
+		y=175
 		width=225
 		height=20
 	}
@@ -197,7 +197,7 @@ text {
 text {
 	object {
 		x=30
-		y=200
+		y=175
 		width=110
 		height=20
 	}
@@ -283,34 +283,6 @@ text {
 	}
 	control {
 		chan="$(P)$(R)OverlayPluginPVPrefix"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=60
-		y=125
-		width=110
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="ROI prefix"
-}
-"text entry" {
-	object {
-		x=220
-		y=125
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)ROIPluginPVPrefix"
 		clr=14
 		bclr=51
 	}

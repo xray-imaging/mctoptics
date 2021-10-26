@@ -20,11 +20,6 @@ record(stringout, "$(P)$(R)OverlayPluginPVPrefix")
    field(VAL,  "$(OVERLAY)")
 }
 
-record(stringout, "$(P)$(R)ROIPluginPVPrefix")
-{
-   field(VAL,  "$(ROI)")
-}
-
 #####################
 # Fast Shutter Select
 #####################
@@ -173,6 +168,6 @@ record(mbbo, "$(P)$(R)CrossSelect") {
   field(NOBT, "3")
   field(ZRVL, "0x0")
   field(ONVL, "0x1")
-  field(ZRST, "Enable")
-  field(ONST, "Disable")
+  field(ZRST, "Yes")
+  field(ONST, "No")
 }

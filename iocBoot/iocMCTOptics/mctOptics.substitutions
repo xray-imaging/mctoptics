@@ -1,6 +1,6 @@
 file "$(TOP)/db/mctOptics.template"
 {
 pattern
-{  P,      R,     CAMERA_MOTOR, LENS_MOTOR, SHUTTER_MOTOR,     TOMOSCAN,       CAMERA,    OVERLAY,         ROI}
-{2bm:, MCTOptics:,    2bmb:m5,    2bmb:m1,     2bmb:m6,     2bmb:TomoScan:,   2bmbSP2:,   2bmbSP2:Over1:,  2bmbSP2:ROI1:}
+{  P,      R,     CAMERA_MOTOR, LENS_MOTOR, SHUTTER_MOTOR,     TOMOSCAN,       CAMERA,    OVERLAY}
+{2bm:, MCTOptics:,    2bmb:m5,    2bmb:m1,     2bmb:m6,     2bmb:TomoScan:,   2bmbSP2:,   2bmbSP2:Over1:}
 }
