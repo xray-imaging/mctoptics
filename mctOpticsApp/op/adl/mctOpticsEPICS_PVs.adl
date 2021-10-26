@@ -5,10 +5,10 @@ file {
 }
 display {
 	object {
-		x=943
-		y=116
+		x=933
+		y=108
 		width=456
-		height=185
+		height=230
 	}
 	clr=14
 	bclr=4
@@ -115,7 +115,7 @@ rectangle {
 		x=5
 		y=40
 		width=445
-		height=135
+		height=185
 	}
 	"basic attribute" {
 		clr=14
@@ -125,7 +125,7 @@ rectangle {
 "text entry" {
 	object {
 		x=220
-		y=100
+		y=150
 		width=225
 		height=20
 	}
@@ -141,7 +141,7 @@ rectangle {
 text {
 	object {
 		x=60
-		y=100
+		y=150
 		width=110
 		height=20
 	}
@@ -153,7 +153,7 @@ text {
 text {
 	object {
 		x=50
-		y=125
+		y=175
 		width=110
 		height=20
 	}
@@ -165,7 +165,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=125
+		y=175
 		width=225
 		height=20
 	}
@@ -181,7 +181,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=150
+		y=200
 		width=225
 		height=20
 	}
@@ -197,7 +197,7 @@ text {
 text {
 	object {
 		x=30
-		y=150
+		y=200
 		width=110
 		height=20
 	}
@@ -255,6 +255,62 @@ text {
 	}
 	control {
 		chan="$(P)$(R)CameraPVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=60
+		y=100
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Overlay prefix"
+}
+"text entry" {
+	object {
+		x=220
+		y=100
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)OverlayPluginPVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=60
+		y=125
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="ROI prefix"
+}
+"text entry" {
+	object {
+		x=220
+		y=125
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ROIPluginPVPrefix"
 		clr=14
 		bclr=51
 	}

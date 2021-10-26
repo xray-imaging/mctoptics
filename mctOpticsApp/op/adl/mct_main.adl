@@ -1,11 +1,11 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/iocBoot/iocMCTOptics/../../mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
 	object {
-		x=1103
+		x=1083
 		y=64
 		width=1550
 		height=1310
@@ -281,19 +281,6 @@ text {
 		clr=14
 	}
 	textix="PDU"
-}
-text {
-	object {
-		x=20
-		y=115
-		width=150
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="References"
-	align="horiz. centered"
 }
 "shell command" {
 	object {
@@ -11342,49 +11329,6 @@ text {
 		bclr=51
 	}
 }
-composite {
-	object {
-		x=1459
-		y=1270
-		width=82
-		height=29
-	}
-	"composite name"=""
-	children {
-		text {
-			object {
-				x=1461
-				y=1273
-				width=80
-				height=26
-			}
-			"basic attribute" {
-				clr=54
-			}
-			"dynamic attribute" {
-				vis="if not zero"
-				chan="2bma:alldoneBlink.VAL"
-			}
-			textix="Moving"
-		}
-		text {
-			object {
-				x=1459
-				y=1270
-				width=80
-				height=26
-			}
-			"basic attribute" {
-				clr=20
-			}
-			"dynamic attribute" {
-				vis="if zero"
-				chan="2bma:alldone.VAL"
-			}
-			textix="Moving"
-		}
-	}
-}
 "text entry" {
 	object {
 		x=1113
@@ -12627,6 +12571,129 @@ composite {
 			}
 			textix="Setup"
 			align="horiz. right"
+		}
+	}
+}
+composite {
+	object {
+		x=143
+		y=109
+		width=83
+		height=29
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=146
+				y=109
+				width=80
+				height=26
+			}
+			"basic attribute" {
+				clr=54
+			}
+			"dynamic attribute" {
+				vis="if not zero"
+				chan="2bmb:alldoneBlink.VAL"
+			}
+			textix="Moving"
+		}
+		text {
+			object {
+				x=143
+				y=112
+				width=80
+				height=26
+			}
+			"basic attribute" {
+				clr=20
+			}
+			"dynamic attribute" {
+				vis="if zero"
+				chan="2bmb:alldone.VAL"
+			}
+			textix="Moving"
+		}
+	}
+}
+composite {
+	object {
+		x=31
+		y=109
+		width=83
+		height=29
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=34
+				y=109
+				width=80
+				height=26
+			}
+			"basic attribute" {
+				clr=54
+			}
+			"dynamic attribute" {
+				vis="if not zero"
+				chan="2bma:alldoneBlink.VAL"
+			}
+			textix="Moving"
+		}
+		text {
+			object {
+				x=31
+				y=112
+				width=80
+				height=26
+			}
+			"basic attribute" {
+				clr=20
+			}
+			"dynamic attribute" {
+				vis="if zero"
+				chan="2bma:alldone.VAL"
+			}
+			textix="Moving"
+		}
+	}
+}
+composite {
+	object {
+		x=717
+		y=943
+		width=100
+		height=123
+	}
+	"composite name"=""
+	children {
+		"choice button" {
+			object {
+				x=717
+				y=992
+				width=100
+				height=74
+			}
+			control {
+				chan="$(P)$(R)CrossSelect.VAL"
+				clr=14
+				bclr=51
+			}
+		}
+		text {
+			object {
+				x=735
+				y=943
+				width=65
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Cross"
+			align="horiz. centered"
 		}
 	}
 }

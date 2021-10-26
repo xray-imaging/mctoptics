@@ -12,6 +12,8 @@
 ######################
 $(P)$(R)TomoScanPVPrefix
 $(P)$(R)CameraPVPrefix
+$(P)$(R)OverlayPluginPVPrefix
+$(P)$(R)ROIPluginPVPrefix
 
 #####################
 # Fast Shutter Select
@@ -47,3 +49,8 @@ $(P)$(R)LensName1
 $(P)$(R)LensName2
 $(P)$(R)LensLock
 $(P)$(R)LensMotorPVName
+
+######################
+# Detector image cross
+######################
+$(P)$(R)CrossSelect

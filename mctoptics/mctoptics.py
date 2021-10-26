@@ -45,10 +45,16 @@ class MCTOptics():
         self.control_pvs['DetectorPixelSize']     = PV(prefix + 'DetectorPixelSize')
         self.control_pvs['ImagePixelSize']        = PV(prefix + 'ImagePixelSize')
 
+        #Define PVs from the camera IOC that we will need
+        prefix = self.pv_prefixes['Camera']
+        camera_prefix = prefix + 'cam1:'
+        self.control_pvs['ArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
+        self.control_pvs['ArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
+
         self.epics_pvs = {**self.config_pvs, **self.control_pvs}
 
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', "ShutterSelect"):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'ShutterSelect', 'CrossSelect'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
 
         log.setup_custom_logger("./mctoptics.log")
@@ -152,6 +158,9 @@ class MCTOptics():
         elif (pvname.find('ShutterSelect') != -1) and ((value == 0) or (value == 1)):
             thread = threading.Thread(target=self.shutter_select, args=())
             thread.start()
+        elif (pvname.find('CrossSelect') != -1) and ((value == 0) or (value == 1)):
+            thread = threading.Thread(target=self.cross_select, args=())
+            thread.start()
 
     def lens_select(self):
         """Moves the Optique Peter lens.
@@ -253,6 +262,32 @@ class MCTOptics():
         """
 
         if (self.epics_pvs['ShutterLock'].get() == 1):
+            shutter_pos0 = self.epics_pvs['ShutterPos0'].get()
+            shutter_pos1 = self.epics_pvs['ShutterPos1'].get()
+
+            shutter_select = self.epics_pvs['ShutterSelect'].get()
+            shutter_name = 'None'
+
+            log.info('Fast shutter')
+
+            if(self.epics_pvs['ShutterSelect'].get() == 0):
+                shutter_name = self.epics_pvs['ShutterName0'].get()
+                self.epics_pvs['ShutterMotor'].put(shutter_pos0, wait=True, timeout=120)
+            elif(self.epics_pvs['ShutterSelect'].get() == 1):
+                shutter_name = self.epics_pvs['ShutterName1'].get()
+                self.epics_pvs['ShutterMotor'].put(shutter_pos1, wait=True, timeout=120)
+
+            log.info('Shutter: %s', shutter_name)
+        else:
+            log.error('Shutter: Locked')
+
+    def cross_select(self):
+        """Moves the Optique Peter shutter.
+        """
+
+        print('OK CallBack')
+        return
+        if (self.epics_pvs['CrossSelect'].get() == 1):
             shutter_pos0 = self.epics_pvs['ShutterPos0'].get()
             shutter_pos1 = self.epics_pvs['ShutterPos1'].get()
 

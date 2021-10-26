@@ -15,6 +15,16 @@ record(stringout, "$(P)$(R)CameraPVPrefix")
    field(VAL,  "$(CAMERA)")
 }
 
+record(stringout, "$(P)$(R)OverlayPluginPVPrefix")
+{
+   field(VAL,  "$(OVERLAY)")
+}
+
+record(stringout, "$(P)$(R)ROIPluginPVPrefix")
+{
+   field(VAL,  "$(ROI)")
+}
+
 #####################
 # Fast Shutter Select
 #####################
@@ -152,4 +162,17 @@ record(bo, "$(P)$(R)LensLock") {
 record(stringout, "$(P)$(R)LensMotorPVName")
 {
    field(VAL,  "$(LENS_MOTOR)")
+}
+
+######################
+# Detector image cross
+######################
+
+record(mbbo, "$(P)$(R)CrossSelect") {
+  field(DTYP, "Raw Soft Channel")
+  field(NOBT, "3")
+  field(ZRVL, "0x0")
+  field(ONVL, "0x1")
+  field(ZRST, "Enable")
+  field(ONST, "Disable")
 }
