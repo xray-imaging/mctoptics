@@ -5,10 +5,10 @@ file {
 }
 display {
 	object {
-		x=923
-		y=100
-		width=456
-		height=210
+		x=913
+		y=92
+		width=455
+		height=260
 	}
 	clr=14
 	bclr=4
@@ -115,7 +115,7 @@ rectangle {
 		x=5
 		y=40
 		width=445
-		height=160
+		height=210
 	}
 	"basic attribute" {
 		clr=14
@@ -140,27 +140,29 @@ rectangle {
 }
 text {
 	object {
-		x=60
+		x=10
 		y=125
-		width=110
+		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
 	textix="Fast Shutter PV"
+	align="horiz. right"
 }
 text {
 	object {
-		x=50
+		x=10
 		y=150
-		width=110
+		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
 	textix="Opt. Ptr Lens PV"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -196,27 +198,29 @@ text {
 }
 text {
 	object {
-		x=30
+		x=10
 		y=175
-		width=110
+		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
 	textix="Opt. Ptr Camera PV"
+	align="horiz. right"
 }
 text {
 	object {
-		x=60
+		x=10
 		y=75
-		width=110
+		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
 	textix="TomoScan prefix"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -236,15 +240,16 @@ text {
 }
 text {
 	object {
-		x=60
+		x=10
 		y=50
-		width=110
+		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
 	textix="Camera prefix"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -264,15 +269,16 @@ text {
 }
 text {
 	object {
-		x=60
+		x=10
 		y=100
-		width=110
+		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
 	textix="Overlay prefix"
+	align="horiz. right"
 }
 "text entry" {
 	object {
@@ -283,6 +289,64 @@ text {
 	}
 	control {
 		chan="$(P)$(R)OverlayPluginPVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=225
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CameraMotorPVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=225
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Opt. Ptr Focus 2 PV"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=200
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Opt. Ptr Focus 1 PV"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=200
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)LensMotorPVName"
 		clr=14
 		bclr=51
 	}

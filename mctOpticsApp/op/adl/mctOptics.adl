@@ -5,9 +5,9 @@ file {
 }
 display {
 	object {
-		x=330
-		y=858
-		width=500
+		x=105
+		y=1050
+		width=725
 		height=330
 	}
 	clr=14
@@ -89,9 +89,9 @@ display {
 }
 rectangle {
 	object {
-		x=0
+		x=5
 		y=15
-		width=500
+		width=715
 		height=25
 	}
 	"basic attribute" {
@@ -100,7 +100,7 @@ rectangle {
 }
 "related display" {
 	object {
-		x=186
+		x=333
 		y=90
 		width=50
 		height=20
@@ -115,8 +115,8 @@ rectangle {
 }
 text {
 	object {
-		x=41
-		y=85
+		x=188
+		y=90
 		width=140
 		height=20
 	}
@@ -127,9 +127,9 @@ text {
 }
 rectangle {
 	object {
-		x=134
-		y=58
-		width=120
+		x=5
+		y=60
+		width=715
 		height=20
 	}
 	"basic attribute" {
@@ -138,7 +138,7 @@ rectangle {
 }
 text {
 	object {
-		x=60
+		x=200
 		y=15
 		width=300
 		height=25
@@ -151,8 +151,8 @@ text {
 }
 text {
 	object {
-		x=169
-		y=58
+		x=322
+		y=60
 		width=50
 		height=20
 	}
@@ -166,7 +166,7 @@ rectangle {
 	object {
 		x=5
 		y=50
-		width=490
+		width=715
 		height=70
 	}
 	"basic attribute" {
@@ -178,7 +178,7 @@ rectangle {
 	object {
 		x=5
 		y=124
-		width=490
+		width=715
 		height=200
 	}
 	"basic attribute" {
@@ -186,307 +186,419 @@ rectangle {
 		fill="outline"
 	}
 }
-composite {
+"related display" {
 	object {
-		x=152
-		y=135
-		width=101
-		height=169
+		x=150
+		y=265
+		width=100
+		height=20
 	}
-	"composite name"=""
-	children {
-		"related display" {
-			object {
-				x=152
-				y=261
-				width=100
-				height=20
-			}
-			display[0] {
-				label="Lens motor"
-				name="single_motor.adl"
-				args="P=$(P1),M1=$(M10)"
-			}
-			display[4] {
-				args=" "
-			}
-			clr=0
-			bclr=53
-			label="- Motor"
-		}
-		text {
-			object {
-				x=167
-				y=135
-				width=65
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Lens"
-			align="horiz. centered"
-		}
-		"choice button" {
-			object {
-				x=152
-				y=189
-				width=100
-				height=60
-			}
-			control {
-				chan="$(P)$(R)LensSelect.VAL"
-				clr=14
-				bclr=51
-			}
-		}
-		"choice button" {
-			object {
-				x=152
-				y=164
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)LensLock.VAL"
-				clr=14
-				bclr=20
-			}
-			stacking="column"
-		}
-		"related display" {
-			object {
-				x=153
-				y=284
-				width=100
-				height=20
-			}
-			display[0] {
-				label="Lens select setup"
-				name="lens_select_setup.adl"
-				args="P=$(P),R=$(R)"
-			}
-			display[4] {
-				args=" "
-			}
-			clr=0
-			bclr=53
-			label="-Setup"
-		}
+	display[0] {
+		label="Lens motor"
+		name="single_motor.adl"
+		args="P=$(P1),M1=$(M10)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="- Motor"
+}
+text {
+	object {
+		x=150
+		y=140
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens"
+	align="horiz. centered"
+}
+"choice button" {
+	object {
+		x=150
+		y=190
+		width=100
+		height=75
+	}
+	control {
+		chan="$(P)$(R)LensSelect.VAL"
+		clr=14
+		bclr=51
 	}
 }
-composite {
+"choice button" {
+	object {
+		x=150
+		y=166
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)LensLock.VAL"
+		clr=14
+		bclr=20
+	}
+	stacking="column"
+}
+"related display" {
+	object {
+		x=150
+		y=285
+		width=100
+		height=20
+	}
+	display[0] {
+		label="Lens select setup"
+		name="lens_select_setup.adl"
+		args="P=$(P),R=$(R)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="-Setup"
+}
+text {
 	object {
 		x=35
-		y=135
+		y=140
 		width=100
-		height=169
+		height=20
 	}
-	"composite name"=""
-	children {
-		text {
-			object {
-				x=35
-				y=135
-				width=100
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Shutter"
-			align="horiz. centered"
-		}
-		"choice button" {
-			object {
-				x=35
-				y=190
-				width=100
-				height=70
-			}
-			control {
-				chan="$(P)$(R)ShutterSelect.VAL"
-				clr=14
-				bclr=51
-			}
-		}
-		"related display" {
-			object {
-				x=35
-				y=284
-				width=100
-				height=20
-			}
-			display[0] {
-				label="shutter select setup"
-				name="shutter_select_setup.adl"
-				args="P=$(P),R=$(R)"
-			}
-			display[4] {
-				args=" "
-			}
-			clr=0
-			bclr=53
-			label="-Setup"
-		}
-		"related display" {
-			object {
-				x=35
-				y=261
-				width=100
-				height=20
-			}
-			display[0] {
-				label="Shutter motor"
-				name="single_motor.adl"
-				args="P=$(P1),M1=$(M22)"
-			}
-			display[4] {
-				args=" "
-			}
-			clr=0
-			bclr=53
-			label="-Motor"
-		}
-		"choice button" {
-			object {
-				x=35
-				y=163
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)ShutterLock.VAL"
-				clr=14
-				bclr=20
-			}
-			stacking="column"
-		}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Shutter"
+	align="horiz. centered"
+}
+"choice button" {
+	object {
+		x=35
+		y=190
+		width=100
+		height=75
+	}
+	control {
+		chan="$(P)$(R)ShutterSelect.VAL"
+		clr=14
+		bclr=51
 	}
 }
-composite {
+"related display" {
 	object {
-		x=270
-		y=135
+		x=35
+		y=285
 		width=100
-		height=169
+		height=20
 	}
-	"composite name"=""
-	children {
-		"related display" {
-			object {
-				x=270
-				y=261
-				width=100
-				height=20
-			}
-			display[0] {
-				label="Lens motor"
-				name="single_motor.adl"
-				args="P=$(P1),M1=$(M14)"
-			}
-			display[4] {
-				args=" "
-			}
-			clr=0
-			bclr=53
-			label="-Motor"
-		}
-		text {
-			object {
-				x=285
-				y=135
-				width=65
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Camera"
-			align="horiz. centered"
-		}
-		"choice button" {
-			object {
-				x=270
-				y=184
-				width=100
-				height=74
-			}
-			control {
-				chan="$(P)$(R)CameraSelect.VAL"
-				clr=14
-				bclr=51
-			}
-		}
-		"choice button" {
-			object {
-				x=270
-				y=159
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CameraLock.VAL"
-				clr=14
-				bclr=20
-			}
-			stacking="column"
-		}
-		"related display" {
-			object {
-				x=270
-				y=284
-				width=100
-				height=20
-			}
-			display[0] {
-				label="camera select setup"
-				name="camera_select_setup.adl"
-				args="P=$(P),R=$(R)"
-			}
-			display[4] {
-				args=" "
-			}
-			clr=0
-			bclr=53
-			label="-Setup"
-		}
+	display[0] {
+		label="shutter select setup"
+		name="shutter_select_setup.adl"
+		args="P=$(P),R=$(R)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="-Setup"
+}
+"related display" {
+	object {
+		x=35
+		y=265
+		width=100
+		height=20
+	}
+	display[0] {
+		label="Shutter motor"
+		name="single_motor.adl"
+		args="P=$(P1),M1=$(M22)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="-Motor"
+}
+"choice button" {
+	object {
+		x=35
+		y=165
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ShutterLock.VAL"
+		clr=14
+		bclr=20
+	}
+	stacking="column"
+}
+"related display" {
+	object {
+		x=265
+		y=265
+		width=100
+		height=20
+	}
+	display[0] {
+		label="Lens motor"
+		name="single_motor.adl"
+		args="P=$(P1),M1=$(M14)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="-Motor"
+}
+text {
+	object {
+		x=265
+		y=140
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Camera"
+	align="horiz. centered"
+}
+"choice button" {
+	object {
+		x=265
+		y=190
+		width=100
+		height=75
+	}
+	control {
+		chan="$(P)$(R)CameraSelect.VAL"
+		clr=14
+		bclr=51
 	}
 }
-composite {
+"choice button" {
 	object {
-		x=381
-		y=135
+		x=265
+		y=165
 		width=100
-		height=123
+		height=20
 	}
-	"composite name"=""
-	children {
-		"choice button" {
-			object {
-				x=381
-				y=184
-				width=100
-				height=74
-			}
-			control {
-				chan="$(P)$(R)CrossSelect.VAL"
-				clr=14
-				bclr=51
-			}
-		}
-		text {
-			object {
-				x=399
-				y=135
-				width=65
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Cross"
-			align="horiz. centered"
-		}
+	control {
+		chan="$(P)$(R)CameraLock.VAL"
+		clr=14
+		bclr=20
 	}
+	stacking="column"
+}
+"related display" {
+	object {
+		x=265
+		y=285
+		width=100
+		height=20
+	}
+	display[0] {
+		label="camera select setup"
+		name="camera_select_setup.adl"
+		args="P=$(P),R=$(R)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="-Setup"
+}
+"choice button" {
+	object {
+		x=610
+		y=190
+		width=100
+		height=75
+	}
+	control {
+		chan="$(P)$(R)CrossSelect.VAL"
+		clr=14
+		bclr=51
+	}
+}
+text {
+	object {
+		x=610
+		y=140
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Cross"
+	align="horiz. centered"
+}
+"related display" {
+	object {
+		x=495
+		y=265
+		width=100
+		height=20
+	}
+	display[0] {
+		label="Focus2 motor"
+		name="single_motor.adl"
+		args="P=$(P1),M1=$(M13)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="- Motor"
+}
+text {
+	object {
+		x=495
+		y=140
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Focus 2"
+	align="horiz. centered"
+}
+"choice button" {
+	object {
+		x=495
+		y=190
+		width=100
+		height=75
+	}
+	control {
+		chan="$(P)$(R)Focus2Select.VAL"
+		clr=14
+		bclr=51
+	}
+}
+"choice button" {
+	object {
+		x=495
+		y=166
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Focus2Lock.VAL"
+		clr=14
+		bclr=20
+	}
+	stacking="column"
+}
+"related display" {
+	object {
+		x=495
+		y=285
+		width=100
+		height=20
+	}
+	display[0] {
+		label="Focus 2 select setup"
+		name="focus2_select_setup.adl"
+		args="P=$(P),R=$(R)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="-Setup"
+}
+"related display" {
+	object {
+		x=380
+		y=265
+		width=100
+		height=20
+	}
+	display[0] {
+		label="Focus2 motor"
+		name="single_motor.adl"
+		args="P=$(P1),M1=$(M12)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="-Motor"
+}
+text {
+	object {
+		x=380
+		y=140
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Focus 1"
+	align="horiz. centered"
+}
+"choice button" {
+	object {
+		x=380
+		y=190
+		width=100
+		height=75
+	}
+	control {
+		chan="$(P)$(R)Focus1Select.VAL"
+		clr=14
+		bclr=51
+	}
+}
+"choice button" {
+	object {
+		x=380
+		y=165
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Focus1Lock.VAL"
+		clr=14
+		bclr=20
+	}
+	stacking="column"
+}
+"related display" {
+	object {
+		x=380
+		y=285
+		width=100
+		height=20
+	}
+	display[0] {
+		label="Focus 1 select setup"
+		name="focus1_select_setup.adl"
+		args="P=$(P),R=$(R)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="-Setup"
 }

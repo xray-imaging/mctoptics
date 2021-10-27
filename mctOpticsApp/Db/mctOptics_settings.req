@@ -53,3 +53,27 @@ $(P)$(R)LensMotorPVName
 # Detector image cross
 ######################
 $(P)$(R)CrossSelect
+
+########################################
+# Optique Peter lens 1 position selector
+########################################
+$(P)$(R)Focus1Select
+$(P)$(R)Focus1Pos0
+$(P)$(R)Focus1Pos1
+$(P)$(R)Focus1Name0
+$(P)$(R)Focus1Name1
+$(P)$(R)Focus1Lock
+$(P)$(R)Focus1MotorPVName
+
+########################################
+# Optique Peter lens 2 position selector
+########################################
+$(P)$(R)Focus2Select
+$(P)$(R)Focus2Pos0
+$(P)$(R)Focus2Pos1
+$(P)$(R)Focus2Pos2
+$(P)$(R)Focus2Name0
+$(P)$(R)Focus2Name1
+$(P)$(R)Focus2Name2
+$(P)$(R)Focus2Lock
+$(P)$(R)Focus2MotorPVName
