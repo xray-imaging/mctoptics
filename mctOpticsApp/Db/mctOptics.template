@@ -77,10 +77,12 @@ record(mbbo, "$(P)$(R)CameraSelect") {
 
 record(ao, "$(P)$(R)CameraPos0") {
   field(PREC, "4")
+  field(VAL,  "$(CAMERA_POS0)")
 }
 
 record(ao, "$(P)$(R)CameraPos1") {
   field(PREC, "4")
+  field(VAL,  "$(CAMERA_POS1)")
 }
 
 record(stringout, "$(P)$(R)CameraName0") {
@@ -121,14 +123,17 @@ record(mbbo, "$(P)$(R)LensSelect") {
 
 record(ao, "$(P)$(R)LensPos0") {
   field(PREC, "4")
+  field(VAL,  "$(LENS_POS0)")
 }
 
 record(ao, "$(P)$(R)LensPos1") {
   field(PREC, "4")
+  field(VAL,  "$(LENS_POS2)")
 }
 
 record(ao, "$(P)$(R)LensPos2") {
   field(PREC, "4")
+  field(VAL,  "$(LENS_POS2)")
 }
 
 record(stringout, "$(P)$(R)LensName0") {
@@ -187,10 +192,12 @@ record(mbbo, "$(P)$(R)Focus1Select") {
 
 record(ao, "$(P)$(R)Focus1Pos0") {
   field(PREC, "4")
+  field(VAL,  "$(FOCUS1_POS0)")
 }
 
 record(ao, "$(P)$(R)Focus1Pos1") {
   field(PREC, "4")
+  field(VAL,  "$(FOCUS1_POS1)")
 }
 
 record(stringout, "$(P)$(R)Focus1Name0") {
@@ -231,14 +238,17 @@ record(mbbo, "$(P)$(R)Focus2Select") {
 
 record(ao, "$(P)$(R)Focus2Pos0") {
   field(PREC, "4")
+  field(VAL,  "$(FOCUS2_POS0)")
 }
 
 record(ao, "$(P)$(R)Focus2Pos1") {
   field(PREC, "4")
+  field(VAL,  "$(FOCUS2_POS1)")
 }
 
 record(ao, "$(P)$(R)Focus2Pos2") {
   field(PREC, "4")
+  field(VAL,  "$(FOCUS2_POS2)")
 }
 
 record(stringout, "$(P)$(R)Focus2Name0") {
