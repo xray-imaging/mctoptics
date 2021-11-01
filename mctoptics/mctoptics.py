@@ -60,7 +60,7 @@ class MCTOptics():
         self.epics_pvs = {**self.config_pvs, **self.control_pvs}
 
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'ShutterSelect', 'CrossSelect', 'Focus1Select', 'Focus2Select'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Focus1Select', 'Focus2Select'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
 
         log.setup_custom_logger("./mctoptics.log")
@@ -160,9 +160,6 @@ class MCTOptics():
             thread.start()
         elif (pvname.find('CameraSelect') != -1) and ((value == 0) or (value == 1)):
             thread = threading.Thread(target=self.camera_select, args=())
-            thread.start()
-        elif (pvname.find('ShutterSelect') != -1) and ((value == 0) or (value == 1)):
-            thread = threading.Thread(target=self.shutter_select, args=())
             thread.start()
         elif (pvname.find('CrossSelect') != -1) and ((value == 0) or (value == 1)):
             thread = threading.Thread(target=self.cross_select, args=())
@@ -268,30 +265,6 @@ class MCTOptics():
                 log.error('Failed to update: Image pixel size')
         else:
             log.error('Changing Optique Peter camera: Locked')
-
-    def shutter_select(self):
-        """Moves the Optique Peter shutter.
-        """
-
-        if (self.epics_pvs['ShutterLock'].get() == 1):
-            shutter_pos0 = self.epics_pvs['ShutterPos0'].get()
-            shutter_pos1 = self.epics_pvs['ShutterPos1'].get()
-
-            shutter_select = self.epics_pvs['ShutterSelect'].get()
-            shutter_name = 'None'
-
-            log.info('Fast shutter')
-
-            if(self.epics_pvs['ShutterSelect'].get() == 0):
-                shutter_name = self.epics_pvs['ShutterName0'].get()
-                self.epics_pvs['ShutterMotor'].put(shutter_pos0, wait=True, timeout=120)
-            elif(self.epics_pvs['ShutterSelect'].get() == 1):
-                shutter_name = self.epics_pvs['ShutterName1'].get()
-                self.epics_pvs['ShutterMotor'].put(shutter_pos1, wait=True, timeout=120)
-
-            log.info('Shutter: %s', shutter_name)
-        else:
-            log.error('Shutter: Locked')
 
     def cross_select(self):
         """Plot the cross in imageJ.
