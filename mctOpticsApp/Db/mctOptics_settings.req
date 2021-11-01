@@ -43,6 +43,11 @@ $(P)$(R)LensMotorPVName
 ######################
 $(P)$(R)CrossSelect
 
+#################
+# Exposure time
+#################
+$(P)$(R)ExposureTime
+
 ########################################
 # Optique Peter lens 1 position selector
 ########################################

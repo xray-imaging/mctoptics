@@ -20,48 +20,6 @@ record(stringout, "$(P)$(R)OverlayPluginPVPrefix")
    field(VAL,  "$(OVERLAY)")
 }
 
-#####################
-# Fast Shutter Select
-#####################
-
-record(mbbo, "$(P)$(R)ShutterSelect") {
-  field(DTYP, "Raw Soft Channel")
-  field(NOBT, "3")
-  field(ZRVL, "0x0")
-  field(ONVL, "0x1")
-  field(ZRST, "Pos. 0")
-  field(ONST, "Pos. 1")
-}
-
-record(ao, "$(P)$(R)ShutterPos0") {
-  field(PREC, "3")
-}
-
-record(ao, "$(P)$(R)ShutterPos1") {
-  field(PREC, "3")
-}
-
-record(stringout, "$(P)$(R)ShutterName0") {
-  field(PINI, "YES")
-  field(VAL, "Pos. 0")
-  field(OUT, "$(P)$(R)ShutterSelect.ZRST PP MS")
-}
-
-record(stringout, "$(P)$(R)ShutterName1") {
-  field(PINI, "YES")
-  field(VAL, "Pos. 1")
-  field(OUT, "$(P)$(R)ShutterSelect.ONST PP MS")
-}
-record(bo, "$(P)$(R)ShutterLock") {
-  field(ZNAM, "Lock")
-  field(ONAM, "Unlock")
-}
-
-record(stringout, "$(P)$(R)ShutterMotorPVName")
-{
-   field(VAL,  "$(SHUTTER_MOTOR)")
-}
-
 ###############################
 # Optique Peter camera selector
 ###############################
@@ -175,6 +133,15 @@ record(mbbo, "$(P)$(R)CrossSelect") {
   field(ONVL, "0x1")
   field(ZRST, "Yes")
   field(ONST, "No")
+}
+
+#################
+# Exposure time
+#################
+
+record(ao, "$(P)$(R)ExposureTime")
+{
+   field(PREC,  "3")
 }
 
 ########################################

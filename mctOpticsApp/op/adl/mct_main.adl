@@ -8580,21 +8580,6 @@ text {
 	textix="Exposure time"
 	align="horiz. right"
 }
-"text entry" {
-	object {
-		x=1051
-		y=50
-		width=60
-		height=20
-	}
-	control {
-		chan="$(AD)$(AD_CAM)AcquireTime"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
 "text update" {
 	object {
 		x=1116
@@ -10055,8 +10040,8 @@ text {
 }
 "text entry" {
 	object {
-		x=1113
-		y=1230
+		x=369
+		y=1084
 		width=100
 		height=20
 	}
@@ -10071,8 +10056,8 @@ text {
 }
 "text entry" {
 	object {
-		x=1113
-		y=1280
+		x=369
+		y=1134
 		width=100
 		height=20
 	}
@@ -10087,8 +10072,8 @@ text {
 }
 menu {
 	object {
-		x=1113
-		y=1255
+		x=369
+		y=1109
 		width=100
 		height=20
 	}
@@ -10100,8 +10085,8 @@ menu {
 }
 text {
 	object {
-		x=986
-		y=1255
+		x=242
+		y=1109
 		width=120
 		height=20
 	}
@@ -10112,8 +10097,8 @@ text {
 }
 text {
 	object {
-		x=986
-		y=1230
+		x=242
+		y=1084
 		width=120
 		height=20
 	}
@@ -10124,8 +10109,8 @@ text {
 }
 text {
 	object {
-		x=986
-		y=1280
+		x=242
+		y=1134
 		width=120
 		height=20
 	}
@@ -10136,8 +10121,8 @@ text {
 }
 rectangle {
 	object {
-		x=977
-		y=1190
+		x=233
+		y=1044
 		width=386
 		height=120
 	}
@@ -10149,8 +10134,8 @@ rectangle {
 }
 rectangle {
 	object {
-		x=985
-		y=1198
+		x=241
+		y=1052
 		width=371
 		height=20
 	}
@@ -10160,8 +10145,8 @@ rectangle {
 }
 text {
 	object {
-		x=1140
-		y=1198
+		x=396
+		y=1052
 		width=100
 		height=20
 	}
@@ -10173,8 +10158,8 @@ text {
 }
 text {
 	object {
-		x=987
-		y=1201
+		x=243
+		y=1055
 		width=125
 		height=15
 	}
@@ -10188,7 +10173,7 @@ rectangle {
 		x=977
 		y=1059
 		width=565
-		height=130
+		height=155
 	}
 	"basic attribute" {
 		clr=14
@@ -10196,153 +10181,120 @@ rectangle {
 		width=5
 	}
 }
-composite {
+text {
 	object {
 		x=1001
-		y=1089
-		width=535
-		height=95
+		y=1189
+		width=140
+		height=20
 	}
-	"composite name"=""
-	children {
-		composite {
-			object {
-				x=1001
-				y=1089
-				width=140
-				height=95
-			}
-			"composite name"=""
-			children {
-				text {
-					object {
-						x=1001
-						y=1164
-						width=140
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="Description #3"
-					align="horiz. right"
-				}
-				text {
-					object {
-						x=1031
-						y=1089
-						width=110
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="Sample name"
-					align="horiz. right"
-				}
-				text {
-					object {
-						x=1001
-						y=1114
-						width=140
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="Description #1"
-					align="horiz. right"
-				}
-				text {
-					object {
-						x=1001
-						y=1139
-						width=140
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="Description #2"
-					align="horiz. right"
-				}
-			}
-		}
-		composite {
-			object {
-				x=1146
-				y=1089
-				width=390
-				height=95
-			}
-			"composite name"=""
-			children {
-				"text entry" {
-					object {
-						x=1146
-						y=1089
-						width=390
-						height=20
-					}
-					control {
-						chan="$(TS)$(TS_R)SampleName"
-						clr=14
-						bclr=51
-					}
-					format="string"
-					limits {
-					}
-				}
-				"text entry" {
-					object {
-						x=1146
-						y=1114
-						width=390
-						height=20
-					}
-					control {
-						chan="$(TS)$(TS_R)SampleDescription1"
-						clr=14
-						bclr=51
-					}
-					format="string"
-					limits {
-					}
-				}
-				"text entry" {
-					object {
-						x=1146
-						y=1139
-						width=390
-						height=20
-					}
-					control {
-						chan="$(TS)$(TS_R)SampleDescription2"
-						clr=14
-						bclr=51
-					}
-					format="string"
-					limits {
-					}
-				}
-				"text entry" {
-					object {
-						x=1146
-						y=1164
-						width=390
-						height=20
-					}
-					control {
-						chan="$(TS)$(TS_R)SampleDescription3"
-						clr=14
-						bclr=51
-					}
-					format="string"
-					limits {
-					}
-				}
-			}
-		}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Description #3"
+	align="horiz. right"
+}
+text {
+	object {
+		x=1031
+		y=1089
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Sample name"
+	align="horiz. right"
+}
+text {
+	object {
+		x=1001
+		y=1139
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Description #1"
+	align="horiz. right"
+}
+text {
+	object {
+		x=1001
+		y=1164
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Description #2"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=1146
+		y=1089
+		width=390
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)SampleName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1146
+		y=1139
+		width=390
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)SampleDescription1"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1146
+		y=1164
+		width=390
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)SampleDescription2"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1146
+		y=1189
+		width=390
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)SampleDescription3"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
 	}
 }
 rectangle {
@@ -11178,8 +11130,8 @@ composite {
 }
 "related display" {
 	object {
-		x=1234
-		y=1198
+		x=490
+		y=1052
 		width=119
 		height=20
 	}
@@ -12142,5 +12094,49 @@ rectangle {
 		clr=14
 		fill="outline"
 		width=5
+	}
+}
+"text entry" {
+	object {
+		x=1051
+		y=50
+		width=60
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ExposureTime"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=1001
+		y=1114
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Base file name"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=1146
+		y=1114
+		width=390
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)FileName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
 	}
 }

@@ -37,17 +37,20 @@ class MCTOptics():
         self.show_pvs()
 
         prefix = self.pv_prefixes['TomoScan']
-        self.control_pvs['ScintillatorType']      = PV(prefix + 'ScintillatorType')
-        self.control_pvs['ScintillatorThickness'] = PV(prefix + 'ScintillatorThickness')
-        self.control_pvs['CameraObjective']       = PV(prefix + 'CameraObjective')
-        self.control_pvs['CameraTubeLength']      = PV(prefix + 'CameraTubeLength')
+        self.control_pvs['TSScintillatorType']      = PV(prefix + 'ScintillatorType')
+        self.control_pvs['TSScintillatorThickness'] = PV(prefix + 'ScintillatorThickness')
+        self.control_pvs['TSCameraObjective']       = PV(prefix + 'CameraObjective')
+        self.control_pvs['TSCameraTubeLength']      = PV(prefix + 'CameraTubeLength')
                  
-        self.control_pvs['DetectorPixelSize']     = PV(prefix + 'DetectorPixelSize')
-        self.control_pvs['ImagePixelSize']        = PV(prefix + 'ImagePixelSize')
+        self.control_pvs['TSDetectorPixelSize']     = PV(prefix + 'DetectorPixelSize')
+        self.control_pvs['TSImagePixelSize']        = PV(prefix + 'ImagePixelSize')
+        self.control_pvs['TSExposureTime']          = PV(prefix + 'ExposureTime')
 
         #Define PVs from the camera IOC that we will need
         prefix = self.pv_prefixes['Camera']
         camera_prefix = prefix + 'cam1:'
+
+        self.control_pvs['CamAcquireTime']          = PV(camera_prefix + 'AcquireTime')
         self.control_pvs['CamArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
         self.control_pvs['CamArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeY_RBV')
 
@@ -60,7 +63,7 @@ class MCTOptics():
         self.epics_pvs = {**self.config_pvs, **self.control_pvs}
 
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Focus1Select', 'Focus2Select'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Focus1Select', 'Focus2Select', 'ExposureTime'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
 
         log.setup_custom_logger("./mctoptics.log")
@@ -170,6 +173,9 @@ class MCTOptics():
         elif (pvname.find('Focus2Select') != -1) and ((value == 0) or (value == 1) or (value == 2)):
             thread = threading.Thread(target=self.focus2_select, args=())
             thread.start()
+        elif (pvname.find('ExposureTime') != -1):
+            thread = threading.Thread(target=self.exposure_time, args=())
+            thread.start()
 
     def lens_select(self):
         """Moves the Optique Peter lens.
@@ -207,14 +213,14 @@ class MCTOptics():
                 tube_lens              = lens_lookup[lens_name]['tube_lens']
 
                 # update tomoScan PVs
-                self.control_pvs['ScintillatorType'].put(scintillator_type)
-                self.control_pvs['ScintillatorThickness'].put(scintillator_thickness)
-                self.control_pvs['CameraObjective'].put(magnification)
-                self.control_pvs['CameraTubeLength'].put(tube_lens)
+                self.control_pvs['TSScintillatorType'].put(scintillator_type)
+                self.control_pvs['TSScintillatorThickness'].put(scintillator_thickness)
+                self.control_pvs['TSCameraObjective'].put(magnification)
+                self.control_pvs['TSCameraTubeLength'].put(tube_lens)
 
-                detector_pixel_size    = self.control_pvs['DetectorPixelSize'].get()
+                detector_pixel_size    = self.control_pvs['TSDetectorPixelSize'].get()
                 image_pixel_size       = float(detector_pixel_size)/float(magnification)
-                self.control_pvs['ImagePixelSize'].put(image_pixel_size)
+                self.control_pvs['TSImagePixelSize'].put(image_pixel_size)
             except KeyError as e:
                 log.error('Lens called %s is not defined. Please add it to the /data/lens.json file' % e)
                 log.error('Failed to update: Scintillator type')
@@ -253,12 +259,12 @@ class MCTOptics():
             try:
                 detector_pixel_size = camera_lookup[camera_name]['detector_pixel_size']
                 # update tomoScan PVs
-                self.control_pvs['DetectorPixelSize'].put(detector_pixel_size)
+                self.control_pvs['TSDetectorPixelSize'].put(detector_pixel_size)
 
-                magnification = self.control_pvs['CameraObjective'].get()
+                magnification = self.control_pvs['TSCameraObjective'].get()
                 magnification = magnification.upper().replace("X", "") # just in case there was a manual entry ...
                 image_pixel_size = float(detector_pixel_size)/float(magnification)
-                self.control_pvs['ImagePixelSize'].put(image_pixel_size)
+                self.control_pvs['TSImagePixelSize'].put(image_pixel_size)
             except KeyError as e:
                 log.error('Camera called %s is not defined. Please add it to the /data/lens.json file' % e)
                 log.error('Failed to update: Detector pixel size')
@@ -335,3 +341,10 @@ class MCTOptics():
         else:
             log.error('Changing Optique Peter focus2: Locked')
 
+    def exposure_time(self):
+        """
+        update exposure time values for both detector and tomoscan
+        """
+        exp_time = self.epics_pvs['ExposureTime'].get()
+        self.epics_pvs['CamAcquireTime'].put(exp_time, wait=True)
+        self.epics_pvs['TSExposureTime'].put(exp_time, wait=True)
