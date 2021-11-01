@@ -14,17 +14,6 @@ $(P)$(R)TomoScanPVPrefix
 $(P)$(R)CameraPVPrefix
 $(P)$(R)OverlayPluginPVPrefix
 
-#####################
-# Fast Shutter Select
-#####################
-$(P)$(R)ShutterSelect
-$(P)$(R)ShutterPos0
-$(P)$(R)ShutterPos1
-$(P)$(R)ShutterName0
-$(P)$(R)ShutterName1
-$(P)$(R)ShutterLock
-$(P)$(R)ShutterMotorPVName
-
 ###############################
 # Optique Peter camera selector
 ###############################
