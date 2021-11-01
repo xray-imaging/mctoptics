@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOptics.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOptics.adl"
 	version=030111
 }
 display {
@@ -188,7 +188,7 @@ rectangle {
 }
 "related display" {
 	object {
-		x=150
+		x=95
 		y=265
 		width=100
 		height=20
@@ -207,7 +207,7 @@ rectangle {
 }
 text {
 	object {
-		x=150
+		x=95
 		y=140
 		width=100
 		height=20
@@ -220,7 +220,7 @@ text {
 }
 "choice button" {
 	object {
-		x=150
+		x=95
 		y=190
 		width=100
 		height=75
@@ -233,7 +233,7 @@ text {
 }
 "choice button" {
 	object {
-		x=150
+		x=95
 		y=166
 		width=100
 		height=20
@@ -247,7 +247,7 @@ text {
 }
 "related display" {
 	object {
-		x=150
+		x=95
 		y=285
 		width=100
 		height=20
@@ -264,87 +264,9 @@ text {
 	bclr=53
 	label="-Setup"
 }
-text {
-	object {
-		x=35
-		y=140
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Shutter"
-	align="horiz. centered"
-}
-"choice button" {
-	object {
-		x=35
-		y=190
-		width=100
-		height=75
-	}
-	control {
-		chan="$(P)$(R)ShutterSelect.VAL"
-		clr=14
-		bclr=51
-	}
-}
 "related display" {
 	object {
-		x=35
-		y=285
-		width=100
-		height=20
-	}
-	display[0] {
-		label="shutter select setup"
-		name="shutter_select_setup.adl"
-		args="P=$(P),R=$(R)"
-	}
-	display[4] {
-		args=" "
-	}
-	clr=0
-	bclr=53
-	label="-Setup"
-}
-"related display" {
-	object {
-		x=35
-		y=265
-		width=100
-		height=20
-	}
-	display[0] {
-		label="Shutter motor"
-		name="single_motor.adl"
-		args="P=$(P1),M1=$(M22)"
-	}
-	display[4] {
-		args=" "
-	}
-	clr=0
-	bclr=53
-	label="-Motor"
-}
-"choice button" {
-	object {
-		x=35
-		y=165
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)ShutterLock.VAL"
-		clr=14
-		bclr=20
-	}
-	stacking="column"
-}
-"related display" {
-	object {
-		x=265
+		x=210
 		y=265
 		width=100
 		height=20
@@ -363,7 +285,7 @@ text {
 }
 text {
 	object {
-		x=265
+		x=210
 		y=140
 		width=100
 		height=20
@@ -376,7 +298,7 @@ text {
 }
 "choice button" {
 	object {
-		x=265
+		x=210
 		y=190
 		width=100
 		height=75
@@ -389,7 +311,7 @@ text {
 }
 "choice button" {
 	object {
-		x=265
+		x=210
 		y=165
 		width=100
 		height=20
@@ -403,7 +325,7 @@ text {
 }
 "related display" {
 	object {
-		x=265
+		x=210
 		y=285
 		width=100
 		height=20
@@ -422,7 +344,7 @@ text {
 }
 "choice button" {
 	object {
-		x=610
+		x=555
 		y=190
 		width=100
 		height=75
@@ -435,7 +357,7 @@ text {
 }
 text {
 	object {
-		x=610
+		x=555
 		y=140
 		width=100
 		height=20
@@ -448,7 +370,7 @@ text {
 }
 "related display" {
 	object {
-		x=495
+		x=440
 		y=265
 		width=100
 		height=20
@@ -467,7 +389,7 @@ text {
 }
 text {
 	object {
-		x=495
+		x=440
 		y=140
 		width=100
 		height=20
@@ -480,7 +402,7 @@ text {
 }
 "choice button" {
 	object {
-		x=495
+		x=440
 		y=190
 		width=100
 		height=75
@@ -493,7 +415,7 @@ text {
 }
 "choice button" {
 	object {
-		x=495
+		x=440
 		y=166
 		width=100
 		height=20
@@ -507,7 +429,7 @@ text {
 }
 "related display" {
 	object {
-		x=495
+		x=440
 		y=285
 		width=100
 		height=20
@@ -526,7 +448,7 @@ text {
 }
 "related display" {
 	object {
-		x=380
+		x=325
 		y=265
 		width=100
 		height=20
@@ -545,7 +467,7 @@ text {
 }
 text {
 	object {
-		x=380
+		x=325
 		y=140
 		width=100
 		height=20
@@ -558,7 +480,7 @@ text {
 }
 "choice button" {
 	object {
-		x=380
+		x=325
 		y=190
 		width=100
 		height=75
@@ -571,7 +493,7 @@ text {
 }
 "choice button" {
 	object {
-		x=380
+		x=325
 		y=165
 		width=100
 		height=20
@@ -585,7 +507,7 @@ text {
 }
 "related display" {
 	object {
-		x=380
+		x=325
 		y=285
 		width=100
 		height=20

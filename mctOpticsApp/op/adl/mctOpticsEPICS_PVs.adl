@@ -122,35 +122,6 @@ rectangle {
 		fill="outline"
 	}
 }
-"text entry" {
-	object {
-		x=220
-		y=125
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)ShutterMotorPVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=125
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Fast Shutter PV"
-	align="horiz. right"
-}
 text {
 	object {
 		x=10
@@ -304,7 +275,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)CameraMotorPVName"
+		chan="$(P)$(R)Focus2MotorPVName"
 		clr=14
 		bclr=51
 	}
@@ -346,7 +317,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)LensMotorPVName"
+		chan="$(P)$(R)Focus1MotorPVName"
 		clr=14
 		bclr=51
 	}
