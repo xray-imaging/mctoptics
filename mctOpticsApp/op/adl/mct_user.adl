@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=340
-		y=501
+		x=2172
+		y=469
 		width=1460
 		height=600
 	}
@@ -4199,6 +4199,51 @@ text {
 		clr=14
 		bclr=51
 	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=31
+		y=564
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ServerRunning"
+		clr=14
+		bclr=2
+	}
+	clrmod="alarm"
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=282
+		y=19
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Optics status"
+}
+"text update" {
+	object {
+		x=416
+		y=19
+		width=400
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)MCTStatus"
+		clr=14
+		bclr=51
+	}
+	format="string"
 	limits {
 	}
 }

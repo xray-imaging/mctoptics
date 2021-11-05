@@ -71,3 +71,9 @@ $(P)$(R)Focus2Name1
 $(P)$(R)Focus2Name2
 $(P)$(R)Focus2Lock
 $(P)$(R)Focus2MotorPVName
+
+###############################
+# MCT status via Channel Access
+###############################
+#controlPV $(P)$(R)MCTStatus
+#controlPV $(P)$(R)Watchdog

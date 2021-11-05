@@ -5,10 +5,10 @@ file {
 }
 display {
 	object {
-		x=105
-		y=1050
+		x=95
+		y=1042
 		width=725
-		height=330
+		height=360
 	}
 	clr=14
 	bclr=4
@@ -179,7 +179,7 @@ rectangle {
 		x=5
 		y=124
 		width=715
-		height=200
+		height=230
 	}
 	"basic attribute" {
 		clr=14
@@ -189,7 +189,7 @@ rectangle {
 "related display" {
 	object {
 		x=95
-		y=265
+		y=311
 		width=100
 		height=20
 	}
@@ -208,7 +208,7 @@ rectangle {
 text {
 	object {
 		x=95
-		y=140
+		y=186
 		width=100
 		height=20
 	}
@@ -221,7 +221,7 @@ text {
 "choice button" {
 	object {
 		x=95
-		y=190
+		y=236
 		width=100
 		height=75
 	}
@@ -234,7 +234,7 @@ text {
 "choice button" {
 	object {
 		x=95
-		y=166
+		y=212
 		width=100
 		height=20
 	}
@@ -248,7 +248,7 @@ text {
 "related display" {
 	object {
 		x=95
-		y=285
+		y=331
 		width=100
 		height=20
 	}
@@ -267,7 +267,7 @@ text {
 "related display" {
 	object {
 		x=210
-		y=265
+		y=311
 		width=100
 		height=20
 	}
@@ -286,7 +286,7 @@ text {
 text {
 	object {
 		x=210
-		y=140
+		y=186
 		width=100
 		height=20
 	}
@@ -299,7 +299,7 @@ text {
 "choice button" {
 	object {
 		x=210
-		y=190
+		y=236
 		width=100
 		height=75
 	}
@@ -312,7 +312,7 @@ text {
 "choice button" {
 	object {
 		x=210
-		y=165
+		y=211
 		width=100
 		height=20
 	}
@@ -326,7 +326,7 @@ text {
 "related display" {
 	object {
 		x=210
-		y=285
+		y=331
 		width=100
 		height=20
 	}
@@ -345,7 +345,7 @@ text {
 "choice button" {
 	object {
 		x=555
-		y=190
+		y=236
 		width=100
 		height=75
 	}
@@ -358,7 +358,7 @@ text {
 text {
 	object {
 		x=555
-		y=140
+		y=186
 		width=100
 		height=20
 	}
@@ -371,7 +371,7 @@ text {
 "related display" {
 	object {
 		x=440
-		y=265
+		y=311
 		width=100
 		height=20
 	}
@@ -390,7 +390,7 @@ text {
 text {
 	object {
 		x=440
-		y=140
+		y=186
 		width=100
 		height=20
 	}
@@ -403,7 +403,7 @@ text {
 "choice button" {
 	object {
 		x=440
-		y=190
+		y=236
 		width=100
 		height=75
 	}
@@ -416,7 +416,7 @@ text {
 "choice button" {
 	object {
 		x=440
-		y=166
+		y=212
 		width=100
 		height=20
 	}
@@ -430,7 +430,7 @@ text {
 "related display" {
 	object {
 		x=440
-		y=285
+		y=331
 		width=100
 		height=20
 	}
@@ -449,7 +449,7 @@ text {
 "related display" {
 	object {
 		x=325
-		y=265
+		y=311
 		width=100
 		height=20
 	}
@@ -468,7 +468,7 @@ text {
 text {
 	object {
 		x=325
-		y=140
+		y=186
 		width=100
 		height=20
 	}
@@ -481,7 +481,7 @@ text {
 "choice button" {
 	object {
 		x=325
-		y=190
+		y=236
 		width=100
 		height=75
 	}
@@ -494,7 +494,7 @@ text {
 "choice button" {
 	object {
 		x=325
-		y=165
+		y=211
 		width=100
 		height=20
 	}
@@ -508,7 +508,7 @@ text {
 "related display" {
 	object {
 		x=325
-		y=285
+		y=331
 		width=100
 		height=20
 	}
@@ -523,4 +523,61 @@ text {
 	clr=0
 	bclr=53
 	label="-Setup"
+}
+"text update" {
+	object {
+		x=233
+		y=153
+		width=100
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)ServerRunning"
+		clr=14
+		bclr=2
+	}
+	clrmod="alarm"
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=233
+		y=129
+		width=400
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)MCTStatus"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=99
+		y=129
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Optics status"
+}
+text {
+	object {
+		x=99
+		y=153
+		width=130
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Python server"
 }
