@@ -5108,44 +5108,33 @@ rectangle {
 		width=5
 	}
 }
-composite {
+"related display" {
+	object {
+		x=101
+		y=242
+		width=20
+		height=20
+	}
+	display[0] {
+		label="MCT Main"
+		name="mctOptics.adl"
+		args="P=$(P),R=$(R),P1=$(P1),M10=$(M10),M12=$(M12),M13=$(M13),M14=$(M14),M22=$(M22)"
+	}
+	clr=0
+	bclr=53
+}
+text {
 	object {
 		x=17
 		y=242
-		width=104
+		width=80
 		height=20
 	}
-	"composite name"=""
-	children {
-		"related display" {
-			object {
-				x=101
-				y=242
-				width=20
-				height=20
-			}
-			display[0] {
-				label="MCT Main"
-				name="mctOptics.adl"
-				args="P=$(P),R=$(R),P1=$(P1),M10=$(M10),M12=$(M12),M13=$(M13),M14=$(M14),M22=$(M22)"
-			}
-			clr=0
-			bclr=53
-		}
-		text {
-			object {
-				x=17
-				y=242
-				width=80
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Setup"
-			align="horiz. right"
-		}
+	"basic attribute" {
+		clr=14
 	}
+	textix="Setup"
+	align="horiz. right"
 }
 text {
 	object {
@@ -5561,7 +5550,7 @@ composite {
 }
 text {
 	object {
-		x=219
+		x=206
 		y=251
 		width=130
 		height=20
@@ -5573,7 +5562,7 @@ text {
 }
 "text update" {
 	object {
-		x=353
+		x=340
 		y=251
 		width=100
 		height=20
@@ -5590,7 +5579,7 @@ text {
 }
 text {
 	object {
-		x=219
+		x=206
 		y=227
 		width=130
 		height=20
@@ -5602,9 +5591,9 @@ text {
 }
 "text update" {
 	object {
-		x=353
+		x=340
 		y=227
-		width=400
+		width=450
 		height=20
 	}
 	monitor {
@@ -6112,7 +6101,7 @@ rectangle {
 	}
 	"dynamic attribute" {
 		vis="if zero"
-		chan="$(P1)$(M11).DMOV"
+		chan="$(P1)$(M10).DMOV"
 	}
 }
 text {
@@ -6323,7 +6312,7 @@ composite {
 }
 composite {
 	object {
-		x=162
+		x=163
 		y=400
 		width=116
 		height=91
@@ -6332,7 +6321,7 @@ composite {
 	children {
 		"text update" {
 			object {
-				x=162
+				x=163
 				y=400
 				width=116
 				height=20
@@ -6348,7 +6337,7 @@ composite {
 		}
 		rectangle {
 			object {
-				x=162
+				x=163
 				y=431
 				width=116
 				height=40
@@ -6360,7 +6349,7 @@ composite {
 		}
 		text {
 			object {
-				x=190
+				x=191
 				y=455
 				width=60
 				height=15
@@ -6378,7 +6367,7 @@ composite {
 		}
 		text {
 			object {
-				x=190
+				x=191
 				y=461
 				width=60
 				height=10
@@ -6396,7 +6385,7 @@ composite {
 		}
 		"message button" {
 			object {
-				x=164
+				x=165
 				y=433
 				width=25
 				height=36
@@ -6411,7 +6400,7 @@ composite {
 		}
 		"text entry" {
 			object {
-				x=190
+				x=191
 				y=433
 				width=60
 				height=20
@@ -6426,7 +6415,7 @@ composite {
 		}
 		"message button" {
 			object {
-				x=251
+				x=252
 				y=433
 				width=25
 				height=36
@@ -6441,7 +6430,7 @@ composite {
 		}
 		rectangle {
 			object {
-				x=162
+				x=163
 				y=420
 				width=116
 				height=12
@@ -6453,7 +6442,7 @@ composite {
 		}
 		text {
 			object {
-				x=162
+				x=163
 				y=421
 				width=116
 				height=10
@@ -6467,7 +6456,7 @@ composite {
 		}
 		text {
 			object {
-				x=190
+				x=191
 				y=453
 				width=60
 				height=10
@@ -6485,7 +6474,7 @@ composite {
 		}
 		"related display" {
 			object {
-				x=176
+				x=177
 				y=471
 				width=89
 				height=20
@@ -6500,175 +6489,6 @@ composite {
 			label="-Debug"
 		}
 	}
-}
-"text update" {
-	object {
-		x=279
-		y=400
-		width=116
-		height=20
-	}
-	monitor {
-		chan="$(P1)$(M13).DESC"
-		clr=54
-		bclr=0
-	}
-	align="horiz. centered"
-	limits {
-	}
-}
-rectangle {
-	object {
-		x=279
-		y=431
-		width=116
-		height=40
-	}
-	"basic attribute" {
-		clr=14
-		width=3
-	}
-}
-text {
-	object {
-		x=307
-		y=455
-		width=60
-		height=15
-	}
-	"basic attribute" {
-		clr=60
-		fill="outline"
-	}
-	"dynamic attribute" {
-		vis="if zero"
-		chan="$(P1)$(M13).DMOV"
-	}
-	textix="Moving"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=307
-		y=461
-		width=60
-		height=10
-	}
-	"basic attribute" {
-		clr=30
-		fill="outline"
-	}
-	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P1)$(M13).SET"
-	}
-	textix="Calibrate"
-	align="horiz. centered"
-}
-"message button" {
-	object {
-		x=281
-		y=433
-		width=25
-		height=36
-	}
-	control {
-		chan="$(P1)$(M13).TWR"
-		clr=14
-		bclr=51
-	}
-	label="<"
-	press_msg="1"
-}
-"text entry" {
-	object {
-		x=307
-		y=433
-		width=60
-		height=20
-	}
-	control {
-		chan="$(P1)$(M13).TWV"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"message button" {
-	object {
-		x=368
-		y=433
-		width=25
-		height=36
-	}
-	control {
-		chan="$(P1)$(M13).TWF"
-		clr=14
-		bclr=51
-	}
-	label=">"
-	press_msg="1"
-}
-rectangle {
-	object {
-		x=279
-		y=420
-		width=116
-		height=12
-	}
-	"basic attribute" {
-		clr=54
-		width=2
-	}
-}
-text {
-	object {
-		x=279
-		y=421
-		width=116
-		height=10
-	}
-	"basic attribute" {
-		clr=0
-		fill="outline"
-	}
-	textix="($(P1)$(M13))"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=307
-		y=453
-		width=60
-		height=10
-	}
-	"basic attribute" {
-		clr=30
-		fill="outline"
-	}
-	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P1)$(M13).LVIO"
-	}
-	textix="Soft limit"
-	align="horiz. centered"
-}
-"related display" {
-	object {
-		x=293
-		y=471
-		width=89
-		height=20
-	}
-	display[0] {
-		label="Debug"
-		name="motorx_all.adl"
-		args="P=$(P1), M=$(M13)"
-	}
-	clr=0
-	bclr=18
-	label="-Debug"
 }
 composite {
 	object {
@@ -6824,6 +6644,186 @@ composite {
 			clr=14
 			bclr=51
 			label="-Update"
+		}
+	}
+}
+composite {
+	object {
+		x=279
+		y=400
+		width=116
+		height=91
+	}
+	"composite name"=""
+	children {
+		"text update" {
+			object {
+				x=279
+				y=400
+				width=116
+				height=20
+			}
+			monitor {
+				chan="$(P1)$(M13).DESC"
+				clr=54
+				bclr=0
+			}
+			align="horiz. centered"
+			limits {
+			}
+		}
+		rectangle {
+			object {
+				x=279
+				y=431
+				width=116
+				height=40
+			}
+			"basic attribute" {
+				clr=14
+				width=3
+			}
+		}
+		text {
+			object {
+				x=307
+				y=455
+				width=60
+				height=15
+			}
+			"basic attribute" {
+				clr=60
+				fill="outline"
+			}
+			"dynamic attribute" {
+				vis="if zero"
+				chan="$(P1)$(M13).DMOV"
+			}
+			textix="Moving"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=307
+				y=461
+				width=60
+				height=10
+			}
+			"basic attribute" {
+				clr=30
+				fill="outline"
+			}
+			"dynamic attribute" {
+				vis="if not zero"
+				chan="$(P1)$(M13).SET"
+			}
+			textix="Calibrate"
+			align="horiz. centered"
+		}
+		"message button" {
+			object {
+				x=281
+				y=433
+				width=25
+				height=36
+			}
+			control {
+				chan="$(P1)$(M13).TWR"
+				clr=14
+				bclr=51
+			}
+			label="<"
+			press_msg="1"
+		}
+		"text entry" {
+			object {
+				x=307
+				y=433
+				width=60
+				height=20
+			}
+			control {
+				chan="$(P1)$(M13).TWV"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		"message button" {
+			object {
+				x=368
+				y=433
+				width=25
+				height=36
+			}
+			control {
+				chan="$(P1)$(M13).TWF"
+				clr=14
+				bclr=51
+			}
+			label=">"
+			press_msg="1"
+		}
+		rectangle {
+			object {
+				x=279
+				y=420
+				width=116
+				height=12
+			}
+			"basic attribute" {
+				clr=54
+				width=2
+			}
+		}
+		text {
+			object {
+				x=279
+				y=421
+				width=116
+				height=10
+			}
+			"basic attribute" {
+				clr=0
+				fill="outline"
+			}
+			textix="($(P1)$(M13))"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=307
+				y=453
+				width=60
+				height=10
+			}
+			"basic attribute" {
+				clr=30
+				fill="outline"
+			}
+			"dynamic attribute" {
+				vis="if not zero"
+				chan="$(P1)$(M13).LVIO"
+			}
+			textix="Soft limit"
+			align="horiz. centered"
+		}
+		"related display" {
+			object {
+				x=293
+				y=471
+				width=89
+				height=20
+			}
+			display[0] {
+				label="Debug"
+				name="motorx_all.adl"
+				args="P=$(P1), M=$(M13)"
+			}
+			clr=0
+			bclr=18
+			label="-Debug"
 		}
 	}
 }
