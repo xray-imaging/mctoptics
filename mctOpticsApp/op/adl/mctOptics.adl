@@ -397,7 +397,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="Focus 2"
+	textix="Focus 0"
 	align="horiz. centered"
 }
 "choice button" {
@@ -408,7 +408,7 @@ text {
 		height=75
 	}
 	control {
-		chan="$(P)$(R)Focus2Select.VAL"
+		chan="$(P)$(R)Focus0Select.VAL"
 		clr=14
 		bclr=51
 	}
@@ -421,7 +421,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus2Lock.VAL"
+		chan="$(P)$(R)Focus0Lock.VAL"
 		clr=14
 		bclr=20
 	}
@@ -435,8 +435,8 @@ text {
 		height=20
 	}
 	display[0] {
-		label="Focus 2 select setup"
-		name="focus2_select_setup.adl"
+		label="Focus 0 select setup"
+		name="focus0_select_setup.adl"
 		args="P=$(P),R=$(R)"
 	}
 	display[4] {

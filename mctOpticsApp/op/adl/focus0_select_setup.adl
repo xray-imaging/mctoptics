@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/focus2_select_setup.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/focus0_select_setup.adl"
 	version=030111
 }
 display {
@@ -109,7 +109,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="Optique Peter Focus 2"
+	textix="Optique Peter Focus 0"
 	align="horiz. centered"
 }
 "choice button" {
@@ -120,7 +120,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus2Lock.VAL"
+		chan="$(P)$(R)Focus0Lock.VAL"
 		clr=14
 		bclr=51
 	}
@@ -210,7 +210,7 @@ polyline {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus2MotorPVName"
+		chan="$(P)$(R)Focus0MotorPVName"
 		clr=14
 		bclr=35
 	}
@@ -237,7 +237,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus2Pos0.VAL"
+		chan="$(P)$(R)Focus0Pos0.VAL"
 		clr=14
 		bclr=51
 	}
@@ -252,7 +252,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus2Pos1.VAL"
+		chan="$(P)$(R)Focus0Pos1.VAL"
 		clr=14
 		bclr=51
 	}
@@ -267,7 +267,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus2Name0"
+		chan="$(P)$(R)Focus0Name0"
 		clr=14
 		bclr=55
 	}
@@ -282,7 +282,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus2Name1"
+		chan="$(P)$(R)Focus0Name1"
 		clr=14
 		bclr=55
 	}
@@ -360,7 +360,7 @@ text {
 		height=60
 	}
 	control {
-		chan="$(P)$(R)Focus2Select.VAL"
+		chan="$(P)$(R)Focus0Select.VAL"
 		clr=14
 		bclr=51
 	}
@@ -373,7 +373,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus2Name2"
+		chan="$(P)$(R)Focus0Name2"
 		clr=14
 		bclr=55
 	}
@@ -388,7 +388,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus2Pos2.VAL"
+		chan="$(P)$(R)Focus0Pos2.VAL"
 		clr=14
 		bclr=51
 	}

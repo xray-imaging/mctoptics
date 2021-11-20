@@ -60,17 +60,17 @@ $(P)$(R)Focus1Lock
 $(P)$(R)Focus1MotorPVName
 
 ########################################
-# Optique Peter lens 2 position selector
+# Optique Peter lens 0 position selector
 ########################################
-$(P)$(R)Focus2Select
-$(P)$(R)Focus2Pos0
-$(P)$(R)Focus2Pos1
-$(P)$(R)Focus2Pos2
-$(P)$(R)Focus2Name0
-$(P)$(R)Focus2Name1
-$(P)$(R)Focus2Name2
-$(P)$(R)Focus2Lock
-$(P)$(R)Focus2MotorPVName
+$(P)$(R)Focus0Select
+$(P)$(R)Focus0Pos0
+$(P)$(R)Focus0Pos1
+$(P)$(R)Focus0Pos2
+$(P)$(R)Focus0Name0
+$(P)$(R)Focus0Name1
+$(P)$(R)Focus0Name2
+$(P)$(R)Focus0Lock
+$(P)$(R)Focus0MotorPVName
 
 ###############################
 # MCT status via Channel Access

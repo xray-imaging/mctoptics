@@ -63,7 +63,7 @@ class MCTOptics():
         self.epics_pvs = {**self.config_pvs, **self.control_pvs}
 
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Focus1Select', 'Focus2Select', 'ExposureTime'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Focus1Select', 'Focus0Select', 'ExposureTime'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
 
         # Start the watchdog timer thread
@@ -182,8 +182,8 @@ class MCTOptics():
         elif (pvname.find('Focus1Select') != -1) and ((value == 0) or (value == 1)):
             thread = threading.Thread(target=self.focus1_select, args=())
             thread.start()
-        elif (pvname.find('Focus2Select') != -1) and ((value == 0) or (value == 1) or (value == 2)):
-            thread = threading.Thread(target=self.focus2_select, args=())
+        elif (pvname.find('Focus0Select') != -1) and ((value == 0) or (value == 1) or (value == 2)):
+            thread = threading.Thread(target=self.focus0_select, args=())
             thread.start()
         elif (pvname.find('ExposureTime') != -1):
             thread = threading.Thread(target=self.exposure_time, args=())
@@ -203,15 +203,15 @@ class MCTOptics():
 
             log.info('Changing Optique Peter lens')
             if(self.epics_pvs['LensSelect'].get() == 0):
-                self.epics_pvs['MCTStatus'].put('Moving to lens: 0')
+                self.epics_pvs['MCTStatus'].put('Moving to lens: 1')
                 lens_name = self.epics_pvs['LensName0'].get()
                 self.epics_pvs['LensMotor'].put(lens_pos0, wait=True, timeout=120)
             elif(self.epics_pvs['LensSelect'].get() == 1):
-                self.epics_pvs['MCTStatus'].put('Moving to lens: 1')
+                self.epics_pvs['MCTStatus'].put('Moving to lens: 2')
                 lens_name = self.epics_pvs['LensName1'].get()
                 self.epics_pvs['LensMotor'].put(lens_pos1, wait=True, timeout=120)
             elif(self.epics_pvs['LensSelect'].get() == 2):
-                self.epics_pvs['MCTStatus'].put('Moving to lens: 2')
+                self.epics_pvs['MCTStatus'].put('Moving to lens: 3')
                 lens_name = self.epics_pvs['LensName2'].get()
                 self.epics_pvs['LensMotor'].put(lens_pos2, wait=True, timeout=120)
             message = 'Lens selected: ' + str(self.epics_pvs['LensSelect'].get())
@@ -341,45 +341,45 @@ class MCTOptics():
             self.epics_pvs['Focus1Select'].put(1)
             log.error('Changing Optique Peter focus1: Locked')
 
-    def focus2_select(self):
+    def focus0_select(self):
         """
-        Moves the Optique Peter focus 2 position from focus location to 
-        lens replacement positions (focus 2 has 2 lens replacement positions for 20x and <10x)
+        Moves the Optique Peter focus 0 position from focus location to 
+        lens replacement positions (focus 0 has 2 lens replacement positions for 20x and <10x)
         """
 
-        if (self.epics_pvs['Focus2Lock'].get() == 1):
-            focus2_pos0 = self.epics_pvs['Focus2Pos0'].get()
-            focus2_pos1 = self.epics_pvs['Focus2Pos1'].get()
-            focus2_pos2 = self.epics_pvs['Focus2Pos2'].get()
+        if (self.epics_pvs['Focus0Lock'].get() == 1):
+            focus2_pos0 = self.epics_pvs['Focus0Pos0'].get()
+            focus2_pos1 = self.epics_pvs['Focus0Pos1'].get()
+            focus2_pos2 = self.epics_pvs['Focus0Pos2'].get()
 
-            focus2_select = self.epics_pvs['Focus2Select'].get()
+            focus0_select = self.epics_pvs['Focus0Select'].get()
             focus2_name = 'None'
 
             log.info('Changing Optique Peter focus2 2 focus select')
 
-            if(self.epics_pvs['Focus2Select'].get() == 0):
-                focus2_name = self.epics_pvs['Focus2Name0'].get()
-                self.epics_pvs['Focus2Motor'].put(focus2_pos0, wait=True, timeout=120)
-                self.epics_pvs['MCTStatus'].put('Lens 2 is the focus position')
-            elif(self.epics_pvs['Focus2Select'].get() == 1):
-                focus2_name = self.epics_pvs['Focus2Name1'].get()
-                self.epics_pvs['MCTStatus'].put('Lens 2 moving to replacement position 1')
-                self.epics_pvs['Focus2Motor'].put(focus2_pos1, wait=True, timeout=120)
-                self.epics_pvs['Focus2Lock'].put(0, wait=True)
+            if(self.epics_pvs['Focus0Select'].get() == 0):
+                focus2_name = self.epics_pvs['Focus0Name0'].get()
+                self.epics_pvs['Focus0Motor'].put(focus2_pos0, wait=True, timeout=120)
+                self.epics_pvs['MCTStatus'].put('Lens 3 is the focus position')
+            elif(self.epics_pvs['Focus0Select'].get() == 1):
+                focus2_name = self.epics_pvs['Focus0Name1'].get()
+                self.epics_pvs['MCTStatus'].put('Lens 3 moving to replacement position 1')
+                self.epics_pvs['Focus0Motor'].put(focus2_pos1, wait=True, timeout=120)
+                self.epics_pvs['Focus0Lock'].put(0, wait=True)
                 self.epics_pvs['LensLock'].put(0, wait=True)
                 self.epics_pvs['MCTStatus'].put('SET NEW LENS NAME')
-            elif(self.epics_pvs['Focus2Select'].get() == 2):
-                focus2_name = self.epics_pvs['Focus2Name2'].get()
-                self.epics_pvs['MCTStatus'].put('Lens 2 moving to replacement position 2')
-                self.epics_pvs['Focus2Motor'].put(focus2_pos2, wait=True, timeout=120)
-                self.epics_pvs['Focus2Lock'].put(0, wait=True)
+            elif(self.epics_pvs['Focus0Select'].get() == 2):
+                focus2_name = self.epics_pvs['Focus0Name2'].get()
+                self.epics_pvs['MCTStatus'].put('Lens 3 moving to replacement position 2')
+                self.epics_pvs['Focus0Motor'].put(focus2_pos2, wait=True, timeout=120)
+                self.epics_pvs['Focus0Lock'].put(0, wait=True)
                 self.epics_pvs['LensLock'].put(0, wait=True)
                 self.epics_pvs['MCTStatus'].put('SET NEW LENS NAME')
 
-            log.info('Focus2: %s selected', focus2_name)
+            log.info('Focus0: %s selected', focus2_name)
         else:
-            self.epics_pvs['MCTStatus'].put('Lens 2 focus is locked: SET NEW LENS NAME')
-            self.epics_pvs['Focus2Select'].put(2)
+            self.epics_pvs['MCTStatus'].put('Lens 3 focus is locked: SET NEW LENS NAME')
+            self.epics_pvs['Focus0Select'].put(2)
             log.error('Changing Optique Peter focus2: Locked')
 
     def exposure_time(self):

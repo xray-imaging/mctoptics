@@ -192,7 +192,7 @@ record(stringout, "$(P)$(R)Focus1MotorPVName")
 # Optique Peter lens 2 position selector
 ########################################
 
-record(mbbo, "$(P)$(R)Focus2Select") {
+record(mbbo, "$(P)$(R)Focus0Select") {
   field(DTYP, "Raw Soft Channel")
   field(NOBT, "3")
   field(ZRVL, "0x0")
@@ -203,45 +203,45 @@ record(mbbo, "$(P)$(R)Focus2Select") {
   field(ONST, "Pos. 2")
 }
 
-record(ao, "$(P)$(R)Focus2Pos0") {
+record(ao, "$(P)$(R)Focus0Pos0") {
   field(PREC, "4")
   field(VAL,  "$(FOCUS2_POS0)")
 }
 
-record(ao, "$(P)$(R)Focus2Pos1") {
+record(ao, "$(P)$(R)Focus0Pos1") {
   field(PREC, "4")
   field(VAL,  "$(FOCUS2_POS1)")
 }
 
-record(ao, "$(P)$(R)Focus2Pos2") {
+record(ao, "$(P)$(R)Focus0Pos2") {
   field(PREC, "4")
   field(VAL,  "$(FOCUS2_POS2)")
 }
 
-record(stringout, "$(P)$(R)Focus2Name0") {
+record(stringout, "$(P)$(R)Focus0Name0") {
   field(PINI, "YES")
   field(VAL, "Pos. 0")
-  field(OUT, "$(P)$(R)Focus2Select.ZRST PP MS")
+  field(OUT, "$(P)$(R)Focus0Select.ZRST PP MS")
 }
 
-record(stringout, "$(P)$(R)Focus2Name1") {
+record(stringout, "$(P)$(R)Focus0Name1") {
   field(PINI, "YES")
   field(VAL, "Pos. 1")
-  field(OUT, "$(P)$(R)Focus2Select.ONST PP MS")
+  field(OUT, "$(P)$(R)Focus0Select.ONST PP MS")
 }
 
-record(stringout, "$(P)$(R)Focus2Name2") {
+record(stringout, "$(P)$(R)Focus0Name2") {
   field(PINI, "YES")
   field(VAL, "Pos. 2")
-  field(OUT, "$(P)$(R)Focus2Select.TWST PP MS")
+  field(OUT, "$(P)$(R)Focus0Select.TWST PP MS")
 }
 
-record(bo, "$(P)$(R)Focus2Lock") {
+record(bo, "$(P)$(R)Focus0Lock") {
   field(ZNAM, "Lock")
   field(ONAM, "Unlock")
 }
 
-record(stringout, "$(P)$(R)Focus2MotorPVName")
+record(stringout, "$(P)$(R)Focus0MotorPVName")
 {
    field(VAL,  "$(FOCUS1_MOTOR)")
 }
