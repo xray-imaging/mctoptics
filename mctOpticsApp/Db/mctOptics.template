@@ -243,7 +243,7 @@ record(bo, "$(P)$(R)Focus2Lock") {
 
 record(stringout, "$(P)$(R)Focus2MotorPVName")
 {
-   field(VAL,  "$(FOCUS1_MOTOR)")
+   field(VAL,  "$(FOCUS2_MOTOR)")
 }
 
 ###############################

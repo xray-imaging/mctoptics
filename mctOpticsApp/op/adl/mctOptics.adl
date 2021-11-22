@@ -397,7 +397,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="Focus 2"
+	textix="Lens 2"
 	align="horiz. centered"
 }
 "choice button" {
@@ -475,7 +475,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="Focus 1"
+	textix="Lens 1"
 	align="horiz. centered"
 }
 "choice button" {
