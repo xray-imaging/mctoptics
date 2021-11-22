@@ -12,17 +12,7 @@
 ######################
 $(P)$(R)TomoScanPVPrefix
 $(P)$(R)CameraPVPrefix
-
-#####################
-# Fast Shutter Select
-#####################
-$(P)$(R)ShutterSelect
-$(P)$(R)ShutterPos0
-$(P)$(R)ShutterPos1
-$(P)$(R)ShutterName0
-$(P)$(R)ShutterName1
-$(P)$(R)ShutterLock
-$(P)$(R)ShutterMotorPVName
+$(P)$(R)OverlayPluginPVPrefix
 
 ###############################
 # Optique Peter camera selector
@@ -47,3 +37,43 @@ $(P)$(R)LensName1
 $(P)$(R)LensName2
 $(P)$(R)LensLock
 $(P)$(R)LensMotorPVName
+
+######################
+# Detector image cross
+######################
+$(P)$(R)CrossSelect
+
+#################
+# Exposure time
+#################
+$(P)$(R)ExposureTime
+
+########################################
+# Optique Peter lens 1 position selector
+########################################
+$(P)$(R)Focus1Select
+$(P)$(R)Focus1Pos0
+$(P)$(R)Focus1Pos1
+$(P)$(R)Focus1Name0
+$(P)$(R)Focus1Name1
+$(P)$(R)Focus1Lock
+$(P)$(R)Focus1MotorPVName
+
+########################################
+# Optique Peter lens 2 position selector
+########################################
+$(P)$(R)Focus2Select
+$(P)$(R)Focus2Pos0
+$(P)$(R)Focus2Pos1
+$(P)$(R)Focus2Pos2
+$(P)$(R)Focus2Name0
+$(P)$(R)Focus2Name1
+$(P)$(R)Focus2Name2
+$(P)$(R)Focus2Lock
+$(P)$(R)Focus2MotorPVName
+
+###############################
+# MCT status via Channel Access
+###############################
+#controlPV $(P)$(R)MCTStatus
+#controlPV $(P)$(R)Watchdog
