@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOptics.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOptics.adl"
 	version=030111
 }
 display {
 	object {
-		x=95
-		y=1042
+		x=316
+		y=1375
 		width=725
-		height=360
+		height=435
 	}
 	clr=14
 	bclr=4
@@ -179,7 +179,7 @@ rectangle {
 		x=5
 		y=124
 		width=715
-		height=230
+		height=305
 	}
 	"basic attribute" {
 		clr=14
@@ -189,7 +189,7 @@ rectangle {
 "related display" {
 	object {
 		x=95
-		y=311
+		y=310
 		width=100
 		height=20
 	}
@@ -208,7 +208,7 @@ rectangle {
 text {
 	object {
 		x=95
-		y=186
+		y=185
 		width=100
 		height=20
 	}
@@ -221,7 +221,7 @@ text {
 "choice button" {
 	object {
 		x=95
-		y=236
+		y=235
 		width=100
 		height=75
 	}
@@ -234,7 +234,7 @@ text {
 "choice button" {
 	object {
 		x=95
-		y=212
+		y=211
 		width=100
 		height=20
 	}
@@ -248,7 +248,7 @@ text {
 "related display" {
 	object {
 		x=95
-		y=331
+		y=330
 		width=100
 		height=20
 	}
@@ -267,7 +267,7 @@ text {
 "related display" {
 	object {
 		x=210
-		y=311
+		y=310
 		width=100
 		height=20
 	}
@@ -286,7 +286,7 @@ text {
 text {
 	object {
 		x=210
-		y=186
+		y=185
 		width=100
 		height=20
 	}
@@ -299,7 +299,7 @@ text {
 "choice button" {
 	object {
 		x=210
-		y=236
+		y=235
 		width=100
 		height=75
 	}
@@ -312,7 +312,7 @@ text {
 "choice button" {
 	object {
 		x=210
-		y=211
+		y=210
 		width=100
 		height=20
 	}
@@ -326,7 +326,7 @@ text {
 "related display" {
 	object {
 		x=210
-		y=331
+		y=330
 		width=100
 		height=20
 	}
@@ -345,7 +345,7 @@ text {
 "choice button" {
 	object {
 		x=555
-		y=236
+		y=235
 		width=100
 		height=75
 	}
@@ -358,7 +358,7 @@ text {
 text {
 	object {
 		x=555
-		y=186
+		y=185
 		width=100
 		height=20
 	}
@@ -371,7 +371,7 @@ text {
 "related display" {
 	object {
 		x=440
-		y=311
+		y=310
 		width=100
 		height=20
 	}
@@ -390,7 +390,7 @@ text {
 text {
 	object {
 		x=440
-		y=186
+		y=185
 		width=100
 		height=20
 	}
@@ -403,7 +403,7 @@ text {
 "choice button" {
 	object {
 		x=440
-		y=236
+		y=235
 		width=100
 		height=75
 	}
@@ -416,7 +416,7 @@ text {
 "choice button" {
 	object {
 		x=440
-		y=212
+		y=211
 		width=100
 		height=20
 	}
@@ -430,7 +430,7 @@ text {
 "related display" {
 	object {
 		x=440
-		y=331
+		y=330
 		width=100
 		height=20
 	}
@@ -449,7 +449,7 @@ text {
 "related display" {
 	object {
 		x=325
-		y=311
+		y=310
 		width=100
 		height=20
 	}
@@ -468,7 +468,7 @@ text {
 text {
 	object {
 		x=325
-		y=186
+		y=185
 		width=100
 		height=20
 	}
@@ -481,7 +481,7 @@ text {
 "choice button" {
 	object {
 		x=325
-		y=236
+		y=235
 		width=100
 		height=75
 	}
@@ -494,7 +494,7 @@ text {
 "choice button" {
 	object {
 		x=325
-		y=211
+		y=210
 		width=100
 		height=20
 	}
@@ -508,7 +508,7 @@ text {
 "related display" {
 	object {
 		x=325
-		y=331
+		y=330
 		width=100
 		height=20
 	}
@@ -580,4 +580,139 @@ text {
 		clr=14
 	}
 	textix="Python server"
+}
+text {
+	object {
+		x=116
+		y=356
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens offset sample X"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=325
+		y=355
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Lens1XOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=116
+		y=381
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens offest sample Y"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=325
+		y=380
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Lens1YOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=116
+		y=406
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens offset sample Z"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=325
+		y=405
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Lens1ZOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=440
+		y=405
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Lens1ZOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=440
+		y=380
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Lens1YOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=440
+		y=355
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Lens1XOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
 }

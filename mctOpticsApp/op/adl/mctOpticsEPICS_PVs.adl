@@ -5,10 +5,10 @@ file {
 }
 display {
 	object {
-		x=913
-		y=92
+		x=903
+		y=84
 		width=455
-		height=260
+		height=335
 	}
 	clr=14
 	bclr=4
@@ -115,7 +115,7 @@ rectangle {
 		x=5
 		y=40
 		width=445
-		height=210
+		height=285
 	}
 	"basic attribute" {
 		clr=14
@@ -151,6 +151,19 @@ text {
 	limits {
 	}
 }
+text {
+	object {
+		x=10
+		y=175
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Opt. Ptr Camera PV"
+	align="horiz. right"
+}
 "text entry" {
 	object {
 		x=220
@@ -170,96 +183,25 @@ text {
 text {
 	object {
 		x=10
-		y=175
+		y=200
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Opt. Ptr Camera PV"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=75
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="TomoScan prefix"
+	textix="Opt. Ptr Focus 1 PV"
 	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=220
-		y=75
+		y=200
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)TomoScanPVPrefix"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=50
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Camera prefix"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=50
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)CameraPVPrefix"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=100
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Overlay prefix"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=100
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)OverlayPluginPVPrefix"
+		chan="$(P)$(R)Focus1MotorPVName"
 		clr=14
 		bclr=51
 	}
@@ -299,25 +241,170 @@ text {
 text {
 	object {
 		x=10
-		y=200
+		y=50
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Opt. Ptr Focus 1 PV"
+	textix="Camera prefix"
 	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=220
-		y=200
+		y=50
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus1MotorPVName"
+		chan="$(P)$(R)CameraPVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=75
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="TomoScan prefix"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=75
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)TomoScanPVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=100
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Overlay prefix"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=100
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)OverlayPluginPVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=250
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens sample X PV"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=250
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)LensSampleXPVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=275
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens sample Y PV"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=275
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)LensSampleYPVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=300
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens sample Z PV"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=300
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)LensSampleZPVName"
 		clr=14
 		bclr=51
 	}

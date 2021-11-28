@@ -30,11 +30,24 @@ class MCTOptics():
         self.control_pvs = {}
         self.pv_prefixes = {}
 
+        self.lens0_sample_x = None
+        self.lens0_sample_y = None
+        self.lens0_sample_z = None
+
         if not isinstance(pv_files, list):
             pv_files = [pv_files]
         for pv_file in pv_files:
             self.read_pv_file(pv_file, macros)
         self.show_pvs()
+
+        #Define PVs we will need from the sample x-y-z motos, which is on another IOC
+        lens_sample_x_pv_name = self.control_pvs['LensSampleX'].pvname
+        self.control_pvs['LensSampleXPosition']      = PV(lens_sample_x_pv_name + '.VAL')
+        lens_sample_y_pv_name = self.control_pvs['LensSampleY'].pvname
+        self.control_pvs['LensSampleYPosition']      = PV(lens_sample_y_pv_name + '.VAL')
+        lens_sample_z_pv_name = self.control_pvs['LensSampleX'].pvname
+        self.control_pvs['LensSampleZPosition']      = PV(lens_sample_z_pv_name + '.VAL')
+
 
         prefix = self.pv_prefixes['TomoScan']
         self.control_pvs['TSScintillatorType']      = PV(prefix + 'ScintillatorType')
@@ -192,6 +205,13 @@ class MCTOptics():
     def lens_select(self):
         """Moves the Optique Peter lens.
         """
+
+        # TO BE completed
+        # if((self.lens0_sample_x == None) and (self.epics_pvs['LensSelect'].get() == 0)):
+        #     self.lens0_sample_x = self.control_pvs['LensSampleXPosition'].get()
+        #     self.lens0_sample_y = self.control_pvs['LensSampleYPosition'].get()
+        #     self.lens0_sample_z = self.control_pvs['LensSampleZPosition'].get()
+
 
         if (self.epics_pvs['LensLock'].get() == 1):
             lens_pos0 = self.epics_pvs['LensPos0'].get()
