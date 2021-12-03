@@ -38,6 +38,19 @@ record(stringout, "$(P)$(R)LensSampleZPVName")
    field(VAL,  "$(LENS_SAMPLE_Z)")
 }
 
+###########################
+# Cameras rotation PV Names
+###########################
+record(stringout, "$(P)$(R)Camera0RotationPVName")
+{
+   field(VAL,  "$(CAM0_ROT)")
+}
+
+record(stringout, "$(P)$(R)Camera1RotationPVName")
+{
+   field(VAL,  "$(CAM1_ROT)")
+}
+
 ###############################
 # Optique Peter camera selector
 ###############################
@@ -81,6 +94,50 @@ record(stringout, "$(P)$(R)CameraMotorPVName")
 {
    field(VAL,  "$(CAMERA_MOTOR)")
 }
+
+######################################
+# Optique Peter camera rotation offset
+######################################
+
+record(ao, "$(P)$(R)Camera0Lens0RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera0Lens1RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera0Lens2RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens0RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens1RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens2RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+
+
+
 
 #############################
 # Optique Peter lens selector
