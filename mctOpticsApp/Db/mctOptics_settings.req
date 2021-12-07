@@ -14,7 +14,6 @@ $(P)$(R)TomoScanPVPrefix
 $(P)$(R)CameraPVPrefix
 $(P)$(R)OverlayPluginPVPrefix
 
-
 ############################
 # Lens Sample X-Y-Z PV Names
 ############################
@@ -38,7 +37,6 @@ $(P)$(R)CameraName0
 $(P)$(R)CameraName1
 $(P)$(R)CameraLock
 $(P)$(R)CameraMotorPVName
-
 
 ######################################
 # Optique Peter camera rotation offset
@@ -108,3 +106,8 @@ $(P)$(R)Lens2ZOffset
 ###############################
 #controlPV $(P)$(R)MCTStatus
 #controlPV $(P)$(R)Watchdog
+
+###############
+# Sync to motor
+###############
+$(P)$(R)Sync

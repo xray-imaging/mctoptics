@@ -85,6 +85,7 @@ record(stringout, "$(P)$(R)CameraName1") {
   field(VAL, "Pos. 1")
   field(OUT, "$(P)$(R)CameraSelect.ONST PP MS")
 }
+
 record(bo, "$(P)$(R)CameraLock") {
   field(ZNAM, "Lock")
   field(ONAM, "Unlock")
@@ -134,10 +135,6 @@ record(ao, "$(P)$(R)Camera1Lens2RotationOffset")
    field(PREC,  "4")
    field(VAL,  0)
 }
-
-
-
-
 
 #############################
 # Optique Peter lens selector
@@ -384,4 +381,14 @@ record(bi, "$(P)$(R)ServerRunning")
    field(ZSV,  "MAJOR")
    field(ONAM, "Running")
    field(OSV,  "NO_ALARM")
+}
+
+###############
+# Sync to motor
+###############
+
+record(busy, "$(P)$(R)Sync")
+{
+   field(ZNAM, "Done")
+   field(ONAM, "Sync")
 }

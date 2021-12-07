@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=234
-		y=64
+		x=1063
+		y=254
 		width=1435
 		height=1110
 	}
@@ -6479,4 +6479,19 @@ composite {
 	}
 	limits {
 	}
+}
+"message button" {
+	object {
+		x=469
+		y=242
+		width=120
+		height=25
+	}
+	control {
+		chan="$(P)$(R)Sync"
+		clr=14
+		bclr=51
+	}
+	label="sync to motors"
+	press_msg="1"
 }
