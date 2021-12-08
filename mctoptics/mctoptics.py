@@ -233,12 +233,34 @@ class MCTOptics():
         """Moves the Optique Peter lens.
         """
 
-        # TO BE completed
-        # if((self.lens0_sample_x == None) and (self.epics_pvs['LensSelect'].get() == 0)):
-        #     self.lens0_sample_x = self.control_pvs['LensSampleXPosition'].get()
-        #     self.lens0_sample_y = self.control_pvs['LensSampleYPosition'].get()
-        #     self.lens0_sample_z = self.control_pvs['LensSampleZPosition'].get()
+        # take offsets of the current lens
+        x_cur,y_cur,z_cur = self.take_lens_offsets(self.lens_cur)            
+        # take new lens id, and its offsets
+        lens_select = self.epics_pvs['LensSelect'].get()
+        x_select,y_select,z_select = self.take_lens_offsets(lens_select)
+        # take camera id and its rotation for the new lens
+        cam = self.epics_pvs['CameraSelect'].get()
+        camera_rotation = self.take_camera_offsets(lens_select)        
+        # update current lens
+        self.lens_cur = lens_select
 
+        # move x,y,z motors to wrt relative offsets        
+        x = self.epics_pvs['LensSampleXPosition'].get()
+        y = self.epics_pvs['LensSampleYPosition'].get()
+        z = self.epics_pvs['LensSampleZPosition'].get()
+        x_new = x + x_select - x_cur
+        y_new = y + y_select - y_cur
+        z_new = z + z_select - z_cur
+        log.info('move X from %f to %f', x, x_new)
+        log.info('move Y from %f to %f', y, y_new)
+        log.info('move Z from %f to %f', z, z_new)
+        log.info('move camera %s rotation to %f' %(cam, camera_rotation))        
+        self.epics_pvs['LensSampleXPosition'].put(x_new)
+        self.epics_pvs['LensSampleYPosition'].put(y_new)
+        self.epics_pvs['LensSampleZPosition'].put(z_new)
+        self.epics_pvs['Camera'+str(cam)+'RotationPosition'].put(camera_rotation) # no wait, assuming the lens movement is the slowest part
+
+        
         if (self.epics_pvs['LensLock'].get() == 1):
             lens_pos0 = self.epics_pvs['LensPos0'].get()
             lens_pos1 = self.epics_pvs['LensPos1'].get()
@@ -295,39 +317,7 @@ class MCTOptics():
             log.error('Changing Optique Peter lens: Locked')
             self.epics_pvs['MCTStatus'].put('Lens select is locked')
 
-        ########################### VN
-        # take offsets of the current lens
-        x_cur,y_cur,z_cur = self.take_lens_offsets(self.lens_cur)            
-        # take new lens id, and its offsets
-        lens_select = self.epics_pvs['LensSelect'].get()
-        x_select,y_select,z_select = self.take_lens_offsets(lens_select)
-        # update current lens
-        self.lens_cur = lens_select
-        # move x,y,z motors to wrt relative offsets        
-        log.info('current X position %f',self.epics_pvs['LensSampleXPosition'].get())
-        log.info('move X to position %f',self.epics_pvs['LensSampleXPosition'].get() + x_select - x_cur)
-        log.info('current Y position %f',self.epics_pvs['LensSampleYPosition'].get())
-        log.info('move Y to position %f',self.epics_pvs['LensSampleYPosition'].get() + y_select - y_cur)
-        log.info('current Z position %f',self.epics_pvs['LensSampleZPosition'].get())
-        log.info('move Z to position %f',self.epics_pvs['LensSampleZPosition'].get() + z_select - z_cur)
         
-        x = self.epics_pvs['LensSampleXPosition'].get()
-        y = self.epics_pvs['LensSampleYPosition'].get()
-        z = self.epics_pvs['LensSampleZPosition'].get() 
-        time.sleep(1)
-        # self.epics_pvs['LensSampleXPosition'].put(x + x_select - x_cur,wait=True)
-        # self.epics_pvs['LensSampleYPosition'].put(y + y_select - y_cur,wait=True)
-        # self.epics_pvs['LensSampleZPosition'].put(z + z_select - z_cur,wait=True)
-        ########################### VN
-        ########################### FDC
-
-        camera_rotation = self.take_camera_offsets(lens_select)
-        cam = self.epics_pvs['CameraSelect'].get()
-        log.info('Move camera %s rotation to %f' %(cam, camera_rotation))
-        # self.epics_pvs['Camera'+str(cam)+'RotationPosition'].put(camera_rotation,wait=True)
-
-        ########################### FDC
-
     def camera_select(self):
         """Moves the Optique Peter camera.
         """
