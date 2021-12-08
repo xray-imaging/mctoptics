@@ -78,6 +78,7 @@ class MCTOptics():
         self.epics_pvs = {**self.config_pvs, **self.control_pvs}
 
         ########################### VN
+        # shall we run a sync() here?
         self.lens_cur = self.epics_pvs['LensSelect'].get()
         ########################### VN
         
@@ -221,6 +222,13 @@ class MCTOptics():
         z = self.epics_pvs['Lens'+str(lens)+'ZOffset'].get()
         return x,y,z
 
+
+    def take_camera_offsets(self, lens):
+
+        cam = self.epics_pvs['CameraSelect'].get()
+        return self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'RotationOffset'].get()
+
+
     def lens_select(self):
         """Moves the Optique Peter lens.
         """
@@ -288,31 +296,38 @@ class MCTOptics():
             self.epics_pvs['MCTStatus'].put('Lens select is locked')
 
         ########################### VN
-        # # take offsets of the current lens
-        # x_cur,y_cur,z_cur = self.take_lens_offsets(self.lens_cur)            
-        # # take new lens id, and its offsets
-        # lens_select = self.epics_pvs['LensSelect'].get()
-        # x_select,y_select,z_select = self.take_lens_offsets(lens_select)
-        # # update current lens
-        # self.lens_cur = lens_select
-        # # move x,y,z motors to wrt relative offsets        
-        # # log.info('current X position %f',self.epics_pvs['LensSampleXPosition'].get())
-        # # log.info('move X to position %f',self.epics_pvs['LensSampleXPosition'].get() + x_select - x_cur)
-        # # log.info('current Y position %f',self.epics_pvs['LensSampleYPosition'].get())
-        # # log.info('move Y to position %f',self.epics_pvs['LensSampleYPosition'].get() + y_select - y_cur)
-        # # log.info('current Z position %f',self.epics_pvs['LensSampleZPosition'].get())
-        # # log.info('move Z to position %f',self.epics_pvs['LensSampleZPosition'].get() + z_select - z_cur)
+        # take offsets of the current lens
+        x_cur,y_cur,z_cur = self.take_lens_offsets(self.lens_cur)            
+        # take new lens id, and its offsets
+        lens_select = self.epics_pvs['LensSelect'].get()
+        x_select,y_select,z_select = self.take_lens_offsets(lens_select)
+        # update current lens
+        self.lens_cur = lens_select
+        # move x,y,z motors to wrt relative offsets        
+        log.info('current X position %f',self.epics_pvs['LensSampleXPosition'].get())
+        log.info('move X to position %f',self.epics_pvs['LensSampleXPosition'].get() + x_select - x_cur)
+        log.info('current Y position %f',self.epics_pvs['LensSampleYPosition'].get())
+        log.info('move Y to position %f',self.epics_pvs['LensSampleYPosition'].get() + y_select - y_cur)
+        log.info('current Z position %f',self.epics_pvs['LensSampleZPosition'].get())
+        log.info('move Z to position %f',self.epics_pvs['LensSampleZPosition'].get() + z_select - z_cur)
         
-        # x = self.epics_pvs['LensSampleXPosition'].get()
-        # y = self.epics_pvs['LensSampleYPosition'].get()
-        # z = self.epics_pvs['LensSampleZPosition'].get() 
-        # time.sleep(1)
+        x = self.epics_pvs['LensSampleXPosition'].get()
+        y = self.epics_pvs['LensSampleYPosition'].get()
+        z = self.epics_pvs['LensSampleZPosition'].get() 
+        time.sleep(1)
         # self.epics_pvs['LensSampleXPosition'].put(x + x_select - x_cur,wait=True)
         # self.epics_pvs['LensSampleYPosition'].put(y + y_select - y_cur,wait=True)
         # self.epics_pvs['LensSampleZPosition'].put(z + z_select - z_cur,wait=True)
         ########################### VN
+        ########################### FDC
 
- 
+        camera_rotation = self.take_camera_offsets(lens_select)
+        cam = self.epics_pvs['CameraSelect'].get()
+        log.info('Move camera %s rotation to %f' %(cam, camera_rotation))
+        # self.epics_pvs['Camera'+str(cam)+'RotationPosition'].put(camera_rotation,wait=True)
+
+        ########################### FDC
+
     def camera_select(self):
         """Moves the Optique Peter camera.
         """
@@ -482,6 +497,7 @@ class MCTOptics():
             camera_select_sync = 1
         else:
             camera_select_sync = -1
+            log.error('Sync camera failed: check camera select motor position')
 
         camera_select = self.epics_pvs['CameraSelect'].get()
         if camera_select != camera_select_sync:
@@ -489,7 +505,7 @@ class MCTOptics():
             self.epics_pvs['CameraSelect'].put(camera_select_sync)
             log.warning('Sync camera: done')
         else:
-            log.warning('Sync camera: not required')
+            log.warning('Sync camera: not required, selector is already in the correct position')
 
         log.info('Sync lens')
         lens_pos0 = self.epics_pvs['LensPos0'].get()
@@ -514,6 +530,7 @@ class MCTOptics():
             lens_select_sync = 2
         else:
             lens_select_sync = -1
+            log.error('Sync lens failed: check lens select motor position')
 
         lens_select = self.epics_pvs['LensSelect'].get()
         if ((lens_select != lens_select_sync) and (lens_select_sync != -1)):
@@ -521,7 +538,7 @@ class MCTOptics():
             self.epics_pvs['LensSelect'].put(lens_select_sync)
             log.warning('Sync lens: done')
         else:
-            log.warning('Sync lens: not required')
+            log.warning('Sync lens: not required, selector is already in the correct position')
 
         log.info('Sync lens 2 in/out')
         focus1_pos0 = self.epics_pvs['Focus1Pos0'].get()
@@ -542,6 +559,7 @@ class MCTOptics():
             focus1_select_sync = 1
         else:
             focus1_select_sync = -1
+            log.error('Sync lens 2 failed: check lens 2 select motor position')
 
         focus1_select = self.epics_pvs['Focus1Select'].get()
         if ((focus1_select != focus1_select_sync) and (focus1_select_sync != -1)):
@@ -549,7 +567,7 @@ class MCTOptics():
             self.epics_pvs['Focus1Select'].put(focus1_select_sync)
             log.warning('Sync focus 1: done')
         else:
-            log.warning('Sync focus 1: not required')
+            log.warning('Sync focus 1: not required, selector is already in the correct position')
 
         log.info('Sync lens 3 in/out')
         focus2_pos0 = self.epics_pvs['Focus2Pos0'].get()
@@ -574,6 +592,7 @@ class MCTOptics():
             focus2_select_sync = 2
         else:
             focus2_select_sync = -1
+            log.error('Sync lens 3 failed: check lens 3 select motor position')
 
         focus2_select = self.epics_pvs['Focus2Select'].get()
         if ((focus2_select != focus2_select_sync) and (focus2_select_sync != -1)):
@@ -581,7 +600,7 @@ class MCTOptics():
             self.epics_pvs['Focus2Select'].put(focus2_select_sync)
             log.warning('Sync focus 2: done')
         else:
-            log.warning('Sync focus 2: not required')
+            log.warning('Sync focus 2: not required, selector is already in the correct position')
            
         if((camera_select_sync == -1) or (lens_select_sync == -1) or (focus1_select_sync == -1) or (focus2_select_sync == -1)):
             self.epics_pvs['MCTStatus'].put('Sync error: check log for details')
