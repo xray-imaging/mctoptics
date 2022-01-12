@@ -7,12 +7,25 @@
 # but they are used by txmoptics.  
 # These PVs are not saved in the txmoptics configuration file.
 
-######################
-# TomoScan PV Prefixes
-######################
+###############################
+# TomoScan, Camera  PV Prefixes 
+###############################
 $(P)$(R)TomoScanPVPrefix
 $(P)$(R)CameraPVPrefix
 $(P)$(R)OverlayPluginPVPrefix
+
+############################
+# Lens Sample X-Y-Z PV Names
+############################
+$(P)$(R)LensSampleXPVName
+$(P)$(R)LensSampleYPVName
+$(P)$(R)LensSampleZPVName
+
+###########################
+# Cameras rotation PV Names
+###########################
+$(P)$(R)Camera0RotationPVName
+$(P)$(R)Camera1RotationPVName
 
 ###############################
 # Optique Peter camera selector
@@ -24,6 +37,16 @@ $(P)$(R)CameraName0
 $(P)$(R)CameraName1
 $(P)$(R)CameraLock
 $(P)$(R)CameraMotorPVName
+
+######################################
+# Optique Peter camera rotation offset
+######################################
+$(P)$(R)Camera0Lens0RotationOffset
+$(P)$(R)Camera0Lens1RotationOffset
+$(P)$(R)Camera0Lens2RotationOffset
+$(P)$(R)Camera1Lens0RotationOffset
+$(P)$(R)Camera1Lens1RotationOffset
+$(P)$(R)Camera1Lens2RotationOffset
 
 #############################
 # Optique Peter lens selector
@@ -58,6 +81,9 @@ $(P)$(R)Focus1Name0
 $(P)$(R)Focus1Name1
 $(P)$(R)Focus1Lock
 $(P)$(R)Focus1MotorPVName
+$(P)$(R)Lens1XOffset
+$(P)$(R)Lens1YOffset
+$(P)$(R)Lens1ZOffset
 
 ########################################
 # Optique Peter lens 2 position selector
@@ -71,9 +97,17 @@ $(P)$(R)Focus2Name1
 $(P)$(R)Focus2Name2
 $(P)$(R)Focus2Lock
 $(P)$(R)Focus2MotorPVName
+$(P)$(R)Lens2XOffset
+$(P)$(R)Lens2YOffset
+$(P)$(R)Lens2ZOffset
 
 ###############################
 # MCT status via Channel Access
 ###############################
 #controlPV $(P)$(R)MCTStatus
 #controlPV $(P)$(R)Watchdog
+
+###############
+# Sync to motor
+###############
+$(P)$(R)Sync

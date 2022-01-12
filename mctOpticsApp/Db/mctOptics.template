@@ -1,9 +1,9 @@
 # Database for EPICS PVS for txm optics control
 # This database contains all of the PVs used by the txmoptics base class.
 
-#################################
-# TomoScan and Camera PV Prefixes
-#################################
+###############################
+# TomoScan, Camera  PV Prefixes 
+###############################
 
 record(stringout, "$(P)$(R)TomoScanPVPrefix")
 {
@@ -18,6 +18,37 @@ record(stringout, "$(P)$(R)CameraPVPrefix")
 record(stringout, "$(P)$(R)OverlayPluginPVPrefix")
 {
    field(VAL,  "$(OVERLAY)")
+}
+
+############################
+# Lens Sample X-Y-Z PV Names
+############################
+record(stringout, "$(P)$(R)LensSampleXPVName")
+{
+   field(VAL,  "$(LENS_SAMPLE_X)")
+}
+
+record(stringout, "$(P)$(R)LensSampleYPVName")
+{
+   field(VAL,  "$(LENS_SAMPLE_Y)")
+}
+
+record(stringout, "$(P)$(R)LensSampleZPVName")
+{
+   field(VAL,  "$(LENS_SAMPLE_Z)")
+}
+
+###########################
+# Cameras rotation PV Names
+###########################
+record(stringout, "$(P)$(R)Camera0RotationPVName")
+{
+   field(VAL,  "$(CAM0_ROT)")
+}
+
+record(stringout, "$(P)$(R)Camera1RotationPVName")
+{
+   field(VAL,  "$(CAM1_ROT)")
 }
 
 ###############################
@@ -54,6 +85,7 @@ record(stringout, "$(P)$(R)CameraName1") {
   field(VAL, "Pos. 1")
   field(OUT, "$(P)$(R)CameraSelect.ONST PP MS")
 }
+
 record(bo, "$(P)$(R)CameraLock") {
   field(ZNAM, "Lock")
   field(ONAM, "Unlock")
@@ -62,6 +94,46 @@ record(bo, "$(P)$(R)CameraLock") {
 record(stringout, "$(P)$(R)CameraMotorPVName")
 {
    field(VAL,  "$(CAMERA_MOTOR)")
+}
+
+######################################
+# Optique Peter camera rotation offset
+######################################
+
+record(ao, "$(P)$(R)Camera0Lens0RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera0Lens1RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera0Lens2RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens0RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens1RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens2RotationOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
 }
 
 #############################
@@ -188,6 +260,24 @@ record(stringout, "$(P)$(R)Focus1MotorPVName")
    field(VAL,  "$(FOCUS1_MOTOR)")
 }
 
+record(ao, "$(P)$(R)Lens1XOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Lens1YOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Lens1ZOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
 ########################################
 # Optique Peter lens 2 position selector
 ########################################
@@ -246,6 +336,24 @@ record(stringout, "$(P)$(R)Focus2MotorPVName")
    field(VAL,  "$(FOCUS2_MOTOR)")
 }
 
+record(ao, "$(P)$(R)Lens2XOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Lens2YOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Lens2ZOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
 ###############################
 # MCT status via Channel Access
 ###############################
@@ -273,4 +381,14 @@ record(bi, "$(P)$(R)ServerRunning")
    field(ZSV,  "MAJOR")
    field(ONAM, "Running")
    field(OSV,  "NO_ALARM")
+}
+
+###############
+# Sync to motor
+###############
+
+record(busy, "$(P)$(R)Sync")
+{
+   field(ZNAM, "Done")
+   field(ONAM, "Sync")
 }
