@@ -13,7 +13,7 @@ Usage
 To select a specific lens/detector combination simply press the desired option in the maim mctOptics control screen:
 
 .. image:: docs/source/img/mctOptics.png
-    :width: 30%
+    :width: 45%
     :align: center
 
 After the selection is completed the corresponding TomoScan information at:
