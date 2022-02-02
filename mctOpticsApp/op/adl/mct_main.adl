@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
 	object {
-		x=474
-		y=567
+		x=437
+		y=1300
 		width=1435
 		height=750
 	}
@@ -6063,4 +6063,19 @@ rectangle {
 		fill="outline"
 		width=5
 	}
+}
+"shell command" {
+	object {
+		x=1313
+		y=1
+		width=120
+		height=25
+	}
+	command[0] {
+		label="IOCs"
+		name="medm -x /home/beams/USER2BMB/scripts/iocs_start.adl &"
+	}
+	clr=0
+	bclr=49
+	label="IOCs"
 }
