@@ -5,11 +5,6 @@
 # TomoScan, Camera  PV Prefixes 
 ###############################
 
-record(stringout, "$(P)$(R)TomoScanPVPrefix")
-{
-   field(VAL,  "$(TOMOSCAN)")
-}
-
 record(stringout, "$(P)$(R)CameraPVPrefix")
 {
    field(VAL,  "$(CAMERA)")
@@ -207,15 +202,6 @@ record(mbbo, "$(P)$(R)CrossSelect") {
   field(ONST, "No")
 }
 
-#################
-# Exposure time
-#################
-
-record(ao, "$(P)$(R)ExposureTime")
-{
-   field(PREC,  "3")
-}
-
 ########################################
 # Optique Peter lens 1 position selector
 ########################################
@@ -391,4 +377,41 @@ record(busy, "$(P)$(R)Sync")
 {
    field(ZNAM, "Done")
    field(ONAM, "Sync")
+}
+
+####################
+# Optics information
+####################
+
+record(stringout, "$(P)$(R)ScintillatorType")
+{
+   field(VAL,  "Unknown")
+}
+
+record(ao, "$(P)$(R)ScintillatorThickness")
+{
+   field(PREC,  "0")
+}
+
+record(ao, "$(P)$(R)ImagePixelSize")
+{
+   field(PREC, "2")
+   field(EGU,  "microns")
+}
+
+record(ao, "$(P)$(R)DetectorPixelSize")
+{
+   field(PREC, "2")
+   field(EGU,  "microns")
+}
+
+record(stringout, "$(P)$(R)CameraObjective")
+{
+   field(VAL,  "Unknown")
+}
+
+record(ao, "$(P)$(R)CameraTubeLength")
+{
+   field(PREC, "0")
+   field(EGU,  "mm")
 }

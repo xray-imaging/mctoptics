@@ -42,9 +42,6 @@ TomoScan and Camera PV Prefixes
   * - Record name
     - Record type
     - Description
-  * - $(P)$(R)TomoScanPVPrefix
-    - stringout
-    - Contains the prefix for the tomoScan, e.g. 2bmb:TomoScan:
   * - $(P)$(R)CameraPVPrefix
     - stringout
     - Contains the prefix for the detector, e.g. 2bmbPG1:
@@ -81,9 +78,6 @@ Fast Shutter Select
   * - $(P)$(R)ShutterMotorPVName
     - stringout
     - Contains the fast shutter motor PV name, e.g. 2bmb:m5
-
-
-
 
 Optique Peter camera selector
 -----------------------------
@@ -157,6 +151,35 @@ Optique Peter lens selector
     - stringout
     - Contains the Lens motor PV name, e.g. 2bmb:m1
 
+Optics information
+^^^^^^^^^^^^^^^^^^
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)ScintillatorType
+    - stringout
+    - Contains the type of scintillator being used.
+  * - $(P)$(R)ScintillatorThickness
+    - ao
+    - Contains the thickness of the scintillator in microns.
+  * - $(P)$(R)ImagePixelSize
+    - ao
+    - Contains the pixel size on the sample in microns (i.e. includes objective magnification)
+  * - $(P)$(R)DetectorPixelSize
+    - ao
+    - Contains the pixel size of the detector.
+  * - $(P)$(R)CameraObjective
+    - stringout
+    - Description of the camera objective
+  * - $(P)$(R)CameraTubeLength
+    - stringout
+    - Description of the camera objective
 
 medm files
 ----------

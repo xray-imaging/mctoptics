@@ -51,16 +51,6 @@ class MCTOptics():
         camera1_rotation_pv_name = self.control_pvs['Camera1Rotation'].pvname
         self.control_pvs['Camera1RotationPosition']  = PV(camera1_rotation_pv_name + '.VAL')
 
-        prefix = self.pv_prefixes['TomoScan']
-        self.control_pvs['TSScintillatorType']      = PV(prefix + 'ScintillatorType')
-        self.control_pvs['TSScintillatorThickness'] = PV(prefix + 'ScintillatorThickness')
-        self.control_pvs['TSCameraObjective']       = PV(prefix + 'CameraObjective')
-        self.control_pvs['TSCameraTubeLength']      = PV(prefix + 'CameraTubeLength')
-                 
-        self.control_pvs['TSDetectorPixelSize']     = PV(prefix + 'DetectorPixelSize')
-        self.control_pvs['TSImagePixelSize']        = PV(prefix + 'ImagePixelSize')
-        self.control_pvs['TSExposureTime']          = PV(prefix + 'ExposureTime')
-
         #Define PVs from the camera IOC that we will need
         prefix = self.pv_prefixes['Camera']
         camera_prefix = prefix + 'cam1:'
@@ -83,7 +73,7 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Focus1Select', 'Focus2Select', 'ExposureTime', 'Sync'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Focus1Select', 'Focus2Select', 'Sync'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
         for epics_pv in ('Sync',):
             self.epics_pvs[epics_pv].put(0)
@@ -207,9 +197,6 @@ class MCTOptics():
         elif (pvname.find('Focus2Select') != -1) and ((value == 0) or (value == 1) or (value == 2)):
             thread = threading.Thread(target=self.focus2_select, args=())
             thread.start()
-        elif (pvname.find('ExposureTime') != -1):
-            thread = threading.Thread(target=self.exposure_time, args=())
-            thread.start()
         elif (pvname.find('Sync') != -1) and (value == 1):
             thread = threading.Thread(target=self.sync, args=())
             thread.start()
@@ -298,14 +285,14 @@ class MCTOptics():
                 tube_lens              = lens_lookup[lens_name]['tube_lens']
 
                 # update tomoScan PVs
-                self.control_pvs['TSScintillatorType'].put(scintillator_type)
-                self.control_pvs['TSScintillatorThickness'].put(scintillator_thickness)
-                self.control_pvs['TSCameraObjective'].put(magnification)
-                self.control_pvs['TSCameraTubeLength'].put(tube_lens)
+                self.control_pvs['ScintillatorType'].put(scintillator_type)
+                self.control_pvs['ScintillatorThickness'].put(scintillator_thickness)
+                self.control_pvs['CameraObjective'].put(magnification)
+                self.control_pvs['CameraTubeLength'].put(tube_lens)
 
-                detector_pixel_size    = self.control_pvs['TSDetectorPixelSize'].get()
+                detector_pixel_size    = self.control_pvs['DetectorPixelSize'].get()
                 image_pixel_size       = float(detector_pixel_size)/float(magnification)
-                self.control_pvs['TSImagePixelSize'].put(image_pixel_size)
+                self.control_pvs['ImagePixelSize'].put(image_pixel_size)
             except KeyError as e:
                 log.error('Lens called %s is not defined. Please add it to the /data/lens.json file' % e)
                 log.error('Failed to update: Scintillator type')
@@ -453,14 +440,6 @@ class MCTOptics():
             self.epics_pvs['MCTStatus'].put('Lens 2 focus is locked: SET NEW LENS NAME')
             self.epics_pvs['Focus2Select'].put(2)
             log.error('Changing Optique Peter focus2: Locked')
-
-    def exposure_time(self):
-        """
-        update exposure time values for both detector and tomoscan
-        """
-        exp_time = self.epics_pvs['ExposureTime'].get()
-        self.epics_pvs['CamAcquireTime'].put(exp_time, wait=True)
-        self.epics_pvs['TSExposureTime'].put(exp_time, wait=True)
 
     def sync(self):
         """
