@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
 	object {
-		x=437
-		y=1300
+		x=427
+		y=1292
 		width=1435
 		height=750
 	}
@@ -432,250 +432,6 @@ composite {
 				chan="2bma:alldone.VAL"
 			}
 			textix="Moving"
-		}
-	}
-}
-composite {
-	object {
-		x=867
-		y=327
-		width=565
-		height=180
-	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=877
-				y=332
-				width=545
-				height=20
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=1065
-				y=332
-				width=255
-				height=20
-			}
-			"basic attribute" {
-				clr=54
-			}
-			textix="Configuration Information"
-		}
-		text {
-			object {
-				x=1031
-				y=482
-				width=160
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Tube length (mm)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=1021
-				y=357
-				width=170
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Scintillator type"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=931
-				y=382
-				width=260
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Scint. thickness (microns)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=931
-				y=407
-				width=260
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Image pixel size (microns)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=901
-				y=432
-				width=290
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Detector pixel size (microns)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=1031
-				y=457
-				width=160
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Camera objective mag. (x)"
-			align="horiz. right"
-		}
-		composite {
-			object {
-				x=1196
-				y=357
-				width=230
-				height=145
-			}
-			"composite name"=""
-			children {
-				"text entry" {
-					object {
-						x=1196
-						y=382
-						width=230
-						height=20
-					}
-					control {
-						chan="$(TS)$(TS_R)ScintillatorThickness"
-						clr=14
-						bclr=51
-					}
-					format="string"
-					limits {
-					}
-				}
-				"text entry" {
-					object {
-						x=1196
-						y=357
-						width=230
-						height=20
-					}
-					control {
-						chan="$(TS)$(TS_R)ScintillatorType"
-						clr=14
-						bclr=51
-					}
-					format="string"
-					limits {
-					}
-				}
-				"text entry" {
-					object {
-						x=1196
-						y=432
-						width=230
-						height=20
-					}
-					control {
-						chan="$(TS)$(TS_R)DetectorPixelSize"
-						clr=14
-						bclr=51
-					}
-					format="string"
-					limits {
-					}
-				}
-				"text entry" {
-					object {
-						x=1196
-						y=457
-						width=230
-						height=20
-					}
-					control {
-						chan="$(TS)$(TS_R)CameraObjective"
-						clr=14
-						bclr=51
-					}
-					format="string"
-					limits {
-					}
-				}
-				"text entry" {
-					object {
-						x=1196
-						y=482
-						width=230
-						height=20
-					}
-					control {
-						chan="$(TS)$(TS_R)CameraTubeLength"
-						clr=14
-						bclr=51
-					}
-					format="string"
-					limits {
-					}
-				}
-				"text entry" {
-					object {
-						x=1196
-						y=407
-						width=230
-						height=20
-					}
-					control {
-						chan="$(TS)$(TS_R)ImagePixelSize"
-						clr=14
-						bclr=51
-					}
-					format="string"
-					limits {
-					}
-				}
-			}
-		}
-		rectangle {
-			object {
-				x=867
-				y=327
-				width=565
-				height=180
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=5
-			}
-		}
-		text {
-			object {
-				x=880
-				y=335
-				width=125
-				height=15
-			}
-			"basic attribute" {
-				clr=20
-			}
-			textix="$(TS)$(TS_R)"
 		}
 	}
 }
@@ -1370,7 +1126,7 @@ text {
 }
 "text update" {
 	object {
-		x=621
+		x=557
 		y=175
 		width=80
 		height=18
@@ -1464,21 +1220,6 @@ rectangle {
 		clr=14
 		fill="outline"
 		width=5
-	}
-}
-"text entry" {
-	object {
-		x=556
-		y=175
-		width=60
-		height=20
-	}
-	control {
-		chan="$(P)$(R)ExposureTime"
-		clr=14
-		bclr=51
-	}
-	limits {
 	}
 }
 text {
@@ -6078,4 +5819,248 @@ rectangle {
 	clr=0
 	bclr=49
 	label="IOCs"
+}
+composite {
+	object {
+		x=867
+		y=327
+		width=565
+		height=180
+	}
+	"composite name"=""
+	children {
+		rectangle {
+			object {
+				x=877
+				y=332
+				width=545
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		text {
+			object {
+				x=1065
+				y=332
+				width=255
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="Visible Light detection"
+		}
+		text {
+			object {
+				x=1031
+				y=482
+				width=160
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Tube length (mm)"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=1021
+				y=357
+				width=170
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Scintillator type"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=931
+				y=382
+				width=260
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Scint. thickness (microns)"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=931
+				y=407
+				width=260
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Image pixel size (microns)"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=901
+				y=432
+				width=290
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Detector pixel size (microns)"
+			align="horiz. right"
+		}
+		text {
+			object {
+				x=1031
+				y=457
+				width=160
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Camera objective mag. (x)"
+			align="horiz. right"
+		}
+		composite {
+			object {
+				x=1196
+				y=357
+				width=230
+				height=145
+			}
+			"composite name"=""
+			children {
+				"text entry" {
+					object {
+						x=1196
+						y=382
+						width=230
+						height=20
+					}
+					control {
+						chan="$(P)$(R)ScintillatorThickness"
+						clr=14
+						bclr=51
+					}
+					format="string"
+					limits {
+					}
+				}
+				"text entry" {
+					object {
+						x=1196
+						y=357
+						width=230
+						height=20
+					}
+					control {
+						chan="$(P)$(R)ScintillatorType"
+						clr=14
+						bclr=51
+					}
+					format="string"
+					limits {
+					}
+				}
+				"text entry" {
+					object {
+						x=1196
+						y=432
+						width=230
+						height=20
+					}
+					control {
+						chan="$(P)$(R)DetectorPixelSize"
+						clr=14
+						bclr=51
+					}
+					format="string"
+					limits {
+					}
+				}
+				"text entry" {
+					object {
+						x=1196
+						y=457
+						width=230
+						height=20
+					}
+					control {
+						chan="$(P)$(R)CameraObjective"
+						clr=14
+						bclr=51
+					}
+					format="string"
+					limits {
+					}
+				}
+				"text entry" {
+					object {
+						x=1196
+						y=482
+						width=230
+						height=20
+					}
+					control {
+						chan="$(P)$(R)CameraTubeLength"
+						clr=14
+						bclr=51
+					}
+					format="string"
+					limits {
+					}
+				}
+				"text entry" {
+					object {
+						x=1196
+						y=407
+						width=230
+						height=20
+					}
+					control {
+						chan="$(P)$(R)ImagePixelSize"
+						clr=14
+						bclr=51
+					}
+					format="string"
+					limits {
+					}
+				}
+			}
+		}
+		rectangle {
+			object {
+				x=867
+				y=327
+				width=565
+				height=180
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=5
+			}
+		}
+		text {
+			object {
+				x=880
+				y=335
+				width=125
+				height=15
+			}
+			"basic attribute" {
+				clr=20
+			}
+			textix="$(P)$(R)"
+		}
+	}
 }

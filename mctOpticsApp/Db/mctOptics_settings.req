@@ -10,7 +10,6 @@
 ###############################
 # TomoScan, Camera  PV Prefixes 
 ###############################
-$(P)$(R)TomoScanPVPrefix
 $(P)$(R)CameraPVPrefix
 $(P)$(R)OverlayPluginPVPrefix
 
@@ -66,11 +65,6 @@ $(P)$(R)LensMotorPVName
 ######################
 $(P)$(R)CrossSelect
 
-#################
-# Exposure time
-#################
-$(P)$(R)ExposureTime
-
 ########################################
 # Optique Peter lens 1 position selector
 ########################################
@@ -111,3 +105,13 @@ $(P)$(R)Lens2ZOffset
 # Sync to motor
 ###############
 $(P)$(R)Sync
+
+####################
+# Optics information
+####################
+$(P)$(R)ScintillatorType
+$(P)$(R)ScintillatorThickness
+$(P)$(R)ImagePixelSize
+$(P)$(R)DetectorPixelSize
+$(P)$(R)CameraObjective
+$(P)$(R)CameraTubeLength
