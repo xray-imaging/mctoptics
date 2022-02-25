@@ -5818,7 +5818,7 @@ rectangle {
 	}
 	clr=0
 	bclr=49
-	label="IOCs"
+	label="-IOCs"
 }
 composite {
 	object {
