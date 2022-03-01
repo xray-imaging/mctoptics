@@ -5346,238 +5346,227 @@ composite {
 		}
 	}
 }
-composite {
+rectangle {
+	object {
+		x=1072
+		y=337
+		width=435
+		height=20
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=1241
+		y=337
+		width=255
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Visible Light detection"
+}
+text {
+	object {
+		x=1226
+		y=487
+		width=160
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Tube length (mm)"
+	align="horiz. right"
+}
+text {
+	object {
+		x=1216
+		y=362
+		width=170
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Scintillator type"
+	align="horiz. right"
+}
+text {
+	object {
+		x=1126
+		y=387
+		width=260
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Scint. thickness (microns)"
+	align="horiz. right"
+}
+text {
+	object {
+		x=1126
+		y=412
+		width=260
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Image pixel size (microns)"
+	align="horiz. right"
+}
+text {
+	object {
+		x=1096
+		y=437
+		width=290
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Detector pixel size (microns)"
+	align="horiz. right"
+}
+text {
+	object {
+		x=1226
+		y=462
+		width=160
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Camera objective mag. (x)"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=1391
+		y=387
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ScintillatorThickness"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1391
+		y=362
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ScintillatorType"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1391
+		y=437
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)DetectorPixelSize"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1391
+		y=462
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CameraObjective"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1391
+		y=487
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CameraTubeLength"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1391
+		y=412
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ImagePixelSize"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+rectangle {
 	object {
 		x=1062
 		y=332
 		width=455
 		height=180
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=1072
-				y=337
-				width=435
-				height=20
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=1193
-				y=337
-				width=255
-				height=20
-			}
-			"basic attribute" {
-				clr=54
-			}
-			textix="Visible Light detection"
-		}
-		text {
-			object {
-				x=1226
-				y=487
-				width=160
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Tube length (mm)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=1216
-				y=362
-				width=170
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Scintillator type"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=1126
-				y=387
-				width=260
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Scint. thickness (microns)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=1126
-				y=412
-				width=260
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Image pixel size (microns)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=1096
-				y=437
-				width=290
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Detector pixel size (microns)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=1226
-				y=462
-				width=160
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Camera objective mag. (x)"
-			align="horiz. right"
-		}
-		"text entry" {
-			object {
-				x=1391
-				y=387
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)ScintillatorThickness"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1391
-				y=362
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)ScintillatorType"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1391
-				y=437
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)DetectorPixelSize"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1391
-				y=462
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CameraObjective"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1391
-				y=487
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CameraTubeLength"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1391
-				y=412
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)ImagePixelSize"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		rectangle {
-			object {
-				x=1062
-				y=332
-				width=455
-				height=180
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=5
-			}
-		}
-		text {
-			object {
-				x=1075
-				y=340
-				width=125
-				height=15
-			}
-			"basic attribute" {
-				clr=20
-			}
-			textix="$(P)$(R)"
-		}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
 	}
+}
+text {
+	object {
+		x=1075
+		y=340
+		width=125
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	textix="$(P)$(R)"
 }
 composite {
 	object {
@@ -5899,7 +5888,7 @@ composite {
 }
 composite {
 	object {
-		x=1064
+		x=1062
 		y=128
 		width=377
 		height=198
@@ -5908,7 +5897,7 @@ composite {
 	children {
 		rectangle {
 			object {
-				x=1073
+				x=1071
 				y=152
 				width=360
 				height=20
@@ -5919,7 +5908,7 @@ composite {
 		}
 		text {
 			object {
-				x=1181
+				x=1179
 				y=216
 				width=1
 				height=10
@@ -5930,7 +5919,7 @@ composite {
 		}
 		text {
 			object {
-				x=1080
+				x=1078
 				y=182
 				width=150
 				height=20
@@ -5942,7 +5931,7 @@ composite {
 		}
 		menu {
 			object {
-				x=1263
+				x=1261
 				y=183
 				width=80
 				height=19
@@ -5955,7 +5944,7 @@ composite {
 		}
 		"text update" {
 			object {
-				x=1348
+				x=1346
 				y=183
 				width=62
 				height=18
@@ -5973,7 +5962,7 @@ composite {
 		}
 		text {
 			object {
-				x=1171
+				x=1169
 				y=208
 				width=80
 				height=20
@@ -5986,7 +5975,7 @@ composite {
 		}
 		"text entry" {
 			object {
-				x=1262
+				x=1260
 				y=209
 				width=80
 				height=19
@@ -6001,7 +5990,7 @@ composite {
 		}
 		"text update" {
 			object {
-				x=1349
+				x=1347
 				y=210
 				width=80
 				height=19
@@ -6016,7 +6005,7 @@ composite {
 		}
 		text {
 			object {
-				x=1102
+				x=1100
 				y=263
 				width=150
 				height=20
@@ -6029,7 +6018,7 @@ composite {
 		}
 		"message button" {
 			object {
-				x=1263
+				x=1261
 				y=264
 				width=80
 				height=19
@@ -6044,7 +6033,7 @@ composite {
 		}
 		"text update" {
 			object {
-				x=1349
+				x=1347
 				y=264
 				width=62
 				height=18
@@ -6060,7 +6049,7 @@ composite {
 		}
 		text {
 			object {
-				x=1082
+				x=1080
 				y=291
 				width=170
 				height=20
@@ -6073,7 +6062,7 @@ composite {
 		}
 		menu {
 			object {
-				x=1263
+				x=1261
 				y=289
 				width=80
 				height=19
@@ -6086,7 +6075,7 @@ composite {
 		}
 		"text update" {
 			object {
-				x=1349
+				x=1347
 				y=289
 				width=62
 				height=18
@@ -6104,7 +6093,7 @@ composite {
 		}
 		text {
 			object {
-				x=1128
+				x=1126
 				y=151
 				width=260
 				height=20
@@ -6117,7 +6106,7 @@ composite {
 		}
 		rectangle {
 			object {
-				x=1064
+				x=1062
 				y=128
 				width=377
 				height=198
@@ -6130,7 +6119,7 @@ composite {
 		}
 		text {
 			object {
-				x=1132
+				x=1130
 				y=236
 				width=120
 				height=20
@@ -6143,7 +6132,7 @@ composite {
 		}
 		"message button" {
 			object {
-				x=1263
+				x=1261
 				y=236
 				width=80
 				height=19
@@ -6160,10 +6149,10 @@ composite {
 }
 rectangle {
 	object {
-		x=936
-		y=282
-		width=125
-		height=230
+		x=931
+		y=267
+		width=130
+		height=245
 	}
 	"basic attribute" {
 		clr=14
@@ -6449,7 +6438,7 @@ rectangle {
 	object {
 		x=801
 		y=128
-		width=262
+		width=260
 		height=145
 	}
 	"basic attribute" {
@@ -6902,9 +6891,9 @@ rectangle {
 rectangle {
 	object {
 		x=801
-		y=282
-		width=130
-		height=230
+		y=267
+		width=135
+		height=245
 	}
 	"basic attribute" {
 		clr=14
