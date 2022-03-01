@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_user.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_user.adl"
 	version=030111
 }
 display {
@@ -4253,4 +4253,49 @@ composite {
 			textix="$(P)$(R)"
 		}
 	}
+}
+rectangle {
+	object {
+		x=707
+		y=299
+		width=89
+		height=17
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A<45"
+		chan="$(AD)cam1:TemperatureActual"
+	}
+}
+rectangle {
+	object {
+		x=782
+		y=319
+		width=89
+		height=17
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A>45"
+		chan="$(AD)cam1:TemperatureActual"
+	}
+}
+text {
+	object {
+		x=711
+		y=318
+		width=80
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Temp."
+	align="horiz. centered"
 }

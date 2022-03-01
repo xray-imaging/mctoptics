@@ -285,14 +285,14 @@ class MCTOptics():
                 tube_lens              = lens_lookup[lens_name]['tube_lens']
 
                 # update tomoScan PVs
-                self.control_pvs['ScintillatorType'].put(scintillator_type)
-                self.control_pvs['ScintillatorThickness'].put(scintillator_thickness)
-                self.control_pvs['CameraObjective'].put(magnification)
-                self.control_pvs['CameraTubeLength'].put(tube_lens)
+                self.epics_pvs['ScintillatorType'].put(scintillator_type)
+                self.epics_pvs['ScintillatorThickness'].put(scintillator_thickness)
+                self.epics_pvs['CameraObjective'].put(magnification)
+                self.epics_pvs['CameraTubeLength'].put(tube_lens)
 
-                detector_pixel_size    = self.control_pvs['DetectorPixelSize'].get()
+                detector_pixel_size    = self.epics_pvs['DetectorPixelSize'].get()
                 image_pixel_size       = float(detector_pixel_size)/float(magnification)
-                self.control_pvs['ImagePixelSize'].put(image_pixel_size)
+                self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
             except KeyError as e:
                 log.error('Lens called %s is not defined. Please add it to the /data/lens.json file' % e)
                 log.error('Failed to update: Scintillator type')
