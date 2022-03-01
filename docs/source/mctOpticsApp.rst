@@ -1,6 +1,6 @@
-******************************
+==============================
 mctOpticsApp EPICS application
-******************************
+==============================
 
 .. 
    toctree::
@@ -185,7 +185,7 @@ medm files
 ----------
 
 mctOptics.adl
-~~~~~~~~~~~~~
+^^^^^^^^^^^^^
 
 The following is the MEDM screen :download:`mctOptics.adl <../../mctOpticsApp/op/adl/mctOptics.adl>` during a scan. 
 The status information is updating.
@@ -195,7 +195,7 @@ The status information is updating.
     :align: center
 
 mctOpticsEPICS_PVs.adl
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 The following is the MEDM screen :download:`mctOpticsEPICS_PVs.adl <../../mctOpticsApp/op/adl/mctOpticsEPICS_PVs.adl>`. 
 

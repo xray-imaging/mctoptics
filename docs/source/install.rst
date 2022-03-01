@@ -29,15 +29,15 @@ To build a minimal synApp::
 
 - Download in ~/epics `assemble_synApps <https://github.com/EPICS-synApps/support/blob/master/assemble_synApps.sh>`_.sh
 - Edit the assemble_synApps.sh script as follows:
-    1. Set FULL_CLONE=True
-    2. Set EPICS_BASE to point to the location of EPICS base.  This could be on APSshare (the default), or a local version you built.
+    #. Set FULL_CLONE=True
+    #. Set EPICS_BASE to point to the location of EPICS base.  This could be on APSshare (the default), or a local version you built.
     
     For mctoptics you need 
     
-    1. ASYN=R4-37
-    2. AUTOSAVE=R5-10
-    3. BUSY=R1-7-2
-    4. XXX=R6-1
+    #. ASYN=R4-37
+    #. AUTOSAVE=R5-10
+    #. BUSY=R1-7-2
+    #. XXX=R6-1
 
     You can comment out all of the other modules (ALLENBRADLEY, ALIVE, etc.)
 
