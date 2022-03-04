@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=1998
-		y=311
+		x=174
+		y=562
 		width=1520
 		height=755
 	}
@@ -3644,42 +3644,6 @@ rectangle {
 	limits {
 	}
 }
-"related display" {
-	object {
-		x=255
-		y=100
-		width=25
-		height=25
-	}
-	display[0] {
-		label="tomoScan"
-		name="tomoScan.adl"
-		args="P=$(TS), R=$(TS_R), BEAMLINE=$(TS_BEAMLINE)"
-	}
-	display[1] {
-		label="tomoScan 2-BM"
-		name="tomoScan_2BM.adl"
-		args="P=$(TS), R=$(TS_R), BEAMLINE=$(TS_BEAMLINE)"
-	}
-	display[4] {
-		args=" "
-	}
-	clr=0
-	bclr=53
-	label="- 2"
-}
-text {
-	object {
-		x=288
-		y=100
-		width=130
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="TomoScan"
-}
 "shell command" {
 	object {
 		x=1175
@@ -5568,323 +5532,302 @@ text {
 	}
 	textix="$(P)$(R)"
 }
-composite {
+"related display" {
+	object {
+		x=1179
+		y=523
+		width=119
+		height=20
+	}
+	display[0] {
+		label="DTaggingUpdate"
+		name="DTaggingUpdate.adl"
+		args=" "
+	}
+	clr=14
+	bclr=51
+	label="-Update"
+}
+rectangle {
 	object {
 		x=849
 		y=515
 		width=455
 		height=235
 	}
-	"composite name"=""
-	children {
-		"related display" {
-			object {
-				x=1179
-				y=523
-				width=119
-				height=20
-			}
-			display[0] {
-				label="DTaggingUpdate"
-				name="DTaggingUpdate.adl"
-				args=" "
-			}
-			clr=14
-			bclr=51
-			label="-Update"
-		}
-		rectangle {
-			object {
-				x=849
-				y=515
-				width=455
-				height=235
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=5
-			}
-		}
-		rectangle {
-			object {
-				x=859
-				y=523
-				width=435
-				height=20
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		composite {
-			object {
-				x=865
-				y=547
-				width=150
-				height=195
-			}
-			"composite name"=""
-			children {
-				text {
-					object {
-						x=925
-						y=547
-						width=90
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="User name"
-					align="horiz. right"
-				}
-				text {
-					object {
-						x=905
-						y=572
-						width=110
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="Institution"
-					align="horiz. right"
-				}
-				text {
-					object {
-						x=905
-						y=597
-						width=110
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="ANL badge #"
-					align="horiz. right"
-				}
-				text {
-					object {
-						x=905
-						y=622
-						width=110
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="User e-mail"
-					align="horiz. right"
-				}
-				text {
-					object {
-						x=875
-						y=647
-						width=140
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="APS proposal #"
-					align="horiz. right"
-				}
-				text {
-					object {
-						x=865
-						y=672
-						width=150
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="APS prop. title"
-					align="horiz. right"
-				}
-				text {
-					object {
-						x=915
-						y=697
-						width=100
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="APS ESAF #"
-					align="horiz. right"
-				}
-				text {
-					object {
-						x=915
-						y=722
-						width=100
-						height=20
-					}
-					"basic attribute" {
-						clr=14
-					}
-					textix="User info update"
-					align="horiz. right"
-				}
-			}
-		}
-		"text entry" {
-			object {
-				x=1020
-				y=547
-				width=280
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)UserName"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1020
-				y=572
-				width=280
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)UserInstitution"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1020
-				y=597
-				width=280
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)UserBadge"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1020
-				y=622
-				width=280
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)UserEmail"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1020
-				y=647
-				width=280
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)ProposalNumber"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1020
-				y=672
-				width=280
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)ProposalTitle"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1020
-				y=697
-				width=280
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)ESAFNumber"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=1020
-				y=722
-				width=280
-				height=20
-			}
-			control {
-				chan="$(TS)$(TS_R)UserInfoUpdate"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		text {
-			object {
-				x=1006
-				y=522
-				width=200
-				height=20
-			}
-			"basic attribute" {
-				clr=54
-			}
-			textix="User Information"
-		}
-		text {
-			object {
-				x=862
-				y=525
-				width=125
-				height=15
-			}
-			"basic attribute" {
-				clr=20
-			}
-			textix="$(TS)$(TS_R)"
-		}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
 	}
+}
+rectangle {
+	object {
+		x=859
+		y=523
+		width=435
+		height=20
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=925
+		y=547
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="User last name"
+	align="horiz. right"
+}
+text {
+	object {
+		x=905
+		y=572
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Institution"
+	align="horiz. right"
+}
+text {
+	object {
+		x=905
+		y=597
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="ANL badge #"
+	align="horiz. right"
+}
+text {
+	object {
+		x=905
+		y=622
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="User e-mail"
+	align="horiz. right"
+}
+text {
+	object {
+		x=875
+		y=647
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="APS proposal #"
+	align="horiz. right"
+}
+text {
+	object {
+		x=865
+		y=672
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="APS prop. title"
+	align="horiz. right"
+}
+text {
+	object {
+		x=915
+		y=697
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="APS ESAF #"
+	align="horiz. right"
+}
+text {
+	object {
+		x=915
+		y=722
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="User info update"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=1020
+		y=547
+		width=280
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)UserLastName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1020
+		y=572
+		width=280
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)UserInstitution"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1020
+		y=597
+		width=280
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)UserBadge"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1020
+		y=622
+		width=280
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)UserEmail"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1020
+		y=647
+		width=280
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)ProposalNumber"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1020
+		y=672
+		width=280
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)ProposalTitle"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1020
+		y=697
+		width=280
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)ESAFNumber"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=1020
+		y=722
+		width=280
+		height=20
+	}
+	control {
+		chan="$(TS)$(TS_R)UserInfoUpdate"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=1027
+		y=522
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="User Info"
+	align="horiz. right"
+}
+text {
+	object {
+		x=862
+		y=525
+		width=125
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	textix="$(TS)$(TS_R)"
 }
 composite {
 	object {
@@ -6449,9 +6392,9 @@ rectangle {
 }
 rectangle {
 	object {
-		x=811
+		x=809
 		y=136
-		width=230
+		width=247
 		height=20
 	}
 	"basic attribute" {
@@ -6460,7 +6403,7 @@ rectangle {
 }
 text {
 	object {
-		x=935
+		x=954
 		y=136
 		width=100
 		height=20
@@ -6469,7 +6412,7 @@ text {
 		clr=54
 	}
 	textix="Energy"
-	align="horiz. centered"
+	align="horiz. right"
 }
 text {
 	object {
