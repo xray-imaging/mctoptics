@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
 	object {
-		x=174
-		y=562
+		x=164
+		y=554
 		width=1520
 		height=755
 	}
@@ -1618,7 +1618,7 @@ text {
 "choice button" {
 	object {
 		x=422
-		y=301
+		y=315
 		width=232
 		height=25
 	}
@@ -1629,24 +1629,10 @@ text {
 	}
 	stacking="column"
 }
-"choice button" {
-	object {
-		x=422
-		y=328
-		width=232
-		height=20
-	}
-	control {
-		chan="$(P)$(R)CameraLock.VAL"
-		clr=14
-		bclr=20
-	}
-	stacking="column"
-}
 rectangle {
 	object {
 		x=394
-		y=300
+		y=315
 		width=25
 		height=25
 	}
@@ -1661,68 +1647,8 @@ rectangle {
 }
 "choice button" {
 	object {
-		x=158
-		y=351
-		width=116
-		height=25
-	}
-	control {
-		chan="$(P)$(R)Focus1Select.VAL"
-		clr=14
-		bclr=51
-	}
-	stacking="column"
-}
-"choice button" {
-	object {
-		x=274
-		y=351
-		width=116
-		height=25
-	}
-	control {
-		chan="$(P)$(R)Focus2Select.VAL"
-		clr=14
-		bclr=51
-	}
-	stacking="column"
-}
-rectangle {
-	object {
-		x=129
-		y=351
-		width=25
-		height=25
-	}
-	"basic attribute" {
-		clr=60
-		width=2
-	}
-	"dynamic attribute" {
-		vis="if zero"
-		chan="$(P1)$(M12).DMOV"
-	}
-}
-rectangle {
-	object {
-		x=393
-		y=351
-		width=25
-		height=25
-	}
-	"basic attribute" {
-		clr=60
-		width=2
-	}
-	"dynamic attribute" {
-		vis="if zero"
-		chan="$(P1)$(M13).DMOV"
-	}
-}
-"choice button" {
-	object {
 		x=42
-		y=301
+		y=315
 		width=348
 		height=25
 	}
@@ -1733,24 +1659,10 @@ rectangle {
 	}
 	stacking="column"
 }
-"choice button" {
-	object {
-		x=42
-		y=328
-		width=348
-		height=20
-	}
-	control {
-		chan="$(P)$(R)LensLock.VAL"
-		clr=14
-		bclr=20
-	}
-	stacking="column"
-}
 rectangle {
 	object {
 		x=14
-		y=300
+		y=315
 		width=25
 		height=25
 	}
@@ -1766,7 +1678,7 @@ rectangle {
 "text update" {
 	object {
 		x=42
-		y=376
+		y=351
 		width=116
 		height=20
 	}
@@ -1875,7 +1787,7 @@ text {
 rectangle {
 	object {
 		x=42
-		y=396
+		y=371
 		width=116
 		height=12
 	}
@@ -1887,7 +1799,7 @@ rectangle {
 text {
 	object {
 		x=42
-		y=397
+		y=372
 		width=116
 		height=10
 	}
@@ -1935,7 +1847,7 @@ text {
 "text update" {
 	object {
 		x=158
-		y=376
+		y=351
 		width=116
 		height=20
 	}
@@ -2044,7 +1956,7 @@ text {
 rectangle {
 	object {
 		x=158
-		y=396
+		y=371
 		width=116
 		height=12
 	}
@@ -2056,7 +1968,7 @@ rectangle {
 text {
 	object {
 		x=158
-		y=397
+		y=372
 		width=116
 		height=10
 	}
@@ -2104,7 +2016,7 @@ text {
 "text update" {
 	object {
 		x=274
-		y=376
+		y=351
 		width=116
 		height=20
 	}
@@ -2213,7 +2125,7 @@ text {
 rectangle {
 	object {
 		x=274
-		y=396
+		y=371
 		width=116
 		height=12
 	}
@@ -2225,7 +2137,7 @@ rectangle {
 text {
 	object {
 		x=274
-		y=397
+		y=372
 		width=116
 		height=10
 	}
@@ -5790,266 +5702,255 @@ text {
 	}
 	textix="$(TS)$(TS_R)"
 }
-composite {
+rectangle {
+	object {
+		x=1071
+		y=152
+		width=360
+		height=20
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=1179
+		y=216
+		width=1
+		height=10
+	}
+	"basic attribute" {
+		clr=14
+	}
+}
+text {
+	object {
+		x=1078
+		y=182
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Recursive average"
+}
+menu {
+	object {
+		x=1261
+		y=183
+		width=80
+		height=19
+	}
+	control {
+		chan="$(AD)$(AD_PROC1)EnableFilter"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=1346
+		y=183
+		width=62
+		height=18
+	}
+	monitor {
+		chan="$(AD)$(AD_PROC1)EnableFilter_RBV"
+		clr=54
+		bclr=12
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=1169
+		y=208
+		width=80
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="N filter"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=1260
+		y=209
+		width=80
+		height=19
+	}
+	control {
+		chan="$(AD)$(AD_PROC1)NumFilter"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1347
+		y=210
+		width=80
+		height=19
+	}
+	monitor {
+		chan="$(AD)$(AD_PROC1)NumFiltered_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=1100
+		y=263
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Save flat field"
+	align="horiz. right"
+}
+"message button" {
+	object {
+		x=1261
+		y=264
+		width=80
+		height=19
+	}
+	control {
+		chan="$(AD)$(AD_PROC1)SaveFlatField"
+		clr=14
+		bclr=51
+	}
+	label="Save"
+	press_msg="1"
+}
+"text update" {
+	object {
+		x=1347
+		y=264
+		width=62
+		height=18
+	}
+	monitor {
+		chan="$(AD)$(AD_PROC1)ValidFlatField_RBV"
+		clr=54
+		bclr=4
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=1080
+		y=291
+		width=170
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Enable flat field"
+	align="horiz. right"
+}
+menu {
+	object {
+		x=1261
+		y=289
+		width=80
+		height=19
+	}
+	control {
+		chan="$(AD)$(AD_PROC1)EnableFlatField"
+		clr=14
+		bclr=51
+	}
+}
+"text update" {
+	object {
+		x=1347
+		y=289
+		width=62
+		height=18
+	}
+	monitor {
+		chan="$(AD)$(AD_PROC1)EnableFlatField_RBV"
+		clr=54
+		bclr=12
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=1126
+		y=151
+		width=260
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Flat field correction"
+	align="horiz. centered"
+}
+rectangle {
 	object {
 		x=1062
 		y=128
 		width=377
 		height=198
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=1071
-				y=152
-				width=360
-				height=20
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=1179
-				y=216
-				width=1
-				height=10
-			}
-			"basic attribute" {
-				clr=14
-			}
-		}
-		text {
-			object {
-				x=1078
-				y=182
-				width=150
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Recursive average"
-		}
-		menu {
-			object {
-				x=1261
-				y=183
-				width=80
-				height=19
-			}
-			control {
-				chan="$(AD)$(AD_PROC1)EnableFilter"
-				clr=14
-				bclr=51
-			}
-		}
-		"text update" {
-			object {
-				x=1346
-				y=183
-				width=62
-				height=18
-			}
-			monitor {
-				chan="$(AD)$(AD_PROC1)EnableFilter_RBV"
-				clr=54
-				bclr=12
-			}
-			clrmod="alarm"
-			align="horiz. centered"
-			format="string"
-			limits {
-			}
-		}
-		text {
-			object {
-				x=1169
-				y=208
-				width=80
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="N filter"
-			align="horiz. right"
-		}
-		"text entry" {
-			object {
-				x=1260
-				y=209
-				width=80
-				height=19
-			}
-			control {
-				chan="$(AD)$(AD_PROC1)NumFilter"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=1347
-				y=210
-				width=80
-				height=19
-			}
-			monitor {
-				chan="$(AD)$(AD_PROC1)NumFiltered_RBV"
-				clr=54
-				bclr=4
-			}
-			limits {
-			}
-		}
-		text {
-			object {
-				x=1100
-				y=263
-				width=150
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Save flat field"
-			align="horiz. right"
-		}
-		"message button" {
-			object {
-				x=1261
-				y=264
-				width=80
-				height=19
-			}
-			control {
-				chan="$(AD)$(AD_PROC1)SaveFlatField"
-				clr=14
-				bclr=51
-			}
-			label="Save"
-			press_msg="1"
-		}
-		"text update" {
-			object {
-				x=1347
-				y=264
-				width=62
-				height=18
-			}
-			monitor {
-				chan="$(AD)$(AD_PROC1)ValidFlatField_RBV"
-				clr=54
-				bclr=4
-			}
-			format="string"
-			limits {
-			}
-		}
-		text {
-			object {
-				x=1080
-				y=291
-				width=170
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Enable flat field"
-			align="horiz. right"
-		}
-		menu {
-			object {
-				x=1261
-				y=289
-				width=80
-				height=19
-			}
-			control {
-				chan="$(AD)$(AD_PROC1)EnableFlatField"
-				clr=14
-				bclr=51
-			}
-		}
-		"text update" {
-			object {
-				x=1347
-				y=289
-				width=62
-				height=18
-			}
-			monitor {
-				chan="$(AD)$(AD_PROC1)EnableFlatField_RBV"
-				clr=54
-				bclr=12
-			}
-			clrmod="alarm"
-			align="horiz. centered"
-			format="string"
-			limits {
-			}
-		}
-		text {
-			object {
-				x=1126
-				y=151
-				width=260
-				height=20
-			}
-			"basic attribute" {
-				clr=54
-			}
-			textix="Flat field correction"
-			align="horiz. centered"
-		}
-		rectangle {
-			object {
-				x=1062
-				y=128
-				width=377
-				height=198
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=5
-			}
-		}
-		text {
-			object {
-				x=1130
-				y=236
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Reset filter"
-			align="horiz. right"
-		}
-		"message button" {
-			object {
-				x=1261
-				y=236
-				width=80
-				height=19
-			}
-			control {
-				chan="$(AD)$(AD_PROC1)ResetFilter"
-				clr=14
-				bclr=51
-			}
-			label="Reset"
-			press_msg="1"
-		}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
 	}
+}
+text {
+	object {
+		x=1130
+		y=236
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Reset filter"
+	align="horiz. right"
+}
+"message button" {
+	object {
+		x=1261
+		y=236
+		width=80
+		height=19
+	}
+	control {
+		chan="$(AD)$(AD_PROC1)ResetFilter"
+		clr=14
+		bclr=51
+	}
+	label="Reset"
+	press_msg="1"
 }
 rectangle {
 	object {
@@ -6805,51 +6706,96 @@ rectangle {
 		width=5
 	}
 }
-"text entry" {
+"text update" {
 	object {
 		x=75
-		y=270
-		width=50
+		y=280
+		width=60
 		height=30
 	}
-	control {
+	monitor {
 		chan="$(P)$(R)Lens0Name"
-		clr=14
-		bclr=51
+		clr=54
+		bclr=4
 	}
-	format="string"
 	limits {
 	}
 }
-"text entry" {
+"text update" {
 	object {
-		x=190
-		y=271
-		width=50
+		x=197
+		y=280
+		width=60
 		height=30
 	}
-	control {
+	monitor {
 		chan="$(P)$(R)Lens1Name"
-		clr=14
-		bclr=51
+		clr=54
+		bclr=4
 	}
-	format="string"
 	limits {
 	}
 }
-"text entry" {
+"text update" {
 	object {
-		x=307
-		y=270
-		width=50
+		x=302
+		y=280
+		width=60
 		height=30
 	}
-	control {
+	monitor {
 		chan="$(P)$(R)Lens2Name"
-		clr=14
-		bclr=51
+		clr=54
+		bclr=4
 	}
-	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=51
+		y=388
+		width=94
+		height=17
+	}
+	monitor {
+		chan="$(P1)$(M11).RBV"
+		clr=54
+		bclr=3
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=167
+		y=388
+		width=94
+		height=17
+	}
+	monitor {
+		chan="$(P1)$(M12).RBV"
+		clr=54
+		bclr=3
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=283
+		y=388
+		width=94
+		height=17
+	}
+	monitor {
+		chan="$(P1)$(M13).RBV"
+		clr=54
+		bclr=3
+	}
+	align="horiz. centered"
 	limits {
 	}
 }
