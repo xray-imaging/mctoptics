@@ -275,12 +275,6 @@ class MCTOptics():
             self.epics_pvs['MCTStatus'].put(message)
 
             lens_name = lens_name.upper().replace("X", "")
-            print('********************************')
-            print('********************************')
-            print(lens_name)
-
-            print('********************************')
-            print('********************************')
             with open(os.path.join(data_path, 'lens.json')) as json_file:
                 lens_lookup = json.load(json_file)
             

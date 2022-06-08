@@ -137,19 +137,40 @@ Optique Peter lens selector
     - Motor position for the third lens
   * - $(P)$(R)LensName0
     - a0
-    - Lens label for Pos0, e.g. 10x
+    - Lens label for Pos0, e.g. Lens0
   * - $(P)$(R)LensName1
     - a0
-    - Lens label for Pos1, e.g. 5x
+    - Lens label for Pos1, e.g. Lens1
   * - $(P)$(R)LensName2
     - a0
-    - Lens label for Pos2, e.g. 1.1x
+    - Lens label for Pos2, e.g. lens2
   * - $(P)$(R)LensLock
     - bo
     - Lens lock
   * - $(P)$(R)LensMotorPVName
     - stringout
     - Contains the Lens motor PV name, e.g. 2bmb:m1
+
+Lens name
+^^^^^^^^^
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)Lens0Name
+    - stringout
+    - Lens name for Lens0, e.g. 1.1x
+  * - $(P)$(R)Lens1Name
+    - stringout
+    - Lens name for Lens1, e.g. 5x
+  * - $(P)$(R)Lens2Name
+    - stringout
+    - Lens name for Lens2, e.g. 10x
 
 Optics information
 ^^^^^^^^^^^^^^^^^^
