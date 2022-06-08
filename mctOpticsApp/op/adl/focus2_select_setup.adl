@@ -8,7 +8,7 @@ display {
 		x=257
 		y=210
 		width=231
-		height=190
+		height=170
 	}
 	clr=14
 	bclr=4
@@ -109,7 +109,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="Optique Peter Focus 2"
+	textix="Optique Peter Focus 1"
 	align="horiz. centered"
 }
 "choice button" {
@@ -205,7 +205,7 @@ polyline {
 "text entry" {
 	object {
 		x=120
-		y=162
+		y=142
 		width=105
 		height=20
 	}
@@ -220,7 +220,7 @@ polyline {
 text {
 	object {
 		x=5
-		y=162
+		y=142
 		width=115
 		height=18
 	}
@@ -357,41 +357,11 @@ text {
 		x=80
 		y=89
 		width=70
-		height=60
+		height=40
 	}
 	control {
 		chan="$(P)$(R)Focus2Select.VAL"
 		clr=14
 		bclr=51
-	}
-}
-"text entry" {
-	object {
-		x=5
-		y=130
-		width=70
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Focus2Name2"
-		clr=14
-		bclr=55
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=155
-		y=130
-		width=70
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Focus2Pos2.VAL"
-		clr=14
-		bclr=51
-	}
-	limits {
 	}
 }

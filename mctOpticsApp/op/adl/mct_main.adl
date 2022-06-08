@@ -783,7 +783,7 @@ rectangle {
 "related display" {
 	object {
 		x=96
-		y=248
+		y=244
 		width=20
 		height=20
 	}
@@ -798,7 +798,7 @@ rectangle {
 text {
 	object {
 		x=12
-		y=248
+		y=244
 		width=80
 		height=20
 	}
@@ -1659,19 +1659,6 @@ rectangle {
 		chan="$(P1)$(M14).DMOV"
 	}
 }
-text {
-	object {
-		x=42
-		y=279
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Lens 1"
-	align="horiz. centered"
-}
 "choice button" {
 	object {
 		x=158
@@ -1775,32 +1762,6 @@ rectangle {
 		vis="if zero"
 		chan="$(P1)$(M10).DMOV"
 	}
-}
-text {
-	object {
-		x=158
-		y=279
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Lens 2"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=274
-		y=279
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Lens 3"
-	align="horiz. centered"
 }
 "text update" {
 	object {
@@ -6842,5 +6803,53 @@ rectangle {
 		clr=14
 		fill="outline"
 		width=5
+	}
+}
+"text entry" {
+	object {
+		x=75
+		y=270
+		width=50
+		height=30
+	}
+	control {
+		chan="$(P)$(R)Lens0Name"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=190
+		y=271
+		width=50
+		height=30
+	}
+	control {
+		chan="$(P)$(R)Lens1Name"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=307
+		y=270
+		width=50
+		height=30
+	}
+	control {
+		chan="$(P)$(R)Lens2Name"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
 	}
 }
