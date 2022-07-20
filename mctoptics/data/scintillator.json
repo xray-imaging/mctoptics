@@ -1,0 +1,14 @@
+{
+    "2": {
+        "scintillator_type":"GGG:Eu - ESRF",
+        "scintillator_thickness": 17
+    },
+    "1": {
+        "scintillator_type":"LuAG",
+        "scintillator_thickness": 50
+    },
+    "0": {
+        "scintillator_type":"LuAG",
+        "scintillator_thickness": 100
+    }
+}
