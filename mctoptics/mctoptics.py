@@ -73,7 +73,7 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Focus1Select', 'Focus2Select', 'Sync'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
         for epics_pv in ('Sync',):
             self.epics_pvs[epics_pv].put(0)
@@ -190,12 +190,6 @@ class MCTOptics():
             thread.start()
         elif (pvname.find('CrossSelect') != -1) and ((value == 0) or (value == 1)):
             thread = threading.Thread(target=self.cross_select, args=())
-            thread.start()
-        elif (pvname.find('Focus1Select') != -1) and ((value == 0) or (value == 1)):
-            thread = threading.Thread(target=self.focus1_select, args=())
-            thread.start()
-        elif (pvname.find('Focus2Select') != -1) and ((value == 0) or (value == 1) or (value == 2)):
-            thread = threading.Thread(target=self.focus2_select, args=())
             thread.start()
         elif (pvname.find('Sync') != -1) and (value == 1):
             thread = threading.Thread(target=self.sync, args=())
@@ -357,58 +351,6 @@ class MCTOptics():
             self.control_pvs['OP1Use'].put(0)
             log.info('Cross is disabled')
 
-    def focus1_select(self):
-        """
-        Moves the Optique Peter lens 1 from focus location to lens replacement 
-        positions
-        """    
-        focus1_pos0 = self.epics_pvs['Focus1Pos0'].get()
-        focus1_pos1 = self.epics_pvs['Focus1Pos1'].get()
-
-        focus1_select = self.epics_pvs['Focus1Select'].get()
-        focus1_name = 'None'
-
-        log.info('Changing Optique Peter lens 1 focus select')
-
-        if(self.epics_pvs['Focus1Select'].get() == 0):
-            focus1_name = self.epics_pvs['Focus1Name0'].get()
-            self.epics_pvs['MCTStatus'].put('Lens 1 moving to the focus position')
-            self.epics_pvs['Focus1Motor'].put(focus1_pos0, wait=True, timeout=120)
-            self.epics_pvs['MCTStatus'].put('Lens 1 is the focus position')
-        elif(self.epics_pvs['Focus1Select'].get() == 1):
-            focus1_name = self.epics_pvs['Focus1Name1'].get()
-            self.epics_pvs['MCTStatus'].put('Lens 1 moving to replacement position')
-            self.epics_pvs['Focus1Motor'].put(focus1_pos1, wait=True, timeout=120)
-            self.epics_pvs['MCTStatus'].put('Lens 1 focus is locked: SET NEW LENS NAME')
-
-        log.info('Focus1: %s selected', focus1_name)
-
-    def focus2_select(self): 
-        """
-        Moves the Optique Peter lens 2 from focus location to lens replacement 
-        positions
-        """ 
-        focus2_pos0 = self.epics_pvs['Focus2Pos0'].get()
-        focus2_pos1 = self.epics_pvs['Focus2Pos1'].get()
-
-        focus2_select = self.epics_pvs['Focus2Select'].get()
-        focus2_name = 'None'
-
-        log.info('Changing Optique Peter focus2 2 focus select')
-
-        if(self.epics_pvs['Focus2Select'].get() == 0):
-            focus2_name = self.epics_pvs['Focus2Name0'].get()
-            self.epics_pvs['MCTStatus'].put('Lens 2 moving to the focus position')
-            self.epics_pvs['Focus2Motor'].put(focus2_pos0, wait=True, timeout=120)
-            self.epics_pvs['MCTStatus'].put('Lens 2 is the focus position')
-        elif(self.epics_pvs['Focus2Select'].get() == 1):
-            focus2_name = self.epics_pvs['Focus2Name1'].get()
-            self.epics_pvs['MCTStatus'].put('Lens 2 moving to replacement position')
-            self.epics_pvs['Focus2Motor'].put(focus2_pos1, wait=True, timeout=120)
-            self.epics_pvs['MCTStatus'].put('Lens 2 focus is locked: SET NEW LENS NAME')
-
-        log.info('Focus2: %s selected', focus2_name)
-
     def sync(self):
         """
         sync the optique peter selector with the actual motor positon
@@ -475,66 +417,7 @@ class MCTOptics():
         else:
             log.warning('Sync lens: not required, selector is already in the correct position')
 
-        log.info('Sync lens 2 in/out')
-        focus1_pos0 = self.epics_pvs['Focus1Pos0'].get()
-        focus1_pos1 = self.epics_pvs['Focus1Pos1'].get()
-        focus1_motor_position = self.epics_pvs['Focus1Motor'].get()
-        # focus1_select = self.epics_pvs['Focus1Select'].get()
-
-        is_focus1_pos0 = np.isclose(focus1_motor_position, focus1_pos0, atol=1e-01)
-        is_focus1_pos1 = np.isclose(focus1_motor_position, focus1_pos1, atol=1e-01)
-
-        log.info('Focus motor positon %s:',  focus1_motor_position)
-        log.info('Pos 0 %s: %s',  focus1_pos0, is_focus1_pos0)
-        log.info('Pos 1 %s: %s',  focus1_pos1, is_focus1_pos1)
-
-        if is_focus1_pos0:
-            focus1_select_sync = 0
-        elif is_focus1_pos1:
-            focus1_select_sync = 1
-        else:
-            focus1_select_sync = -1
-            log.error('Sync lens 2 failed: check lens 2 select motor position')
-
-        focus1_select = self.epics_pvs['Focus1Select'].get()
-        if ((focus1_select != focus1_select_sync) and (focus1_select_sync != -1)):
-            self.epics_pvs['Focus1Select'].put(focus1_select_sync)
-            log.warning('Sync focus 1: done')
-        else:
-            log.warning('Sync focus 1: not required, selector is already in the correct position')
-
-        log.info('Sync lens 3 in/out')
-        focus2_pos0 = self.epics_pvs['Focus2Pos0'].get()
-        focus2_pos1 = self.epics_pvs['Focus2Pos1'].get()
-        focus2_motor_position = self.epics_pvs['Focus2Motor'].get()
-
-        is_focus2_pos0 = np.isclose(focus2_motor_position, focus2_pos0, atol=1e-01)
-        is_focus2_pos1 = np.isclose(focus2_motor_position, focus2_pos1, atol=1e-01)
-        is_focus2_pos2 = np.isclose(focus2_motor_position, focus2_pos2, atol=1e-01)
-
-        log.info('Focus motor positon %s:',  focus1_motor_position)
-        log.info('Pos 0 %s: %s',  focus2_pos0, is_focus2_pos0)
-        log.info('Pos 1 %s: %s',  focus2_pos1, is_focus2_pos1)
-        log.info('Pos 2 %s: %s',  focus2_pos2, is_focus2_pos2)
-
-        if is_focus2_pos0:
-            focus2_select_sync = 0
-        elif is_focus2_pos1:
-            focus2_select_sync = 1
-        elif is_focus2_pos2:
-            focus2_select_sync = 2
-        else:
-            focus2_select_sync = -1
-            log.error('Sync lens 3 failed: check lens 3 select motor position')
-
-        focus2_select = self.epics_pvs['Focus2Select'].get()
-        if ((focus2_select != focus2_select_sync) and (focus2_select_sync != -1)):
-            self.epics_pvs['Focus2Select'].put(focus2_select_sync)
-            log.warning('Sync focus 2: done')
-        else:
-            log.warning('Sync focus 2: not required, selector is already in the correct position')
-           
-        if((camera_select_sync == -1) or (lens_select_sync == -1) or (focus1_select_sync == -1) or (focus2_select_sync == -1)):
+        if((camera_select_sync == -1) or (lens_select_sync == -1)):
             self.epics_pvs['MCTStatus'].put('Sync error: check log for details')
         else:
             self.epics_pvs['MCTStatus'].put('Sync done!')

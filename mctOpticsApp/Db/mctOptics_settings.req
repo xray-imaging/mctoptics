@@ -63,28 +63,16 @@ $(P)$(R)LensMotorPVName
 ######################
 $(P)$(R)CrossSelect
 
-########################################
-# Optique Peter lens 1 position selector
-########################################
-$(P)$(R)Focus1Select
-$(P)$(R)Focus1Pos0
-$(P)$(R)Focus1Pos1
-$(P)$(R)Focus1Name0
-$(P)$(R)Focus1Name1
-$(P)$(R)Focus1MotorPVName
+##############################
+# Optique Peter lens 1 offsets
+##############################
 $(P)$(R)Lens1XOffset
 $(P)$(R)Lens1YOffset
 $(P)$(R)Lens1ZOffset
 
-########################################
-# Optique Peter lens 2 position selector
-########################################
-$(P)$(R)Focus2Select
-$(P)$(R)Focus2Pos0
-$(P)$(R)Focus2Pos1
-$(P)$(R)Focus2Name0
-$(P)$(R)Focus2Name1
-$(P)$(R)Focus2MotorPVName
+##############################
+# Optique Peter lens 2 offsets
+##############################
 $(P)$(R)Lens2XOffset
 $(P)$(R)Lens2YOffset
 $(P)$(R)Lens2ZOffset

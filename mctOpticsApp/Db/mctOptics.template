@@ -192,45 +192,9 @@ record(mbbo, "$(P)$(R)CrossSelect") {
   field(ONST, "No")
 }
 
-########################################
-# Optique Peter lens 1 position selector
-########################################
-
-record(mbbo, "$(P)$(R)Focus1Select") {
-  field(DTYP, "Raw Soft Channel")
-  field(NOBT, "3")
-  field(ZRVL, "0x0")
-  field(ONVL, "0x1")
-  field(ZRST, "Pos. 0")
-  field(ONST, "Pos. 1")
-}
-
-record(ao, "$(P)$(R)Focus1Pos0") {
-  field(PREC, "4")
-  field(VAL,  "$(FOCUS1_POS0)")
-}
-
-record(ao, "$(P)$(R)Focus1Pos1") {
-  field(PREC, "4")
-  field(VAL,  "$(FOCUS1_POS1)")
-}
-
-record(stringout, "$(P)$(R)Focus1Name0") {
-  field(PINI, "YES")
-  field(VAL, "Pos. 0")
-  field(OUT, "$(P)$(R)Focus1Select.ZRST PP MS")
-}
-
-record(stringout, "$(P)$(R)Focus1Name1") {
-  field(PINI, "YES")
-  field(VAL, "Pos. 1")
-  field(OUT, "$(P)$(R)Focus1Select.ONST PP MS")
-}
-
-record(stringout, "$(P)$(R)Focus1MotorPVName")
-{
-   field(VAL,  "$(FOCUS1_MOTOR)")
-}
+##############################
+# Optique Peter lens 1 offsets
+##############################
 
 record(ao, "$(P)$(R)Lens1XOffset")
 {
@@ -250,46 +214,9 @@ record(ao, "$(P)$(R)Lens1ZOffset")
    field(VAL,  0)
 }
 
-########################################
-# Optique Peter lens 2 position selector
-########################################
-
-record(mbbo, "$(P)$(R)Focus2Select") {
-  field(DTYP, "Raw Soft Channel")
-  field(NOBT, "3")
-  field(ZRVL, "0x0")
-  field(ONVL, "0x1")
-  field(ZRST, "Pos. 0")
-  field(ONST, "Pos. 1")
-}
-
-record(ao, "$(P)$(R)Focus2Pos0") {
-  field(PREC, "4")
-  field(VAL,  "$(FOCUS2_POS0)")
-}
-
-record(ao, "$(P)$(R)Focus2Pos1") {
-  field(PREC, "4")
-  field(VAL,  "$(FOCUS2_POS1)")
-}
-
-
-record(stringout, "$(P)$(R)Focus2Name0") {
-  field(PINI, "YES")
-  field(VAL, "Pos. 0")
-  field(OUT, "$(P)$(R)Focus2Select.ZRST PP MS")
-}
-
-record(stringout, "$(P)$(R)Focus2Name1") {
-  field(PINI, "YES")
-  field(VAL, "Pos. 1")
-  field(OUT, "$(P)$(R)Focus2Select.ONST PP MS")
-}
-
-record(stringout, "$(P)$(R)Focus2MotorPVName")
-{
-   field(VAL,  "$(FOCUS2_MOTOR)")
-}
+##############################
+# Optique Peter lens 2 offsets
+##############################
 
 record(ao, "$(P)$(R)Lens2XOffset")
 {
