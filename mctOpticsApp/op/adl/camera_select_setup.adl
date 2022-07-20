@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/iocBoot/iocMCTOptics/../../mctOpticsApp/op/adl/mct_camera_choice_setup.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/camera_select_setup.adl"
 	version=030111
 }
 display {
 	object {
-		x=267
-		y=218
+		x=851
+		y=241
 		width=231
-		height=170
+		height=150
 	}
 	clr=14
 	bclr=4
@@ -89,18 +89,6 @@ display {
 }
 text {
 	object {
-		x=80
-		y=64
-		width=70
-		height=14
-	}
-	"basic attribute" {
-		clr=14
-	}
-	align="horiz. centered"
-}
-text {
-	object {
 		x=70
 		y=0
 		width=100
@@ -112,24 +100,10 @@ text {
 	textix="Optique Peter Camera"
 	align="horiz. centered"
 }
-"choice button" {
-	object {
-		x=15
-		y=20
-		width=200
-		height=20
-	}
-	control {
-		chan="$(P)$(R)CameraLock.VAL"
-		clr=14
-		bclr=51
-	}
-	stacking="column"
-}
 polyline {
 	object {
 		x=-1
-		y=17
+		y=22
 		width=233
 		height=2
 	}
@@ -138,24 +112,8 @@ polyline {
 		width=2
 	}
 	points {
-		(0,18)
-		(231,18)
-	}
-}
-polyline {
-	object {
-		x=-1
-		y=44
-		width=233
-		height=2
-	}
-	"basic attribute" {
-		clr=14
-		width=2
-	}
-	points {
-		(0,45)
-		(231,45)
+		(0,23)
+		(231,23)
 	}
 }
 text {
@@ -169,22 +127,6 @@ text {
 		clr=14
 	}
 	align="horiz. centered"
-}
-polyline {
-	object {
-		x=229
-		y=17
-		width=2
-		height=259
-	}
-	"basic attribute" {
-		clr=14
-		width=2
-	}
-	points {
-		(230,18)
-		(230,275)
-	}
 }
 polyline {
 	object {
@@ -205,7 +147,7 @@ polyline {
 "text entry" {
 	object {
 		x=120
-		y=142
+		y=120
 		width=105
 		height=20
 	}
@@ -220,7 +162,7 @@ polyline {
 text {
 	object {
 		x=5
-		y=142
+		y=120
 		width=115
 		height=18
 	}
@@ -232,7 +174,7 @@ text {
 "text entry" {
 	object {
 		x=155
-		y=89
+		y=67
 		width=70
 		height=20
 	}
@@ -247,7 +189,7 @@ text {
 "text entry" {
 	object {
 		x=155
-		y=109
+		y=87
 		width=70
 		height=20
 	}
@@ -262,7 +204,7 @@ text {
 "text entry" {
 	object {
 		x=5
-		y=89
+		y=67
 		width=70
 		height=20
 	}
@@ -277,7 +219,7 @@ text {
 "text entry" {
 	object {
 		x=5
-		y=109
+		y=87
 		width=70
 		height=20
 	}
@@ -292,7 +234,7 @@ text {
 composite {
 	object {
 		x=155
-		y=49
+		y=27
 		width=70
 		height=29
 	}
@@ -301,7 +243,7 @@ composite {
 		text {
 			object {
 				x=155
-				y=49
+				y=27
 				width=70
 				height=14
 			}
@@ -314,7 +256,7 @@ composite {
 		text {
 			object {
 				x=155
-				y=64
+				y=42
 				width=70
 				height=14
 			}
@@ -329,7 +271,7 @@ composite {
 text {
 	object {
 		x=5
-		y=64
+		y=42
 		width=70
 		height=14
 	}
@@ -342,7 +284,7 @@ text {
 text {
 	object {
 		x=80
-		y=64
+		y=42
 		width=70
 		height=14
 	}
@@ -355,7 +297,7 @@ text {
 "choice button" {
 	object {
 		x=80
-		y=89
+		y=67
 		width=70
 		height=40
 	}

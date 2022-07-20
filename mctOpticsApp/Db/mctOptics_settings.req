@@ -20,9 +20,9 @@ $(P)$(R)LensSampleXPVName
 $(P)$(R)LensSampleYPVName
 $(P)$(R)LensSampleZPVName
 
-###########################
-# Cameras rotation PV Names
-###########################
+##########################
+# Camera rotation PV Names
+##########################
 $(P)$(R)Camera0RotationPVName
 $(P)$(R)Camera1RotationPVName
 
@@ -34,18 +34,17 @@ $(P)$(R)CameraPos0
 $(P)$(R)CameraPos1
 $(P)$(R)CameraName0
 $(P)$(R)CameraName1
-$(P)$(R)CameraLock
 $(P)$(R)CameraMotorPVName
 
-######################################
-# Optique Peter camera rotation offset
-######################################
-$(P)$(R)Camera0Lens0RotationOffset
-$(P)$(R)Camera0Lens1RotationOffset
-$(P)$(R)Camera0Lens2RotationOffset
-$(P)$(R)Camera1Lens0RotationOffset
-$(P)$(R)Camera1Lens1RotationOffset
-$(P)$(R)Camera1Lens2RotationOffset
+###############################
+# Optique Peter camera rotation
+###############################
+$(P)$(R)Camera0Lens0Rotation
+$(P)$(R)Camera0Lens1Rotation
+$(P)$(R)Camera0Lens2Rotation
+$(P)$(R)Camera1Lens0Rotation
+$(P)$(R)Camera1Lens1Rotation
+$(P)$(R)Camera1Lens2Rotation
 
 #############################
 # Optique Peter lens selector
@@ -57,7 +56,6 @@ $(P)$(R)LensPos2
 $(P)$(R)LensName0
 $(P)$(R)LensName1
 $(P)$(R)LensName2
-$(P)$(R)LensLock
 $(P)$(R)LensMotorPVName
 
 ######################
@@ -65,30 +63,16 @@ $(P)$(R)LensMotorPVName
 ######################
 $(P)$(R)CrossSelect
 
-########################################
-# Optique Peter lens 1 position selector
-########################################
-$(P)$(R)Focus1Select
-$(P)$(R)Focus1Pos0
-$(P)$(R)Focus1Pos1
-$(P)$(R)Focus1Name0
-$(P)$(R)Focus1Name1
-$(P)$(R)Focus1Lock
-$(P)$(R)Focus1MotorPVName
+##############################
+# Optique Peter lens 1 offsets
+##############################
 $(P)$(R)Lens1XOffset
 $(P)$(R)Lens1YOffset
 $(P)$(R)Lens1ZOffset
 
-########################################
-# Optique Peter lens 2 position selector
-########################################
-$(P)$(R)Focus2Select
-$(P)$(R)Focus2Pos0
-$(P)$(R)Focus2Pos1
-$(P)$(R)Focus2Name0
-$(P)$(R)Focus2Name1
-$(P)$(R)Focus2Lock
-$(P)$(R)Focus2MotorPVName
+##############################
+# Optique Peter lens 2 offsets
+##############################
 $(P)$(R)Lens2XOffset
 $(P)$(R)Lens2YOffset
 $(P)$(R)Lens2ZOffset
@@ -120,3 +104,9 @@ $(P)$(R)CameraTubeLength
 $(P)$(R)Lens0Name
 $(P)$(R)Lens1Name
 $(P)$(R)Lens2Name
+
+##############
+# Camera names
+##############
+$(P)$(R)Camera0Name
+$(P)$(R)Camera1Name
