@@ -34,7 +34,6 @@ $(P)$(R)CameraPos0
 $(P)$(R)CameraPos1
 $(P)$(R)CameraName0
 $(P)$(R)CameraName1
-$(P)$(R)CameraLock
 $(P)$(R)CameraMotorPVName
 
 ######################################
@@ -57,7 +56,6 @@ $(P)$(R)LensPos2
 $(P)$(R)LensName0
 $(P)$(R)LensName1
 $(P)$(R)LensName2
-$(P)$(R)LensLock
 $(P)$(R)LensMotorPVName
 
 ######################
@@ -73,7 +71,6 @@ $(P)$(R)Focus1Pos0
 $(P)$(R)Focus1Pos1
 $(P)$(R)Focus1Name0
 $(P)$(R)Focus1Name1
-$(P)$(R)Focus1Lock
 $(P)$(R)Focus1MotorPVName
 $(P)$(R)Lens1XOffset
 $(P)$(R)Lens1YOffset
@@ -87,7 +84,6 @@ $(P)$(R)Focus2Pos0
 $(P)$(R)Focus2Pos1
 $(P)$(R)Focus2Name0
 $(P)$(R)Focus2Name1
-$(P)$(R)Focus2Lock
 $(P)$(R)Focus2MotorPVName
 $(P)$(R)Lens2XOffset
 $(P)$(R)Lens2YOffset

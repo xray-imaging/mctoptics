@@ -105,9 +105,6 @@ Optique Peter camera selector
   * - $(P)$(R)CameraName1
     - a0
     - Camera label for Pos1, e.g. Flir
-  * - $(P)$(R)CameraLock
-    - bo
-    - Camera lock
   * - $(P)$(R)CameraMotorPVName
     - stringout
     - Contains the camera motor PV name, e.g. 2bmb:m5
@@ -144,9 +141,6 @@ Optique Peter lens selector
   * - $(P)$(R)LensName2
     - a0
     - Lens label for Pos2, e.g. lens2
-  * - $(P)$(R)LensLock
-    - bo
-    - Lens lock
   * - $(P)$(R)LensMotorPVName
     - stringout
     - Contains the Lens motor PV name, e.g. 2bmb:m1

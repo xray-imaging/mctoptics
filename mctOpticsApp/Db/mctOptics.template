@@ -81,11 +81,6 @@ record(stringout, "$(P)$(R)CameraName1") {
   field(OUT, "$(P)$(R)CameraSelect.ONST PP MS")
 }
 
-record(bo, "$(P)$(R)CameraLock") {
-  field(ZNAM, "Lock")
-  field(ONAM, "Unlock")
-}
-
 record(stringout, "$(P)$(R)CameraMotorPVName")
 {
    field(VAL,  "$(CAMERA_MOTOR)")
@@ -179,11 +174,6 @@ record(stringout, "$(P)$(R)LensName2") {
   field(OUT, "$(P)$(R)LensSelect.TWST PP MS")
 }
 
-record(bo, "$(P)$(R)LensLock") {
-  field(ZNAM, "Lock")
-  field(ONAM, "Unlock")
-}
-
 record(stringout, "$(P)$(R)LensMotorPVName")
 {
    field(VAL,  "$(LENS_MOTOR)")
@@ -235,10 +225,6 @@ record(stringout, "$(P)$(R)Focus1Name1") {
   field(PINI, "YES")
   field(VAL, "Pos. 1")
   field(OUT, "$(P)$(R)Focus1Select.ONST PP MS")
-}
-record(bo, "$(P)$(R)Focus1Lock") {
-  field(ZNAM, "Lock")
-  field(ONAM, "Unlock")
 }
 
 record(stringout, "$(P)$(R)Focus1MotorPVName")
@@ -298,11 +284,6 @@ record(stringout, "$(P)$(R)Focus2Name1") {
   field(PINI, "YES")
   field(VAL, "Pos. 1")
   field(OUT, "$(P)$(R)Focus2Select.ONST PP MS")
-}
-
-record(bo, "$(P)$(R)Focus2Lock") {
-  field(ZNAM, "Lock")
-  field(ONAM, "Unlock")
 }
 
 record(stringout, "$(P)$(R)Focus2MotorPVName")

@@ -248,107 +248,98 @@ class MCTOptics():
         self.epics_pvs['Camera'+str(cam)+'RotationPosition'].put(camera_rotation) # no wait, assuming the lens movement is the slowest part
 
         
-        if (self.epics_pvs['LensLock'].get() == 1):
-            lens_pos0 = self.epics_pvs['LensPos0'].get()
-            lens_pos1 = self.epics_pvs['LensPos1'].get()
-            lens_pos2 = self.epics_pvs['LensPos2'].get()
+        lens_pos0 = self.epics_pvs['LensPos0'].get()
+        lens_pos1 = self.epics_pvs['LensPos1'].get()
+        lens_pos2 = self.epics_pvs['LensPos2'].get()
 
-            lens_select = self.epics_pvs['LensSelect'].get()
-            lens_name = 'None'
+        lens_select = self.epics_pvs['LensSelect'].get()
+        lens_name = 'None'
 
-            log.info('Changing Optique Peter lens')
-            if(self.epics_pvs['LensSelect'].get() == 0):
-                lens_name = self.epics_pvs['Lens0Name'].get()
-                self.epics_pvs['MCTStatus'].put('Moving to lens: ' + lens_name)
-                self.epics_pvs['LensMotor'].put(lens_pos0, wait=True, timeout=120)
-            elif(self.epics_pvs['LensSelect'].get() == 1):
-                lens_name = self.epics_pvs['Lens1Name'].get()
-                self.epics_pvs['MCTStatus'].put('Moving to lens: '+ lens_name)
-                self.epics_pvs['LensMotor'].put(lens_pos1, wait=True, timeout=120)
-            elif(self.epics_pvs['LensSelect'].get() == 2):
-                lens_name = self.epics_pvs['Lens2Name'].get()
-                self.epics_pvs['MCTStatus'].put('Moving to lens: '+ lens_name)
-                self.epics_pvs['LensMotor'].put(lens_pos2, wait=True, timeout=120)
-            # message = 'Lens selected: ' + str(self.epics_pvs['LensSelect'].get())
-            message = 'Lens selected: ' + lens_name
-            log.info(message)
-            self.epics_pvs['MCTStatus'].put(message)
+        log.info('Changing Optique Peter lens')
+        if(self.epics_pvs['LensSelect'].get() == 0):
+            lens_name = self.epics_pvs['Lens0Name'].get()
+            self.epics_pvs['MCTStatus'].put('Moving to lens: ' + lens_name)
+            self.epics_pvs['LensMotor'].put(lens_pos0, wait=True, timeout=120)
+        elif(self.epics_pvs['LensSelect'].get() == 1):
+            lens_name = self.epics_pvs['Lens1Name'].get()
+            self.epics_pvs['MCTStatus'].put('Moving to lens: '+ lens_name)
+            self.epics_pvs['LensMotor'].put(lens_pos1, wait=True, timeout=120)
+        elif(self.epics_pvs['LensSelect'].get() == 2):
+            lens_name = self.epics_pvs['Lens2Name'].get()
+            self.epics_pvs['MCTStatus'].put('Moving to lens: '+ lens_name)
+            self.epics_pvs['LensMotor'].put(lens_pos2, wait=True, timeout=120)
+        # message = 'Lens selected: ' + str(self.epics_pvs['LensSelect'].get())
+        message = 'Lens selected: ' + lens_name
+        log.info(message)
+        self.epics_pvs['MCTStatus'].put(message)
 
-            lens_name = lens_name.upper().replace("X", "")
-            with open(os.path.join(data_path, 'lens.json')) as json_file:
-                lens_lookup = json.load(json_file)
-            
-            try:
-                scintillator_type      = lens_lookup[lens_name]['scintillator_type']
-                scintillator_thickness = lens_lookup[lens_name]['scintillator_thickness']
-                magnification          = str(lens_lookup[lens_name]['magnification'])
-                tube_lens              = lens_lookup[lens_name]['tube_lens']
+        lens_name = lens_name.upper().replace("X", "")
+        with open(os.path.join(data_path, 'lens.json')) as json_file:
+            lens_lookup = json.load(json_file)
+        
+        try:
+            scintillator_type      = lens_lookup[lens_name]['scintillator_type']
+            scintillator_thickness = lens_lookup[lens_name]['scintillator_thickness']
+            magnification          = str(lens_lookup[lens_name]['magnification'])
+            tube_lens              = lens_lookup[lens_name]['tube_lens']
 
-                # update tomoScan PVs
-                self.epics_pvs['ScintillatorType'].put(scintillator_type)
-                self.epics_pvs['ScintillatorThickness'].put(scintillator_thickness)
-                self.epics_pvs['CameraObjective'].put(magnification)
-                self.epics_pvs['CameraTubeLength'].put(tube_lens)
+            # update tomoScan PVs
+            self.epics_pvs['ScintillatorType'].put(scintillator_type)
+            self.epics_pvs['ScintillatorThickness'].put(scintillator_thickness)
+            self.epics_pvs['CameraObjective'].put(magnification)
+            self.epics_pvs['CameraTubeLength'].put(tube_lens)
 
-                detector_pixel_size    = self.epics_pvs['DetectorPixelSize'].get()
-                image_pixel_size       = float(detector_pixel_size)/float(magnification)
-                self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
-            except KeyError as e:
-                log.error('Lens called %s is not defined. Please add it to the /data/lens.json file' % e)
-                log.error('Failed to update: Scintillator type')
-                log.error('Failed to update: Scintillator thickness')
-                log.error('Failed to update: Camera objective')
-                log.error('Failed to update: Camera tube length')
-                log.error('Failed to update: Image pixel size')
-        else:
-            log.error('Changing Optique Peter lens: Locked')
-            self.epics_pvs['MCTStatus'].put('Lens select is locked')
-
+            detector_pixel_size    = self.epics_pvs['DetectorPixelSize'].get()
+            image_pixel_size       = float(detector_pixel_size)/float(magnification)
+            self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
+        except KeyError as e:
+            log.error('Lens called %s is not defined. Please add it to the /data/lens.json file' % e)
+            log.error('Failed to update: Scintillator type')
+            log.error('Failed to update: Scintillator thickness')
+            log.error('Failed to update: Camera objective')
+            log.error('Failed to update: Camera tube length')
+            log.error('Failed to update: Image pixel size')
         
     def camera_select(self):
         """Moves the Optique Peter camera.
         """
         
-        if (self.epics_pvs['CameraLock'].get() == 1):
-            camera_pos0 = self.epics_pvs['CameraPos0'].get()
-            camera_pos1 = self.epics_pvs['CameraPos1'].get()
+        camera_pos0 = self.epics_pvs['CameraPos0'].get()
+        camera_pos1 = self.epics_pvs['CameraPos1'].get()
 
-            camera_select = self.epics_pvs['CameraSelect'].get()
-            camera_name = 'None'
+        camera_select = self.epics_pvs['CameraSelect'].get()
+        camera_name = 'None'
 
-            log.info('Changing Optique Peter camera')
-            self.epics_pvs['MCTStatus'].put('Changing Optique Peter camera')
+        log.info('Changing Optique Peter camera')
+        self.epics_pvs['MCTStatus'].put('Changing Optique Peter camera')
 
-            if(self.epics_pvs['CameraSelect'].get() == 0):
-                camera_name = self.epics_pvs['CameraName0'].get()
-                self.epics_pvs['MCTStatus'].put('Camera selected: 0')
-                self.epics_pvs['CameraMotor'].put(camera_pos0, wait=True, timeout=120)
-            elif(self.epics_pvs['CameraSelect'].get() == 1):
-                camera_name = self.epics_pvs['CameraName1'].get()
-                self.epics_pvs['MCTStatus'].put('Camera selected: 1')
-                self.epics_pvs['CameraMotor'].put(camera_pos1, wait=True, timeout=120)
-            log.info('Camera: %s selected', camera_name)
+        if(self.epics_pvs['CameraSelect'].get() == 0):
+            camera_name = self.epics_pvs['CameraName0'].get()
+            self.epics_pvs['MCTStatus'].put('Camera selected: 0')
+            self.epics_pvs['CameraMotor'].put(camera_pos0, wait=True, timeout=120)
+        elif(self.epics_pvs['CameraSelect'].get() == 1):
+            camera_name = self.epics_pvs['CameraName1'].get()
+            self.epics_pvs['MCTStatus'].put('Camera selected: 1')
+            self.epics_pvs['CameraMotor'].put(camera_pos1, wait=True, timeout=120)
+        log.info('Camera: %s selected', camera_name)
 
-            camera_name = camera_name.upper()
-            with open(os.path.join(data_path, 'camera.json')) as json_file:
-                camera_lookup = json.load(json_file)
+        camera_name = camera_name.upper()
+        with open(os.path.join(data_path, 'camera.json')) as json_file:
+            camera_lookup = json.load(json_file)
 
-            try:
-                detector_pixel_size = camera_lookup[camera_name]['detector_pixel_size']
-                # update tomoScan PVs
-                self.control_pvs['TSDetectorPixelSize'].put(detector_pixel_size)
+        try:
+            detector_pixel_size = camera_lookup[camera_name]['detector_pixel_size']
+            # update tomoScan PVs
+            self.control_pvs['TSDetectorPixelSize'].put(detector_pixel_size)
 
-                magnification = self.control_pvs['TSCameraObjective'].get()
-                magnification = magnification.upper().replace("X", "") # just in case there was a manual entry ...
-                image_pixel_size = float(detector_pixel_size)/float(magnification)
-                self.control_pvs['TSImagePixelSize'].put(image_pixel_size)
-            except KeyError as e:
-                log.error('Camera called %s is not defined. Please add it to the /data/lens.json file' % e)
-                log.error('Failed to update: Detector pixel size')
-                log.error('Failed to update: Image pixel size')
-        else:
-            log.error('Changing Optique Peter camera: Locked')
-            self.epics_pvs['MCTStatus'].put('Camera select is locked')
+            magnification = self.control_pvs['TSCameraObjective'].get()
+            magnification = magnification.upper().replace("X", "") # just in case there was a manual entry ...
+            image_pixel_size = float(detector_pixel_size)/float(magnification)
+            self.control_pvs['TSImagePixelSize'].put(image_pixel_size)
+        except KeyError as e:
+            log.error('Camera called %s is not defined. Please add it to the /data/lens.json file' % e)
+            log.error('Failed to update: Detector pixel size')
+            log.error('Failed to update: Image pixel size')
 
     def cross_select(self):
         """Plot the cross in imageJ.
@@ -371,62 +362,52 @@ class MCTOptics():
         Moves the Optique Peter lens 1 from focus location to lens replacement 
         positions
         """    
-        if (self.epics_pvs['Focus1Lock'].get() == 1):
-            focus1_pos0 = self.epics_pvs['Focus1Pos0'].get()
-            focus1_pos1 = self.epics_pvs['Focus1Pos1'].get()
+        focus1_pos0 = self.epics_pvs['Focus1Pos0'].get()
+        focus1_pos1 = self.epics_pvs['Focus1Pos1'].get()
 
-            focus1_select = self.epics_pvs['Focus1Select'].get()
-            focus1_name = 'None'
+        focus1_select = self.epics_pvs['Focus1Select'].get()
+        focus1_name = 'None'
 
-            log.info('Changing Optique Peter lens 1 focus select')
+        log.info('Changing Optique Peter lens 1 focus select')
 
-            if(self.epics_pvs['Focus1Select'].get() == 0):
-                focus1_name = self.epics_pvs['Focus1Name0'].get()
-                self.epics_pvs['MCTStatus'].put('Lens 1 moving to the focus position')
-                self.epics_pvs['Focus1Motor'].put(focus1_pos0, wait=True, timeout=120)
-                self.epics_pvs['MCTStatus'].put('Lens 1 is the focus position')
-            elif(self.epics_pvs['Focus1Select'].get() == 1):
-                focus1_name = self.epics_pvs['Focus1Name1'].get()
-                self.epics_pvs['MCTStatus'].put('Lens 1 moving to replacement position')
-                self.epics_pvs['Focus1Motor'].put(focus1_pos1, wait=True, timeout=120)
-                self.epics_pvs['MCTStatus'].put('Lens 1 focus is locked: SET NEW LENS NAME')
-
-            log.info('Focus1: %s selected', focus1_name)
-        else:
+        if(self.epics_pvs['Focus1Select'].get() == 0):
+            focus1_name = self.epics_pvs['Focus1Name0'].get()
+            self.epics_pvs['MCTStatus'].put('Lens 1 moving to the focus position')
+            self.epics_pvs['Focus1Motor'].put(focus1_pos0, wait=True, timeout=120)
+            self.epics_pvs['MCTStatus'].put('Lens 1 is the focus position')
+        elif(self.epics_pvs['Focus1Select'].get() == 1):
+            focus1_name = self.epics_pvs['Focus1Name1'].get()
+            self.epics_pvs['MCTStatus'].put('Lens 1 moving to replacement position')
+            self.epics_pvs['Focus1Motor'].put(focus1_pos1, wait=True, timeout=120)
             self.epics_pvs['MCTStatus'].put('Lens 1 focus is locked: SET NEW LENS NAME')
-            self.epics_pvs['Focus1Select'].put(1)
-            log.error('Changing Optique Peter focus1: Locked')
+
+        log.info('Focus1: %s selected', focus1_name)
 
     def focus2_select(self): 
         """
         Moves the Optique Peter lens 2 from focus location to lens replacement 
         positions
         """ 
-        if (self.epics_pvs['Focus2Lock'].get() == 1):
-            focus2_pos0 = self.epics_pvs['Focus2Pos0'].get()
-            focus2_pos1 = self.epics_pvs['Focus2Pos1'].get()
+        focus2_pos0 = self.epics_pvs['Focus2Pos0'].get()
+        focus2_pos1 = self.epics_pvs['Focus2Pos1'].get()
 
-            focus2_select = self.epics_pvs['Focus2Select'].get()
-            focus2_name = 'None'
+        focus2_select = self.epics_pvs['Focus2Select'].get()
+        focus2_name = 'None'
 
-            log.info('Changing Optique Peter focus2 2 focus select')
+        log.info('Changing Optique Peter focus2 2 focus select')
 
-            if(self.epics_pvs['Focus2Select'].get() == 0):
-                focus2_name = self.epics_pvs['Focus2Name0'].get()
-                self.epics_pvs['MCTStatus'].put('Lens 2 moving to the focus position')
-                self.epics_pvs['Focus2Motor'].put(focus2_pos0, wait=True, timeout=120)
-                self.epics_pvs['MCTStatus'].put('Lens 2 is the focus position')
-            elif(self.epics_pvs['Focus2Select'].get() == 1):
-                focus2_name = self.epics_pvs['Focus2Name1'].get()
-                self.epics_pvs['MCTStatus'].put('Lens 2 moving to replacement position')
-                self.epics_pvs['Focus2Motor'].put(focus2_pos1, wait=True, timeout=120)
-                self.epics_pvs['MCTStatus'].put('Lens 2 focus is locked: SET NEW LENS NAME')
-
-            log.info('Focus2: %s selected', focus2_name)
-        else:
+        if(self.epics_pvs['Focus2Select'].get() == 0):
+            focus2_name = self.epics_pvs['Focus2Name0'].get()
+            self.epics_pvs['MCTStatus'].put('Lens 2 moving to the focus position')
+            self.epics_pvs['Focus2Motor'].put(focus2_pos0, wait=True, timeout=120)
+            self.epics_pvs['MCTStatus'].put('Lens 2 is the focus position')
+        elif(self.epics_pvs['Focus2Select'].get() == 1):
+            focus2_name = self.epics_pvs['Focus2Name1'].get()
+            self.epics_pvs['MCTStatus'].put('Lens 2 moving to replacement position')
+            self.epics_pvs['Focus2Motor'].put(focus2_pos1, wait=True, timeout=120)
             self.epics_pvs['MCTStatus'].put('Lens 2 focus is locked: SET NEW LENS NAME')
-            self.epics_pvs['Focus2Select'].put(2)
-            log.error('Changing Optique Peter focus2: Locked')
+
+        log.info('Focus2: %s selected', focus2_name)
 
     def sync(self):
         """
@@ -457,7 +438,6 @@ class MCTOptics():
 
         camera_select = self.epics_pvs['CameraSelect'].get()
         if camera_select != camera_select_sync:
-            self.epics_pvs['CameraLock'].put(1)
             self.epics_pvs['CameraSelect'].put(camera_select_sync)
             log.warning('Sync camera: done')
         else:
@@ -490,7 +470,6 @@ class MCTOptics():
 
         lens_select = self.epics_pvs['LensSelect'].get()
         if ((lens_select != lens_select_sync) and (lens_select_sync != -1)):
-            self.epics_pvs['LensLock'].put(1)
             self.epics_pvs['LensSelect'].put(lens_select_sync)
             log.warning('Sync lens: done')
         else:
@@ -519,7 +498,6 @@ class MCTOptics():
 
         focus1_select = self.epics_pvs['Focus1Select'].get()
         if ((focus1_select != focus1_select_sync) and (focus1_select_sync != -1)):
-            self.epics_pvs['Focus1Lock'].put(1)
             self.epics_pvs['Focus1Select'].put(focus1_select_sync)
             log.warning('Sync focus 1: done')
         else:
@@ -551,7 +529,6 @@ class MCTOptics():
 
         focus2_select = self.epics_pvs['Focus2Select'].get()
         if ((focus2_select != focus2_select_sync) and (focus2_select_sync != -1)):
-            self.epics_pvs['Focus2Lock'].put(1)
             self.epics_pvs['Focus2Select'].put(focus2_select_sync)
             log.warning('Sync focus 2: done')
         else:
