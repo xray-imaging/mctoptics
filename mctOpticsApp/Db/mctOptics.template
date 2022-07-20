@@ -273,10 +273,8 @@ record(mbbo, "$(P)$(R)Focus2Select") {
   field(NOBT, "3")
   field(ZRVL, "0x0")
   field(ONVL, "0x1")
-  field(ONVL, "0x2")
   field(ZRST, "Pos. 0")
   field(ONST, "Pos. 1")
-  field(ONST, "Pos. 2")
 }
 
 record(ao, "$(P)$(R)Focus2Pos0") {
@@ -289,10 +287,6 @@ record(ao, "$(P)$(R)Focus2Pos1") {
   field(VAL,  "$(FOCUS2_POS1)")
 }
 
-record(ao, "$(P)$(R)Focus2Pos2") {
-  field(PREC, "4")
-  field(VAL,  "$(FOCUS2_POS2)")
-}
 
 record(stringout, "$(P)$(R)Focus2Name0") {
   field(PINI, "YES")
@@ -304,12 +298,6 @@ record(stringout, "$(P)$(R)Focus2Name1") {
   field(PINI, "YES")
   field(VAL, "Pos. 1")
   field(OUT, "$(P)$(R)Focus2Select.ONST PP MS")
-}
-
-record(stringout, "$(P)$(R)Focus2Name2") {
-  field(PINI, "YES")
-  field(VAL, "Pos. 2")
-  field(OUT, "$(P)$(R)Focus2Select.TWST PP MS")
 }
 
 record(bo, "$(P)$(R)Focus2Lock") {
@@ -414,4 +402,23 @@ record(ao, "$(P)$(R)CameraTubeLength")
 {
    field(PREC, "0")
    field(EGU,  "mm")
+}
+
+############
+# Lens names
+############
+
+record(stringout, "$(P)$(R)Lens0Name")
+{
+   field(VAL,  "Unknown")
+}
+
+record(stringout, "$(P)$(R)Lens1Name")
+{
+   field(VAL,  "Unknown")
+}
+
+record(stringout, "$(P)$(R)Lens2Name")
+{
+   field(VAL,  "Unknown")
 }

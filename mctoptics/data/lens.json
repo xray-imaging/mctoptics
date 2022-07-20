@@ -1,8 +1,20 @@
 {
+    "20": {
+        "scintillator_type":"GGG:Eu - ESRF",
+        "scintillator_thickness": 17,
+        "magnification": 20.0,
+        "tube_lens": 1.0
+    },
     "10": {
-        "scintillator_type":"LuAG",
-        "scintillator_thickness": 25,
+        "scintillator_type":"GGG:Eu - ESRF",
+        "scintillator_thickness": 17,
         "magnification": 9.83502809397156,
+        "tube_lens": 1.0
+    },
+    "7.5": {
+        "scintillator_type":"GGG:Eu - ESRF",
+        "scintillator_thickness": 17,
+        "magnification": 7.5,
         "tube_lens": 1.0
     },
     "5": {

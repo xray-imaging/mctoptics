@@ -85,10 +85,8 @@ $(P)$(R)Lens1ZOffset
 $(P)$(R)Focus2Select
 $(P)$(R)Focus2Pos0
 $(P)$(R)Focus2Pos1
-$(P)$(R)Focus2Pos2
 $(P)$(R)Focus2Name0
 $(P)$(R)Focus2Name1
-$(P)$(R)Focus2Name2
 $(P)$(R)Focus2Lock
 $(P)$(R)Focus2MotorPVName
 $(P)$(R)Lens2XOffset
@@ -115,3 +113,10 @@ $(P)$(R)ImagePixelSize
 $(P)$(R)DetectorPixelSize
 $(P)$(R)CameraObjective
 $(P)$(R)CameraTubeLength
+
+############
+# Lens names
+############
+$(P)$(R)Lens0Name
+$(P)$(R)Lens1Name
+$(P)$(R)Lens2Name
