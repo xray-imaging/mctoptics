@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=1699
-		y=1501
+		x=1689
+		y=1493
 		width=935
 		height=510
 	}
@@ -139,7 +139,7 @@ rectangle {
 		x=5
 		y=122
 		width=460
-		height=315
+		height=180
 	}
 	"basic attribute" {
 		clr=14
@@ -150,7 +150,7 @@ rectangle {
 "related display" {
 	object {
 		x=510
-		y=164
+		y=155
 		width=100
 		height=20
 	}
@@ -164,12 +164,12 @@ rectangle {
 	}
 	clr=0
 	bclr=53
-	label="-Motor"
+	label="-Select motor"
 }
 "related display" {
 	object {
 		x=510
-		y=189
+		y=180
 		width=100
 		height=20
 	}
@@ -183,38 +183,12 @@ rectangle {
 	}
 	clr=0
 	bclr=53
-	label="-Setup"
+	label="-Select setup"
 }
 "choice button" {
 	object {
-		x=825
-		y=164
-		width=100
-		height=75
-	}
-	control {
-		chan="$(P)$(R)CrossSelect.VAL"
-		clr=14
-		bclr=51
-	}
-}
-text {
-	object {
-		x=823
-		y=139
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Cross"
-	align="horiz. centered"
-}
-"choice button" {
-	object {
-		x=614
-		y=189
+		x=615
+		y=165
 		width=200
 		height=25
 	}
@@ -227,32 +201,6 @@ text {
 }
 text {
 	object {
-		x=614
-		y=139
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Camera 1"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=714
-		y=139
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Camera 2"
-	align="horiz. centered"
-}
-text {
-	object {
 		x=405
 		y=220
 		width=200
@@ -261,18 +209,18 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="Lens 1 offset"
+	textix="Lens 1"
 	align="horiz. right"
 }
 "text entry" {
 	object {
-		x=614
+		x=615
 		y=219
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Camera0Lens0RotationOffset"
+		chan="$(P)$(R)Camera0Lens0Rotation"
 		clr=14
 		bclr=51
 	}
@@ -290,18 +238,18 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="Lens 2 offest"
+	textix="Lens 2"
 	align="horiz. right"
 }
 "text entry" {
 	object {
-		x=614
+		x=615
 		y=244
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Camera0Lens1RotationOffset"
+		chan="$(P)$(R)Camera0Lens1Rotation"
 		clr=14
 		bclr=51
 	}
@@ -319,18 +267,18 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="Lens 3 offset"
+	textix="Lens 3"
 	align="horiz. right"
 }
 "text entry" {
 	object {
-		x=614
+		x=615
 		y=269
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Camera0Lens2RotationOffset"
+		chan="$(P)$(R)Camera0Lens2Rotation"
 		clr=14
 		bclr=51
 	}
@@ -340,13 +288,13 @@ text {
 }
 "text entry" {
 	object {
-		x=714
+		x=715
 		y=269
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Camera1Lens2RotationOffset"
+		chan="$(P)$(R)Camera1Lens2Rotation"
 		clr=14
 		bclr=51
 	}
@@ -356,13 +304,13 @@ text {
 }
 "text entry" {
 	object {
-		x=714
+		x=715
 		y=244
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Camera1Lens1RotationOffset"
+		chan="$(P)$(R)Camera1Lens1Rotation"
 		clr=14
 		bclr=51
 	}
@@ -372,13 +320,13 @@ text {
 }
 "text entry" {
 	object {
-		x=714
+		x=715
 		y=219
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Camera1Lens0RotationOffset"
+		chan="$(P)$(R)Camera1Lens0Rotation"
 		clr=14
 		bclr=51
 	}
@@ -388,8 +336,8 @@ text {
 }
 "related display" {
 	object {
-		x=714
-		y=294
+		x=715
+		y=196
 		width=100
 		height=20
 	}
@@ -403,12 +351,12 @@ text {
 	}
 	clr=0
 	bclr=53
-	label="-Motor"
+	label="-Roll 2 motor"
 }
 "related display" {
 	object {
-		x=614
-		y=294
+		x=615
+		y=196
 		width=100
 		height=20
 	}
@@ -422,12 +370,12 @@ text {
 	}
 	clr=0
 	bclr=53
-	label="-Motor"
+	label="-Roll 1 motor"
 }
 "related display" {
 	object {
 		x=9
-		y=160
+		y=155
 		width=100
 		height=20
 	}
@@ -441,12 +389,12 @@ text {
 	}
 	clr=0
 	bclr=53
-	label="- Motor"
+	label="-Select motor"
 }
 "related display" {
 	object {
 		x=9
-		y=185
+		y=180
 		width=100
 		height=20
 	}
@@ -460,88 +408,12 @@ text {
 	}
 	clr=0
 	bclr=53
-	label="-Setup"
-}
-"related display" {
-	object {
-		x=359
-		y=315
-		width=100
-		height=20
-	}
-	display[0] {
-		label="Focus2 motor"
-		name="single_motor.adl"
-		args="P=$(P1),M1=$(M13)"
-	}
-	display[4] {
-		args=" "
-	}
-	clr=0
-	bclr=53
-	label="- Motor"
-}
-"related display" {
-	object {
-		x=359
-		y=335
-		width=100
-		height=20
-	}
-	display[0] {
-		label="Focus 2 select setup"
-		name="focus2_select_setup.adl"
-		args="P=$(P),R=$(R)"
-	}
-	display[4] {
-		args=" "
-	}
-	clr=0
-	bclr=53
-	label="-Setup"
-}
-"related display" {
-	object {
-		x=237
-		y=315
-		width=100
-		height=20
-	}
-	display[0] {
-		label="Focus2 motor"
-		name="single_motor.adl"
-		args="P=$(P1),M1=$(M12)"
-	}
-	display[4] {
-		args=" "
-	}
-	clr=0
-	bclr=53
-	label="-Motor"
-}
-"related display" {
-	object {
-		x=237
-		y=335
-		width=100
-		height=20
-	}
-	display[0] {
-		label="Focus 1 select setup"
-		name="focus1_select_setup.adl"
-		args="P=$(P),R=$(R)"
-	}
-	display[4] {
-		args=" "
-	}
-	clr=0
-	bclr=53
-	label="-Setup"
+	label="-Select setup"
 }
 text {
 	object {
 		x=11
-		y=361
+		y=220
 		width=200
 		height=20
 	}
@@ -553,8 +425,8 @@ text {
 }
 "text entry" {
 	object {
-		x=237
-		y=360
+		x=235
+		y=220
 		width=100
 		height=20
 	}
@@ -570,7 +442,7 @@ text {
 text {
 	object {
 		x=11
-		y=386
+		y=245
 		width=200
 		height=20
 	}
@@ -582,8 +454,8 @@ text {
 }
 "text entry" {
 	object {
-		x=237
-		y=385
+		x=235
+		y=245
 		width=100
 		height=20
 	}
@@ -599,7 +471,7 @@ text {
 text {
 	object {
 		x=11
-		y=411
+		y=270
 		width=200
 		height=20
 	}
@@ -611,8 +483,8 @@ text {
 }
 "text entry" {
 	object {
-		x=237
-		y=410
+		x=235
+		y=270
 		width=100
 		height=20
 	}
@@ -627,8 +499,8 @@ text {
 }
 "text entry" {
 	object {
-		x=359
-		y=410
+		x=355
+		y=270
 		width=100
 		height=20
 	}
@@ -643,8 +515,8 @@ text {
 }
 "text entry" {
 	object {
-		x=359
-		y=385
+		x=355
+		y=245
 		width=100
 		height=20
 	}
@@ -659,8 +531,8 @@ text {
 }
 "text entry" {
 	object {
-		x=359
-		y=360
+		x=355
+		y=220
 		width=100
 		height=20
 	}
@@ -676,7 +548,7 @@ text {
 "choice button" {
 	object {
 		x=112
-		y=160
+		y=165
 		width=348
 		height=25
 	}
@@ -760,7 +632,7 @@ rectangle {
 		x=468
 		y=122
 		width=465
-		height=200
+		height=180
 	}
 	"basic attribute" {
 		clr=14
@@ -1093,6 +965,38 @@ composite {
 	}
 	control {
 		chan="$(P)$(R)Lens2Name"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=140
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera0Name"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=716
+		y=140
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1Name"
 		clr=14
 		bclr=51
 	}

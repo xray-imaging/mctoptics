@@ -6799,3 +6799,35 @@ rectangle {
 	limits {
 	}
 }
+"text update" {
+	object {
+		x=542
+		y=280
+		width=110
+		height=30
+	}
+	monitor {
+		chan="$(P)$(R)Camera1Name"
+		clr=54
+		bclr=4
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=422
+		y=280
+		width=110
+		height=30
+	}
+	monitor {
+		chan="$(P)$(R)Camera0Name"
+		clr=54
+		bclr=4
+	}
+	align="horiz. centered"
+	limits {
+	}
+}

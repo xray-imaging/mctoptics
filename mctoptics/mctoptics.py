@@ -207,7 +207,7 @@ class MCTOptics():
     def take_camera_offsets(self, lens):
 
         cam = self.epics_pvs['CameraSelect'].get()
-        return self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'RotationOffset'].get()
+        return self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'Rotation'].get()
 
 
     def lens_select(self):
@@ -250,19 +250,14 @@ class MCTOptics():
         lens_name = 'None'
 
         log.info('Changing Optique Peter lens')
-        if(self.epics_pvs['LensSelect'].get() == 0):
-            lens_name = self.epics_pvs['Lens0Name'].get()
-            self.epics_pvs['MCTStatus'].put('Moving to lens: ' + lens_name)
-            self.epics_pvs['LensMotor'].put(lens_pos0, wait=True, timeout=120)
-        elif(self.epics_pvs['LensSelect'].get() == 1):
-            lens_name = self.epics_pvs['Lens1Name'].get()
-            self.epics_pvs['MCTStatus'].put('Moving to lens: '+ lens_name)
-            self.epics_pvs['LensMotor'].put(lens_pos1, wait=True, timeout=120)
-        elif(self.epics_pvs['LensSelect'].get() == 2):
-            lens_name = self.epics_pvs['Lens2Name'].get()
-            self.epics_pvs['MCTStatus'].put('Moving to lens: '+ lens_name)
-            self.epics_pvs['LensMotor'].put(lens_pos2, wait=True, timeout=120)
-        # message = 'Lens selected: ' + str(self.epics_pvs['LensSelect'].get())
+
+        lens_positions = [lens_pos0, lens_pos1,lens_pos2]
+
+        lens_index = self.epics_pvs['LensSelect'].get()
+        lens_name  = self.epics_pvs['Lens' + str(lens_index) + 'Name'].get()
+        self.epics_pvs['MCTStatus'].put('Moving to lens: ' + lens_name)
+        self.epics_pvs['LensMotor'].put(lens_positions[lens_index], wait=True, timeout=120)
+
         message = 'Lens selected: ' + lens_name
         log.info(message)
         self.epics_pvs['MCTStatus'].put(message)
@@ -272,14 +267,11 @@ class MCTOptics():
             lens_lookup = json.load(json_file)
         
         try:
-            scintillator_type      = lens_lookup[lens_name]['scintillator_type']
-            scintillator_thickness = lens_lookup[lens_name]['scintillator_thickness']
+
             magnification          = str(lens_lookup[lens_name]['magnification'])
             tube_lens              = lens_lookup[lens_name]['tube_lens']
 
             # update tomoScan PVs
-            self.epics_pvs['ScintillatorType'].put(scintillator_type)
-            self.epics_pvs['ScintillatorThickness'].put(scintillator_thickness)
             self.epics_pvs['CameraObjective'].put(magnification)
             self.epics_pvs['CameraTubeLength'].put(tube_lens)
 
@@ -288,11 +280,22 @@ class MCTOptics():
             self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
         except KeyError as e:
             log.error('Lens called %s is not defined. Please add it to the /data/lens.json file' % e)
-            log.error('Failed to update: Scintillator type')
-            log.error('Failed to update: Scintillator thickness')
             log.error('Failed to update: Camera objective')
             log.error('Failed to update: Camera tube length')
             log.error('Failed to update: Image pixel size')
+
+        with open(os.path.join(data_path, 'scintillator.json')) as json_file:
+            scintillator_lookup = json.load(json_file)
+
+        try:           
+            scintillator_type      = scintillator_lookup[str(lens_index)]['scintillator_type']
+            scintillator_thickness = scintillator_lookup[str(lens_index)]['scintillator_thickness']
+            self.epics_pvs['ScintillatorType'].put(scintillator_type)
+            self.epics_pvs['ScintillatorThickness'].put(scintillator_thickness)
+        except KeyError as e:
+            log.error('Lens called %s is not defined. Please add it to the /data/lens.json file' % e)
+            log.error('Failed to update: Scintillator type')
+            log.error('Failed to update: Scintillator thickness')
         
     def camera_select(self):
         """Moves the Optique Peter camera.
@@ -308,11 +311,11 @@ class MCTOptics():
         self.epics_pvs['MCTStatus'].put('Changing Optique Peter camera')
 
         if(self.epics_pvs['CameraSelect'].get() == 0):
-            camera_name = self.epics_pvs['CameraName0'].get()
+            camera_name = self.epics_pvs['Camera0Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 0')
             self.epics_pvs['CameraMotor'].put(camera_pos0, wait=True, timeout=120)
         elif(self.epics_pvs['CameraSelect'].get() == 1):
-            camera_name = self.epics_pvs['CameraName1'].get()
+            camera_name = self.epics_pvs['Camera1Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 1')
             self.epics_pvs['CameraMotor'].put(camera_pos1, wait=True, timeout=120)
         log.info('Camera: %s selected', camera_name)
@@ -324,14 +327,14 @@ class MCTOptics():
         try:
             detector_pixel_size = camera_lookup[camera_name]['detector_pixel_size']
             # update tomoScan PVs
-            self.control_pvs['TSDetectorPixelSize'].put(detector_pixel_size)
+            self.epics_pvs['DetectorPixelSize'].put(detector_pixel_size)
 
-            magnification = self.control_pvs['TSCameraObjective'].get()
+            magnification = self.epics_pvs['CameraObjective'].get()
             magnification = magnification.upper().replace("X", "") # just in case there was a manual entry ...
             image_pixel_size = float(detector_pixel_size)/float(magnification)
-            self.control_pvs['TSImagePixelSize'].put(image_pixel_size)
+            self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
         except KeyError as e:
-            log.error('Camera called %s is not defined. Please add it to the /data/lens.json file' % e)
+            log.error('Camera called %s is not defined. Please add it to the /data/camera.json file' % e)
             log.error('Failed to update: Detector pixel size')
             log.error('Failed to update: Image pixel size')
 

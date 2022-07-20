@@ -33,9 +33,9 @@ record(stringout, "$(P)$(R)LensSampleZPVName")
    field(VAL,  "$(LENS_SAMPLE_Z)")
 }
 
-###########################
-# Cameras rotation PV Names
-###########################
+##########################
+# Camera rotation PV Names
+##########################
 record(stringout, "$(P)$(R)Camera0RotationPVName")
 {
    field(VAL,  "$(CAM0_ROT)")
@@ -86,41 +86,41 @@ record(stringout, "$(P)$(R)CameraMotorPVName")
    field(VAL,  "$(CAMERA_MOTOR)")
 }
 
-######################################
-# Optique Peter camera rotation offset
-######################################
+###############################
+# Optique Peter camera rotation
+###############################
 
-record(ao, "$(P)$(R)Camera0Lens0RotationOffset")
+record(ao, "$(P)$(R)Camera0Lens0Rotation")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Camera0Lens1RotationOffset")
+record(ao, "$(P)$(R)Camera0Lens1Rotation")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Camera0Lens2RotationOffset")
+record(ao, "$(P)$(R)Camera0Lens2Rotation")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Camera1Lens0RotationOffset")
+record(ao, "$(P)$(R)Camera1Lens0Rotation")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Camera1Lens1RotationOffset")
+record(ao, "$(P)$(R)Camera1Lens1Rotation")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Camera1Lens2RotationOffset")
+record(ao, "$(P)$(R)Camera1Lens2Rotation")
 {
    field(PREC,  "4")
    field(VAL,  0)
@@ -330,3 +330,18 @@ record(stringout, "$(P)$(R)Lens2Name")
 {
    field(VAL,  "Unknown")
 }
+
+##############
+# Camera names
+##############
+
+record(stringout, "$(P)$(R)Camera0Name")
+{
+   field(VAL,  "Unknown")
+}
+
+record(stringout, "$(P)$(R)Camera1Name")
+{
+   field(VAL,  "Unknown")
+}
+
