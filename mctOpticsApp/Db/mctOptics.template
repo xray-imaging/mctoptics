@@ -345,3 +345,28 @@ record(stringout, "$(P)$(R)Camera1Name")
    field(VAL,  "Unknown")
 }
 
+####################
+# Energy information
+####################
+
+record(ao, "$(P)$(R)Energy") 
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(PREC, 2)
+}
+
+record(mbbo, "$(P)$(R)EnergyMode")
+{
+   field(ZRVL, "0")
+   field(ZRST, "Mono")
+   field(ONVL, "1")
+   field(ONST, "Pink")
+   field(TWVL, "2")
+   field(TWST, "White")
+}
+
+record(stringout, "$(P)$(R)Filters")
+{
+   field(VAL,  "Unknown")
+}

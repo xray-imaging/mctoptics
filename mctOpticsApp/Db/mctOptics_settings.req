@@ -110,3 +110,10 @@ $(P)$(R)Lens2Name
 ##############
 $(P)$(R)Camera0Name
 $(P)$(R)Camera1Name
+
+####################
+# Energy information
+####################
+$(P)$(R)Energy
+$(P)$(R)EnergyMode
+$(P)$(R)Filters

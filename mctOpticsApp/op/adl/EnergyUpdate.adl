@@ -133,7 +133,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="dmagic tag -h"
+	textix="energy tag -h"
 }
 text {
 	object {
@@ -241,5 +241,5 @@ text {
 	"basic attribute" {
 		clr=20
 	}
-	textix="$(TS)$(TS_R)"
+	textix="$(P)$(R)"
 }
