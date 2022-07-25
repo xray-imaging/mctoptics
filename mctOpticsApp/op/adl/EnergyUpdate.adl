@@ -181,7 +181,7 @@ text {
 	"basic attribute" {
 		clr=20
 	}
-	textix="energy status --tomoscan-prefix"
+	textix="energy status --energyioc-prefix"
 }
 text {
 	object {
