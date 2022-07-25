@@ -133,7 +133,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="energy tag -h"
+	textix="energy -h"
 }
 text {
 	object {
