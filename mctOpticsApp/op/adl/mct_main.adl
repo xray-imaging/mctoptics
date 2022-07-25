@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=159
-		y=876
+		x=149
+		y=868
 		width=1520
 		height=755
 	}
@@ -561,21 +561,6 @@ text {
 	}
 	textix="Exposure time"
 	align="horiz. right"
-}
-"text update" {
-	object {
-		x=552
-		y=178
-		width=80
-		height=18
-	}
-	monitor {
-		chan="$(AD)$(AD_CAM)AcquireTime_RBV"
-		clr=54
-		bclr=4
-	}
-	limits {
-	}
 }
 "related display" {
 	object {
@@ -6830,4 +6815,35 @@ text {
 		clr=20
 	}
 	textix="$(P)$(R)"
+}
+"text update" {
+	object {
+		x=653
+		y=178
+		width=80
+		height=18
+	}
+	monitor {
+		chan="$(AD)$(AD_CAM)AcquireTime_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=547
+		y=178
+		width=100
+		height=20
+	}
+	control {
+		chan="$(AD)$(AD_CAM)AcquireTime"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
 }
