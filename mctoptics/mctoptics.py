@@ -293,7 +293,7 @@ class MCTOptics():
             self.epics_pvs['ScintillatorType'].put(scintillator_type)
             self.epics_pvs['ScintillatorThickness'].put(scintillator_thickness)
         except KeyError as e:
-            log.error('Lens called %s is not defined. Please add it to the /data/lens.json file' % e)
+            log.error('Scintillator called %s is not defined. Please add it to the /data/scintillator.json file' % e)
             log.error('Failed to update: Scintillator type')
             log.error('Failed to update: Scintillator thickness')
         
