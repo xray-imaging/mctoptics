@@ -117,3 +117,21 @@ $(P)$(R)Camera1Name
 $(P)$(R)Energy
 $(P)$(R)EnergyMode
 $(P)$(R)Filters
+
+###############
+# Energy change
+###############
+$(P)$(R)EnergySet
+$(P)$(R)EnergyBusy
+$(P)$(R)EnergyUseCalibration
+$(P)$(R)EnergyCalibrationFileOne
+$(P)$(R)EnergyCalibrationFileTwo
+
+###################
+# Detector cropping
+###################
+$(P)$(R)CropLeft
+$(P)$(R)CropRight
+$(P)$(R)CropTop
+$(P)$(R)CropBottom
+$(P)$(R)Crop

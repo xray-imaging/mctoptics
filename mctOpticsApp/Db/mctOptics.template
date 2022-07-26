@@ -370,3 +370,66 @@ record(stringout, "$(P)$(R)Filters")
 {
    field(VAL,  "Unknown")
 }
+
+###############
+# Energy change
+###############
+
+record(busy,"$(P)$(R)EnergySet")
+{
+   field(ZNAM,"Done")
+   field(ZSV, "NO_ALARM")
+   field(ONAM,"Set")
+   field(OSV, "MINOR")
+   field(VAL, "0")
+}
+
+record(busy, "$(P)$(R)EnergyBusy")
+{
+   field(ZNAM, "Done")
+   field(ONAM, "Busy")
+}
+
+record(mbbo, "$(P)$(R)EnergyUseCalibration") {
+  field(DTYP, "Raw Soft Channel")
+  field(NOBT, "3")
+  field(ZRVL, "0x0")
+  field(ONVL, "0x1")
+  field(ZRST, "Yes")
+  field(ONST, "No")
+}
+
+record(stringout, "$(P)$(R)EnergyCalibrationFileOne")
+{
+   field(VAL,  "$(EN_FILE1)")
+}
+
+record(stringout, "$(P)$(R)EnergyCalibrationFileTwo")
+{
+   field(VAL,  "$(EN_FILE2)")
+}
+
+###################
+# Detector cropping
+###################
+record(longout, "$(P)$(R)CropLeft")
+{
+}
+
+record(longout, "$(P)$(R)CropRight")
+{
+}
+
+record(longout, "$(P)$(R)CropTop")
+{
+}
+
+record(longout, "$(P)$(R)CropBottom")
+{
+}
+
+record(busy, "$(P)$(R)Crop")
+{
+   field(ZNAM, "Done")
+   field(ONAM, "Crop")
+}

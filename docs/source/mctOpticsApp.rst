@@ -216,7 +216,21 @@ Energy information
   * - $(P)$(R)Filters
     - stringout
     - Contains the material and thickness of the filters manually set in the beam path, e.g. Al 1mm; Glass 5mm.
-
+  * - $(P)$(R)EnergySet
+    - busy
+    - 
+  * - $(P)$(R)EnergyBusy
+    - busy
+    - 
+  * - $(P)$(R)EnergyUseCalibration
+    - mbbo
+    -
+  * - $(P)$(R)EnergyCalibrationFileOne
+    - stringout
+    -
+  * - $(P)$(R)EnergyCalibrationFileTwo
+    - stringout
+    -
 
 medm files
 ----------
