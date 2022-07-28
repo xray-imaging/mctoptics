@@ -73,7 +73,7 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Crop'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
         for epics_pv in ('Sync',):
             self.epics_pvs[epics_pv].put(0)
@@ -194,6 +194,9 @@ class MCTOptics():
         elif (pvname.find('Sync') != -1) and (value == 1):
             thread = threading.Thread(target=self.sync, args=())
             thread.start()
+        elif (pvname.find('Crop') != -1) and (value ==1):
+            thread = threading.Thread(target=self.crop_detector, args=())
+            thread.start()    
 
     def take_lens_offsets(self, lens):
         if lens == 0:
@@ -425,3 +428,42 @@ class MCTOptics():
         else:
             self.epics_pvs['MCTStatus'].put('Sync done!')
         self.epics_pvs['Sync'].put('Done')
+
+    def crop_detector(self):
+        """crop detector sizes"""
+        state = self.epics_pvs['CamAcquire'].get()
+        self.epics_pvs['CamAcquire'].put(0,wait=True)
+
+        maxsizex = self.epics_pvs['CamMaxSizeXRBV'].get()
+        self.epics_pvs['CamMinX'].put(0,wait=True)        
+        
+        maxsizey = self.epics_pvs['CamMaxSizeYRBV'].get()
+        self.epics_pvs['CamMinY'].put(0,wait=True)        
+        
+        left = self.epics_pvs['CropLeft'].get()
+        top = self.epics_pvs['CropTop'].get()
+        
+        right = self.epics_pvs['CropRight'].get()        
+        self.epics_pvs['CamSizeX'].put(maxsizex-left-right,wait=True)
+        sizex = self.epics_pvs['CamSizeXRBV'].get()
+        right = maxsizex - left - sizex
+        self.epics_pvs['CropRight'].put(right,wait=True)
+
+        bottom = self.epics_pvs['CropBottom'].get()
+        self.epics_pvs['CamSizeY'].put(maxsizey-top-bottom,wait=True)
+        sizey = self.epics_pvs['CamSizeYRBV'].get()
+        bottom = maxsizey - top - sizey
+        self.epics_pvs['CropBottom'].put(bottom,wait=True)
+
+        self.epics_pvs['CamMinX'].put(left,wait=True)        
+        left = self.epics_pvs['CamMinXRBV'].get()
+        self.epics_pvs['CropLeft'].put(left,wait=True)
+
+        self.epics_pvs['CamMinY'].put(top,wait=True)        
+        top = self.epics_pvs['CamMinYRBV'].get()
+        self.epics_pvs['CropTop'].put(top,wait=True)                
+    
+
+        self.epics_pvs['CamAcquire'].put(state)  
+        self.cross_select()      
+        self.epics_pvs['Crop'].put(0,wait=True)  
