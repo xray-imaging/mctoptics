@@ -6881,7 +6881,7 @@ composite {
 				height=20
 			}
 			control {
-				chan="$(P)$(R)CropLeft.VAL"
+				chan="$(P)$(R)CutLeft.VAL"
 				clr=14
 				bclr=51
 			}
@@ -6896,7 +6896,7 @@ composite {
 				height=20
 			}
 			control {
-				chan="$(P)$(R)CropTop.VAL"
+				chan="$(P)$(R)CutTop.VAL"
 				clr=14
 				bclr=51
 			}
@@ -6937,7 +6937,7 @@ composite {
 				height=20
 			}
 			control {
-				chan="$(P)$(R)CropRight.VAL"
+				chan="$(P)$(R)CutRight.VAL"
 				clr=14
 				bclr=51
 			}
@@ -6952,7 +6952,7 @@ composite {
 				height=20
 			}
 			control {
-				chan="$(P)$(R)CropBottom.VAL"
+				chan="$(P)$(R)CutBottom.VAL"
 				clr=14
 				bclr=51
 			}
@@ -6967,11 +6967,11 @@ composite {
 				height=20
 			}
 			control {
-				chan="$(P)$(R)Crop"
+				chan="$(P)$(R)Cut"
 				clr=14
 				bclr=51
 			}
-			label="Crop"
+			label="Cut"
 			press_msg="1"
 		}
 		text {

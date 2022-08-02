@@ -130,8 +130,8 @@ $(P)$(R)EnergyCalibrationFileTwo
 ###################
 # Detector cropping
 ###################
-$(P)$(R)CropLeft
-$(P)$(R)CropRight
-$(P)$(R)CropTop
-$(P)$(R)CropBottom
-$(P)$(R)Crop
+$(P)$(R)CutLeft
+$(P)$(R)CutRight
+$(P)$(R)CutTop
+$(P)$(R)CutBottom
+$(P)$(R)Cut

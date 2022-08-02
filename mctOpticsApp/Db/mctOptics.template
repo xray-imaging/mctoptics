@@ -412,24 +412,24 @@ record(stringout, "$(P)$(R)EnergyCalibrationFileTwo")
 ###################
 # Detector cropping
 ###################
-record(longout, "$(P)$(R)CropLeft")
+record(longout, "$(P)$(R)CutLeft")
 {
 }
 
-record(longout, "$(P)$(R)CropRight")
+record(longout, "$(P)$(R)CutRight")
 {
 }
 
-record(longout, "$(P)$(R)CropTop")
+record(longout, "$(P)$(R)CutTop")
 {
 }
 
-record(longout, "$(P)$(R)CropBottom")
+record(longout, "$(P)$(R)CutBottom")
 {
 }
 
-record(busy, "$(P)$(R)Crop")
+record(busy, "$(P)$(R)Cut")
 {
    field(ZNAM, "Done")
-   field(ONAM, "Crop")
+   field(ONAM, "Cut")
 }
