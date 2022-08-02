@@ -58,6 +58,17 @@ class MCTOptics():
         self.control_pvs['CamAcquireTime']          = PV(camera_prefix + 'AcquireTime')
         self.control_pvs['CamArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
         self.control_pvs['CamArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeY_RBV')
+        self.control_pvs['CamAcquire']              = PV(camera_prefix + 'Acquire')
+        self.control_pvs['CamMaxSizeXRBV']          = PV(camera_prefix + 'MaxSizeX_RBV')
+        self.control_pvs['CamMaxSizeYRBV']          = PV(camera_prefix + 'MaxSizeY_RBV')
+        self.control_pvs['CamMinX']                 = PV(camera_prefix + 'MinX')
+        self.control_pvs['CamMinY']                 = PV(camera_prefix + 'MinY')
+        self.control_pvs['CamSizeX']                = PV(camera_prefix + 'SizeX')
+        self.control_pvs['CamSizeY']                = PV(camera_prefix + 'SizeY')
+        self.control_pvs['CamSizeXRBV']             = PV(camera_prefix + 'SizeX_RBV')
+        self.control_pvs['CamSizeYRBV']             = PV(camera_prefix + 'SizeY_RBV')
+        self.control_pvs['CamMinXRBV']              = PV(camera_prefix + 'MinX_RBV')
+        self.control_pvs['CamMinYRBV']              = PV(camera_prefix + 'MinY_RBV')
 
         prefix = self.pv_prefixes['OverlayPlugin']
         self.control_pvs['OPEnableCallbacks'] = PV(prefix + 'EnableCallbacks')
@@ -75,7 +86,7 @@ class MCTOptics():
         # print(self.epics_pvs)
         for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Crop'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
-        for epics_pv in ('Sync',):
+        for epics_pv in ('Sync', 'Crop'):
             self.epics_pvs[epics_pv].put(0)
 
         # Start the watchdog timer thread
@@ -431,6 +442,17 @@ class MCTOptics():
 
     def crop_detector(self):
         """crop detector sizes"""
+
+        print("crop detector sizes")
+        print("crop detector sizes")
+        print("crop detector sizes")
+        print("crop detector sizes")
+        print("crop detector sizes")
+        print("crop detector sizes")
+        print("crop detector sizes")
+        print("crop detector sizes")
+        print("crop detector sizes")
+        print("crop detector sizes")
         state = self.epics_pvs['CamAcquire'].get()
         self.epics_pvs['CamAcquire'].put(0,wait=True)
 
