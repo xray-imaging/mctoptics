@@ -42,9 +42,12 @@ TomoScan and Camera PV Prefixes
   * - Record name
     - Record type
     - Description
-  * - $(P)$(R)CameraPVPrefix
+  * - $(P)$(R)Camera0PVPrefix
     - stringout
-    - Contains the prefix for the detector, e.g. 2bmbPG1:
+    - Contains the prefix for the detector 0, e.g. 2bmbPG1:
+  * - $(P)$(R)Camera1PVPrefix
+    - stringout
+    - Contains the prefix for the detector 1, e.g. 2bmbPG2:
 
 Fast Shutter Select
 -------------------

@@ -10,8 +10,10 @@
 ###############################
 # TomoScan, Camera  PV Prefixes 
 ###############################
-$(P)$(R)CameraPVPrefix
-$(P)$(R)OverlayPluginPVPrefix
+$(P)$(R)Camera0PVPrefix
+$(P)$(R)Camera1PVPrefix
+$(P)$(R)OverlayPlugin0PVPrefix
+$(P)$(R)OverlayPlugin1PVPrefix
 
 ############################
 # Lens Sample X-Y-Z PV Names

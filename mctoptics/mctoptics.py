@@ -52,7 +52,7 @@ class MCTOptics():
         self.control_pvs['Camera1RotationPosition']  = PV(camera1_rotation_pv_name + '.VAL')
 
         #Define PVs from the camera IOC that we will need
-        prefix = self.pv_prefixes['Camera']
+        prefix = self.pv_prefixes['Camera0']
         camera_prefix = prefix + 'cam1:'
 
         self.control_pvs['CamAcquireTime']          = PV(camera_prefix + 'AcquireTime')
@@ -70,11 +70,36 @@ class MCTOptics():
         self.control_pvs['CamMinXRBV']              = PV(camera_prefix + 'MinX_RBV')
         self.control_pvs['CamMinYRBV']              = PV(camera_prefix + 'MinY_RBV')
 
-        prefix = self.pv_prefixes['OverlayPlugin']
+        prefix = self.pv_prefixes['Camera1']
+        camera_prefix = prefix + 'cam1:'
+
+        self.control_pvs['CamAcquireTime']          = PV(camera_prefix + 'AcquireTime')
+        self.control_pvs['CamArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
+        self.control_pvs['CamArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeY_RBV')
+        self.control_pvs['CamAcquire']              = PV(camera_prefix + 'Acquire')
+        self.control_pvs['CamMaxSizeXRBV']          = PV(camera_prefix + 'MaxSizeX_RBV')
+        self.control_pvs['CamMaxSizeYRBV']          = PV(camera_prefix + 'MaxSizeY_RBV')
+        self.control_pvs['CamMinX']                 = PV(camera_prefix + 'MinX')
+        self.control_pvs['CamMinY']                 = PV(camera_prefix + 'MinY')
+        self.control_pvs['CamSizeX']                = PV(camera_prefix + 'SizeX')
+        self.control_pvs['CamSizeY']                = PV(camera_prefix + 'SizeY')
+        self.control_pvs['CamSizeXRBV']             = PV(camera_prefix + 'SizeX_RBV')
+        self.control_pvs['CamSizeYRBV']             = PV(camera_prefix + 'SizeY_RBV')
+        self.control_pvs['CamMinXRBV']              = PV(camera_prefix + 'MinX_RBV')
+        self.control_pvs['CamMinYRBV']              = PV(camera_prefix + 'MinY_RBV')
+
+        prefix = self.pv_prefixes['OverlayPlugin0']
         self.control_pvs['OPEnableCallbacks'] = PV(prefix + 'EnableCallbacks')
         self.control_pvs['OP1Use']            = PV(prefix + '1:Use')        
         self.control_pvs['OP1CenterX']        = PV(prefix + '1:CenterX')        
         self.control_pvs['OP1CenterY']        = PV(prefix + '1:CenterY')        
+
+
+        prefix = self.pv_prefixes['OverlayPlugin1']
+        self.control_pvs['OPEnableCallbacks'] = PV(prefix + 'EnableCallbacks')
+        self.control_pvs['OP1Use']            = PV(prefix + '1:Use')        
+        self.control_pvs['OP1CenterX']        = PV(prefix + '1:CenterX')        
+        self.control_pvs['OP1CenterY']        = PV(prefix + '1:CenterY')       
 
         self.epics_pvs = {**self.config_pvs, **self.control_pvs}
 
@@ -84,9 +109,9 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
-        for epics_pv in ('Sync', 'Cut'):
+        for epics_pv in ('Sync', 'Cut', 'EnergySet', 'EnergyBusy'):
             self.epics_pvs[epics_pv].put(0)
 
         # Start the watchdog timer thread
@@ -207,7 +232,10 @@ class MCTOptics():
             thread.start()
         elif (pvname.find('Cut') != -1) and (value ==1):
             thread = threading.Thread(target=self.cut_detector, args=())
-            thread.start()    
+            thread.start()
+        elif (pvname.find('EnergySet') != -1) and (value == 1):
+            thread = threading.Thread(target=self.energy_change, args=())
+            thread.start()       
 
     def take_lens_offsets(self, lens):
         if lens == 0:
@@ -479,3 +507,61 @@ class MCTOptics():
         self.epics_pvs['CamAcquire'].put(state)  
         self.cross_select()      
         self.epics_pvs['Cut'].put(0,wait=True)  
+
+    def energy_change(self):
+        if self.epics_pvs['EnergyBusy'].get() == 0:
+            self.epics_pvs['EnergyBusy'].put(1)
+            energy = float(self.epics_pvs["Energy"].get())
+            energy_mode = self.epics_pvs["EnergyMode"].get(as_string=True)
+            log.info("mctOptics: change energy to %.2f keV",energy)
+            log.info("mctOptics: energy mode = %s",energy_mode)
+            
+            log.info('move monochromator')
+            log.info('energy set --mode %s --energy-value %f' % (energy_mode, energy))
+
+            time.sleep(1)# possible backlash/stabilization, more??
+            # if self.epics_pvs['EnergyUseCalibration'].get(as_string=True) == 'Yes':                
+            #     try:
+            #         # read pvs for 2 energies
+            #         pvs1, pvs2, vals1, vals2 = [],[],[],[]
+            #         with open(self.epics_pvs['EnergyCalibrationFileOne'].get()) as fid:
+            #             for pv_val in fid.readlines():
+            #                 pv, val = pv_val[:-1].split(' ')
+            #                 pvs1.append(pv)
+            #                 vals1.append(float(val))
+            #         with open(self.epics_pvs['EnergyCalibrationFileTwo'].get()) as fid:
+            #             for pv_val in fid.readlines():
+            #                 pv, val = pv_val[:-1].split(' ')
+            #                 pvs2.append(pv)
+            #                 vals2.append(float(val))                    
+                    
+            #         for k in range(len(pvs1)):
+            #             if(pvs1[k]!=pvs2[k]):                            
+            #                 raise Exception()                            
+            #         if(np.abs(vals2[0]-vals1[0])<0.001):            
+            #             raise Exception()           
+            #         vals = []                     
+            #         for k in range(len(pvs1)):
+            #             vals.append(vals1[k]+(energy-vals1[0])*(vals2[k]-vals1[k])/(vals2[0]-vals1[0]))               
+            #         # set new pvs  
+            #         for k in range(1,len(pvs1)):# skip energy line                        
+            #             if pvs1[k]==self.epics_pvs['DetectorZ'].pvname:                            
+            #                 log.info('old Detector Z %3.3f', self.epics_pvs['DetectorZ'].get())
+            #                 self.epics_pvs['DetectorZ'].put(vals[k],wait=True)                                                        
+            #                 log.info('new Detector Z %3.3f', self.epics_pvs['DetectorZ'].get())
+            #             if pvs1[k]==self.epics_pvs['ZonePlateZ'].pvname:                            
+            #                 log.info('old Zone plate Z %3.3f', self.epics_pvs['ZonePlateZ'].get())
+            #                 self.epics_pvs['ZonePlateZ'].put(vals[k],wait=True)                                                        
+            #                 log.info('new Zone plate Z %3.3f', self.epics_pvs['ZonePlateZ'].get())
+            #             if pvs1[k]==self.epics_pvs['ZonePlateX'].pvname:                            
+            #                 log.info('old Zone plate X %3.3f', self.epics_pvs['ZonePlateX'].get())
+            #                 self.epics_pvs['ZonePlateX'].put(vals[k],wait=True)                                                        
+            #                 log.info('new Zone plate X %3.3f', self.epics_pvs['ZonePlateX'].get())
+            #             #maybe  y too..                        
+            #     except:
+            #         log.error('Calibration files are wrong.')
+
+                
+            log.info('energy change is done')
+            self.epics_pvs['EnergyBusy'].put(0)   
+            self.epics_pvs['EnergySet'].put(0)      

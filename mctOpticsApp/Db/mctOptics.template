@@ -5,14 +5,24 @@
 # TomoScan, Camera  PV Prefixes 
 ###############################
 
-record(stringout, "$(P)$(R)CameraPVPrefix")
+record(stringout, "$(P)$(R)Camera0PVPrefix")
 {
-   field(VAL,  "$(CAMERA)")
+   field(VAL,  "$(CAMERA0)")
 }
 
-record(stringout, "$(P)$(R)OverlayPluginPVPrefix")
+record(stringout, "$(P)$(R)Camera1PVPrefix")
 {
-   field(VAL,  "$(OVERLAY)")
+   field(VAL,  "$(CAMERA1)")
+}
+
+record(stringout, "$(P)$(R)OverlayPlugin0PVPrefix")
+{
+   field(VAL,  "$(OVERLAY0)")
+}
+
+record(stringout, "$(P)$(R)OverlayPlugin1PVPrefix")
+{
+   field(VAL,  "$(OVERLAY1)")
 }
 
 ############################
