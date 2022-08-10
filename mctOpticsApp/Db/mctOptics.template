@@ -25,6 +25,16 @@ record(stringout, "$(P)$(R)OverlayPlugin1PVPrefix")
    field(VAL,  "$(OVERLAY1)")
 }
 
+record(stringout, "$(P)$(R)FilePlugin0PVPrefix")
+{
+   field(VAL,  "$(FILE_PLUGIN0)")
+}
+
+record(stringout, "$(P)$(R)FilePlugin1PVPrefix")
+{
+   field(VAL,  "$(FILE_PLUGIN1)")
+}
+
 ############################
 # Lens Sample X-Y-Z PV Names
 ############################

@@ -14,6 +14,8 @@ $(P)$(R)Camera0PVPrefix
 $(P)$(R)Camera1PVPrefix
 $(P)$(R)OverlayPlugin0PVPrefix
 $(P)$(R)OverlayPlugin1PVPrefix
+$(P)$(R)FilePlugin0PVPrefix
+$(P)$(R)FilePlugin1PVPrefix
 
 ############################
 # Lens Sample X-Y-Z PV Names

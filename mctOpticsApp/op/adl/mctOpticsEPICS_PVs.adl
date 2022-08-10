@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOpticsEPICS_PVs.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/tomoscan/../mctoptics/mctOpticsApp/op/adl/mctOpticsEPICS_PVs.adl"
 	version=030111
 }
 display {
 	object {
-		x=873
-		y=64
+		x=1450
+		y=183
 		width=455
-		height=325
+		height=375
 	}
 	clr=14
 	bclr=4
@@ -115,7 +115,7 @@ rectangle {
 		x=5
 		y=40
 		width=445
-		height=280
+		height=330
 	}
 	"basic attribute" {
 		clr=14
@@ -125,7 +125,7 @@ rectangle {
 text {
 	object {
 		x=10
-		y=145
+		y=195
 		width=200
 		height=20
 	}
@@ -138,7 +138,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=145
+		y=195
 		width=225
 		height=20
 	}
@@ -154,7 +154,7 @@ text {
 text {
 	object {
 		x=10
-		y=170
+		y=220
 		width=200
 		height=20
 	}
@@ -167,7 +167,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=170
+		y=220
 		width=225
 		height=20
 	}
@@ -212,7 +212,7 @@ text {
 text {
 	object {
 		x=10
-		y=70
+		y=95
 		width=200
 		height=20
 	}
@@ -225,7 +225,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=70
+		y=95
 		width=225
 		height=20
 	}
@@ -241,7 +241,7 @@ text {
 text {
 	object {
 		x=10
-		y=245
+		y=295
 		width=200
 		height=20
 	}
@@ -254,7 +254,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=245
+		y=295
 		width=225
 		height=20
 	}
@@ -270,7 +270,7 @@ text {
 text {
 	object {
 		x=10
-		y=270
+		y=320
 		width=200
 		height=20
 	}
@@ -283,7 +283,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=270
+		y=320
 		width=225
 		height=20
 	}
@@ -299,7 +299,7 @@ text {
 text {
 	object {
 		x=10
-		y=295
+		y=345
 		width=200
 		height=20
 	}
@@ -312,7 +312,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=295
+		y=345
 		width=225
 		height=20
 	}
@@ -328,7 +328,7 @@ text {
 text {
 	object {
 		x=10
-		y=195
+		y=245
 		width=200
 		height=20
 	}
@@ -341,7 +341,7 @@ text {
 text {
 	object {
 		x=10
-		y=220
+		y=270
 		width=200
 		height=20
 	}
@@ -354,7 +354,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=220
+		y=270
 		width=225
 		height=20
 	}
@@ -370,7 +370,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=195
+		y=245
 		width=225
 		height=20
 	}
@@ -386,7 +386,7 @@ text {
 text {
 	object {
 		x=10
-		y=95
+		y=120
 		width=200
 		height=20
 	}
@@ -399,7 +399,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=95
+		y=120
 		width=225
 		height=20
 	}
@@ -415,7 +415,7 @@ text {
 text {
 	object {
 		x=10
-		y=120
+		y=170
 		width=200
 		height=20
 	}
@@ -428,12 +428,70 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=120
+		y=170
 		width=225
 		height=20
 	}
 	control {
 		chan="$(P)$(R)OverlayPlugin1PVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=30
+		y=70
+		width=180
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="File plugin 0 prefix"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=70
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)FilePlugin0PVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=30
+		y=145
+		width=180
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="File plugin 1 prefix"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=145
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)FilePlugin1PVPrefix"
 		clr=14
 		bclr=51
 	}
