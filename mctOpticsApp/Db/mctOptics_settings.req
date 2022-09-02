@@ -10,8 +10,12 @@
 ###############################
 # TomoScan, Camera  PV Prefixes 
 ###############################
-$(P)$(R)CameraPVPrefix
-$(P)$(R)OverlayPluginPVPrefix
+$(P)$(R)Camera0PVPrefix
+$(P)$(R)Camera1PVPrefix
+$(P)$(R)OverlayPlugin0PVPrefix
+$(P)$(R)OverlayPlugin1PVPrefix
+$(P)$(R)FilePlugin0PVPrefix
+$(P)$(R)FilePlugin1PVPrefix
 
 ############################
 # Lens Sample X-Y-Z PV Names
@@ -117,3 +121,21 @@ $(P)$(R)Camera1Name
 $(P)$(R)Energy
 $(P)$(R)EnergyMode
 $(P)$(R)Filters
+
+###############
+# Energy change
+###############
+$(P)$(R)EnergySet
+$(P)$(R)EnergyBusy
+$(P)$(R)EnergyUseCalibration
+$(P)$(R)EnergyCalibrationFileOne
+$(P)$(R)EnergyCalibrationFileTwo
+
+###################
+# Detector cropping
+###################
+$(P)$(R)CutLeft
+$(P)$(R)CutRight
+$(P)$(R)CutTop
+$(P)$(R)CutBottom
+$(P)$(R)Cut

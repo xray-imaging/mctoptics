@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOpticsEPICS_PVs.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/tomoscan/../mctoptics/mctOpticsApp/op/adl/mctOpticsEPICS_PVs.adl"
 	version=030111
 }
 display {
 	object {
-		x=883
-		y=68
+		x=1450
+		y=183
 		width=455
-		height=360
+		height=375
 	}
 	clr=14
 	bclr=4
@@ -115,7 +115,7 @@ rectangle {
 		x=5
 		y=40
 		width=445
-		height=310
+		height=330
 	}
 	"basic attribute" {
 		clr=14
@@ -125,7 +125,7 @@ rectangle {
 text {
 	object {
 		x=10
-		y=125
+		y=195
 		width=200
 		height=20
 	}
@@ -138,7 +138,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=125
+		y=195
 		width=225
 		height=20
 	}
@@ -154,7 +154,7 @@ text {
 text {
 	object {
 		x=10
-		y=200
+		y=220
 		width=200
 		height=20
 	}
@@ -167,7 +167,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=200
+		y=220
 		width=225
 		height=20
 	}
@@ -183,41 +183,25 @@ text {
 text {
 	object {
 		x=10
-		y=150
+		y=45
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Opt. Ptr Focus 1 PV"
+	textix="Camera 0 prefix"
 	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=220
-		y=150
+		y=45
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Focus1MotorPVName"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=220
-		y=175
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Focus2MotorPVName"
+		chan="$(P)$(R)Camera0PVPrefix"
 		clr=14
 		bclr=51
 	}
@@ -228,38 +212,25 @@ text {
 text {
 	object {
 		x=10
-		y=175
+		y=95
 		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Opt. Ptr Focus 2 PV"
-	align="horiz. right"
-}
-text {
-	object {
-		x=10
-		y=50
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Camera prefix"
+	textix="Overlay 0 prefix"
 	align="horiz. right"
 }
 "text entry" {
 	object {
 		x=220
-		y=50
+		y=95
 		width=225
 		height=20
 	}
 	control {
-		chan="$(P)$(R)CameraPVPrefix"
+		chan="$(P)$(R)OverlayPlugin0PVPrefix"
 		clr=14
 		bclr=51
 	}
@@ -270,36 +241,7 @@ text {
 text {
 	object {
 		x=10
-		y=75
-		width=200
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Overlay prefix"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=220
-		y=75
-		width=225
-		height=20
-	}
-	control {
-		chan="$(P)$(R)OverlayPluginPVPrefix"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=10
-		y=275
+		y=295
 		width=200
 		height=20
 	}
@@ -312,7 +254,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=275
+		y=295
 		width=225
 		height=20
 	}
@@ -328,7 +270,7 @@ text {
 text {
 	object {
 		x=10
-		y=300
+		y=320
 		width=200
 		height=20
 	}
@@ -341,7 +283,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=300
+		y=320
 		width=225
 		height=20
 	}
@@ -357,7 +299,7 @@ text {
 text {
 	object {
 		x=10
-		y=325
+		y=345
 		width=200
 		height=20
 	}
@@ -370,7 +312,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=325
+		y=345
 		width=225
 		height=20
 	}
@@ -386,7 +328,7 @@ text {
 text {
 	object {
 		x=10
-		y=225
+		y=245
 		width=200
 		height=20
 	}
@@ -399,7 +341,7 @@ text {
 text {
 	object {
 		x=10
-		y=250
+		y=270
 		width=200
 		height=20
 	}
@@ -412,7 +354,7 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=250
+		y=270
 		width=225
 		height=20
 	}
@@ -428,12 +370,128 @@ text {
 "text entry" {
 	object {
 		x=220
-		y=225
+		y=245
 		width=225
 		height=20
 	}
 	control {
 		chan="$(P)$(R)Camera0RotationPVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=120
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Camera 1 prefix"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=120
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1PVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=170
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Overlay 1 prefix"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=170
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)OverlayPlugin1PVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=30
+		y=70
+		width=180
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="File plugin 0 prefix"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=70
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)FilePlugin0PVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=30
+		y=145
+		width=180
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="File plugin 1 prefix"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=145
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)FilePlugin1PVPrefix"
 		clr=14
 		bclr=51
 	}

@@ -42,9 +42,12 @@ TomoScan and Camera PV Prefixes
   * - Record name
     - Record type
     - Description
-  * - $(P)$(R)CameraPVPrefix
+  * - $(P)$(R)Camera0PVPrefix
     - stringout
-    - Contains the prefix for the detector, e.g. 2bmbPG1:
+    - Contains the prefix for the detector 0, e.g. 2bmbPG1:
+  * - $(P)$(R)Camera1PVPrefix
+    - stringout
+    - Contains the prefix for the detector 1, e.g. 2bmbPG2:
 
 Fast Shutter Select
 -------------------
@@ -216,7 +219,21 @@ Energy information
   * - $(P)$(R)Filters
     - stringout
     - Contains the material and thickness of the filters manually set in the beam path, e.g. Al 1mm; Glass 5mm.
-
+  * - $(P)$(R)EnergySet
+    - busy
+    - 
+  * - $(P)$(R)EnergyBusy
+    - busy
+    - 
+  * - $(P)$(R)EnergyUseCalibration
+    - mbbo
+    -
+  * - $(P)$(R)EnergyCalibrationFileOne
+    - stringout
+    -
+  * - $(P)$(R)EnergyCalibrationFileTwo
+    - stringout
+    -
 
 medm files
 ----------
