@@ -55,38 +55,40 @@ class MCTOptics():
         prefix = self.pv_prefixes['Camera0']
         camera_prefix = prefix + 'cam1:'
 
-        self.control_pvs['CamAcquireTime']          = PV(camera_prefix + 'AcquireTime')
-        self.control_pvs['CamArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
-        self.control_pvs['CamArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeY_RBV')
-        self.control_pvs['CamAcquire']              = PV(camera_prefix + 'Acquire')
-        self.control_pvs['CamMaxSizeXRBV']          = PV(camera_prefix + 'MaxSizeX_RBV')
-        self.control_pvs['CamMaxSizeYRBV']          = PV(camera_prefix + 'MaxSizeY_RBV')
-        self.control_pvs['CamMinX']                 = PV(camera_prefix + 'MinX')
-        self.control_pvs['CamMinY']                 = PV(camera_prefix + 'MinY')
-        self.control_pvs['CamSizeX']                = PV(camera_prefix + 'SizeX')
-        self.control_pvs['CamSizeY']                = PV(camera_prefix + 'SizeY')
-        self.control_pvs['CamSizeXRBV']             = PV(camera_prefix + 'SizeX_RBV')
-        self.control_pvs['CamSizeYRBV']             = PV(camera_prefix + 'SizeY_RBV')
-        self.control_pvs['CamMinXRBV']              = PV(camera_prefix + 'MinX_RBV')
-        self.control_pvs['CamMinYRBV']              = PV(camera_prefix + 'MinY_RBV')
+        self.control_pvs['Cam0AcquireTime']          = PV(camera_prefix + 'AcquireTime')
+        self.control_pvs['Cam0ArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
+        self.control_pvs['Cam0ArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeY_RBV')
+        self.control_pvs['Cam0Acquire']              = PV(camera_prefix + 'Acquire')
+        self.control_pvs['Cam0MaxSizeXRBV']          = PV(camera_prefix + 'MaxSizeX_RBV')
+        self.control_pvs['Cam0MaxSizeYRBV']          = PV(camera_prefix + 'MaxSizeY_RBV')
+        self.control_pvs['Cam0MinX']                 = PV(camera_prefix + 'MinX')
+        self.control_pvs['Cam0MinY']                 = PV(camera_prefix + 'MinY')
+        self.control_pvs['Cam0SizeX']                = PV(camera_prefix + 'SizeX')
+        self.control_pvs['Cam0SizeY']                = PV(camera_prefix + 'SizeY')
+        self.control_pvs['Cam0SizeXRBV']             = PV(camera_prefix + 'SizeX_RBV')
+        self.control_pvs['Cam0SizeYRBV']             = PV(camera_prefix + 'SizeY_RBV')
+        self.control_pvs['Cam0MinXRBV']              = PV(camera_prefix + 'MinX_RBV')
+        self.control_pvs['Cam0MinYRBV']              = PV(camera_prefix + 'MinY_RBV')
 
         prefix = self.pv_prefixes['Camera1']
         camera_prefix = prefix + 'cam1:'
 
-        self.control_pvs['CamAcquireTime']          = PV(camera_prefix + 'AcquireTime')
-        self.control_pvs['CamArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
-        self.control_pvs['CamArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeY_RBV')
-        self.control_pvs['CamAcquire']              = PV(camera_prefix + 'Acquire')
-        self.control_pvs['CamMaxSizeXRBV']          = PV(camera_prefix + 'MaxSizeX_RBV')
-        self.control_pvs['CamMaxSizeYRBV']          = PV(camera_prefix + 'MaxSizeY_RBV')
-        self.control_pvs['CamMinX']                 = PV(camera_prefix + 'MinX')
-        self.control_pvs['CamMinY']                 = PV(camera_prefix + 'MinY')
-        self.control_pvs['CamSizeX']                = PV(camera_prefix + 'SizeX')
-        self.control_pvs['CamSizeY']                = PV(camera_prefix + 'SizeY')
-        self.control_pvs['CamSizeXRBV']             = PV(camera_prefix + 'SizeX_RBV')
-        self.control_pvs['CamSizeYRBV']             = PV(camera_prefix + 'SizeY_RBV')
-        self.control_pvs['CamMinXRBV']              = PV(camera_prefix + 'MinX_RBV')
-        self.control_pvs['CamMinYRBV']              = PV(camera_prefix + 'MinY_RBV')
+        self.control_pvs['Cam1AcquireTime']          = PV(camera_prefix + 'AcquireTime')
+        self.control_pvs['Cam1AAcquireTime']          = PV(camera_prefix + 'AcquireTime')
+        self.control_pvs['Cam1ArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
+        self.control_pvs['Cam1ArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
+        self.control_pvs['Cam1ArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeY_RBV')
+        self.control_pvs['Cam1Acquire']              = PV(camera_prefix + 'Acquire')
+        self.control_pvs['Cam1MaxSizeXRBV']          = PV(camera_prefix + 'MaxSizeX_RBV')
+        self.control_pvs['Cam1MaxSizeYRBV']          = PV(camera_prefix + 'MaxSizeY_RBV')
+        self.control_pvs['Cam1MinX']                 = PV(camera_prefix + 'MinX')
+        self.control_pvs['Cam1MinY']                 = PV(camera_prefix + 'MinY')
+        self.control_pvs['Cam1SizeX']                = PV(camera_prefix + 'SizeX')
+        self.control_pvs['Cam1SizeY']                = PV(camera_prefix + 'SizeY')
+        self.control_pvs['Cam1SizeXRBV']             = PV(camera_prefix + 'SizeX_RBV')
+        self.control_pvs['Cam1SizeYRBV']             = PV(camera_prefix + 'SizeY_RBV')
+        self.control_pvs['Cam1MinXRBV']              = PV(camera_prefix + 'MinX_RBV')
+        self.control_pvs['Cam1MinYRBV']              = PV(camera_prefix + 'MinY_RBV')
 
         prefix = self.pv_prefixes['OverlayPlugin0']
         self.control_pvs['OPEnableCallbacks'] = PV(prefix + 'EnableCallbacks')
@@ -321,7 +323,7 @@ class MCTOptics():
             image_pixel_size       = float(detector_pixel_size)/float(magnification)
             self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
         except KeyError as e:
-            log.error('Lens called %s is not defined. Please add it to the /data/lens.json file' % e)
+            log.error('Lens called %s is not defined. Please add it to the ./data/lens.json file' % e)
             log.error('Failed to update: Camera objective')
             log.error('Failed to update: Camera tube length')
             log.error('Failed to update: Image pixel size')
@@ -335,7 +337,7 @@ class MCTOptics():
             self.epics_pvs['ScintillatorType'].put(scintillator_type)
             self.epics_pvs['ScintillatorThickness'].put(scintillator_thickness)
         except KeyError as e:
-            log.error('Scintillator called %s is not defined. Please add it to the /data/scintillator.json file' % e)
+            log.error('Scintillator called %s is not defined. Please add it to the ./data/scintillator.json file' % e)
             log.error('Failed to update: Scintillator type')
             log.error('Failed to update: Scintillator thickness')
         
@@ -376,7 +378,7 @@ class MCTOptics():
             image_pixel_size = float(detector_pixel_size)/float(magnification)
             self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
         except KeyError as e:
-            log.error('Camera called %s is not defined. Please add it to the /data/camera.json file' % e)
+            log.error('Camera called %s is not defined. Please add it to the ./data/camera.json file' % e)
             log.error('Failed to update: Detector pixel size')
             log.error('Failed to update: Image pixel size')
 
@@ -386,8 +388,8 @@ class MCTOptics():
     
 
         if (self.epics_pvs['CrossSelect'].get() == 0):
-            sizex = int(self.epics_pvs['CamArraySizeXRBV'].get())
-            sizey = int(self.epics_pvs['CamArraySizeYRBV'].get())
+            sizex = int(self.epics_pvs['Cam0ArraySizeXRBV'].get())
+            sizey = int(self.epics_pvs['Cam0ArraySizeYRBV'].get())
             self.epics_pvs['OP1CenterX'].put(sizex//2)
             self.epics_pvs['OP1CenterY'].put(sizey//2)
             self.control_pvs['OP1Use'].put(1)
@@ -471,40 +473,42 @@ class MCTOptics():
     def cut_detector(self):
         """crop detector sizes"""
 
-        state = self.epics_pvs['CamAcquire'].get()
-        self.epics_pvs['CamAcquire'].put(0,wait=True)
 
-        maxsizex = self.epics_pvs['CamMaxSizeXRBV'].get()
-        self.epics_pvs['CamMinX'].put(0,wait=True)        
+        camera_select = str(self.epics_pvs['CameraSelect'].get())
+        state = self.epics_pvs['Cam'+camera_select+'Acquire'].get()
+        self.epics_pvs['Cam'+camera_select+'Acquire'].put(0,wait=True)
+
+        maxsizex = self.epics_pvs['Cam'+camera_select+'MaxSizeXRBV'].get()
+        self.epics_pvs['Cam'+camera_select+'MinX'].put(0,wait=True)        
         
-        maxsizey = self.epics_pvs['CamMaxSizeYRBV'].get()
-        self.epics_pvs['CamMinY'].put(0,wait=True)        
+        maxsizey = self.epics_pvs['Cam'+camera_select+'MaxSizeYRBV'].get()
+        self.epics_pvs['Cam'+camera_select+'MinY'].put(0,wait=True)        
         
         left = self.epics_pvs['CutLeft'].get()
         top = self.epics_pvs['CutTop'].get()
         
         right = self.epics_pvs['CutRight'].get()        
-        self.epics_pvs['CamSizeX'].put(maxsizex-left-right,wait=True)
-        sizex = self.epics_pvs['CamSizeXRBV'].get()
+        self.epics_pvs['Cam'+camera_select+'SizeX'].put(maxsizex-left-right,wait=True)
+        sizex = self.epics_pvs['Cam'+camera_select+'SizeXRBV'].get()
         right = maxsizex - left - sizex
         self.epics_pvs['CutRight'].put(right,wait=True)
 
         bottom = self.epics_pvs['CutBottom'].get()
-        self.epics_pvs['CamSizeY'].put(maxsizey-top-bottom,wait=True)
-        sizey = self.epics_pvs['CamSizeYRBV'].get()
+        self.epics_pvs['Cam'+camera_select+'SizeY'].put(maxsizey-top-bottom,wait=True)
+        sizey = self.epics_pvs['Cam'+camera_select+'SizeYRBV'].get()
         bottom = maxsizey - top - sizey
         self.epics_pvs['CutBottom'].put(bottom,wait=True)
 
-        self.epics_pvs['CamMinX'].put(left,wait=True)        
-        left = self.epics_pvs['CamMinXRBV'].get()
+        self.epics_pvs['Cam'+camera_select+'MinX'].put(left,wait=True)        
+        left = self.epics_pvs['Cam'+camera_select+'MinXRBV'].get()
         self.epics_pvs['CutLeft'].put(left,wait=True)
 
-        self.epics_pvs['CamMinY'].put(top,wait=True)        
-        top = self.epics_pvs['CamMinYRBV'].get()
+        self.epics_pvs['Cam'+camera_select+'MinY'].put(top,wait=True)        
+        top = self.epics_pvs['Cam'+camera_select+'MinYRBV'].get()
         self.epics_pvs['CutTop'].put(top,wait=True)                
     
 
-        self.epics_pvs['CamAcquire'].put(state)  
+        self.epics_pvs['Cam'+camera_select+'Acquire'].put(state)  
         self.cross_select()      
         self.epics_pvs['Cut'].put(0,wait=True)  
 
