@@ -11,10 +11,10 @@
     "Q-12A180-Fm/CXP-6": {
         "detector_pixel_size": 5.5
     },
-    "FLIR": {
+    "ORYX 5MP": {
         "detector_pixel_size": 3.45
     },
-    "FLIR7BM": {
+    "ORYX 31MP": {
         "detector_pixel_size": 3.45
     },
     "ADIMEC": {
