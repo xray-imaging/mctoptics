@@ -79,6 +79,17 @@ record(mbbo, "$(P)$(R)CameraSelect") {
   field(ONST, "Pos. 1")
 }
 
+record(mbbo, "$(P)$(R)CameraSelected") {
+  field(DTYP, "Raw Soft Channel")
+  field(NOBT, "3")
+  field(ZRVL, "0x0")
+  field(ONVL, "0x1")
+  field(ONVL, "0x2")
+  field(ZRST, "Camera Selected 0")
+  field(ONST, "Camera Selected 1")
+  field(ONST, "Moving")
+}
+
 record(ao, "$(P)$(R)CameraPos0") {
   field(PREC, "4")
   field(VAL,  "$(CAMERA_POS0)")
@@ -155,10 +166,10 @@ record(mbbo, "$(P)$(R)LensSelect") {
   field(NOBT, "3")
   field(ZRVL, "0x0")
   field(ONVL, "0x1")
-  field(ONVL, "0x2")
+  field(TWVL, "0x2")
   field(ZRST, "Pos. 0")
   field(ONST, "Pos. 1")
-  field(ONST, "Pos. 2")
+  field(TWST, "Pos. 2")
 }
 
 record(ao, "$(P)$(R)LensPos0") {
