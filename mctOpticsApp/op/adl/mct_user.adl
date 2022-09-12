@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=2162
-		y=461
+		x=1706
+		y=802
 		width=1460
 		height=600
 	}
@@ -113,7 +113,7 @@ text {
 text {
 	object {
 		x=17
-		y=118
+		y=92
 		width=100
 		height=20
 	}
@@ -126,7 +126,7 @@ text {
 "message button" {
 	object {
 		x=29
-		y=141
+		y=115
 		width=75
 		height=35
 	}
@@ -141,7 +141,7 @@ text {
 "message button" {
 	object {
 		x=29
-		y=176
+		y=150
 		width=75
 		height=35
 	}
@@ -156,7 +156,7 @@ text {
 oval {
 	object {
 		x=109
-		y=151
+		y=125
 		width=20
 		height=19
 	}
@@ -171,7 +171,7 @@ oval {
 oval {
 	object {
 		x=109
-		y=183
+		y=157
 		width=20
 		height=19
 	}
@@ -186,7 +186,7 @@ oval {
 text {
 	object {
 		x=130
-		y=118
+		y=92
 		width=100
 		height=20
 	}
@@ -199,7 +199,7 @@ text {
 "message button" {
 	object {
 		x=141
-		y=141
+		y=115
 		width=75
 		height=35
 	}
@@ -214,7 +214,7 @@ text {
 "message button" {
 	object {
 		x=141
-		y=176
+		y=150
 		width=75
 		height=35
 	}
@@ -229,7 +229,7 @@ text {
 oval {
 	object {
 		x=223
-		y=183
+		y=157
 		width=20
 		height=19
 	}
@@ -244,7 +244,7 @@ oval {
 oval {
 	object {
 		x=223
-		y=151
+		y=125
 		width=20
 		height=19
 	}
@@ -332,7 +332,7 @@ text {
 composite {
 	object {
 		x=141
-		y=213
+		y=187
 		width=83
 		height=29
 	}
@@ -341,7 +341,7 @@ composite {
 		text {
 			object {
 				x=144
-				y=213
+				y=187
 				width=80
 				height=26
 			}
@@ -357,7 +357,7 @@ composite {
 		text {
 			object {
 				x=141
-				y=216
+				y=190
 				width=80
 				height=26
 			}
@@ -375,7 +375,7 @@ composite {
 composite {
 	object {
 		x=29
-		y=213
+		y=187
 		width=83
 		height=29
 	}
@@ -384,7 +384,7 @@ composite {
 		text {
 			object {
 				x=32
-				y=213
+				y=187
 				width=80
 				height=26
 			}
@@ -400,7 +400,7 @@ composite {
 		text {
 			object {
 				x=29
-				y=216
+				y=190
 				width=80
 				height=26
 			}
@@ -714,166 +714,15 @@ text {
 rectangle {
 	object {
 		x=10
-		y=293
+		y=245
 		width=875
-		height=300
+		height=345
 	}
 	"basic attribute" {
 		clr=14
 		fill="outline"
 		width=5
 	}
-}
-text {
-	object {
-		x=391
-		y=302
-		width=40
-		height=20
-	}
-	"basic attribute" {
-		clr=63
-	}
-	"dynamic attribute" {
-		vis="if zero"
-		calc="A"
-		chan="$(AD)$(AD_CAM)Acquire"
-	}
-	textix="Done"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=362
-		y=302
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=30
-	}
-	"dynamic attribute" {
-		vis="if not zero"
-		calc="A"
-		chan="$(AD)$(AD_CAM)Acquire"
-	}
-	textix="Collecting"
-	align="horiz. centered"
-}
-"message button" {
-	object {
-		x=348
-		y=322
-		width=59
-		height=20
-	}
-	control {
-		chan="$(AD)$(AD_CAM)Acquire"
-		clr=14
-		bclr=51
-	}
-	label="Start"
-	press_msg="1"
-}
-"message button" {
-	object {
-		x=415
-		y=322
-		width=59
-		height=20
-	}
-	control {
-		chan="$(AD)$(AD_CAM)Acquire"
-		clr=14
-		bclr=51
-	}
-	label="Stop"
-	press_msg="0"
-}
-text {
-	object {
-		x=273
-		y=322
-		width=70
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Acquire"
-	align="horiz. right"
-}
-text {
-	object {
-		x=488
-		y=322
-		width=130
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Exposure time"
-	align="horiz. right"
-}
-"text update" {
-	object {
-		x=623
-		y=323
-		width=80
-		height=18
-	}
-	monitor {
-		chan="$(AD)$(AD_CAM)AcquireTime_RBV"
-		clr=54
-		bclr=4
-	}
-	limits {
-	}
-}
-"related display" {
-	object {
-		x=139
-		y=314
-		width=90
-		height=25
-	}
-	display[0] {
-		label="Point Grey camera (PG1)"
-		name="ADSpinnaker.adl"
-		args="P=$(AD), R=$(AD_CAM), C=$(AD_MODEL)"
-	}
-	clr=14
-	bclr=31
-	label="-Detector"
-}
-text {
-	object {
-		x=426
-		y=298
-		width=298
-		height=25
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Detector"
-	align="horiz. centered"
-}
-"shell command" {
-	object {
-		x=34
-		y=314
-		width=90
-		height=25
-	}
-	command[0] {
-		label="imageJ start"
-		name="/home/beams/USER2BMB/Software/ImageJ/ImageJ.sh"
-	}
-	clr=14
-	bclr=31
-	label="-ImageJ"
 }
 text {
 	object {
@@ -1201,321 +1050,6 @@ rectangle {
 		width=5
 	}
 }
-"related display" {
-	object {
-		x=845
-		y=240
-		width=25
-		height=25
-	}
-	display[0] {
-		label="tomoScan"
-		name="tomoScan.adl"
-		args="P=$(TS), R=$(TS_R), BEAMLINE=$(TS_BEAMLINE)"
-	}
-	display[1] {
-		label="tomoScan 2-BM"
-		name="tomoScan_2BM.adl"
-		args="P=$(TS), R=$(TS_R), BEAMLINE=$(TS_BEAMLINE)"
-	}
-	display[4] {
-		args=" "
-	}
-	clr=0
-	bclr=53
-	label="- 2"
-}
-rectangle {
-	object {
-		x=267
-		y=71
-		width=605
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-"message button" {
-	object {
-		x=437
-		y=97
-		width=120
-		height=20
-	}
-	control {
-		chan="$(TS)$(TS_R)StartScan"
-		clr=14
-		bclr=15
-	}
-	label="Start Scan"
-	press_msg="1"
-}
-"message button" {
-	object {
-		x=562
-		y=97
-		width=120
-		height=20
-	}
-	control {
-		chan="$(TS)$(TS_R)AbortScan"
-		clr=14
-		bclr=20
-	}
-	label="Abort Scan"
-	press_msg="1"
-	release_msg="0"
-}
-"text update" {
-	object {
-		x=767
-		y=97
-		width=100
-		height=20
-	}
-	monitor {
-		chan="$(TS)$(TS_R)StartScan"
-		clr=14
-		bclr=2
-	}
-	clrmod="alarm"
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=702
-		y=97
-		width=60
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Status"
-}
-text {
-	object {
-		x=301
-		y=246
-		width=130
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Python server"
-}
-text {
-	object {
-		x=321
-		y=121
-		width=110
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Scan status"
-}
-"text update" {
-	object {
-		x=437
-		y=121
-		width=400
-		height=20
-	}
-	monitor {
-		chan="$(TS)$(TS_R)ScanStatus"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=291
-		y=221
-		width=140
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Remaining time"
-}
-text {
-	object {
-		x=311
-		y=196
-		width=120
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Elapsed time"
-}
-"text update" {
-	object {
-		x=437
-		y=196
-		width=100
-		height=20
-	}
-	monitor {
-		chan="$(TS)$(TS_R)ElapsedTime"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=436
-		y=221
-		width=100
-		height=20
-	}
-	monitor {
-		chan="$(TS)$(TS_R)RemainingTime"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=271
-		y=146
-		width=160
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Images collected"
-}
-"text update" {
-	object {
-		x=437
-		y=146
-		width=100
-		height=20
-	}
-	monitor {
-		chan="$(TS)$(TS_R)ImagesCollected"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=311
-		y=171
-		width=120
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Images saved"
-}
-"text update" {
-	object {
-		x=437
-		y=171
-		width=100
-		height=20
-	}
-	monitor {
-		chan="$(TS)$(TS_R)ImagesSaved"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text update" {
-	object {
-		x=435
-		y=246
-		width=100
-		height=20
-	}
-	monitor {
-		chan="$(TS)$(TS_R)ServerRunning"
-		clr=14
-		bclr=2
-	}
-	clrmod="alarm"
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=270
-		y=74
-		width=125
-		height=15
-	}
-	"basic attribute" {
-		clr=20
-	}
-	textix="$(TS)$(TS_R)"
-}
-text {
-	object {
-		x=521
-		y=71
-		width=255
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="TomoScan"
-	align="horiz. centered"
-}
-rectangle {
-	object {
-		x=263
-		y=64
-		width=615
-		height=210
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-		width=5
-	}
-}
-text {
-	object {
-		x=716
-		y=243
-		width=130
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Setup"
-	align="horiz. right"
-}
 "text update" {
 	object {
 		x=31
@@ -1536,7 +1070,7 @@ text {
 text {
 	object {
 		x=282
-		y=19
+		y=11
 		width=130
 		height=20
 	}
@@ -1548,7 +1082,7 @@ text {
 "text update" {
 	object {
 		x=416
-		y=19
+		y=11
 		width=400
 		height=20
 	}
@@ -4240,12 +3774,501 @@ composite {
 		}
 	}
 }
+composite {
+	object {
+		x=263
+		y=34
+		width=615
+		height=210
+	}
+	"composite name"=""
+	children {
+		"related display" {
+			object {
+				x=845
+				y=210
+				width=25
+				height=25
+			}
+			display[0] {
+				label="tomoScan"
+				name="tomoScan.adl"
+				args="P=$(TS), R=$(TS_R), BEAMLINE=$(TS_BEAMLINE)"
+			}
+			display[1] {
+				label="tomoScan 2-BM"
+				name="tomoScan_2BM.adl"
+				args="P=$(TS), R=$(TS_R), BEAMLINE=$(TS_BEAMLINE)"
+			}
+			display[4] {
+				args=" "
+			}
+			clr=0
+			bclr=53
+			label="- 2"
+		}
+		rectangle {
+			object {
+				x=267
+				y=41
+				width=605
+				height=20
+			}
+			"basic attribute" {
+				clr=2
+			}
+		}
+		"message button" {
+			object {
+				x=437
+				y=67
+				width=120
+				height=20
+			}
+			control {
+				chan="$(TS)$(TS_R)StartScan"
+				clr=14
+				bclr=15
+			}
+			label="Start Scan"
+			press_msg="1"
+		}
+		"message button" {
+			object {
+				x=562
+				y=67
+				width=120
+				height=20
+			}
+			control {
+				chan="$(TS)$(TS_R)AbortScan"
+				clr=14
+				bclr=20
+			}
+			label="Abort Scan"
+			press_msg="1"
+			release_msg="0"
+		}
+		"text update" {
+			object {
+				x=767
+				y=67
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(TS)$(TS_R)StartScan"
+				clr=14
+				bclr=2
+			}
+			clrmod="alarm"
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=702
+				y=67
+				width=60
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Status"
+		}
+		text {
+			object {
+				x=301
+				y=216
+				width=130
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Python server"
+		}
+		text {
+			object {
+				x=321
+				y=91
+				width=110
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Scan status"
+		}
+		"text update" {
+			object {
+				x=437
+				y=91
+				width=400
+				height=20
+			}
+			monitor {
+				chan="$(TS)$(TS_R)ScanStatus"
+				clr=14
+				bclr=51
+			}
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=291
+				y=191
+				width=140
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Remaining time"
+		}
+		text {
+			object {
+				x=311
+				y=166
+				width=120
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Elapsed time"
+		}
+		"text update" {
+			object {
+				x=437
+				y=166
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(TS)$(TS_R)ElapsedTime"
+				clr=14
+				bclr=51
+			}
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=436
+				y=191
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(TS)$(TS_R)RemainingTime"
+				clr=14
+				bclr=51
+			}
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=271
+				y=116
+				width=160
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Images collected"
+		}
+		"text update" {
+			object {
+				x=437
+				y=116
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(TS)$(TS_R)ImagesCollected"
+				clr=14
+				bclr=51
+			}
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=311
+				y=141
+				width=120
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Images saved"
+		}
+		"text update" {
+			object {
+				x=437
+				y=141
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(TS)$(TS_R)ImagesSaved"
+				clr=14
+				bclr=51
+			}
+			format="string"
+			limits {
+			}
+		}
+		"text update" {
+			object {
+				x=435
+				y=216
+				width=100
+				height=20
+			}
+			monitor {
+				chan="$(TS)$(TS_R)ServerRunning"
+				clr=14
+				bclr=2
+			}
+			clrmod="alarm"
+			format="string"
+			limits {
+			}
+		}
+		text {
+			object {
+				x=270
+				y=44
+				width=125
+				height=15
+			}
+			"basic attribute" {
+				clr=20
+			}
+			textix="$(TS)$(TS_R)"
+		}
+		text {
+			object {
+				x=521
+				y=41
+				width=255
+				height=20
+			}
+			"basic attribute" {
+				clr=54
+			}
+			textix="TomoScan"
+			align="horiz. centered"
+		}
+		rectangle {
+			object {
+				x=263
+				y=34
+				width=615
+				height=210
+			}
+			"basic attribute" {
+				clr=14
+				fill="outline"
+				width=5
+			}
+		}
+		text {
+			object {
+				x=716
+				y=213
+				width=130
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Setup"
+			align="horiz. right"
+		}
+	}
+}
+text {
+	object {
+		x=50
+		y=270
+		width=75
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Camera 1"
+	align="horiz. centered"
+}
+"shell command" {
+	object {
+		x=140
+		y=270
+		width=90
+		height=20
+	}
+	command[0] {
+		label="imageJ start"
+		name="/home/beams/USER2BMB/Software/ImageJ/ImageJ.sh"
+	}
+	clr=14
+	bclr=31
+	label="-ImageJ"
+}
+"related display" {
+	object {
+		x=230
+		y=270
+		width=90
+		height=20
+	}
+	display[0] {
+		label="Point Grey camera (PG1)"
+		name="ADSpinnaker.adl"
+		args="P=$(AD0), R=$(AD0_CAM), C=$(AD0_MODEL)"
+	}
+	clr=14
+	bclr=31
+	label="-Detector"
+}
+text {
+	object {
+		x=325
+		y=270
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Acquire"
+	align="horiz. right"
+}
+text {
+	object {
+		x=415
+		y=250
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=30
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		calc="A"
+		chan="$(AD0)$(AD0_CAM)Acquire"
+	}
+	textix="Collecting"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=445
+		y=250
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=63
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		calc="A"
+		chan="$(AD0)$(AD0_CAM)Acquire"
+	}
+	textix="Done"
+	align="horiz. centered"
+}
+"message button" {
+	object {
+		x=400
+		y=270
+		width=59
+		height=20
+	}
+	control {
+		chan="$(AD0)$(AD0_CAM)Acquire"
+		clr=14
+		bclr=51
+	}
+	label="Start"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=465
+		y=270
+		width=59
+		height=20
+	}
+	control {
+		chan="$(AD0)$(AD0_CAM)Acquire"
+		clr=14
+		bclr=51
+	}
+	label="Stop"
+	press_msg="0"
+}
+text {
+	object {
+		x=530
+		y=270
+		width=80
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Exposure"
+}
+"text update" {
+	object {
+		x=615
+		y=270
+		width=80
+		height=18
+	}
+	monitor {
+		chan="$(AD0)$(AD0_CAM)AcquireTime_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=705
+		y=270
+		width=50
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Temp."
+	align="horiz. right"
+}
 rectangle {
 	object {
-		x=707
-		y=299
-		width=89
-		height=17
+		x=760
+		y=270
+		width=45
+		height=20
 	}
 	"basic attribute" {
 		clr=15
@@ -4253,15 +4276,15 @@ rectangle {
 	"dynamic attribute" {
 		vis="calc"
 		calc="A<45"
-		chan="$(AD)cam1:TemperatureActual"
+		chan="$(AD0)cam1:TemperatureActual"
 	}
 }
 rectangle {
 	object {
-		x=782
-		y=319
-		width=89
-		height=17
+		x=805
+		y=270
+		width=45
+		height=20
 	}
 	"basic attribute" {
 		clr=20
@@ -4269,19 +4292,237 @@ rectangle {
 	"dynamic attribute" {
 		vis="calc"
 		calc="A>45"
-		chan="$(AD)cam1:TemperatureActual"
+		chan="$(AD0)cam1:TemperatureActual"
 	}
 }
 text {
 	object {
-		x=711
-		y=318
+		x=50
+		y=315
+		width=75
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Camera 2"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=325
+		y=315
+		width=70
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Acquire"
+	align="horiz. right"
+}
+text {
+	object {
+		x=530
+		y=315
 		width=80
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
+	textix="Exposure"
+}
+text {
+	object {
+		x=705
+		y=315
+		width=50
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
 	textix="Temp."
+	align="horiz. right"
+}
+"shell command" {
+	object {
+		x=138
+		y=315
+		width=91
+		height=20
+	}
+	command[0] {
+		label="imageJ start"
+		name="/home/beams/USER2BMB/Software/ImageJ/ImageJ.sh"
+	}
+	clr=14
+	bclr=31
+	label="-ImageJ"
+}
+"related display" {
+	object {
+		x=228
+		y=315
+		width=91
+		height=20
+	}
+	display[0] {
+		label="Point Grey camera (PG1)"
+		name="ADSpinnaker.adl"
+		args="P=$(AD1), R=$(AD1_CAM), C=$(AD1_MODEL)"
+	}
+	clr=14
+	bclr=31
+	label="-Detector"
+}
+"message button" {
+	object {
+		x=400
+		y=315
+		width=59
+		height=20
+	}
+	control {
+		chan="$(AD1)$(AD1_CAM)Acquire"
+		clr=14
+		bclr=51
+	}
+	label="Start"
+	press_msg="1"
+}
+"message button" {
+	object {
+		x=465
+		y=315
+		width=59
+		height=20
+	}
+	control {
+		chan="$(AD1)$(AD1_CAM)Acquire"
+		clr=14
+		bclr=51
+	}
+	label="Stop"
+	press_msg="0"
+}
+text {
+	object {
+		x=445
+		y=295
+		width=40
+		height=20
+	}
+	"basic attribute" {
+		clr=63
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		calc="A"
+		chan="$(AD1)$(AD1_CAM)Acquire"
+	}
+	textix="Done"
 	align="horiz. centered"
+}
+text {
+	object {
+		x=416
+		y=295
+		width=101
+		height=20
+	}
+	"basic attribute" {
+		clr=30
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		calc="A"
+		chan="$(AD1)$(AD1_CAM)Acquire"
+	}
+	textix="Collecting"
+	align="horiz. centered"
+}
+"text update" {
+	object {
+		x=615
+		y=315
+		width=81
+		height=18
+	}
+	monitor {
+		chan="$(AD1)$(AD1_CAM)AcquireTime_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=760
+		y=315
+		width=45
+		height=20
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A<45"
+		chan="$(AD1)cam1:TemperatureActual"
+	}
+}
+rectangle {
+	object {
+		x=805
+		y=315
+		width=45
+		height=20
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A>45"
+		chan="$(AD1)cam1:TemperatureActual"
+	}
+}
+rectangle {
+	object {
+		x=25
+		y=310
+		width=850
+		height=30
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==1"
+		chan="$(P)$(R)CameraSelected.VAL"
+	}
+}
+rectangle {
+	object {
+		x=25
+		y=264
+		width=850
+		height=30
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==0"
+		chan="$(P)$(R)CameraSelected.VAL"
+	}
 }
