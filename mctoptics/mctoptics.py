@@ -120,6 +120,13 @@ class MCTOptics():
         thread = threading.Thread(target=self.reset_watchdog, args=(), daemon=True)
         thread.start()
 
+        # Synch CameraSelected with CameraSelect
+        camera_select = self.epics_pvs['CameraSelect'].get()
+        if(camera_select == 0):
+            self.epics_pvs['CameraSelected'].put(0)
+        elif(camera_select == 1):
+            self.epics_pvs['CameraSelected'].put(1)
+
         log.setup_custom_logger("./mctoptics.log")
 
     def reset_watchdog(self):
@@ -353,15 +360,18 @@ class MCTOptics():
 
         log.info('Changing Optique Peter camera')
         self.epics_pvs['MCTStatus'].put('Changing Optique Peter camera')
+        self.epics_pvs['CameraSelected'].put(2)
 
         if(self.epics_pvs['CameraSelect'].get() == 0):
             camera_name = self.epics_pvs['Camera0Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 0')
             self.epics_pvs['CameraMotor'].put(camera_pos0, wait=True, timeout=120)
+            self.epics_pvs['CameraSelected'].put(0)
         elif(self.epics_pvs['CameraSelect'].get() == 1):
             camera_name = self.epics_pvs['Camera1Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 1')
             self.epics_pvs['CameraMotor'].put(camera_pos1, wait=True, timeout=120)
+            self.epics_pvs['CameraSelected'].put(1)
         log.info('Camera: %s selected', camera_name)
 
         camera_name = camera_name.upper()

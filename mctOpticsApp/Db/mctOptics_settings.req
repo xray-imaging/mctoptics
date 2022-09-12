@@ -34,6 +34,7 @@ $(P)$(R)Camera1RotationPVName
 # Optique Peter camera selector
 ###############################
 $(P)$(R)CameraSelect
+$(P)$(R)CameraSelected
 $(P)$(R)CameraPos0
 $(P)$(R)CameraPos1
 $(P)$(R)CameraName0

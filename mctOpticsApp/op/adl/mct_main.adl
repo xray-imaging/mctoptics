@@ -7135,8 +7135,9 @@ rectangle {
 		width=5
 	}
 	"dynamic attribute" {
-		vis="if zero"
-		chan="$(P)$(R)CameraSelect.VAL"
+		vis="calc"
+		calc="A==0"
+		chan="$(P)$(R)CameraSelected.VAL"
 	}
 }
 composite {
@@ -7824,7 +7825,26 @@ rectangle {
 		width=5
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P)$(R)CameraSelect.VAL"
+		vis="calc"
+		calc="A==1"
+		chan="$(P)$(R)CameraSelected.VAL"
+	}
+}
+rectangle {
+	object {
+		x=0
+		y=135
+		width=1570
+		height=185
+	}
+	"basic attribute" {
+		clr=20
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==2"
+		chan="$(P)$(R)CameraSelected.VAL"
 	}
 }
