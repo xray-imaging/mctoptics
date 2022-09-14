@@ -157,6 +157,44 @@ record(ao, "$(P)$(R)Camera1Lens2Rotation")
    field(VAL,  0)
 }
 
+#################################
+# Optique Peter camera X-Y offset
+#################################
+
+record(ao, "$(P)$(R)CameraXOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)CameraYOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+#################################
+# Optique Peter lens focus offset
+#################################
+
+record(ao, "$(P)$(R)Lens0FocusOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Lens1FocusOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Lens2FocusOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
 #############################
 # Optique Peter lens selector
 #############################
