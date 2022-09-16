@@ -74,8 +74,6 @@ class MCTOptics():
         camera_prefix = prefix + 'cam1:'
 
         self.control_pvs['Cam1AcquireTime']          = PV(camera_prefix + 'AcquireTime')
-        self.control_pvs['Cam1AAcquireTime']          = PV(camera_prefix + 'AcquireTime')
-        self.control_pvs['Cam1ArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
         self.control_pvs['Cam1ArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
         self.control_pvs['Cam1ArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeY_RBV')
         self.control_pvs['Cam1Acquire']              = PV(camera_prefix + 'Acquire')
@@ -91,17 +89,17 @@ class MCTOptics():
         self.control_pvs['Cam1MinYRBV']              = PV(camera_prefix + 'MinY_RBV')
 
         prefix = self.pv_prefixes['OverlayPlugin0']
-        self.control_pvs['OPEnableCallbacks'] = PV(prefix + 'EnableCallbacks')
-        self.control_pvs['OP1Use']            = PV(prefix + '1:Use')        
-        self.control_pvs['OP1CenterX']        = PV(prefix + '1:CenterX')        
-        self.control_pvs['OP1CenterY']        = PV(prefix + '1:CenterY')        
+        self.control_pvs['OP0EnableCallbacks'] = PV(prefix + 'EnableCallbacks')
+        self.control_pvs['OP01Use']            = PV(prefix + '1:Use')        
+        self.control_pvs['OP01CenterX']        = PV(prefix + '1:CenterX')        
+        self.control_pvs['OP01CenterY']        = PV(prefix + '1:CenterY')        
 
 
         prefix = self.pv_prefixes['OverlayPlugin1']
-        self.control_pvs['OPEnableCallbacks'] = PV(prefix + 'EnableCallbacks')
-        self.control_pvs['OP1Use']            = PV(prefix + '1:Use')        
-        self.control_pvs['OP1CenterX']        = PV(prefix + '1:CenterX')        
-        self.control_pvs['OP1CenterY']        = PV(prefix + '1:CenterY')       
+        self.control_pvs['OP1EnableCallbacks'] = PV(prefix + 'EnableCallbacks')
+        self.control_pvs['OP11Use']            = PV(prefix + '1:Use')        
+        self.control_pvs['OP11CenterX']        = PV(prefix + '1:CenterX')        
+        self.control_pvs['OP11CenterY']        = PV(prefix + '1:CenterY')       
 
         self.epics_pvs = {**self.config_pvs, **self.control_pvs}
 
@@ -355,6 +353,13 @@ class MCTOptics():
         camera_pos0 = self.epics_pvs['CameraPos0'].get()
         camera_pos1 = self.epics_pvs['CameraPos1'].get()
 
+        camera_x_offset = self.epics_pvs['CameraXOffset'].get()
+        camera_y_offset = self.epics_pvs['CameraYOffset'].get()
+
+        lens0_focus_offset = self.epics_pvs['Lens0FocusOffset'].get()
+        lens1_focus_offset = self.epics_pvs['Lens1FocusOffset'].get()
+        lens2_focus_offset = self.epics_pvs['Lens2FocusOffset'].get()
+
         camera_select = self.epics_pvs['CameraSelect'].get()
         camera_name = 'None'
 
@@ -366,11 +371,19 @@ class MCTOptics():
             camera_name = self.epics_pvs['Camera0Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 0')
             self.epics_pvs['CameraMotor'].put(camera_pos0, wait=True, timeout=120)
+            # get current_sample_x position => 
+            # self.epics_pvs['CameraXOffset'].put(current_sample_x+camera_x_offset, wait=True, timeout=120)
+            # ...
+            self.epics_pvs['Cam1Acquire'].put(0) 
             self.epics_pvs['CameraSelected'].put(0)
         elif(self.epics_pvs['CameraSelect'].get() == 1):
             camera_name = self.epics_pvs['Camera1Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 1')
             self.epics_pvs['CameraMotor'].put(camera_pos1, wait=True, timeout=120)
+            # get current_sample_x position => 
+            # self.epics_pvs['CameraXOffset'].put(current_sample_x-camera_x_offset, wait=True, timeout=120)
+            # ...            self.epics_pvs['CameraSelected'].put(1)
+            self.epics_pvs['Cam0Acquire'].put(0) 
             self.epics_pvs['CameraSelected'].put(1)
         log.info('Camera: %s selected', camera_name)
 
@@ -395,18 +408,32 @@ class MCTOptics():
     def cross_select(self):
         """Plot the cross in imageJ.
         """
-    
 
-        if (self.epics_pvs['CrossSelect'].get() == 0):
-            sizex = int(self.epics_pvs['Cam0ArraySizeXRBV'].get())
-            sizey = int(self.epics_pvs['Cam0ArraySizeYRBV'].get())
-            self.epics_pvs['OP1CenterX'].put(sizex//2)
-            self.epics_pvs['OP1CenterY'].put(sizey//2)
-            self.control_pvs['OP1Use'].put(1)
-            log.info('Cross at %d %d is enable' % (sizex//2,sizey//2))
-        else:
-            self.control_pvs['OP1Use'].put(0)
-            log.info('Cross is disabled')
+        if(self.epics_pvs['CameraSelect'].get() == 0):
+            if (self.epics_pvs['CrossSelect'].get() == 0):
+                sizex = int(self.epics_pvs['Cam0ArraySizeXRBV'].get())
+                sizey = int(self.epics_pvs['Cam0ArraySizeYRBV'].get())
+                self.epics_pvs['OP01CenterX'].put(sizex//2)
+                self.epics_pvs['OP01CenterY'].put(sizey//2)
+                self.control_pvs['OP01Use'].put(1)
+                log.info('Cross on camera 0 at %d %d is enable' % (sizex//2,sizey//2))
+            else:
+                self.control_pvs['OP01Use'].put(0)
+                log.info('Cross on camera 0 is disabled')
+        elif(self.epics_pvs['CameraSelect'].get() == 1):
+            if (self.epics_pvs['CrossSelect'].get() == 0):
+                sizex = int(self.epics_pvs['Cam1ArraySizeXRBV'].get())
+                sizey = int(self.epics_pvs['Cam1ArraySizeYRBV'].get())
+                self.epics_pvs['OP11CenterX'].put(sizex//2)
+                self.epics_pvs['OP11CenterY'].put(sizey//2)
+                self.control_pvs['OP11Use'].put(1)
+                log.info('Cross on camera 1 at %d %d is enable' % (sizex//2,sizey//2))
+            else:
+                self.control_pvs['OP11Use'].put(0)
+                log.info('Cross on camera 1 is disabled')
+        
+        suggested_angles = 1500.0 / 2448.0 * sizex
+        self.epics_pvs['SuggestedAngles'].put(suggested_angles)
 
     def sync(self):
         """
