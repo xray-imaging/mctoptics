@@ -502,3 +502,9 @@ record(busy, "$(P)$(R)Cut")
    field(ZNAM, "Done")
    field(ONAM, "Cut")
 }
+
+record(ao, "$(P)$(R)SelectedAngles")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}

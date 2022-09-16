@@ -153,3 +153,4 @@ $(P)$(R)CutRight
 $(P)$(R)CutTop
 $(P)$(R)CutBottom
 $(P)$(R)Cut
+$(P)$(R)SelectedAngles

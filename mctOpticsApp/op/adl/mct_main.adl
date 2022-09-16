@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
 	object {
-		x=652
-		y=341
+		x=295
+		y=621
 		width=1570
 		height=865
 	}
@@ -5625,9 +5625,9 @@ composite {
 }
 "related display" {
 	object {
-		x=155
+		x=135
 		y=152
-		width=90
+		width=100
 		height=25
 	}
 	display[0] {
@@ -5644,9 +5644,9 @@ composite {
 }
 "related display" {
 	object {
-		x=1000
+		x=980
 		y=182
-		width=90
+		width=100
 		height=25
 	}
 	display[0] {
@@ -5660,7 +5660,7 @@ composite {
 }
 text {
 	object {
-		x=20
+		x=35
 		y=152
 		width=100
 		height=25
@@ -5672,9 +5672,9 @@ text {
 }
 "shell command" {
 	object {
-		x=65
+		x=35
 		y=182
-		width=90
+		width=100
 		height=25
 	}
 	command[0] {
@@ -5702,7 +5702,7 @@ rectangle {
 	object {
 		x=135
 		y=212
-		width=89
+		width=100
 		height=20
 	}
 	"basic attribute" {
@@ -5716,9 +5716,9 @@ rectangle {
 }
 rectangle {
 	object {
-		x=225
+		x=135
 		y=212
-		width=89
+		width=100
 		height=20
 	}
 	"basic attribute" {
@@ -6110,19 +6110,6 @@ text {
 }
 rectangle {
 	object {
-		x=5
-		y=140
-		width=715
-		height=175
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-		width=5
-	}
-}
-rectangle {
-	object {
 		x=850
 		y=140
 		width=715
@@ -6136,9 +6123,9 @@ rectangle {
 }
 "related display" {
 	object {
-		x=1000
+		x=980
 		y=152
-		width=91
+		width=100
 		height=25
 	}
 	display[0] {
@@ -6155,9 +6142,9 @@ rectangle {
 }
 "related display" {
 	object {
-		x=155
+		x=135
 		y=182
-		width=91
+		width=100
 		height=25
 	}
 	display[0] {
@@ -6171,9 +6158,9 @@ rectangle {
 }
 text {
 	object {
-		x=865
+		x=880
 		y=152
-		width=101
+		width=100
 		height=25
 	}
 	"basic attribute" {
@@ -6183,9 +6170,9 @@ text {
 }
 "shell command" {
 	object {
-		x=910
+		x=880
 		y=182
-		width=91
+		width=100
 		height=25
 	}
 	command[0] {
@@ -6378,7 +6365,7 @@ rectangle {
 	object {
 		x=980
 		y=212
-		width=90
+		width=100
 		height=20
 	}
 	"basic attribute" {
@@ -6392,9 +6379,9 @@ rectangle {
 }
 rectangle {
 	object {
-		x=1070
+		x=980
 		y=212
-		width=90
+		width=100
 		height=20
 	}
 	"basic attribute" {
@@ -7863,4 +7850,89 @@ composite {
 		bclr=51
 	}
 	stacking="column"
+}
+rectangle {
+	object {
+		x=5
+		y=140
+		width=715
+		height=175
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
+	}
+}
+rectangle {
+	object {
+		x=1112
+		y=320
+		width=455
+		height=115
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
+	}
+}
+text {
+	object {
+		x=1225
+		y=338
+		width=225
+		height=25
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Suggested angle #"
+	align="horiz. centered"
+}
+"text update" {
+	object {
+		x=1243
+		y=375
+		width=200
+		height=25
+	}
+	monitor {
+		chan="$(P)$(R)SuggestedAngles"
+		clr=14
+		bclr=2
+	}
+	clrmod="alarm"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=240
+		y=212
+		width=80
+		height=18
+	}
+	monitor {
+		chan="$(AD0)$(AD0_CAM)TemperatureActual"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=1085
+		y=212
+		width=80
+		height=18
+	}
+	monitor {
+		chan="$(AD1)$(AD1_CAM)TemperatureActual"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
 }
