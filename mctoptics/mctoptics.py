@@ -374,6 +374,7 @@ class MCTOptics():
             # get current_sample_x position => 
             # self.epics_pvs['CameraXOffset'].put(current_sample_x+camera_x_offset, wait=True, timeout=120)
             # ...
+            self.epics_pvs['Cam1Acquire'].put(0) 
             self.epics_pvs['CameraSelected'].put(0)
         elif(self.epics_pvs['CameraSelect'].get() == 1):
             camera_name = self.epics_pvs['Camera1Name'].get()
@@ -382,6 +383,8 @@ class MCTOptics():
             # get current_sample_x position => 
             # self.epics_pvs['CameraXOffset'].put(current_sample_x-camera_x_offset, wait=True, timeout=120)
             # ...            self.epics_pvs['CameraSelected'].put(1)
+            self.epics_pvs['Cam0Acquire'].put(0) 
+            self.epics_pvs['CameraSelected'].put(1)
         log.info('Camera: %s selected', camera_name)
 
         camera_name = camera_name.upper()
