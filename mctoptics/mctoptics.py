@@ -74,8 +74,6 @@ class MCTOptics():
         camera_prefix = prefix + 'cam1:'
 
         self.control_pvs['Cam1AcquireTime']          = PV(camera_prefix + 'AcquireTime')
-        self.control_pvs['Cam1AAcquireTime']          = PV(camera_prefix + 'AcquireTime')
-        self.control_pvs['Cam1ArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
         self.control_pvs['Cam1ArraySizeXRBV']        = PV(camera_prefix + 'ArraySizeX_RBV')
         self.control_pvs['Cam1ArraySizeYRBV']        = PV(camera_prefix + 'ArraySizeY_RBV')
         self.control_pvs['Cam1Acquire']              = PV(camera_prefix + 'Acquire')
@@ -355,6 +353,13 @@ class MCTOptics():
         camera_pos0 = self.epics_pvs['CameraPos0'].get()
         camera_pos1 = self.epics_pvs['CameraPos1'].get()
 
+        camera_x_offset = self.epics_pvs['CameraXOffset'].get()
+        camera_y_offset = self.epics_pvs['CameraYOffset'].get()
+
+        lens0_focus_offset = self.epics_pvs['Lens0FocusOffset'].get()
+        lens1_focus_offset = self.epics_pvs['Lens1FocusOffset'].get()
+        lens2_focus_offset = self.epics_pvs['Lens2FocusOffset'].get()
+
         camera_select = self.epics_pvs['CameraSelect'].get()
         camera_name = 'None'
 
@@ -366,12 +371,17 @@ class MCTOptics():
             camera_name = self.epics_pvs['Camera0Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 0')
             self.epics_pvs['CameraMotor'].put(camera_pos0, wait=True, timeout=120)
+            # get current_sample_x position => 
+            # self.epics_pvs['CameraXOffset'].put(current_sample_x+camera_x_offset, wait=True, timeout=120)
+            # ...
             self.epics_pvs['CameraSelected'].put(0)
         elif(self.epics_pvs['CameraSelect'].get() == 1):
             camera_name = self.epics_pvs['Camera1Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 1')
             self.epics_pvs['CameraMotor'].put(camera_pos1, wait=True, timeout=120)
-            self.epics_pvs['CameraSelected'].put(1)
+            # get current_sample_x position => 
+            # self.epics_pvs['CameraXOffset'].put(current_sample_x-camera_x_offset, wait=True, timeout=120)
+            # ...            self.epics_pvs['CameraSelected'].put(1)
         log.info('Camera: %s selected', camera_name)
 
         camera_name = camera_name.upper()
@@ -418,6 +428,9 @@ class MCTOptics():
             else:
                 self.control_pvs['OP11Use'].put(0)
                 log.info('Cross on camera 1 is disabled')
+        
+        suggested_angles = 1500.0 / 2448.0 * sizex
+        self.epics_pvs['SuggestedAngles'].put(suggested_angles)
 
     def sync(self):
         """
