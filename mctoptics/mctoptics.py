@@ -238,7 +238,7 @@ class MCTOptics():
             thread = threading.Thread(target=self.sync, args=())
             thread.start()
         elif (pvname.find('Cut') != -1) and (value ==1):
-            thread = threading.Thread(target=self.cut_detector, args=())
+            thread = threading.Thread(target=self.crop_detector, args=())
             thread.start()
         elif (pvname.find('EnergySet') != -1) and (value == 1):
             thread = threading.Thread(target=self.energy_change, args=())
@@ -385,6 +385,9 @@ class MCTOptics():
             # ...            self.epics_pvs['CameraSelected'].put(1)
             self.epics_pvs['Cam0Acquire'].put(0) 
             self.epics_pvs['CameraSelected'].put(1)
+
+        update_suggested_scan_param(self)
+
         log.info('Camera: %s selected', camera_name)
 
         camera_name = camera_name.upper()
@@ -431,9 +434,6 @@ class MCTOptics():
             else:
                 self.control_pvs['OP11Use'].put(0)
                 log.info('Cross on camera 1 is disabled')
-        
-        suggested_angles = 1500.0 / 2448.0 * sizex
-        self.epics_pvs['SuggestedAngles'].put(suggested_angles)
 
     def sync(self):
         """
@@ -507,7 +507,7 @@ class MCTOptics():
             self.epics_pvs['MCTStatus'].put('Sync done!')
         self.epics_pvs['Sync'].put('Done')
 
-    def cut_detector(self):
+    def crop_detector(self):
         """crop detector sizes"""
 
 
@@ -547,7 +547,17 @@ class MCTOptics():
 
         self.epics_pvs['Cam'+camera_select+'Acquire'].put(state)  
         self.cross_select()      
-        self.epics_pvs['Cut'].put(0,wait=True)  
+        self.epics_pvs['Cut'].put(0,wait=True)
+
+        update_suggested_scan_param(self)
+
+    def update_suggested_scan_param(self):
+        camera_select = str(self.epics_pvs['CameraSelect'].get())
+        image_size_x = self.epics_pvs['Cam'+camera_select+'ArraySizeXRBV'].get()
+        suggested_angles = int(1500.0 / 2448.0 * image_size_x)
+        self.epics_pvs['SuggestedAngles'].put(suggested_angles)
+        suggested_angle_step = 180.0 / suggested_angles
+        self.epics_pvs['SuggestedAngleStep'].put(suggested_angle_step)   
 
     def energy_change(self):
         if self.epics_pvs['EnergyBusy'].get() == 0:

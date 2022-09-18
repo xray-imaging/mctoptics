@@ -503,8 +503,11 @@ record(busy, "$(P)$(R)Cut")
    field(ONAM, "Cut")
 }
 
-record(ao, "$(P)$(R)SelectedAngles")
+record(ao, "$(P)$(R)SuggestedAngles")
 {
-   field(PREC,  "4")
+   field(PREC,  "0")
    field(VAL,  0)
 }
+
+
+SuggestedAngleStep
