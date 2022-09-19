@@ -509,5 +509,8 @@ record(ao, "$(P)$(R)SuggestedAngles")
    field(VAL,  0)
 }
 
-
-SuggestedAngleStep
+record(ao, "$(P)$(R)SuggestedAngleStep")
+{
+   field(PREC,  "5")
+   field(VAL,  0)
+}
