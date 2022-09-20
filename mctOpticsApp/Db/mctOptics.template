@@ -53,6 +53,24 @@ record(stringout, "$(P)$(R)LensSampleZPVName")
    field(VAL,  "$(LENS_SAMPLE_Z)")
 }
 
+#####################
+# Lens Focus PV Names
+#####################
+record(stringout, "$(P)$(R)Lens0FocusPVName")
+{
+   field(VAL,  "$(LENS0_FOCUS)")
+}
+
+record(stringout, "$(P)$(R)Lens1FocusPVName")
+{
+   field(VAL,  "$(LENS1_FOCUS)")
+}
+
+record(stringout, "$(P)$(R)Lens2FocusPVName")
+{
+   field(VAL,  "$(LENS2_FOCUS)")
+}
+
 ##########################
 # Camera rotation PV Names
 ##########################
@@ -157,39 +175,42 @@ record(ao, "$(P)$(R)Camera1Lens2Rotation")
    field(VAL,  0)
 }
 
-#################################
-# Optique Peter camera X-Y offset
-#################################
 
-record(ao, "$(P)$(R)CameraXOffset")
+##########################
+# Optique Peter lens focus
+##########################
+
+record(ao, "$(P)$(R)Camera0Lens0Focus")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)CameraYOffset")
+record(ao, "$(P)$(R)Camera0Lens1Focus")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-#################################
-# Optique Peter lens focus offset
-#################################
-
-record(ao, "$(P)$(R)Lens0FocusOffset")
+record(ao, "$(P)$(R)Camera0Lens2Focus")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Lens1FocusOffset")
+record(ao, "$(P)$(R)Camera1Lens0Focus")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Lens2FocusOffset")
+record(ao, "$(P)$(R)Camera1Lens1Focus")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens2Focus")
 {
    field(PREC,  "4")
    field(VAL,  0)
@@ -210,20 +231,36 @@ record(mbbo, "$(P)$(R)LensSelect") {
   field(TWST, "Pos. 2")
 }
 
-record(ao, "$(P)$(R)LensPos0") {
+record(ao, "$(P)$(R)Camera0LensPos0") {
   field(PREC, "4")
-  field(VAL,  "$(LENS_POS0)")
+  field(VAL,  "$(CAM0_LENS_POS0)")
 }
 
-record(ao, "$(P)$(R)LensPos1") {
+record(ao, "$(P)$(R)Camera0LensPos1") {
   field(PREC, "4")
-  field(VAL,  "$(LENS_POS2)")
+  field(VAL,  "$(CAM0_LENS_POS1)")
 }
 
-record(ao, "$(P)$(R)LensPos2") {
+record(ao, "$(P)$(R)Camera0LensPos2") {
   field(PREC, "4")
-  field(VAL,  "$(LENS_POS2)")
+  field(VAL,  "$(CAM0_LENS_POS2)")
 }
+
+record(ao, "$(P)$(R)Camera1LensPos0") {
+  field(PREC, "4")
+  field(VAL,  "$(CAM1_LENS_POS0)")
+}
+
+record(ao, "$(P)$(R)Camera1LensPos1") {
+  field(PREC, "4")
+  field(VAL,  "$(CAM1_LENS_POS1)")
+}
+
+record(ao, "$(P)$(R)Camera1LensPos2") {
+  field(PREC, "4")
+  field(VAL,  "$(CAM1_LENS_POS2)")
+}
+
 
 record(stringout, "$(P)$(R)LensName0") {
   field(PINI, "YES")
@@ -265,19 +302,37 @@ record(mbbo, "$(P)$(R)CrossSelect") {
 # Optique Peter lens 1 offsets
 ##############################
 
-record(ao, "$(P)$(R)Lens1XOffset")
+record(ao, "$(P)$(R)Camera0Lens1XOffset")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Lens1YOffset")
+record(ao, "$(P)$(R)Camera0Lens1YOffset")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Lens1ZOffset")
+record(ao, "$(P)$(R)Camera0Lens1ZOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens1XOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens1YOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens1ZOffset")
 {
    field(PREC,  "4")
    field(VAL,  0)
@@ -287,19 +342,37 @@ record(ao, "$(P)$(R)Lens1ZOffset")
 # Optique Peter lens 2 offsets
 ##############################
 
-record(ao, "$(P)$(R)Lens2XOffset")
+record(ao, "$(P)$(R)Camera0Lens2XOffset")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Lens2YOffset")
+record(ao, "$(P)$(R)Camera0Lens2YOffset")
 {
    field(PREC,  "4")
    field(VAL,  0)
 }
 
-record(ao, "$(P)$(R)Lens2ZOffset")
+record(ao, "$(P)$(R)Camera0Lens2ZOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens2XOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens2YOffset")
+{
+   field(PREC,  "4")
+   field(VAL,  0)
+}
+
+record(ao, "$(P)$(R)Camera1Lens2ZOffset")
 {
    field(PREC,  "4")
    field(VAL,  0)

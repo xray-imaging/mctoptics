@@ -126,13 +126,13 @@ Optique Peter lens selector
   * - $(P)$(R)LensSelect
     - mbbo
     - Lens selector for Pos0 and Pos1 position
-  * - $(P)$(R)LensPos0
+  * - $(P)$(R)Camera0LensPos0
     - a0
     - Motor position for the first lens
-  * - $(P)$(R)LensPos1
+  * - $(P)$(R)Camera0LensPos1
     - a0
     - Motor position for the second lens
-  * - $(P)$(R)LensPos2
+  * - $(P)$(R)Camera0LensPos2
     - a0
     - Motor position for the third lens
   * - $(P)$(R)LensName0

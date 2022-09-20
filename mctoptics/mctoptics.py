@@ -51,6 +51,14 @@ class MCTOptics():
         camera1_rotation_pv_name = self.control_pvs['Camera1Rotation'].pvname
         self.control_pvs['Camera1RotationPosition']  = PV(camera1_rotation_pv_name + '.VAL')
 
+
+        lens0_focus_pv_name = self.control_pvs['Lens0Focus'].pvname
+        self.control_pvs['Lens0FocusPosition']  = PV(lens0_focus_pv_name + '.VAL')
+        lens1_focus_pv_name = self.control_pvs['Lens1Focus'].pvname
+        self.control_pvs['Lens1FocusPosition']  = PV(lens1_focus_pv_name + '.VAL')
+        lens2_focus_pv_name = self.control_pvs['Lens2Focus'].pvname
+        self.control_pvs['Lens2FocusPosition']  = PV(lens2_focus_pv_name + '.VAL')
+
         #Define PVs from the camera IOC that we will need
         prefix = self.pv_prefixes['Camera0']
         camera_prefix = prefix + 'cam1:'
@@ -106,6 +114,7 @@ class MCTOptics():
         ########################### VN
         # shall we run a sync() here?
         self.lens_cur = self.epics_pvs['LensSelect'].get()
+        self.camera_cur = self.epics_pvs['CameraSelect'].get()
         ########################### VN
         
         # print(self.epics_pvs)
@@ -244,33 +253,35 @@ class MCTOptics():
             thread = threading.Thread(target=self.energy_change, args=())
             thread.start()       
 
-    def take_lens_offsets(self, lens):
+    def take_lens_offsets(self, lens, cam):
         if lens == 0:
             return 0,0,0
-        x = self.epics_pvs['Lens'+str(lens)+'XOffset'].get()
-        y = self.epics_pvs['Lens'+str(lens)+'YOffset'].get()
-        z = self.epics_pvs['Lens'+str(lens)+'ZOffset'].get()
+        x = self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'XOffset'].get()
+        y = self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'YOffset'].get()
+        z = self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'ZOffset'].get()
         return x,y,z
 
 
-    def take_camera_offsets(self, lens):
+    def take_camera_rotation(self, lens, cam):
 
-        cam = self.epics_pvs['CameraSelect'].get()
         return self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'Rotation'].get()
 
 
     def lens_select(self):
         """Moves the Optique Peter lens.
         """
+        # store the current camera rotation position where it belongs
+        rotation_cur = self.control_pvs['Camera'+str(self.camera_cur)+'RotationPosition'].get()
+        self.epics_pvs['Camera'+str(self.camera_cur)+'Lens'+str(self.lens_cur)+'Rotation'].put(rotation_cur)
 
         # take offsets of the current lens
-        x_cur,y_cur,z_cur = self.take_lens_offsets(self.lens_cur)            
+        x_cur,y_cur,z_cur = self.take_lens_offsets(self.lens_cur, self.camera_cur)            
         # take new lens id, and its offsets
         lens_select = self.epics_pvs['LensSelect'].get()
-        x_select,y_select,z_select = self.take_lens_offsets(lens_select)
+        x_select,y_select,z_select = self.take_lens_offsets(lens_select, self.camera_cur)
         # take camera id and its rotation for the new lens
-        cam = self.epics_pvs['CameraSelect'].get()
-        camera_rotation = self.take_camera_offsets(lens_select)        
+        camera_rotation = self.take_camera_rotation(lens_select, self.camera_cur)        
+
         # update current lens
         self.lens_cur = lens_select
 
@@ -284,23 +295,22 @@ class MCTOptics():
         log.info('move X from %f to %f', x, x_new)
         log.info('move Y from %f to %f', y, y_new)
         log.info('move Z from %f to %f', z, z_new)
-        log.info('move camera %s rotation to %f' %(cam, camera_rotation))        
+        log.info('move camera %s rotation to %f' %(self.camera_cur, camera_rotation))        
         self.epics_pvs['LensSampleXPosition'].put(x_new)
         self.epics_pvs['LensSampleYPosition'].put(y_new)
         self.epics_pvs['LensSampleZPosition'].put(z_new)
-        self.epics_pvs['Camera'+str(cam)+'RotationPosition'].put(camera_rotation) # no wait, assuming the lens movement is the slowest part
+        self.epics_pvs['Camera'+str(self.camera_cur)+'RotationPosition'].put(camera_rotation) # no wait, assuming the lens movement is the slowest part
 
-        
-        lens_pos0 = self.epics_pvs['LensPos0'].get()
-        lens_pos1 = self.epics_pvs['LensPos1'].get()
-        lens_pos2 = self.epics_pvs['LensPos2'].get()
+        lens_pos0 = self.epics_pvs['Camera'+str(self.camera_cur)+'LensPos0'].get()
+        lens_pos1 = self.epics_pvs['Camera'+str(self.camera_cur)+'LensPos1'].get()
+        lens_pos2 = self.epics_pvs['Camera'+str(self.camera_cur)+'LensPos2'].get()
 
         lens_select = self.epics_pvs['LensSelect'].get()
         lens_name = 'None'
 
         log.info('Changing Optique Peter lens')
 
-        lens_positions = [lens_pos0, lens_pos1,lens_pos2]
+        lens_positions = [lens_pos0, lens_pos1, lens_pos2]
 
         lens_index = self.epics_pvs['LensSelect'].get()
         lens_name  = self.epics_pvs['Lens' + str(lens_index) + 'Name'].get()
@@ -349,44 +359,61 @@ class MCTOptics():
     def camera_select(self):
         """Moves the Optique Peter camera.
         """
-        
-        camera_pos0 = self.epics_pvs['CameraPos0'].get()
-        camera_pos1 = self.epics_pvs['CameraPos1'].get()
 
-        camera_x_offset = self.epics_pvs['CameraXOffset'].get()
-        camera_y_offset = self.epics_pvs['CameraYOffset'].get()
-
-        lens0_focus_offset = self.epics_pvs['Lens0FocusOffset'].get()
-        lens1_focus_offset = self.epics_pvs['Lens1FocusOffset'].get()
-        lens2_focus_offset = self.epics_pvs['Lens2FocusOffset'].get()
-
-        camera_select = self.epics_pvs['CameraSelect'].get()
-        camera_name = 'None'
+        # store the current camera rotation position where it belongs
+        rotation_cur = self.control_pvs['Camera'+str(self.camera_cur)+'RotationPosition'].get()
+        self.epics_pvs['Camera'+str(self.camera_cur)+'Lens'+str(self.lens_cur)+'Rotation'].put(rotation_cur)
 
         log.info('Changing Optique Peter camera')
         self.epics_pvs['MCTStatus'].put('Changing Optique Peter camera')
         self.epics_pvs['CameraSelected'].put(2)
 
-        if(self.epics_pvs['CameraSelect'].get() == 0):
+        camera_select = self.epics_pvs['CameraSelect'].get()
+        camera_name = 'None'
+
+        if(camera_select == 0):
             camera_name = self.epics_pvs['Camera0Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 0')
+            camera_pos0 = self.epics_pvs['CameraPos0'].get()
             self.epics_pvs['CameraMotor'].put(camera_pos0, wait=True, timeout=120)
-            # get current_sample_x position => 
-            # self.epics_pvs['CameraXOffset'].put(current_sample_x+camera_x_offset, wait=True, timeout=120)
-            # ...
             self.epics_pvs['Cam1Acquire'].put(0) 
             self.epics_pvs['CameraSelected'].put(0)
-        elif(self.epics_pvs['CameraSelect'].get() == 1):
+            # update stored focus position for camera 1, this is needed in case there was some adjustiment
+            lens0_focus_pos = self.epics_pvs['Lens0FocusPosition'].get()
+            lens1_focus_pos = self.epics_pvs['Lens1FocusPosition'].get()
+            lens2_focus_pos = self.epics_pvs['Lens2FocusPosition'].get()
+            self.epics_pvs['Camera1Lens0Focus'].put(lens0_focus_pos)
+            self.epics_pvs['Camera1Lens1Focus'].put(lens1_focus_pos)
+            self.epics_pvs['Camera1Lens2Focus'].put(lens2_focus_pos)
+        elif(camera_select == 1):
             camera_name = self.epics_pvs['Camera1Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 1')
+            camera_pos1 = self.epics_pvs['CameraPos1'].get()
             self.epics_pvs['CameraMotor'].put(camera_pos1, wait=True, timeout=120)
-            # get current_sample_x position => 
-            # self.epics_pvs['CameraXOffset'].put(current_sample_x-camera_x_offset, wait=True, timeout=120)
-            # ...            self.epics_pvs['CameraSelected'].put(1)
             self.epics_pvs['Cam0Acquire'].put(0) 
             self.epics_pvs['CameraSelected'].put(1)
+            # update stored focus position for camera 1, this is needed in case there was some adjustiment
+            lens0_focus_pos = self.epics_pvs['Lens0FocusPosition'].get()
+            lens1_focus_pos = self.epics_pvs['Lens1FocusPosition'].get()
+            lens2_focus_pos = self.epics_pvs['Lens2FocusPosition'].get()
+            self.epics_pvs['Camera0Lens0Focus'].put(lens0_focus_pos)
+            self.epics_pvs['Camera0Lens1Focus'].put(lens1_focus_pos)
+            self.epics_pvs['Camera0Lens2Focus'].put(lens2_focus_pos)
 
-        update_suggested_scan_param(self)
+        self.camera_cur = camera_select
+        self.update_suggested_scan_param()
+
+        # set the correct focus 
+        lens0_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens0Focus'].get()
+        lens1_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens1Focus'].get()
+        lens2_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens2Focus'].get()
+        self.epics_pvs['Lens0FocusPosition'].put(lens0_focus_pos, wait=True) 
+        self.epics_pvs['Lens1FocusPosition'].put(lens1_focus_pos, wait=True) 
+        self.epics_pvs['Lens2FocusPosition'].put(lens2_focus_pos, wait=True) 
+
+        # set the correct camera rotation
+        camera_rotation = self.take_camera_rotation(self.lens_cur, camera_select)        
+        self.control_pvs['Camera'+str(camera_select)+'RotationPosition'].put(camera_rotation, wait=True)
 
         log.info('Camera: %s selected', camera_name)
 
@@ -470,9 +497,9 @@ class MCTOptics():
             log.warning('Sync camera: not required, selector is already in the correct position')
 
         log.info('Sync lens')
-        lens_pos0 = self.epics_pvs['LensPos0'].get()
-        lens_pos1 = self.epics_pvs['LensPos1'].get()
-        lens_pos2 = self.epics_pvs['LensPos2'].get()
+        lens_pos0 = self.epics_pvs['Camera0LensPos0'].get()
+        lens_pos1 = self.epics_pvs['Camera0LensPos1'].get()
+        lens_pos2 = self.epics_pvs['Camera0LensPos2'].get()
         lens_motor_position = self.epics_pvs['LensMotor'].get()
 
         is_lens_pos0 = np.isclose(lens_motor_position, lens_pos0, atol=1e-01)
