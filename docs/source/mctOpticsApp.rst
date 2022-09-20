@@ -44,12 +44,45 @@ TomoScan and Camera PV Prefixes
     - Description
   * - $(P)$(R)Camera0PVPrefix
     - stringout
-    - Contains the prefix for the detector 0, e.g. 2bmbPG1:
+    - Contains the prefix for the detector 0, e.g. 2bmbSP1:
   * - $(P)$(R)Camera1PVPrefix
     - stringout
-    - Contains the prefix for the detector 1, e.g. 2bmbPG2:
+    - Contains the prefix for the detector 1, e.g. 2bmbSP2:
+  * - $(P)$(R)OverlayPlugin0PVPrefix
+    - stringout
+    - Contains the prefix for OverlayPlugin 0, e.g. 2bmbSP1:Over1:
+  * - $(P)$(R)OverlayPlugin0PVPrefix
+    - stringout
+    - Contains the prefix for OverlayPlugin 1, e.g. 2bmbSP2:Over1:
+  * - $(P)$(R)OverlayPlugin1PVPrefix
+    - stringout
+    - Contains the prefix for FilePlugin 0, e.g. 2bmbSP1:HDF1:
+  * - $(P)$(R)FilePlugin0PVPrefix
+    - stringout
+    - Contains the prefix for FilePlugin 1, e.g. 2bmbSP2:HDF1:
 
-Fast Shutter Select
+Lens Sample X-Y-Z PV Names
+--------------------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)LensSampleXPVName
+    - stringout
+    - Contains the prefix for LensSampleX , e.g. 2bmS1:m2
+  * - $(P)$(R)LensSampleYPVName
+    - stringout
+    - Contains the prefix for LensSampleY, e.g. 2bmb:25
+  * - $(P)$(R)LensSampleZPVName
+    - stringout
+    - Contains the prefix for LensSampleZ, e.g. 2bmS1:m1
+
+Lens Focus PV Names
 -------------------
 
 .. cssclass:: table-bordered table-striped table-hover
@@ -60,27 +93,33 @@ Fast Shutter Select
   * - Record name
     - Record type
     - Description
-  * - $(P)$(R)ShutterSelect
-    - mbbo
-    - Fast shutter selector for Pos0 and Pos1 position
-  * - $(P)$(R)ShutterPos0
-    - a0
-    - Motor position for the close positiom
-  * - $(P)$(R)ShutterPos1
-    - a0
-    - Motor position for the open positiom
-  * - $(P)$(R)ShutterName0
-    - a0
-    - Fast shutter selector label for Pos0, e.g. Close
-  * - $(P)$(R)ShutterName1
-    - a0
-    - Fast shutter selector label for Pos1, e.g. Open
-  * - $(P)$(R)ShutterLock
-    - bo
-    - Fast shutter lock
-  * - $(P)$(R)ShutterMotorPVName
+  * - $(P)$(R)Lens0FocusPVName
     - stringout
-    - Contains the fast shutter motor PV name, e.g. 2bmb:m5
+    - Contains the prefix for Lens0Focus, e.g. 2bmb:m2
+  * - $(P)$(R)Lens1FocusPVName
+    - stringout
+    - Contains the prefix for Lens1FocusPVName, e.g. 2bmb:m3
+  * - $(P)$(R)Lens2FocusPVName
+    - stringout
+    - Contains the prefix for Lens2FocusPVName, e.g. 2bmb:m4
+
+Camera rotation PV Names
+------------------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)Camera0RotationPVName
+    - stringout
+    - Contains the prefix for Camera0Rotation , e.g. 2bmb:m7
+  * - $(P)$(R)Camera1RotationPVName
+    - stringout
+    - Contains the prefix for Camera1Rotation , e.g. 2bmb:m8
 
 Optique Peter camera selector
 -----------------------------
@@ -95,22 +134,86 @@ Optique Peter camera selector
     - Description
   * - $(P)$(R)CameraSelect
     - mbbo
-    - Fast shutter selector for Pos0 and Pos1 position
+    - Camera selector for Pos0 and Pos1 position
+  * - $(P)$(R)CameraSelected
+    - mbbo
+    - Camera selector status for Camera0 and Camera1 position
   * - $(P)$(R)CameraPos0
     - a0
-    - Motor position for the first camera
+    - Motor position for the Camera0
   * - $(P)$(R)CameraPos1
     - a0
-    - Motor position for the second camera
+    - Motor position for the Camera1
   * - $(P)$(R)CameraName0
     - a0
-    - Camere label for Pos0, e.g. Adimec
+    - Camera label for Pos0, e.g. Adimec
   * - $(P)$(R)CameraName1
     - a0
     - Camera label for Pos1, e.g. Flir
   * - $(P)$(R)CameraMotorPVName
     - stringout
     - Contains the camera motor PV name, e.g. 2bmb:m5
+
+
+Optique Peter camera rotation
+-----------------------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)Camera0Lens0Rotation
+    - a0
+    - PV storing Camera 0 Lens 0 rotation value
+  * - (P)$(R)Camera0Lens1Rotation
+    - a0
+    - PV storing Camera 0 Lens 1 rotation value
+  * - $(P)$(R)Camera0Lens2Rotation
+    - a0
+    - PV storing Camera 0 Lens 1 rotation value
+  * - $(P)$(R)Camera1Lens0Rotation
+    - a0
+    - PV storing Camera 1 Lens 0 rotation value
+  * - $(P)$(R)Camera1Lens1Rotation
+    - a0
+    - PV storing Camera 1 Lens 1 rotation value
+  * - $(P)$(R)Camera1Lens2Rotation
+    - a0
+    - PV storing Camera 1 Lens 2 rotation value
+
+Optique Peter lens focus
+------------------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)Camera0Lens0Focus
+    - a0
+    - PV storing Camera 0 Lens 0 focus value
+  * - $(P)$(R)Camera0Lens1Focus
+    - a0
+    - PV storing Camera 0 Lens 1 focus value
+  * - $(P)$(R)Camera0Lens2Focus
+    - a0
+    - PV storing Camera 0 Lens 2 focus value
+  * - $(P)$(R)Camera1Lens0Focus
+    - a0
+    - PV storing Camera 1 Lens 0 focus value
+  * - $(P)$(R)Camera1Lens1Focus
+    - a0
+    - PV storing Camera 1 Lens 1 focus value
+  * - $(P)$(R)Camera1Lens2Focus
+    - a0
+    - PV storing Camera 1 Lens 2 focus value
 
 Optique Peter lens selector
 ---------------------------
@@ -148,8 +251,8 @@ Optique Peter lens selector
     - stringout
     - Contains the Lens motor PV name, e.g. 2bmb:m1
 
-Lens name
-^^^^^^^^^
+Detector image cross
+--------------------
 
 .. cssclass:: table-bordered table-striped table-hover
 .. list-table::
@@ -159,18 +262,108 @@ Lens name
   * - Record name
     - Record type
     - Description
-  * - $(P)$(R)Lens0Name
-    - stringout
-    - Lens name for Lens0, e.g. 1.1x
-  * - $(P)$(R)Lens1Name
-    - stringout
-    - Lens name for Lens1, e.g. 5x
-  * - $(P)$(R)Lens2Name
-    - stringout
-    - Lens name for Lens2, e.g. 10x
+  * - $(P)$(R)CrossSelect
+    - mbbo
+    - 
+
+Optique Peter lens 1 offsets
+----------------------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)Camera0Lens1XOffset
+    - ao
+    - 
+  * - $(P)$(R)Camera0Lens1YOffset
+    - ao
+    - 
+  * - $(P)$(R)Camera0Lens1ZOffset
+    - ao
+    - 
+  * - $(P)$(R)Camera1Lens1XOffset
+    - ao
+    - 
+  * - $(P)$(R)Camera1Lens1YOffset
+    - ao
+    - 
+  * - $(P)$(R)Camera1Lens1ZOffset
+    - ao
+    - 
+
+Optique Peter lens 2 offsets
+----------------------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)Camera0Lens2XOffset
+    - ao
+    - 
+  * - $(P)$(R)Camera0Lens2YOffset
+    - ao
+    - 
+  * - $(P)$(R)Camera0Lens2ZOffset
+    - ao
+    - 
+  * - $(P)$(R)Camera1Lens2XOffset
+    - ao
+    - 
+  * - $(P)$(R)Camera1Lens2YOffset
+    - ao
+    - 
+  * - $(P)$(R)Camera1Lens2ZOffset
+    - ao
+    - 
+
+MCT status via Channel Access
+-----------------------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)MCTStatus
+    - waveform
+    -
+  * - $(P)$(R)Watchdog
+    - calcout
+    -
+  * - $(P)$(R)ServerRunning
+    - bi
+    - 
+
+Sync to motor
+-------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)Sync
+    - busy
+    - 
 
 Optics information
-^^^^^^^^^^^^^^^^^^
+------------------
 
 .. cssclass:: table-bordered table-striped table-hover
 .. list-table::
@@ -199,8 +392,49 @@ Optics information
     - stringout
     - Description of the camera objective
 
+Lens name
+---------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)Lens0Name
+    - stringout
+    - Lens name for Lens0, e.g. 1.1x
+  * - $(P)$(R)Lens1Name
+    - stringout
+    - Lens name for Lens1, e.g. 5x
+  * - $(P)$(R)Lens2Name
+    - stringout
+    - Lens name for Lens2, e.g. 10x
+
+
+Camera names
+------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)Camera0Name
+    - stringout
+    - 
+  * - $(P)$(R)Camera1Name
+    - stringout
+    - 
+
+
 Energy information
-^^^^^^^^^^^^^^^^^^
+------------------
 
 .. cssclass:: table-bordered table-striped table-hover
 .. list-table::
@@ -235,6 +469,66 @@ Energy information
     - stringout
     -
 
+Energy change
+-------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)EnergySet
+    - busy
+    -
+  * - $(P)$(R)EnergyBusy
+    - busy
+    -
+  * - $(P)$(R)EnergyUseCalibration
+    - mbbo
+    -
+  * - $(P)$(R)EnergyCalibrationFileOne
+    - stringout
+    -
+  * - $(P)$(R)EnergyCalibrationFileTwo
+    - stringout
+    -
+
+Detector cropping
+-----------------
+
+.. cssclass:: table-bordered table-striped table-hover
+.. list-table::
+  :header-rows: 1
+  :widths: 5 5 90
+
+  * - Record name
+    - Record type
+    - Description
+  * - $(P)$(R)CutLeft
+    - longout
+    - 
+  * - $(P)$(R)CutRight
+    - longout
+    - 
+  * - $(P)$(R)CutTop
+    - longout
+    - 
+  * - $(P)$(R)CutBottom
+    - longout
+    - 
+  * - $(P)$(R)Cut
+    - busy
+    - 
+  * - $(P)$(R)SuggestedAngles
+    - ao
+    - 
+  * - $(P)$(R)SuggestedAngleStep
+    - ao
+    - 
+    
 medm files
 ----------
 
