@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/tomoscan/../mctoptics/mctOpticsApp/op/adl/mctOpticsEPICS_PVs.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOpticsEPICS_PVs.adl"
 	version=030111
 }
 display {
 	object {
-		x=1450
-		y=183
+		x=1440
+		y=175
 		width=455
-		height=375
+		height=450
 	}
 	clr=14
 	bclr=4
@@ -115,7 +115,7 @@ rectangle {
 		x=5
 		y=40
 		width=445
-		height=330
+		height=405
 	}
 	"basic attribute" {
 		clr=14
@@ -492,6 +492,93 @@ text {
 	}
 	control {
 		chan="$(P)$(R)FilePlugin1PVPrefix"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=10
+		y=370
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens 0 focus PV"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=395
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens 1 focus PV"
+	align="horiz. right"
+}
+text {
+	object {
+		x=10
+		y=420
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens 2 focus PV"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=370
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Lens0FocusPVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=395
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Lens1FocusPVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=220
+		y=420
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Lens2FocusPVName"
 		clr=14
 		bclr=51
 	}

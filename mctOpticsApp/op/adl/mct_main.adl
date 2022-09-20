@@ -7879,22 +7879,22 @@ rectangle {
 }
 text {
 	object {
-		x=1225
-		y=338
-		width=225
+		x=1120
+		y=345
+		width=255
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Suggested angle #"
-	align="horiz. centered"
+	textix="Suggested # of angles"
+	align="horiz. right"
 }
 "text update" {
 	object {
-		x=1243
-		y=375
-		width=200
+		x=1390
+		y=345
+		width=170
 		height=25
 	}
 	monitor {
@@ -7935,4 +7935,33 @@ text {
 	}
 	limits {
 	}
+}
+"text update" {
+	object {
+		x=1390
+		y=380
+		width=170
+		height=25
+	}
+	monitor {
+		chan="$(P)$(R)SuggestedAngleStep"
+		clr=14
+		bclr=2
+	}
+	clrmod="alarm"
+	limits {
+	}
+}
+text {
+	object {
+		x=1120
+		y=380
+		width=255
+		height=25
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Suggested angle step"
+	align="horiz. right"
 }

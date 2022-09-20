@@ -51,6 +51,14 @@ class MCTOptics():
         camera1_rotation_pv_name = self.control_pvs['Camera1Rotation'].pvname
         self.control_pvs['Camera1RotationPosition']  = PV(camera1_rotation_pv_name + '.VAL')
 
+
+        lens0_focus_pv_name = self.control_pvs['Lens0Focus'].pvname
+        self.control_pvs['Lens0FocusPosition']  = PV(lens0_focus_pv_name + '.VAL')
+        lens1_focus_pv_name = self.control_pvs['Lens1Focus'].pvname
+        self.control_pvs['Lens1FocusPosition']  = PV(lens1_focus_pv_name + '.VAL')
+        lens2_focus_pv_name = self.control_pvs['Lens2Focus'].pvname
+        self.control_pvs['Lens2FocusPosition']  = PV(lens2_focus_pv_name + '.VAL')
+
         #Define PVs from the camera IOC that we will need
         prefix = self.pv_prefixes['Camera0']
         camera_prefix = prefix + 'cam1:'
@@ -106,6 +114,7 @@ class MCTOptics():
         ########################### VN
         # shall we run a sync() here?
         self.lens_cur = self.epics_pvs['LensSelect'].get()
+        self.camera_cur = self.epics_pvs['CameraSelect'].get()
         ########################### VN
         
         # print(self.epics_pvs)
@@ -238,43 +247,65 @@ class MCTOptics():
             thread = threading.Thread(target=self.sync, args=())
             thread.start()
         elif (pvname.find('Cut') != -1) and (value ==1):
-            thread = threading.Thread(target=self.cut_detector, args=())
+            thread = threading.Thread(target=self.crop_detector, args=())
             thread.start()
         elif (pvname.find('EnergySet') != -1) and (value == 1):
             thread = threading.Thread(target=self.energy_change, args=())
             thread.start()       
 
-    def take_lens_offsets(self, lens):
+    def take_lens_offsets(self, lens, cam):
         if lens == 0:
             return 0,0,0
-        x = self.epics_pvs['Lens'+str(lens)+'XOffset'].get()
-        y = self.epics_pvs['Lens'+str(lens)+'YOffset'].get()
-        z = self.epics_pvs['Lens'+str(lens)+'ZOffset'].get()
+        x = self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'XOffset'].get()
+        y = self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'YOffset'].get()
+        z = self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'ZOffset'].get()
         return x,y,z
 
+    def take_camera_rotation(self, lens, cam):
 
-    def take_camera_offsets(self, lens):
-
-        cam = self.epics_pvs['CameraSelect'].get()
         return self.epics_pvs['Camera'+str(cam)+'Lens'+str(lens)+'Rotation'].get()
 
 
     def lens_select(self):
-        """Moves the Optique Peter lens.
-        """
+        """Callback function that is called by pyEpics when the Optique Peter lens select button is pressed.
+        
+        The callback handles the following tasks:
 
-        # take offsets of the current lens
-        x_cur,y_cur,z_cur = self.take_lens_offsets(self.lens_cur)            
-        # take new lens id, and its offsets
+        - Store the current camera rotation position for the current lens in the corresponding CameraXLenxYRotation PV.
+
+        - Take offsets of the current lens.
+
+        - Take new lens id and its offsets.
+
+        - Take camera id and its rotation for the new lens.
+
+        - Move sample X-Y-Z motors with respect to relative offsets.
+
+        - Set the correct camera rotation for the lens in use.
+
+        - Move to the new selected lens.
+
+        - Update detector magnification and tube lens PVs using the data stored in the lens.json file.
+
+        - Update scintillator information using the data stored in the scintillator.json file.
+
+        """
+        # Store the current camera rotation position for the current lens in the corresponding CameraXLenxYRotation PV
+        rotation_cur = self.control_pvs['Camera'+str(self.camera_cur)+'RotationPosition'].get()
+        self.epics_pvs['Camera'+str(self.camera_cur)+'Lens'+str(self.lens_cur)+'Rotation'].put(rotation_cur)
+
+        # Take offsets of the current lens
+        x_cur,y_cur,z_cur = self.take_lens_offsets(self.lens_cur, self.camera_cur)            
+        # Take new lens id and its offsets
         lens_select = self.epics_pvs['LensSelect'].get()
-        x_select,y_select,z_select = self.take_lens_offsets(lens_select)
-        # take camera id and its rotation for the new lens
-        cam = self.epics_pvs['CameraSelect'].get()
-        camera_rotation = self.take_camera_offsets(lens_select)        
-        # update current lens
+        x_select,y_select,z_select = self.take_lens_offsets(lens_select, self.camera_cur)
+        # Take camera id and its rotation for the new lens
+        camera_rotation = self.take_camera_rotation(lens_select, self.camera_cur)        
+
+        # Update current lens
         self.lens_cur = lens_select
 
-        # move x,y,z motors to wrt relative offsets        
+        # Move sample X-Y-Z motors with respect to relative offsets       
         x = self.epics_pvs['LensSampleXPosition'].get()
         y = self.epics_pvs['LensSampleYPosition'].get()
         z = self.epics_pvs['LensSampleZPosition'].get()
@@ -284,33 +315,33 @@ class MCTOptics():
         log.info('move X from %f to %f', x, x_new)
         log.info('move Y from %f to %f', y, y_new)
         log.info('move Z from %f to %f', z, z_new)
-        log.info('move camera %s rotation to %f' %(cam, camera_rotation))        
+        log.info('move camera %s rotation to %f' %(self.camera_cur, camera_rotation))        
         self.epics_pvs['LensSampleXPosition'].put(x_new)
         self.epics_pvs['LensSampleYPosition'].put(y_new)
         self.epics_pvs['LensSampleZPosition'].put(z_new)
-        self.epics_pvs['Camera'+str(cam)+'RotationPosition'].put(camera_rotation) # no wait, assuming the lens movement is the slowest part
+        # Set the correct camera rotation for the lens in use.
+        self.epics_pvs['Camera'+str(self.camera_cur)+'RotationPosition'].put(camera_rotation) # no wait, assuming the lens movement is the slowest part
 
-        
-        lens_pos0 = self.epics_pvs['LensPos0'].get()
-        lens_pos1 = self.epics_pvs['LensPos1'].get()
-        lens_pos2 = self.epics_pvs['LensPos2'].get()
+        lens_pos0 = self.epics_pvs['Camera'+str(self.camera_cur)+'LensPos0'].get()
+        lens_pos1 = self.epics_pvs['Camera'+str(self.camera_cur)+'LensPos1'].get()
+        lens_pos2 = self.epics_pvs['Camera'+str(self.camera_cur)+'LensPos2'].get()
 
         lens_select = self.epics_pvs['LensSelect'].get()
         lens_name = 'None'
 
         log.info('Changing Optique Peter lens')
-
-        lens_positions = [lens_pos0, lens_pos1,lens_pos2]
+        lens_positions = [lens_pos0, lens_pos1, lens_pos2]
 
         lens_index = self.epics_pvs['LensSelect'].get()
         lens_name  = self.epics_pvs['Lens' + str(lens_index) + 'Name'].get()
         self.epics_pvs['MCTStatus'].put('Moving to lens: ' + lens_name)
+        # Move to the new selected lens
         self.epics_pvs['LensMotor'].put(lens_positions[lens_index], wait=True, timeout=120)
-
         message = 'Lens selected: ' + lens_name
         log.info(message)
         self.epics_pvs['MCTStatus'].put(message)
 
+        # Update detector magnification and tube lens PVs using the data stored in the lens.json file
         lens_name = lens_name.upper().replace("X", "")
         with open(os.path.join(data_path, 'lens.json')) as json_file:
             lens_lookup = json.load(json_file)
@@ -333,6 +364,7 @@ class MCTOptics():
             log.error('Failed to update: Camera tube length')
             log.error('Failed to update: Image pixel size')
 
+        # Update scintillator information using the data stored in the scintillator.json file
         with open(os.path.join(data_path, 'scintillator.json')) as json_file:
             scintillator_lookup = json.load(json_file)
 
@@ -347,46 +379,97 @@ class MCTOptics():
             log.error('Failed to update: Scintillator thickness')
         
     def camera_select(self):
-        """Moves the Optique Peter camera.
-        """
+        """Callback function that is called by pyEpics when the Optique Peter camera select button is pressed.
         
-        camera_pos0 = self.epics_pvs['CameraPos0'].get()
-        camera_pos1 = self.epics_pvs['CameraPos1'].get()
+        The callback handles the following tasks:
 
-        camera_x_offset = self.epics_pvs['CameraXOffset'].get()
-        camera_y_offset = self.epics_pvs['CameraYOffset'].get()
+        - Store the previous camera rotation position for the current lens in the corresponding CameraXLenxYRotation PV.
 
-        lens0_focus_offset = self.epics_pvs['Lens0FocusOffset'].get()
-        lens1_focus_offset = self.epics_pvs['Lens1FocusOffset'].get()
-        lens2_focus_offset = self.epics_pvs['Lens2FocusOffset'].get()
+        - Move the camera selector motor.
 
-        camera_select = self.epics_pvs['CameraSelect'].get()
-        camera_name = 'None'
+        - Stop acquistion of the camera not in use.
+
+        - Store the previous camera (X) focus motor positions of all 3 objectives in the corresponding CameraXLensYFocus PVs.
+          This is needed in case there was some adjustiment.
+
+        - Restore the new camera (Y) focus positions store in CameraXLensYFocus to all 3 objectives.
+
+        - Run lens_select() so the Sample X-Y-Z are updated to the new camera-lens combination.
+
+        - Set the correct camera rotation for the lens in use.
+
+        - Update detector pixel size, magnification and image pixel size PVs using the data stored in the camera.json file.
+
+        """
+
+        # store the current camera rotation position for the current lens in the CameraXLenxYRotation PV
+        rotation_cur = self.control_pvs['Camera'+str(self.camera_cur)+'RotationPosition'].get()
+        self.epics_pvs['Camera'+str(self.camera_cur)+'Lens'+str(self.lens_cur)+'Rotation'].put(rotation_cur)
 
         log.info('Changing Optique Peter camera')
         self.epics_pvs['MCTStatus'].put('Changing Optique Peter camera')
         self.epics_pvs['CameraSelected'].put(2)
 
-        if(self.epics_pvs['CameraSelect'].get() == 0):
+        camera_select = self.epics_pvs['CameraSelect'].get()
+        camera_name = 'None'
+
+        if(camera_select == 0):
             camera_name = self.epics_pvs['Camera0Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 0')
+            camera_pos0 = self.epics_pvs['CameraPos0'].get()
+            # move the camera selector motor
             self.epics_pvs['CameraMotor'].put(camera_pos0, wait=True, timeout=120)
-            # get current_sample_x position => 
-            # self.epics_pvs['CameraXOffset'].put(current_sample_x+camera_x_offset, wait=True, timeout=120)
-            # ...
-            self.epics_pvs['Cam1Acquire'].put(0) 
             self.epics_pvs['CameraSelected'].put(0)
-        elif(self.epics_pvs['CameraSelect'].get() == 1):
+            # stop acquistion of the camera not in use
+            self.epics_pvs['Cam1Acquire'].put(0) 
+            # Store the previous camera (X) focus motor positions of all 3 objectives in the corresponding CameraXLensYFocus PVs.
+            # This is needed in case there was some adjustiment.
+            lens0_focus_pos = self.epics_pvs['Lens0FocusPosition'].get()
+            lens1_focus_pos = self.epics_pvs['Lens1FocusPosition'].get()
+            lens2_focus_pos = self.epics_pvs['Lens2FocusPosition'].get()
+            self.epics_pvs['Camera1Lens0Focus'].put(lens0_focus_pos)
+            self.epics_pvs['Camera1Lens1Focus'].put(lens1_focus_pos)
+            self.epics_pvs['Camera1Lens2Focus'].put(lens2_focus_pos)
+
+        elif(camera_select == 1):
             camera_name = self.epics_pvs['Camera1Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 1')
+            camera_pos1 = self.epics_pvs['CameraPos1'].get()
+            # move the Camera selector motor
             self.epics_pvs['CameraMotor'].put(camera_pos1, wait=True, timeout=120)
-            # get current_sample_x position => 
-            # self.epics_pvs['CameraXOffset'].put(current_sample_x-camera_x_offset, wait=True, timeout=120)
-            # ...            self.epics_pvs['CameraSelected'].put(1)
-            self.epics_pvs['Cam0Acquire'].put(0) 
             self.epics_pvs['CameraSelected'].put(1)
+            # stop acquistion of the camera not in use
+            self.epics_pvs['Cam0Acquire'].put(0) 
+            # Store the previous camera (X) focus motor positions of all 3 objectives in the corresponding CameraXLensYFocus PVs.
+            # This is needed in case there was some adjustiment.
+            lens0_focus_pos = self.epics_pvs['Lens0FocusPosition'].get()
+            lens1_focus_pos = self.epics_pvs['Lens1FocusPosition'].get()
+            lens2_focus_pos = self.epics_pvs['Lens2FocusPosition'].get()
+            self.epics_pvs['Camera0Lens0Focus'].put(lens0_focus_pos)
+            self.epics_pvs['Camera0Lens1Focus'].put(lens1_focus_pos)
+            self.epics_pvs['Camera0Lens2Focus'].put(lens2_focus_pos)
+
+        self.camera_cur = camera_select
+        self.update_suggested_scan_param()
+
+        # Restore the new camera (Y) focus positions store in CameraXLensYFocus to all 3 objectives.
+        lens0_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens0Focus'].get()
+        lens1_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens1Focus'].get()
+        lens2_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens2Focus'].get()
+        self.epics_pvs['Lens0FocusPosition'].put(lens0_focus_pos, wait=True) 
+        self.epics_pvs['Lens1FocusPosition'].put(lens1_focus_pos, wait=True) 
+        self.epics_pvs['Lens2FocusPosition'].put(lens2_focus_pos, wait=True) 
+
+        # Run lens_select() so the Sample X-Y-Z are updated to the new camera-lens combination
+        self.lens_select()
+
+        # Set the correct camera rotation for the lens in use
+        camera_rotation = self.take_camera_rotation(self.lens_cur, camera_select)        
+        self.control_pvs['Camera'+str(camera_select)+'RotationPosition'].put(camera_rotation, wait=True)
+
         log.info('Camera: %s selected', camera_name)
 
+        # Update detector pixel size, magnification and image pixel size PVs using the data stored in the camera.json file
         camera_name = camera_name.upper()
         with open(os.path.join(data_path, 'camera.json')) as json_file:
             camera_lookup = json.load(json_file)
@@ -431,9 +514,6 @@ class MCTOptics():
             else:
                 self.control_pvs['OP11Use'].put(0)
                 log.info('Cross on camera 1 is disabled')
-        
-        suggested_angles = 1500.0 / 2448.0 * sizex
-        self.epics_pvs['SuggestedAngles'].put(suggested_angles)
 
     def sync(self):
         """
@@ -470,9 +550,9 @@ class MCTOptics():
             log.warning('Sync camera: not required, selector is already in the correct position')
 
         log.info('Sync lens')
-        lens_pos0 = self.epics_pvs['LensPos0'].get()
-        lens_pos1 = self.epics_pvs['LensPos1'].get()
-        lens_pos2 = self.epics_pvs['LensPos2'].get()
+        lens_pos0 = self.epics_pvs['Camera0LensPos0'].get()
+        lens_pos1 = self.epics_pvs['Camera0LensPos1'].get()
+        lens_pos2 = self.epics_pvs['Camera0LensPos2'].get()
         lens_motor_position = self.epics_pvs['LensMotor'].get()
 
         is_lens_pos0 = np.isclose(lens_motor_position, lens_pos0, atol=1e-01)
@@ -507,7 +587,7 @@ class MCTOptics():
             self.epics_pvs['MCTStatus'].put('Sync done!')
         self.epics_pvs['Sync'].put('Done')
 
-    def cut_detector(self):
+    def crop_detector(self):
         """crop detector sizes"""
 
 
@@ -547,7 +627,17 @@ class MCTOptics():
 
         self.epics_pvs['Cam'+camera_select+'Acquire'].put(state)  
         self.cross_select()      
-        self.epics_pvs['Cut'].put(0,wait=True)  
+        self.epics_pvs['Cut'].put(0,wait=True)
+
+        self.update_suggested_scan_param()
+
+    def update_suggested_scan_param(self):
+        camera_select = str(self.epics_pvs['CameraSelect'].get())
+        image_size_x = self.epics_pvs['Cam'+camera_select+'ArraySizeXRBV'].get()
+        suggested_angles = 1500.0 / 2448.0 * image_size_x
+        self.epics_pvs['SuggestedAngles'].put(suggested_angles)
+        suggested_angle_step = 180.0 / suggested_angles
+        self.epics_pvs['SuggestedAngleStep'].put(suggested_angle_step)
 
     def energy_change(self):
         if self.epics_pvs['EnergyBusy'].get() == 0:

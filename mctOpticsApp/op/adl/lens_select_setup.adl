@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/lens_select_setup.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/lens_select_setup.adl"
 	version=030111
 }
 display {
 	object {
-		x=174
-		y=527
-		width=231
-		height=170
+		x=1385
+		y=1632
+		width=310
+		height=180
 	}
 	clr=14
 	bclr=4
@@ -90,7 +90,7 @@ display {
 text {
 	object {
 		x=80
-		y=42
+		y=57
 		width=70
 		height=14
 	}
@@ -101,7 +101,7 @@ text {
 }
 text {
 	object {
-		x=70
+		x=105
 		y=0
 		width=100
 		height=18
@@ -116,7 +116,7 @@ polyline {
 	object {
 		x=-1
 		y=22
-		width=233
+		width=309
 		height=2
 	}
 	"basic attribute" {
@@ -125,7 +125,7 @@ polyline {
 	}
 	points {
 		(0,23)
-		(231,23)
+		(307,23)
 	}
 }
 text {
@@ -159,7 +159,7 @@ polyline {
 "text entry" {
 	object {
 		x=120
-		y=140
+		y=155
 		width=105
 		height=20
 	}
@@ -174,7 +174,7 @@ polyline {
 text {
 	object {
 		x=5
-		y=140
+		y=155
 		width=115
 		height=18
 	}
@@ -186,12 +186,12 @@ text {
 "text entry" {
 	object {
 		x=155
-		y=67
+		y=85
 		width=70
 		height=20
 	}
 	control {
-		chan="$(P)$(R)LensPos0.VAL"
+		chan="$(P)$(R)Camera0LensPos0.VAL"
 		clr=14
 		bclr=51
 	}
@@ -201,12 +201,12 @@ text {
 "text entry" {
 	object {
 		x=155
-		y=87
+		y=105
 		width=70
 		height=20
 	}
 	control {
-		chan="$(P)$(R)LensPos1.VAL"
+		chan="$(P)$(R)Camera0LensPos1.VAL"
 		clr=14
 		bclr=51
 	}
@@ -216,7 +216,7 @@ text {
 "text entry" {
 	object {
 		x=5
-		y=67
+		y=85
 		width=70
 		height=20
 	}
@@ -231,7 +231,7 @@ text {
 "text entry" {
 	object {
 		x=5
-		y=87
+		y=105
 		width=70
 		height=20
 	}
@@ -243,47 +243,10 @@ text {
 	limits {
 	}
 }
-composite {
-	object {
-		x=155
-		y=27
-		width=70
-		height=29
-	}
-	"composite name"=""
-	children {
-		text {
-			object {
-				x=155
-				y=27
-				width=70
-				height=14
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="motor"
-			align="horiz. centered"
-		}
-		text {
-			object {
-				x=155
-				y=42
-				width=70
-				height=14
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="position"
-			align="horiz. centered"
-		}
-	}
-}
 text {
 	object {
 		x=5
-		y=42
+		y=60
 		width=70
 		height=14
 	}
@@ -296,7 +259,7 @@ text {
 text {
 	object {
 		x=80
-		y=42
+		y=60
 		width=70
 		height=14
 	}
@@ -309,7 +272,7 @@ text {
 "choice button" {
 	object {
 		x=80
-		y=67
+		y=85
 		width=70
 		height=60
 	}
@@ -322,7 +285,7 @@ text {
 "text entry" {
 	object {
 		x=5
-		y=108
+		y=125
 		width=70
 		height=20
 	}
@@ -337,15 +300,196 @@ text {
 "text entry" {
 	object {
 		x=155
-		y=108
+		y=125
 		width=70
 		height=20
 	}
 	control {
-		chan="$(P)$(R)LensPos2.VAL"
+		chan="$(P)$(R)Camera0LensPos2.VAL"
 		clr=14
 		bclr=51
 	}
 	limits {
+	}
+}
+"text entry" {
+	object {
+		x=235
+		y=85
+		width=70
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1LensPos0.VAL"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=235
+		y=105
+		width=70
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1LensPos1.VAL"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=235
+		y=125
+		width=70
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1LensPos2.VAL"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+composite {
+	object {
+		x=235
+		y=30
+		width=71
+		height=44
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=236
+				y=30
+				width=70
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Camera 1"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=235
+				y=45
+				width=70
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="motor"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=235
+				y=60
+				width=70
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="position"
+			align="horiz. centered"
+		}
+	}
+}
+composite {
+	object {
+		x=155
+		y=30
+		width=70
+		height=44
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=155
+				y=30
+				width=70
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Camera 0"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=155
+				y=45
+				width=70
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="motor"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=155
+				y=60
+				width=70
+				height=14
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="position"
+			align="horiz. centered"
+		}
+	}
+}
+rectangle {
+	object {
+		x=150
+		y=25
+		width=80
+		height=125
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==0"
+		chan="$(P)$(R)CameraSelected.VAL"
+	}
+}
+rectangle {
+	object {
+		x=230
+		y=25
+		width=80
+		height=125
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==1"
+		chan="$(P)$(R)CameraSelected.VAL"
 	}
 }

@@ -24,6 +24,13 @@ $(P)$(R)LensSampleXPVName
 $(P)$(R)LensSampleYPVName
 $(P)$(R)LensSampleZPVName
 
+#####################
+# Lens Focus PV Names
+#####################
+$(P)$(R)Lens0FocusPVName
+$(P)$(R)Lens1FocusPVName
+$(P)$(R)Lens2FocusPVName
+
 ##########################
 # Camera rotation PV Names
 ##########################
@@ -51,26 +58,26 @@ $(P)$(R)Camera1Lens0Rotation
 $(P)$(R)Camera1Lens1Rotation
 $(P)$(R)Camera1Lens2Rotation
 
-#################################
-# Optique Peter camera X-Y offset
-#################################
-$(P)$(R)CameraXOffset
-$(P)$(R)CameraYOffset
-
-#################################
-# Optique Peter lens focus offset
-#################################
-$(P)$(R)Lens0FocusOffset
-$(P)$(R)Lens1FocusOffset
-$(P)$(R)Lens2FocusOffset
+##########################
+# Optique Peter lens focus
+##########################
+$(P)$(R)Camera0Lens0Focus
+$(P)$(R)Camera0Lens1Focus
+$(P)$(R)Camera0Lens2Focus
+$(P)$(R)Camera1Lens0Focus
+$(P)$(R)Camera1Lens1Focus
+$(P)$(R)Camera1Lens2Focus
 
 #############################
 # Optique Peter lens selector
 #############################
 $(P)$(R)LensSelect
-$(P)$(R)LensPos0
-$(P)$(R)LensPos1
-$(P)$(R)LensPos2
+$(P)$(R)Camera0LensPos0
+$(P)$(R)Camera0LensPos1
+$(P)$(R)Camera0LensPos2
+$(P)$(R)Camera1LensPos0
+$(P)$(R)Camera1LensPos1
+$(P)$(R)Camera1LensPos2
 $(P)$(R)LensName0
 $(P)$(R)LensName1
 $(P)$(R)LensName2
@@ -84,16 +91,22 @@ $(P)$(R)CrossSelect
 ##############################
 # Optique Peter lens 1 offsets
 ##############################
-$(P)$(R)Lens1XOffset
-$(P)$(R)Lens1YOffset
-$(P)$(R)Lens1ZOffset
+$(P)$(R)Camera0Lens1XOffset
+$(P)$(R)Camera0Lens1YOffset
+$(P)$(R)Camera0Lens1ZOffset
+$(P)$(R)Camera1Lens1XOffset
+$(P)$(R)Camera1Lens1YOffset
+$(P)$(R)Camera1Lens1ZOffset
 
 ##############################
 # Optique Peter lens 2 offsets
 ##############################
-$(P)$(R)Lens2XOffset
-$(P)$(R)Lens2YOffset
-$(P)$(R)Lens2ZOffset
+$(P)$(R)Camera0Lens2XOffset
+$(P)$(R)Camera0Lens2YOffset
+$(P)$(R)Camera0Lens2ZOffset
+$(P)$(R)Camera1Lens2XOffset
+$(P)$(R)Camera1Lens2YOffset
+$(P)$(R)Camera1Lens2ZOffset
 
 ###############################
 # MCT status via Channel Access
@@ -153,4 +166,5 @@ $(P)$(R)CutRight
 $(P)$(R)CutTop
 $(P)$(R)CutBottom
 $(P)$(R)Cut
-$(P)$(R)SelectedAngles
+$(P)$(R)SuggestedAngles
+$(P)$(R)SuggestedAngleStep

@@ -5,10 +5,10 @@ file {
 }
 display {
 	object {
-		x=594
-		y=272
-		width=935
-		height=700
+		x=894
+		y=337
+		width=885
+		height=605
 	}
 	clr=14
 	bclr=4
@@ -87,253 +87,242 @@ display {
 		1a7309,
 	}
 }
-composite {
+"text entry" {
+	object {
+		x=640
+		y=430
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Energy"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=640
+		y=455
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Filters"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+menu {
+	object {
+		x=640
+		y=405
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyMode"
+		clr=14
+		bclr=51
+	}
+}
+text {
+	object {
+		x=510
+		y=405
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy mode"
+}
+text {
+	object {
+		x=510
+		y=430
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy (keV)"
+}
+text {
+	object {
+		x=510
+		y=455
+		width=120
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Filters"
+}
+rectangle {
 	object {
 		x=468
-		y=412
-		width=300
+		y=370
+		width=410
 		height=230
 	}
-	"composite name"=""
-	children {
-		"text entry" {
-			object {
-				x=612
-				y=474
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)Energy"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=612
-				y=499
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)Filters"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		menu {
-			object {
-				x=612
-				y=448
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)EnergyMode"
-				clr=14
-				bclr=51
-			}
-		}
-		text {
-			object {
-				x=485
-				y=448
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Energy mode"
-		}
-		text {
-			object {
-				x=485
-				y=474
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Energy (keV)"
-		}
-		text {
-			object {
-				x=485
-				y=499
-				width=120
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Filters"
-		}
-		rectangle {
-			object {
-				x=468
-				y=412
-				width=300
-				height=230
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=5
-			}
-		}
-		rectangle {
-			object {
-				x=484
-				y=420
-				width=247
-				height=20
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=626
-				y=420
-				width=100
-				height=20
-			}
-			"basic attribute" {
-				clr=54
-			}
-			textix="Energy"
-			align="horiz. centered"
-		}
-		"related display" {
-			object {
-				x=575
-				y=614
-				width=100
-				height=20
-			}
-			display[0] {
-				label="EnergyUpdate"
-				name="EnergyUpdate.adl"
-				args="P=$(P),R=$(R)"
-			}
-			clr=14
-			bclr=51
-			label="-CLI"
-		}
-		text {
-			object {
-				x=487
-				y=422
-				width=125
-				height=15
-			}
-			"basic attribute" {
-				clr=20
-			}
-			textix="$(P)$(R)"
-		}
-		text {
-			object {
-				x=537
-				y=529
-				width=120
-				height=16
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Use calibration"
-			align="horiz. right"
-		}
-		"message button" {
-			object {
-				x=716
-				y=474
-				width=40
-				height=23
-			}
-			control {
-				chan="$(P)$(R)EnergySet"
-				clr=14
-				bclr=15
-			}
-			label="Set"
-			press_msg="1"
-			release_msg="0"
-		}
-		"choice button" {
-			object {
-				x=665
-				y=524
-				width=90
-				height=25
-			}
-			control {
-				chan="$(P)$(R)EnergyUseCalibration"
-				clr=14
-				bclr=51
-			}
-			stacking="column"
-		}
-		"text entry" {
-			object {
-				x=534
-				y=554
-				width=220
-				height=25
-			}
-			control {
-				chan="$(P)$(R)EnergyCalibrationFileOne"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=534
-				y=584
-				width=220
-				height=25
-			}
-			control {
-				chan="$(P)$(R)EnergyCalibrationFileTwo"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		text {
-			object {
-				x=692
-				y=614
-				width=60
-				height=20
-			}
-			"basic attribute" {
-				clr=20
-				fill="outline"
-			}
-			"dynamic attribute" {
-				vis="if not zero"
-				chan="$(P)$(R)EnergyBusy"
-			}
-			textix="Busy"
-			align="horiz. centered"
-		}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
 	}
+}
+rectangle {
+	object {
+		x=485
+		y=380
+		width=380
+		height=20
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=626
+		y=380
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Energy"
+	align="horiz. centered"
+}
+"related display" {
+	object {
+		x=640
+		y=570
+		width=100
+		height=20
+	}
+	display[0] {
+		label="EnergyUpdate"
+		name="EnergyUpdate.adl"
+		args="P=$(P),R=$(R)"
+	}
+	clr=14
+	bclr=51
+	label="-CLI"
+}
+text {
+	object {
+		x=487
+		y=382
+		width=125
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	textix="$(P)$(R)"
+}
+text {
+	object {
+		x=562
+		y=485
+		width=120
+		height=16
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Use calibration"
+	align="horiz. right"
+}
+"message button" {
+	object {
+		x=745
+		y=430
+		width=40
+		height=23
+	}
+	control {
+		chan="$(P)$(R)EnergySet"
+		clr=14
+		bclr=15
+	}
+	label="Set"
+	press_msg="1"
+	release_msg="0"
+}
+"choice button" {
+	object {
+		x=690
+		y=480
+		width=90
+		height=25
+	}
+	control {
+		chan="$(P)$(R)EnergyUseCalibration"
+		clr=14
+		bclr=51
+	}
+	stacking="column"
+}
+"text entry" {
+	object {
+		x=560
+		y=510
+		width=220
+		height=25
+	}
+	control {
+		chan="$(P)$(R)EnergyCalibrationFileOne"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=560
+		y=540
+		width=220
+		height=25
+	}
+	control {
+		chan="$(P)$(R)EnergyCalibrationFileTwo"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=760
+		y=570
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=20
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(R)EnergyBusy"
+	}
+	textix="Busy"
+	align="horiz. centered"
 }
 composite {
 	object {
@@ -527,44 +516,44 @@ text {
 	object {
 		x=475
 		y=200
-		width=200
+		width=150
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Lens 1"
+	textix="Rotation lens 1"
 	align="horiz. right"
 }
 text {
 	object {
 		x=475
 		y=225
-		width=200
+		width=150
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Lens 2"
+	textix="Rotation lens 2"
 	align="horiz. right"
 }
 text {
 	object {
 		x=475
 		y=250
-		width=200
+		width=150
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Lens 3"
+	textix="Rotation lens 3"
 	align="horiz. right"
 }
 "related display" {
 	object {
-		x=586
+		x=530
 		y=135
 		width=100
 		height=20
@@ -583,7 +572,7 @@ text {
 }
 "related display" {
 	object {
-		x=586
+		x=530
 		y=160
 		width=100
 		height=20
@@ -602,9 +591,9 @@ text {
 }
 "choice button" {
 	object {
-		x=690
+		x=640
 		y=145
-		width=200
+		width=225
 		height=25
 	}
 	control {
@@ -616,7 +605,7 @@ text {
 }
 "text entry" {
 	object {
-		x=690
+		x=640
 		y=200
 		width=100
 		height=20
@@ -632,7 +621,7 @@ text {
 }
 "text entry" {
 	object {
-		x=690
+		x=640
 		y=225
 		width=100
 		height=20
@@ -648,7 +637,7 @@ text {
 }
 "text entry" {
 	object {
-		x=690
+		x=640
 		y=250
 		width=100
 		height=20
@@ -664,7 +653,7 @@ text {
 }
 "text entry" {
 	object {
-		x=790
+		x=760
 		y=250
 		width=100
 		height=20
@@ -680,7 +669,7 @@ text {
 }
 "text entry" {
 	object {
-		x=790
+		x=760
 		y=225
 		width=100
 		height=20
@@ -696,7 +685,7 @@ text {
 }
 "text entry" {
 	object {
-		x=790
+		x=760
 		y=200
 		width=100
 		height=20
@@ -712,7 +701,7 @@ text {
 }
 "related display" {
 	object {
-		x=790
+		x=760
 		y=175
 		width=100
 		height=20
@@ -731,7 +720,7 @@ text {
 }
 "related display" {
 	object {
-		x=690
+		x=640
 		y=175
 		width=100
 		height=20
@@ -752,18 +741,18 @@ rectangle {
 	object {
 		x=468
 		y=105
-		width=455
-		height=300
+		width=410
+		height=260
 	}
 	"basic attribute" {
 		clr=14
 		fill="outline"
-		width=4
+		width=5
 	}
 }
 "text entry" {
 	object {
-		x=690
+		x=640
 		y=120
 		width=100
 		height=20
@@ -779,7 +768,7 @@ rectangle {
 }
 "text entry" {
 	object {
-		x=791
+		x=760
 		y=120
 		width=100
 		height=20
@@ -796,115 +785,25 @@ rectangle {
 text {
 	object {
 		x=475
-		y=325
-		width=250
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Focus off. lens 0"
-	align="horiz. right"
-}
-"text entry" {
-	object {
-		x=740
-		y=350
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Lens1FocusOffset"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=740
-		y=375
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Lens2FocusOffset"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=740
-		y=325
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Lens0FocusOffset"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-text {
-	object {
-		x=475
 		y=275
-		width=250
+		width=150
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Camera off. sample X"
-	align="horiz. right"
-}
-text {
-	object {
-		x=475
-		y=300
-		width=250
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Camera off. sample Y"
+	textix="Focus lens 1"
 	align="horiz. right"
 }
 "text entry" {
 	object {
-		x=740
-		y=275
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)CameraXOffset"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=740
+		x=640
 		y=300
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)CameraYOffset"
+		chan="$(P)$(R)Camera0Lens1Focus"
 		clr=14
 		bclr=51
 	}
@@ -912,521 +811,786 @@ text {
 	limits {
 	}
 }
-composite {
+"text entry" {
+	object {
+		x=640
+		y=325
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera0Lens2Focus"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=640
+		y=275
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera0Lens0Focus"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+rectangle {
 	object {
 		x=5
-		y=107
+		y=105
 		width=460
-		height=160
+		height=300
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=5
-				y=107
-				width=460
-				height=160
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=4
-			}
-		}
-		"related display" {
-			object {
-				x=9
-				y=140
-				width=100
-				height=20
-			}
-			display[0] {
-				label="Lens motor"
-				name="single_motor.adl"
-				args="P=$(P1),M1=$(M10)"
-			}
-			display[4] {
-				args=" "
-			}
-			clr=0
-			bclr=53
-			label="-Select motor"
-		}
-		"related display" {
-			object {
-				x=9
-				y=165
-				width=100
-				height=20
-			}
-			display[0] {
-				label="Lens select setup"
-				name="lens_select_setup.adl"
-				args="P=$(P),R=$(R)"
-			}
-			display[4] {
-				args=" "
-			}
-			clr=0
-			bclr=53
-			label="-Select setup"
-		}
-		text {
-			object {
-				x=11
-				y=190
-				width=200
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Lens offset sample X"
-			align="horiz. right"
-		}
-		"text entry" {
-			object {
-				x=235
-				y=190
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)Lens1XOffset"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		text {
-			object {
-				x=11
-				y=215
-				width=200
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Lens offest sample Y"
-			align="horiz. right"
-		}
-		"text entry" {
-			object {
-				x=235
-				y=215
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)Lens1YOffset"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		text {
-			object {
-				x=11
-				y=240
-				width=200
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Lens offset sample Z"
-			align="horiz. right"
-		}
-		"text entry" {
-			object {
-				x=235
-				y=240
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)Lens1ZOffset"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=355
-				y=240
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)Lens2ZOffset"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=355
-				y=215
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)Lens2YOffset"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=355
-				y=190
-				width=100
-				height=20
-			}
-			control {
-				chan="$(P)$(R)Lens2XOffset"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"choice button" {
-			object {
-				x=112
-				y=150
-				width=348
-				height=25
-			}
-			control {
-				chan="$(P)$(R)LensSelect.VAL"
-				clr=14
-				bclr=51
-			}
-			stacking="column"
-		}
-		"text entry" {
-			object {
-				x=153
-				y=112
-				width=50
-				height=30
-			}
-			control {
-				chan="$(P)$(R)Lens0Name"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=268
-				y=113
-				width=50
-				height=30
-			}
-			control {
-				chan="$(P)$(R)Lens1Name"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=385
-				y=112
-				width=50
-				height=30
-			}
-			control {
-				chan="$(P)$(R)Lens2Name"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
 	}
+}
+"related display" {
+	object {
+		x=9
+		y=140
+		width=100
+		height=20
+	}
+	display[0] {
+		label="Lens motor"
+		name="single_motor.adl"
+		args="P=$(P1),M1=$(M10)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="-Select motor"
+}
+"related display" {
+	object {
+		x=9
+		y=165
+		width=100
+		height=20
+	}
+	display[0] {
+		label="Lens select setup"
+		name="lens_select_setup.adl"
+		args="P=$(P),R=$(R)"
+	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="-Select setup"
 }
 text {
 	object {
-		x=475
-		y=350
-		width=250
+		x=20
+		y=200
+		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Focus off. lens 1"
+	textix="Lens offset sample X"
 	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=235
+		y=200
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera0Lens1XOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
 }
 text {
 	object {
-		x=475
-		y=375
-		width=250
+		x=20
+		y=225
+		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Focus off. lens 2"
+	textix="Lens offest sample Y"
 	align="horiz. right"
 }
-composite {
+"text entry" {
+	object {
+		x=235
+		y=225
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera0Lens1YOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=20
+		y=250
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens offset sample Z"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=235
+		y=250
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera0Lens1ZOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=355
+		y=250
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera0Lens2ZOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=355
+		y=225
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera0Lens2YOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=355
+		y=200
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera0Lens2XOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"choice button" {
+	object {
+		x=112
+		y=150
+		width=348
+		height=25
+	}
+	control {
+		chan="$(P)$(R)LensSelect.VAL"
+		clr=14
+		bclr=51
+	}
+	stacking="column"
+}
+"text entry" {
+	object {
+		x=153
+		y=115
+		width=50
+		height=30
+	}
+	control {
+		chan="$(P)$(R)Lens0Name"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=268
+		y=115
+		width=50
+		height=30
+	}
+	control {
+		chan="$(P)$(R)Lens1Name"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=385
+		y=115
+		width=50
+		height=30
+	}
+	control {
+		chan="$(P)$(R)Lens2Name"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=475
+		y=300
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Focus lens 2"
+	align="horiz. right"
+}
+text {
+	object {
+		x=475
+		y=325
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Focus lens 3"
+	align="horiz. right"
+}
+rectangle {
+	object {
+		x=15
+		y=420
+		width=435
+		height=20
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=203
+		y=420
+		width=255
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Visible light detection"
+}
+text {
+	object {
+		x=169
+		y=570
+		width=160
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Tube length (mm)"
+	align="horiz. right"
+}
+text {
+	object {
+		x=159
+		y=445
+		width=170
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Scintillator type"
+	align="horiz. right"
+}
+text {
+	object {
+		x=69
+		y=470
+		width=260
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Scint. thickness (microns)"
+	align="horiz. right"
+}
+text {
+	object {
+		x=69
+		y=495
+		width=260
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Image pixel size (microns)"
+	align="horiz. right"
+}
+text {
+	object {
+		x=39
+		y=520
+		width=290
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Detector pixel size (microns)"
+	align="horiz. right"
+}
+text {
+	object {
+		x=169
+		y=545
+		width=160
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Camera objective mag. (x)"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=334
+		y=470
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ScintillatorThickness"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=334
+		y=445
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ScintillatorType"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=334
+		y=520
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)DetectorPixelSize"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=334
+		y=545
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CameraObjective"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=334
+		y=570
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CameraTubeLength"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=334
+		y=495
+		width=120
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ImagePixelSize"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=18
+		y=423
+		width=125
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	textix="$(P)$(R)"
+}
+rectangle {
 	object {
 		x=5
-		y=270
+		y=410
 		width=460
-		height=185
+		height=190
 	}
-	"composite name"=""
-	children {
-		rectangle {
-			object {
-				x=15
-				y=275
-				width=435
-				height=20
-			}
-			"basic attribute" {
-				clr=2
-			}
-		}
-		text {
-			object {
-				x=203
-				y=275
-				width=255
-				height=20
-			}
-			"basic attribute" {
-				clr=54
-			}
-			textix="Visible light detection"
-		}
-		text {
-			object {
-				x=169
-				y=425
-				width=160
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Tube length (mm)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=159
-				y=300
-				width=170
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Scintillator type"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=69
-				y=325
-				width=260
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Scint. thickness (microns)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=69
-				y=350
-				width=260
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Image pixel size (microns)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=39
-				y=375
-				width=290
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Detector pixel size (microns)"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=169
-				y=400
-				width=160
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Camera objective mag. (x)"
-			align="horiz. right"
-		}
-		"text entry" {
-			object {
-				x=334
-				y=325
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)ScintillatorThickness"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=334
-				y=300
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)ScintillatorType"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=334
-				y=375
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)DetectorPixelSize"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=334
-				y=400
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CameraObjective"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=334
-				y=425
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CameraTubeLength"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=334
-				y=350
-				width=120
-				height=20
-			}
-			control {
-				chan="$(P)$(R)ImagePixelSize"
-				clr=14
-				bclr=51
-			}
-			format="string"
-			limits {
-			}
-		}
-		text {
-			object {
-				x=18
-				y=278
-				width=125
-				height=15
-			}
-			"basic attribute" {
-				clr=20
-			}
-			textix="$(P)$(R)"
-		}
-		rectangle {
-			object {
-				x=5
-				y=270
-				width=460
-				height=185
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=5
-			}
-		}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
+	}
+}
+rectangle {
+	object {
+		x=10
+		y=190
+		width=450
+		height=90
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==0"
+		chan="$(P)$(R)CameraSelected.VAL"
+	}
+}
+text {
+	object {
+		x=20
+		y=305
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens offset sample X"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=235
+		y=305
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1Lens1XOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=20
+		y=330
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens offest sample Y"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=235
+		y=330
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1Lens1YOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=20
+		y=355
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Lens offset sample Z"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=235
+		y=355
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1Lens1ZOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=355
+		y=355
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1Lens2ZOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=355
+		y=330
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1Lens2YOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=355
+		y=305
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1Lens2XOffset"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+rectangle {
+	object {
+		x=10
+		y=295
+		width=450
+		height=90
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==1"
+		chan="$(P)$(R)CameraSelected.VAL"
+	}
+}
+rectangle {
+	object {
+		x=750
+		y=110
+		width=120
+		height=245
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==1"
+		chan="$(P)$(R)CameraSelected.VAL"
+	}
+}
+rectangle {
+	object {
+		x=630
+		y=110
+		width=120
+		height=245
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==0"
+		chan="$(P)$(R)CameraSelected.VAL"
+	}
+}
+"text entry" {
+	object {
+		x=760
+		y=275
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1Lens0Focus"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=760
+		y=300
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1Lens1Focus"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=760
+		y=325
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Camera1Lens2Focus"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
 	}
 }
