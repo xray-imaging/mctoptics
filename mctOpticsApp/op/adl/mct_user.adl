@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_user.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_user.adl"
 	version=030111
 }
 display {
@@ -4525,4 +4525,19 @@ rectangle {
 		calc="A==0"
 		chan="$(P)$(R)CameraSelected.VAL"
 	}
+}
+"message button" {
+	object {
+		x=586
+		y=127
+		width=250
+		height=70
+	}
+	control {
+		chan="2bmb:allstop.VAL"
+		clr=30
+		bclr=20
+	}
+	label="All Stop"
+	press_msg="1"
 }

@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=295
-		y=621
+		x=1835
+		y=660
 		width=1570
 		height=865
 	}
@@ -7964,4 +7964,19 @@ text {
 	}
 	textix="Suggested angle step"
 	align="horiz. right"
+}
+"message button" {
+	object {
+		x=1318
+		y=0
+		width=250
+		height=70
+	}
+	control {
+		chan="2bmb:allstop.VAL"
+		clr=30
+		bclr=20
+	}
+	label="All Stop"
+	press_msg="1"
 }
