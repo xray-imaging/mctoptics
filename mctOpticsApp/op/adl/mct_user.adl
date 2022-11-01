@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_user.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_user.adl"
 	version=030111
 }
 display {
 	object {
-		x=1706
-		y=802
+		x=236
+		y=876
 		width=1460
 		height=600
 	}
@@ -4235,24 +4235,9 @@ text {
 	}
 	textix="Exposure"
 }
-"text update" {
-	object {
-		x=615
-		y=270
-		width=80
-		height=18
-	}
-	monitor {
-		chan="$(AD0)$(AD0_CAM)AcquireTime_RBV"
-		clr=54
-		bclr=4
-	}
-	limits {
-	}
-}
 text {
 	object {
-		x=705
+		x=768
 		y=270
 		width=50
 		height=20
@@ -4265,7 +4250,7 @@ text {
 }
 rectangle {
 	object {
-		x=760
+		x=820
 		y=270
 		width=45
 		height=20
@@ -4281,7 +4266,7 @@ rectangle {
 }
 rectangle {
 	object {
-		x=805
+		x=820
 		y=270
 		width=45
 		height=20
@@ -4335,7 +4320,7 @@ text {
 }
 text {
 	object {
-		x=705
+		x=768
 		y=315
 		width=50
 		height=20
@@ -4443,24 +4428,9 @@ text {
 	textix="Collecting"
 	align="horiz. centered"
 }
-"text update" {
-	object {
-		x=615
-		y=315
-		width=81
-		height=18
-	}
-	monitor {
-		chan="$(AD1)$(AD1_CAM)AcquireTime_RBV"
-		clr=54
-		bclr=4
-	}
-	limits {
-	}
-}
 rectangle {
 	object {
-		x=760
+		x=820
 		y=315
 		width=45
 		height=20
@@ -4476,7 +4446,7 @@ rectangle {
 }
 rectangle {
 	object {
-		x=805
+		x=820
 		y=315
 		width=45
 		height=20
@@ -4540,4 +4510,66 @@ rectangle {
 	}
 	label="All Stop"
 	press_msg="1"
+}
+"text entry" {
+	object {
+		x=615
+		y=269
+		width=65
+		height=20
+	}
+	control {
+		chan="$(AD0)$(AD0_CAM)AcquireTime"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=315
+		width=65
+		height=20
+	}
+	control {
+		chan="$(AD1)$(AD1_CAM)AcquireTime"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=688
+		y=272
+		width=75
+		height=18
+	}
+	monitor {
+		chan="$(AD0)$(AD0_CAM)AcquireTime_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=688
+		y=317
+		width=75
+		height=18
+	}
+	monitor {
+		chan="$(AD1)$(AD1_CAM)AcquireTime_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
 }
