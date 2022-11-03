@@ -134,6 +134,7 @@ class MCTOptics():
         elif(camera_select == 1):
             self.epics_pvs['CameraSelected'].put(1)
 
+        self.epics_pvs['MCTStatus'].put('Done')
         log.setup_custom_logger("./mctoptics.log")
 
     def reset_watchdog(self):
@@ -290,6 +291,10 @@ class MCTOptics():
         - Update scintillator information using the data stored in the scintillator.json file.
 
         """
+        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done':
+            self.epics_pvs['LensSelect'].put(self.lens_cur)
+            return
+        
         # Store the current camera rotation position for the current lens in the corresponding CameraXLenxYRotation PV
         rotation_cur = self.control_pvs['Camera'+str(self.camera_cur)+'RotationPosition'].get()
         self.epics_pvs['Camera'+str(self.camera_cur)+'Lens'+str(self.lens_cur)+'Rotation'].put(rotation_cur)
@@ -377,6 +382,8 @@ class MCTOptics():
             log.error('Scintillator called %s is not defined. Please add it to the ./data/scintillator.json file' % e)
             log.error('Failed to update: Scintillator type')
             log.error('Failed to update: Scintillator thickness')
+
+        self.epics_pvs['MCTStatus'].put('Done')
         
     def camera_select(self):
         """Callback function that is called by pyEpics when the Optique Peter camera select button is pressed.
@@ -401,7 +408,11 @@ class MCTOptics():
         - Update detector pixel size, magnification and image pixel size PVs using the data stored in the camera.json file.
 
         """
-
+        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done':
+            self.epics_pvs['CameraSelect'].put(self.camera_cur)
+            return
+            
+        self.epics_pvs['MCTStatus'].put('Changing Optique Peter camera')
         # store the current camera rotation position for the current lens in the CameraXLenxYRotation PV
         rotation_cur = self.control_pvs['Camera'+str(self.camera_cur)+'RotationPosition'].get()
         self.epics_pvs['Camera'+str(self.camera_cur)+'Lens'+str(self.lens_cur)+'Rotation'].put(rotation_cur)
@@ -412,6 +423,8 @@ class MCTOptics():
 
         camera_select = self.epics_pvs['CameraSelect'].get()
         camera_name = 'None'
+        self.camera_cur = camera_select
+        self.update_suggested_scan_param()
 
         if(camera_select == 0):
             camera_name = self.epics_pvs['Camera0Name'].get()
@@ -449,9 +462,7 @@ class MCTOptics():
             self.epics_pvs['Camera0Lens1Focus'].put(lens1_focus_pos, wait=True)
             self.epics_pvs['Camera0Lens2Focus'].put(lens2_focus_pos, wait=True)
 
-        self.camera_cur = camera_select
-        self.update_suggested_scan_param()
-
+        
         # Take the stored focus position of the selected camera and move the focus position for all 3 lenses
         lens0_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens0Focus'].get()
         lens1_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens1Focus'].get()
@@ -487,6 +498,8 @@ class MCTOptics():
             log.error('Camera called %s is not defined. Please add it to the ./data/camera.json file' % e)
             log.error('Failed to update: Detector pixel size')
             log.error('Failed to update: Image pixel size')
+    
+        self.epics_pvs['MCTStatus'].put('Done')
 
     def cross_select(self):
         """Plot the cross in imageJ.
