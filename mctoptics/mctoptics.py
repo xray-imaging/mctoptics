@@ -427,10 +427,10 @@ class MCTOptics():
             lens0_focus_pos = self.epics_pvs['Lens0FocusPosition'].get()
             lens1_focus_pos = self.epics_pvs['Lens1FocusPosition'].get()
             lens2_focus_pos = self.epics_pvs['Lens2FocusPosition'].get()
-            self.epics_pvs['Camera1Lens0Focus'].put(lens0_focus_pos)
-            self.epics_pvs['Camera1Lens1Focus'].put(lens1_focus_pos)
-            self.epics_pvs['Camera1Lens2Focus'].put(lens2_focus_pos)
-
+            self.epics_pvs['Camera1Lens0Focus'].put(lens0_focus_pos, wait=True)
+            self.epics_pvs['Camera1Lens1Focus'].put(lens1_focus_pos, wait=True)
+            self.epics_pvs['Camera1Lens2Focus'].put(lens2_focus_pos, wait=True)
+                    
         elif(camera_select == 1):
             camera_name = self.epics_pvs['Camera1Name'].get()
             self.epics_pvs['MCTStatus'].put('Camera selected: 1')
@@ -445,14 +445,14 @@ class MCTOptics():
             lens0_focus_pos = self.epics_pvs['Lens0FocusPosition'].get()
             lens1_focus_pos = self.epics_pvs['Lens1FocusPosition'].get()
             lens2_focus_pos = self.epics_pvs['Lens2FocusPosition'].get()
-            self.epics_pvs['Camera0Lens0Focus'].put(lens0_focus_pos)
-            self.epics_pvs['Camera0Lens1Focus'].put(lens1_focus_pos)
-            self.epics_pvs['Camera0Lens2Focus'].put(lens2_focus_pos)
+            self.epics_pvs['Camera0Lens0Focus'].put(lens0_focus_pos, wait=True)
+            self.epics_pvs['Camera0Lens1Focus'].put(lens1_focus_pos, wait=True)
+            self.epics_pvs['Camera0Lens2Focus'].put(lens2_focus_pos, wait=True)
 
         self.camera_cur = camera_select
         self.update_suggested_scan_param()
 
-        # Restore the new camera (Y) focus positions store in CameraXLensYFocus to all 3 objectives.
+        # Take the stored focus position of the selected camera and move the focus position for all 3 lenses
         lens0_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens0Focus'].get()
         lens1_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens1Focus'].get()
         lens2_focus_pos = self.epics_pvs['Camera'+str(camera_select)+'Lens2Focus'].get()
@@ -460,7 +460,7 @@ class MCTOptics():
         self.epics_pvs['Lens1FocusPosition'].put(lens1_focus_pos, wait=True) 
         self.epics_pvs['Lens2FocusPosition'].put(lens2_focus_pos, wait=True) 
 
-        # Run lens_select() so the Sample X-Y-Z are updated to the new camera-lens combination
+        # Run lens_select() so the Sample X-Y-Z and the lens rotation are updated to the new camera-lens combination
         self.lens_select()
 
         # Set the correct camera rotation for the lens in use

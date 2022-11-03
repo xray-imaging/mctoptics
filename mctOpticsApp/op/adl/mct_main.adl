@@ -8042,3 +8042,33 @@ text {
 	limits {
 	}
 }
+"text update" {
+	object {
+		x=1060
+		y=270
+		width=81
+		height=18
+	}
+	monitor {
+		chan="$(AD1)$(AD1_CAM)NumImagesCounter_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=215
+		y=270
+		width=81
+		height=18
+	}
+	monitor {
+		chan="$(AD0)$(AD0_CAM)NumImagesCounter_RBV"
+		clr=54
+		bclr=4
+	}
+	limits {
+	}
+}
