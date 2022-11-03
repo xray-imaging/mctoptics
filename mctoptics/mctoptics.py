@@ -408,7 +408,6 @@ class MCTOptics():
         - Update detector pixel size, magnification and image pixel size PVs using the data stored in the camera.json file.
 
         """
-        print('camera select')
         if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done':
             self.epics_pvs['CameraSelect'].put(self.camera_cur)
             return
@@ -420,7 +419,7 @@ class MCTOptics():
 
         log.info('Changing Optique Peter camera')
         self.epics_pvs['MCTStatus'].put('Changing Optique Peter camera')
-        self.epics_pvs['CameraSelected'].put(1)
+        self.epics_pvs['CameraSelected'].put(2)
 
         camera_select = self.epics_pvs['CameraSelect'].get()
         camera_name = 'None'
