@@ -168,3 +168,9 @@ $(P)$(R)CutBottom
 $(P)$(R)Cut
 $(P)$(R)SuggestedAngles
 $(P)$(R)SuggestedAngleStep
+
+##################
+# Detector options
+##################
+$(P)$(R)Camera0Bit
+$(P)$(R)Camera1Bit
