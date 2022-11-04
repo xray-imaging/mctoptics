@@ -775,6 +775,4 @@ class MCTOptics():
             self.control_pvs['Cam'+str(self.camera_cur)+'GC_AdcBitDepth'].put(2)   
             self.control_pvs['Cam'+str(self.camera_cur)+'PixelFormat'].put(1)   
             self.control_pvs['Cam'+str(self.camera_cur)+'ConvertPixelFormat'].put(2)   
-
-        log.info("mctOptics: energy mode = %s",energy_mode)
   
