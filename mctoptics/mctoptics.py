@@ -140,8 +140,34 @@ class MCTOptics():
         elif(camera_select == 1):
             self.epics_pvs['CameraSelected'].put(1)
 
+        # Synch BitSelect with actual camera 0/1 status
+        self.sync_bit_select(0)
+        self.sync_bit_select(1)
+
         self.epics_pvs['MCTStatus'].put('Done')
         log.setup_custom_logger("./mctoptics.log")
+
+    def sync_bit_select(self, camera_id):
+        # 2bmbSP2:cam1:PixelFormat
+        # ======================================
+        # STATE  0: Mono8
+        # STATE  1: Mono16
+        # STATE  2: Mono10Packed
+        # STATE  3: Mono12Packed
+        # STATE  4: Mono10p
+        # STATE  5: Mono12p
+        cam_pixel_format = self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].get()
+        if cam_pixel_format == 0:
+            self.epics_pvs['Camera'+str(camera_id)+'Bit'].put(0)
+        elif cam_pixel_format == 1:
+            self.epics_pvs['Camera'+str(camera_id)+'Bit'].put(3)
+        elif cam_pixel_format == 2:
+            self.epics_pvs['Camera'+str(camera_id)+'Bit'].put(1)
+        elif cam_pixel_format == 3:
+            self.epics_pvs['Camera'+str(camera_id)+'Bit'].put(2)
+
+
+
 
     def reset_watchdog(self):
         """Sets the watchdog timer to 5 every 3 seconds"""
@@ -259,11 +285,11 @@ class MCTOptics():
         elif (pvname.find('EnergySet') != -1) and (value == 1):
             thread = threading.Thread(target=self.energy_change, args=())
             thread.start()       
-        elif (pvname.find('Camera0Bit') != -1) and (value == 1):
-            thread = threading.Thread(target=self.camera_bit, args=())
+        elif (pvname.find('Camera0Bit') != -1) and ((value == 0) or (value == 1) or (value == 2) or (value == 3)):
+            thread = threading.Thread(target=self.camera_bit, args=(0,))
             thread.start()
-        elif (pvname.find('Camera1Bit') != -1) and (value == 1):
-            thread = threading.Thread(target=self.camera_bit, args=())
+        elif (pvname.find('Camera1Bit') != -1) and ((value == 0) or (value == 1) or (value == 2) or (value == 3)):
+            thread = threading.Thread(target=self.camera_bit, args=(1,))
             thread.start()
 
     def take_lens_offsets(self, lens, cam):
@@ -723,10 +749,10 @@ class MCTOptics():
             self.epics_pvs['EnergySet'].put(0)      
 
 
-    def camera_bit(self):
+    def camera_bit(self, camera_id):
         
-        bit_selected = self.epics_pvs['Camera'+str(self.camera_cur)+'Bit'].get()
-        log.info("mctOptics: Set camera%s to %s" % (str(self.camera_cur), self.epics_pvs['Camera'+str(self.camera_cur)+'Bit'].get(as_string=True)))
+        bit_selected = self.epics_pvs['Camera'+str(camera_id)+'Bit'].get()
+        log.info("mctOptics: Set camera %s to %s" % (str(camera_id), self.epics_pvs['Camera'+str(camera_id)+'Bit'].get(as_string=True)))
         
         # $(P)$(R)CameraXBit
         # ======================================
@@ -760,19 +786,22 @@ class MCTOptics():
         # STATE  5: RGB16 
 
         if (bit_selected == 0):
-            self.control_pvs['Cam'+str(self.camera_cur)+'GC_AdcBitDepth'].put(0)   
-            self.control_pvs['Cam'+str(self.camera_cur)+'PixelFormat'].put(0)   
-            self.control_pvs['Cam'+str(self.camera_cur)+'ConvertPixelFormat'].put(1)   
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(0)   
+            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(0)   
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(1)   
         elif (bit_selected == 1):
-            self.control_pvs['Cam'+str(self.camera_cur)+'GC_AdcBitDepth'].put(1)   
-            self.control_pvs['Cam'+str(self.camera_cur)+'PixelFormat'].put(2)   
-            self.control_pvs['Cam'+str(self.camera_cur)+'ConvertPixelFormat'].put(2)   
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(1)   
+            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(2)   
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2)   
         elif (bit_selected == 2):
-            self.control_pvs['Cam'+str(self.camera_cur)+'GC_AdcBitDepth'].put(2)   
-            self.control_pvs['Cam'+str(self.camera_cur)+'PixelFormat'].put(3)   
-            self.control_pvs['Cam'+str(self.camera_cur)+'ConvertPixelFormat'].put(2)   
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(2)   
+            if camera_id == 1:
+                self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(3)   
+            else:
+                self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(2)   
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2)
         elif (bit_selected == 3):
-            self.control_pvs['Cam'+str(self.camera_cur)+'GC_AdcBitDepth'].put(2)   
-            self.control_pvs['Cam'+str(self.camera_cur)+'PixelFormat'].put(1)   
-            self.control_pvs['Cam'+str(self.camera_cur)+'ConvertPixelFormat'].put(2)   
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(2)   
+            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(1)   
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2)   
   
