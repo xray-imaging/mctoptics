@@ -785,6 +785,9 @@ class MCTOptics():
         # STATE  4: RGB8
         # STATE  5: RGB16 
 
+        if (self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].info == None):
+            log.error("mctOptics: Camera %s IOC is down", str(camera_id))
+            return
         if (bit_selected == 0):
             self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(0)   
             self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(0)   
