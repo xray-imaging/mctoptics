@@ -587,3 +587,30 @@ record(ao, "$(P)$(R)SuggestedAngleStep")
    field(PREC,  "5")
    field(VAL,  0)
 }
+
+##################
+# Detector options
+##################
+record(mbbi, "$(P)$(R)Camera0Bit")
+{
+   field(ZRVL, "0")
+   field(ZRST, "8-bit")
+   field(ONVL, "1")
+   field(ONST, "10-bit")
+   field(TWVL, "2")
+   field(TWST, "12-bit")
+   field(THVL, "3")
+   field(THST, "16-bit")
+}
+
+record(mbbi, "$(P)$(R)Camera1Bit")
+{
+   field(ZRVL, "0")
+   field(ZRST, "8-bit")
+   field(ONVL, "1")
+   field(ONST, "10-bit")
+   field(TWVL, "2")
+   field(TWST, "12-bit")
+   field(THVL, "3")
+   field(THST, "16-bit")
+}
