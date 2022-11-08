@@ -14,6 +14,8 @@ from epics import PV
 
 data_path = Path(__file__).parent / 'data'
 
+EPSILON = 0.1
+
 class MCTOptics():
     """ Class for controlling TXM optics via EPICS
 
@@ -148,14 +150,14 @@ class MCTOptics():
         log.setup_custom_logger("./mctoptics.log")
 
     def sync_bit_select(self, camera_id):
-        # 2bmbSP2:cam1:PixelFormat
-        # ======================================
-        # STATE  0: Mono8
-        # STATE  1: Mono16
-        # STATE  2: Mono10Packed
-        # STATE  3: Mono12Packed
-        # STATE  4: Mono10p
-        # STATE  5: Mono12p
+        # ConvertPixelFormat 2bmbSP1:    2bmbSP2:
+        # ============================================
+        # STATE  0:          None        None
+        # STATE  1:          Mono8       Mono8
+        # STATE  2:          Mono16      Mono16
+        # STATE  3:          Raw16       Raw16
+        # STATE  4:          RGB8        RGB8
+        # STATE  5:          RGB16       RGB16 
         cam_pixel_format = self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].get()
         if cam_pixel_format == 0:
             self.epics_pvs['Camera'+str(camera_id)+'Bit'].put(0)
@@ -761,47 +763,83 @@ class MCTOptics():
         # STATE  2: 12-bit")
         # STATE  3: 16-bit")
 
-        # 2bmbSP2:cam1:GC_AdcBitDepth
-        # ======================================
-        # STATE  0: Bit8
-        # STATE  1: Bit10
-        # STATE  2: Bit12
+        # GC_AdcBitDepth 2bmbSP1: 2bmbSP2:
+        # ================================
+        # STATE  0:      Bit8     Bit8
+        # STATE  1:      Bit10    Bit10
+        # STATE  2:      Bit12    Bit12
 
-        # 2bmbSP2:cam1:PixelFormat
+        # PixelFormat 2bmbSP1:     2bmbSP2:
         # ======================================
-        # STATE  0: Mono8
-        # STATE  1: Mono16
-        # STATE  2: Mono10Packed
-        # STATE  3: Mono12Packed
-        # STATE  4: Mono10p
-        # STATE  5: Mono12p
+        # STATE  0:   Mono8        Mono8  
+        # STATE  1:   Mono16       Mono16 
+        # STATE  2:   Mono12Packed Mono10Packed 
+        # STATE  3:   Mono12p      Mono12Packed 
+        # STATE  4:     N/A        Mono10p
+        # STATE  5:     N/A        Mono12p
 
-        # 2bmbSP2:cam1:ConvertPixelFormat
-        # ======================================
-        # STATE  0: None
-        # STATE  1: Mono8
-        # STATE  2: Mono16
-        # STATE  3: Raw16
-        # STATE  4: RGB8
-        # STATE  5: RGB16 
+        # ConvertPixelFormat 2bmbSP1:    2bmbSP2:
+        # ============================================
+        # STATE  0:          None        None
+        # STATE  1:          Mono8       Mono8
+        # STATE  2:          Mono16      Mono16
+        # STATE  3:          Raw16       Raw16
+        # STATE  4:          RGB8        RGB8
+        # STATE  5:          RGB16       RGB16 
 
+        # if the cameara IOC is down, do nothing
+        if (self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].info == None):
+            log.error("mctOptics: Camera %s IOC is down", str(camera_id))
+            return
+        # if the camera is collecting images stop it
+        camera_acquire = 0
+        if self.control_pvs['Cam'+str(camera_id)+'Acquire'].get() == 1:
+            camera_acquire = 1
+            log.info('stopping the camera')
+            self.control_pvs['Cam'+str(camera_id)+'Acquire'].put('Done')
+            self.wait_pv(self.epics_pvs['Cam'+str(camera_id)+'Acquire'], 0)
         if (bit_selected == 0):
-            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(0)   
-            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(0)   
-            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(1)   
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(0, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(0, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(1, wait=True)
         elif (bit_selected == 1):
-            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(1)   
-            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(2)   
-            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2)   
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(1, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(2, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2, wait=True)
         elif (bit_selected == 2):
-            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(2)   
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(2, wait=True)
             if camera_id == 1:
-                self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(3)   
+                self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(3, wait=True)
             else:
-                self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(2)   
-            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2)
+                self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(2, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2, wait=True)
         elif (bit_selected == 3):
-            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(2)   
-            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(1)   
-            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2)   
-  
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(2, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(1, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2, wait=True)
+        # if the camera was collecting images start it again
+        if camera_acquire == 1:
+            time.sleep(1)
+            self.control_pvs['Cam'+str(camera_id)+'Acquire'].put('Acquire', wait=True)
+
+    def wait_pv(pv, wait_val, max_timeout_sec=-1):
+
+        # wait on a pv to be a value until max_timeout (default forever)   
+        # delay for pv to change
+        time.sleep(.01)
+        startTime = time.time()
+        while(True):
+            pv_val = pv.get()
+            if type(pv_val) == float:
+                if abs(pv_val - wait_val) < EPSILON:
+                    return True
+            if (pv_val != wait_val):
+                if max_timeout_sec > -1:
+                    curTime = time.time()
+                    diffTime = curTime - startTime
+                    if diffTime >= max_timeout_sec:
+                        log.error('  *** wait_pv(%s, %d, %5.2f reached max timeout. Return False' % (pv.pvname, wait_val, max_timeout_sec))
+                        return False
+                time.sleep(.01)
+            else:
+                return True
