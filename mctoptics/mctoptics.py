@@ -14,6 +14,8 @@ from epics import PV
 
 data_path = Path(__file__).parent / 'data'
 
+EPSILON = 0.1
+
 class MCTOptics():
     """ Class for controlling TXM optics via EPICS
 
@@ -785,26 +787,56 @@ class MCTOptics():
         # STATE  4: RGB8
         # STATE  5: RGB16 
 
+        camera_acquire = 0
+        if self.control_pvs['Cam'+str(camera_id)+'Acquire'].get() == 1:
+            camera_acquire = 1
+            log.error('stop')
+            self.control_pvs['Cam'+str(camera_id)+'Acquire'].put('Done')
+            time.sleep(1)
         if (self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].info == None):
             log.error("mctOptics: Camera %s IOC is down", str(camera_id))
             return
         if (bit_selected == 0):
-            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(0)   
-            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(0)   
-            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(1)   
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(0, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(0, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(1, wait=True)
         elif (bit_selected == 1):
-            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(1)   
-            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(2)   
-            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2)   
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(1, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(2, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2, wait=True)
         elif (bit_selected == 2):
-            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(2)   
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(2, wait=True)
             if camera_id == 1:
-                self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(3)   
+                self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(3, wait=True)
             else:
-                self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(2)   
-            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2)
+                self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(2, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2, wait=True)
         elif (bit_selected == 3):
-            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(2)   
-            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(1)   
-            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2)   
-  
+            self.control_pvs['Cam'+str(camera_id)+'GC_AdcBitDepth'].put(2, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'PixelFormat'].put(1, wait=True)
+            self.control_pvs['Cam'+str(camera_id)+'ConvertPixelFormat'].put(2, wait=True)
+        if camera_acquire == 1:
+            time.sleep(1)
+            self.control_pvs['Cam'+str(camera_id)+'Acquire'].put('Acquire', wait=True)
+
+    def wait_pv(pv, wait_val, max_timeout_sec=-1):
+
+        # wait on a pv to be a value until max_timeout (default forever)   
+        # delay for pv to change
+        time.sleep(.01)
+        startTime = time.time()
+        while(True):
+            pv_val = pv.get()
+            if type(pv_val) == float:
+                if abs(pv_val - wait_val) < EPSILON:
+                    return True
+            if (pv_val != wait_val):
+                if max_timeout_sec > -1:
+                    curTime = time.time()
+                    diffTime = curTime - startTime
+                    if diffTime >= max_timeout_sec:
+                        log.error('  *** wait_pv(%s, %d, %5.2f reached max timeout. Return False' % (pv.pvname, wait_val, max_timeout_sec))
+                        return False
+                time.sleep(.01)
+            else:
+                return True
