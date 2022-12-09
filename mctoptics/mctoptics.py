@@ -82,6 +82,8 @@ class MCTOptics():
         self.control_pvs['Cam0ConvertPixelFormat']   = PV(camera_prefix + 'ConvertPixelFormat')
         self.control_pvs['Cam0PixelFormat']          = PV(camera_prefix + 'PixelFormat')
         self.control_pvs['Cam0GC_AdcBitDepth']       = PV(camera_prefix + 'GC_AdcBitDepth')
+        self.control_pvs['Cam0BinXRBV']              = PV(camera_prefix + 'BinX_RBV')
+        self.control_pvs['Cam0BinYRBV']              = PV(camera_prefix + 'BinY_RBV')
 
         prefix = self.pv_prefixes['Camera1']
         camera_prefix = prefix + 'cam1:'
@@ -103,6 +105,8 @@ class MCTOptics():
         self.control_pvs['Cam1ConvertPixelFormat']   = PV(camera_prefix + 'ConvertPixelFormat')
         self.control_pvs['Cam1PixelFormat']          = PV(camera_prefix + 'PixelFormat')
         self.control_pvs['Cam1GC_AdcBitDepth']       = PV(camera_prefix + 'GC_AdcBitDepth')
+        self.control_pvs['Cam1BinXRBV']              = PV(camera_prefix + 'BinX_RBV')
+        self.control_pvs['Cam1BinYRBV']              = PV(camera_prefix + 'BinY_RBV')
 
         prefix = self.pv_prefixes['OverlayPlugin0']
         self.control_pvs['OP0EnableCallbacks'] = PV(prefix + 'EnableCallbacks')
@@ -126,7 +130,7 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
         for epics_pv in ('Sync', 'Cut', 'EnergySet', 'EnergyBusy'):
             self.epics_pvs[epics_pv].put(0)
@@ -292,6 +296,9 @@ class MCTOptics():
             thread.start()
         elif (pvname.find('Camera1Bit') != -1) and ((value == 0) or (value == 1) or (value == 2) or (value == 3)):
             thread = threading.Thread(target=self.camera_bit, args=(1,))
+            thread.start()
+        elif (pvname.find('CameraBinning') != -1) and ((value == 0) or (value == 1) or (value == 2)):
+            thread = threading.Thread(target=self.camera_binning, args=())
             thread.start()
 
     def take_lens_offsets(self, lens, cam):
@@ -821,6 +828,19 @@ class MCTOptics():
         if camera_acquire == 1:
             time.sleep(1)
             self.control_pvs['Cam'+str(camera_id)+'Acquire'].put('Acquire', wait=True)
+
+    def camera_binning(self):
+        """crop detector sizes"""
+
+        camera_select = str(self.epics_pvs['CameraSelect'].get())
+        state = self.epics_pvs['Cam'+camera_select+'Acquire'].get()
+        self.epics_pvs['Cam'+camera_select+'Acquire'].put(0,wait=True)
+
+        binning = self.epics_pvs['CameraBinning'].get()
+        self.epics_pvs['Cam'+camera_select+'BinXRBV'].put(binning,wait=True)
+        self.epics_pvs['Cam'+camera_select+'BinYRBV'].put(binning,wait=True)    
+
+        self.epics_pvs['Cam'+camera_select+'Acquire'].put(state)  
 
     def wait_pv(pv, wait_val, max_timeout_sec=-1):
 

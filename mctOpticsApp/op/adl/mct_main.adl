@@ -7626,182 +7626,171 @@ composite {
 		}
 	}
 }
-composite {
+"choice button" {
+	object {
+		x=739
+		y=283
+		width=90
+		height=25
+	}
+	control {
+		chan="$(P)$(R)CrossSelect.VAL"
+		clr=14
+		bclr=51
+	}
+	stacking="column"
+}
+text {
+	object {
+		x=750
+		y=263
+		width=65
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Cross"
+	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=789
+		y=185
+		width=47
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CutLeft.VAL"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=789
+		y=225
+		width=47
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CutTop.VAL"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=734
+		y=205
+		width=50
+		height=16
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Right"
+	align="horiz. right"
+}
+text {
+	object {
+		x=734
+		y=245
+		width=50
+		height=16
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Bottom"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=789
+		y=205
+		width=47
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CutRight.VAL"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=789
+		y=245
+		width=47
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CutBottom.VAL"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+"message button" {
+	object {
+		x=735
+		y=150
+		width=40
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Cut"
+		clr=14
+		bclr=51
+	}
+	label="Crop"
+	press_msg="1"
+}
+text {
+	object {
+		x=734
+		y=185
+		width=50
+		height=16
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Left"
+	align="horiz. right"
+}
+text {
+	object {
+		x=734
+		y=225
+		width=50
+		height=16
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Top"
+	align="horiz. right"
+}
+rectangle {
 	object {
 		x=725
 		y=140
 		width=120
 		height=175
 	}
-	"composite name"=""
-	children {
-		"choice button" {
-			object {
-				x=739
-				y=282
-				width=90
-				height=25
-			}
-			control {
-				chan="$(P)$(R)CrossSelect.VAL"
-				clr=14
-				bclr=51
-			}
-			stacking="column"
-		}
-		text {
-			object {
-				x=750
-				y=262
-				width=65
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Cross"
-			align="horiz. centered"
-		}
-		"text entry" {
-			object {
-				x=789
-				y=177
-				width=47
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CutLeft.VAL"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=789
-				y=217
-				width=47
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CutTop.VAL"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		text {
-			object {
-				x=734
-				y=197
-				width=50
-				height=16
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Right"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=734
-				y=237
-				width=50
-				height=16
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Bottom"
-			align="horiz. right"
-		}
-		"text entry" {
-			object {
-				x=789
-				y=197
-				width=47
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CutRight.VAL"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		"text entry" {
-			object {
-				x=789
-				y=237
-				width=47
-				height=20
-			}
-			control {
-				chan="$(P)$(R)CutBottom.VAL"
-				clr=14
-				bclr=51
-			}
-			limits {
-			}
-		}
-		"message button" {
-			object {
-				x=759
-				y=149
-				width=59
-				height=20
-			}
-			control {
-				chan="$(P)$(R)Cut"
-				clr=14
-				bclr=51
-			}
-			label="Crop"
-			press_msg="1"
-		}
-		text {
-			object {
-				x=734
-				y=177
-				width=50
-				height=16
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Left"
-			align="horiz. right"
-		}
-		text {
-			object {
-				x=734
-				y=217
-				width=50
-				height=16
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Top"
-			align="horiz. right"
-		}
-		rectangle {
-			object {
-				x=725
-				y=140
-				width=120
-				height=175
-			}
-			"basic attribute" {
-				clr=14
-				fill="outline"
-				width=5
-			}
-		}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
 	}
 }
 "choice button" {
@@ -8083,6 +8072,19 @@ menu {
 	}
 	control {
 		chan="$(P)$(R)Camera0Bit"
+		clr=14
+		bclr=51
+	}
+}
+menu {
+	object {
+		x=780
+		y=150
+		width=55
+		height=20
+	}
+	control {
+		chan="$(P)$(R)CameraBinning"
 		clr=14
 		bclr=51
 	}

@@ -174,3 +174,8 @@ $(P)$(R)SuggestedAngleStep
 ##################
 $(P)$(R)Camera0Bit
 $(P)$(R)Camera1Bit
+
+###################
+# Detectors binning
+###################
+$(P)$(R)CameraBinning
