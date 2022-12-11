@@ -82,6 +82,8 @@ class MCTOptics():
         self.control_pvs['Cam0ConvertPixelFormat']   = PV(camera_prefix + 'ConvertPixelFormat')
         self.control_pvs['Cam0PixelFormat']          = PV(camera_prefix + 'PixelFormat')
         self.control_pvs['Cam0GC_AdcBitDepth']       = PV(camera_prefix + 'GC_AdcBitDepth')
+        self.control_pvs['Cam0BinX']                 = PV(camera_prefix + 'BinX')
+        self.control_pvs['Cam0BinY']                 = PV(camera_prefix + 'BinY')
         self.control_pvs['Cam0BinXRBV']              = PV(camera_prefix + 'BinX_RBV')
         self.control_pvs['Cam0BinYRBV']              = PV(camera_prefix + 'BinY_RBV')
 
@@ -105,6 +107,8 @@ class MCTOptics():
         self.control_pvs['Cam1ConvertPixelFormat']   = PV(camera_prefix + 'ConvertPixelFormat')
         self.control_pvs['Cam1PixelFormat']          = PV(camera_prefix + 'PixelFormat')
         self.control_pvs['Cam1GC_AdcBitDepth']       = PV(camera_prefix + 'GC_AdcBitDepth')
+        self.control_pvs['Cam1BinX']                 = PV(camera_prefix + 'BinX')
+        self.control_pvs['Cam1BinY']                 = PV(camera_prefix + 'BinY')
         self.control_pvs['Cam1BinXRBV']              = PV(camera_prefix + 'BinX_RBV')
         self.control_pvs['Cam1BinYRBV']              = PV(camera_prefix + 'BinY_RBV')
 
@@ -837,8 +841,8 @@ class MCTOptics():
         self.epics_pvs['Cam'+camera_select+'Acquire'].put(0,wait=True)
 
         binning = self.epics_pvs['CameraBinning'].get()
-        self.epics_pvs['Cam'+camera_select+'BinXRBV'].put(binning,wait=True)
-        self.epics_pvs['Cam'+camera_select+'BinYRBV'].put(binning,wait=True)    
+        self.epics_pvs['Cam'+camera_select+'BinX'].put(binning,wait=True)
+        self.epics_pvs['Cam'+camera_select+'BinY'].put(binning,wait=True)    
 
         self.epics_pvs['Cam'+camera_select+'Acquire'].put(state)  
 
