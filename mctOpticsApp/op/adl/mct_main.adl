@@ -7628,10 +7628,10 @@ composite {
 }
 "choice button" {
 	object {
-		x=739
-		y=283
-		width=90
-		height=25
+		x=735
+		y=290
+		width=100
+		height=20
 	}
 	control {
 		chan="$(P)$(R)CrossSelect.VAL"
@@ -7642,9 +7642,9 @@ composite {
 }
 text {
 	object {
-		x=750
-		y=263
-		width=65
+		x=735
+		y=270
+		width=100
 		height=20
 	}
 	"basic attribute" {
@@ -7655,8 +7655,8 @@ text {
 }
 "text entry" {
 	object {
-		x=789
-		y=185
+		x=790
+		y=195
 		width=47
 		height=20
 	}
@@ -7670,8 +7670,8 @@ text {
 }
 "text entry" {
 	object {
-		x=789
-		y=225
+		x=790
+		y=235
 		width=47
 		height=20
 	}
@@ -7685,8 +7685,8 @@ text {
 }
 text {
 	object {
-		x=734
-		y=205
+		x=735
+		y=215
 		width=50
 		height=16
 	}
@@ -7698,8 +7698,8 @@ text {
 }
 text {
 	object {
-		x=734
-		y=245
+		x=735
+		y=255
 		width=50
 		height=16
 	}
@@ -7711,8 +7711,8 @@ text {
 }
 "text entry" {
 	object {
-		x=789
-		y=205
+		x=790
+		y=215
 		width=47
 		height=20
 	}
@@ -7726,8 +7726,8 @@ text {
 }
 "text entry" {
 	object {
-		x=789
-		y=245
+		x=790
+		y=255
 		width=47
 		height=20
 	}
@@ -7742,8 +7742,8 @@ text {
 "message button" {
 	object {
 		x=735
-		y=150
-		width=40
+		y=170
+		width=100
 		height=20
 	}
 	control {
@@ -7756,8 +7756,8 @@ text {
 }
 text {
 	object {
-		x=734
-		y=185
+		x=735
+		y=195
 		width=50
 		height=16
 	}
@@ -7769,8 +7769,8 @@ text {
 }
 text {
 	object {
-		x=734
-		y=225
+		x=735
+		y=235
 		width=50
 		height=16
 	}
@@ -8078,9 +8078,9 @@ menu {
 }
 menu {
 	object {
-		x=780
-		y=150
-		width=55
+		x=785
+		y=147
+		width=50
 		height=20
 	}
 	control {
@@ -8088,4 +8088,17 @@ menu {
 		clr=14
 		bclr=51
 	}
+}
+text {
+	object {
+		x=735
+		y=147
+		width=50
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Bin"
+	align="horiz. centered"
 }

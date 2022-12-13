@@ -557,6 +557,9 @@ class MCTOptics():
         camera_rotation = self.take_camera_rotation(self.lens_cur, camera_select)        
         self.control_pvs['Camera'+str(camera_select)+'RotationPosition'].put(camera_rotation, wait=True)
 
+        # Synch binning with actual camera select status
+        self.sync_binning_select(str(camera_select))
+        
         log.info('Camera: %s selected', camera_name)
 
         # Update detector pixel size, magnification and image pixel size PVs using the data stored in the camera.json file
