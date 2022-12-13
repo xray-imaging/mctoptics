@@ -622,10 +622,10 @@ record(mbbi, "$(P)$(R)Camera1Bit")
 
 record(mbbo, "$(P)$(R)CameraBinning")
 {
-   field(ZRVL, "1")
-   field(ZRST, "None")
-   field(ONVL, "2")
+   field(ZRVL, "0")
+   field(ZRST, "1x")
+   field(ONVL, "1")
    field(ONST, "2x")
-   field(TWVL, "4")
+   field(TWVL, "2")
    field(TWST, "4x")
 }

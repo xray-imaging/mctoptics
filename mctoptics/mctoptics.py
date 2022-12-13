@@ -7,6 +7,7 @@ import threading
 import signal
 import json
 
+
 from pathlib import Path
 from mctoptics import util
 from mctoptics import log
@@ -154,8 +155,35 @@ class MCTOptics():
         self.sync_bit_select(0)
         self.sync_bit_select(1)
 
+        # Synch binning with actual camera select status
+        self.sync_binning_select(str(camera_select))
+
         self.epics_pvs['MCTStatus'].put('Done')
+
         log.setup_custom_logger("./mctoptics.log")
+        print("./mctoptics.log")
+
+    def sync_binning_select(self, camera_id):
+
+        # if the camera is collecting images stop it
+        camera_acquire = 0
+        if self.control_pvs['Cam'+camera_id+'Acquire'].get() == 1:
+            camera_acquire = 1
+            log.info('stopping the camera')
+            self.control_pvs['Cam'+camera_id+'Acquire'].put('Done')
+            self.wait_pv(self.epics_pvs['Cam'+camera_id+'Acquire'], 0)
+
+        bin_x = self.epics_pvs['Cam'+camera_id+'BinX'].get()
+        if bin_x == 1 or bin_x == 2 or bin_x == 4:
+            self.epics_pvs['Cam'+camera_id+'BinY'].put(bin_x, wait=True)
+            self.epics_pvs['CameraBinning'].put(int(np.log2(bin_x)))
+            log.info('mctOptics: Set camera %s binning to %d', camera_id, self.epics_pvs['CameraBinning'].get(as_string=True))
+
+        # if the camera was collecting images start it again
+        if camera_acquire == 1:
+            time.sleep(1)
+            log.info('restarting the camera')
+            self.control_pvs['Cam'+str(camera_id)+'Acquire'].put('Acquire', wait=True)
 
     def sync_bit_select(self, camera_id):
         # ConvertPixelFormat 2bmbSP1:    2bmbSP2:
@@ -831,38 +859,53 @@ class MCTOptics():
         # if the camera was collecting images start it again
         if camera_acquire == 1:
             time.sleep(1)
+            log.info('restarting the camera')
             self.control_pvs['Cam'+str(camera_id)+'Acquire'].put('Acquire', wait=True)
 
     def camera_binning(self):
-        """crop detector sizes"""
+        """camera binning"""
 
         camera_select = str(self.epics_pvs['CameraSelect'].get())
-        state = self.epics_pvs['Cam'+camera_select+'Acquire'].get()
-        self.epics_pvs['Cam'+camera_select+'Acquire'].put(0,wait=True)
+        # if the camera is collecting images stop it
+        camera_acquire = 0
+        if self.control_pvs['Cam'+camera_select+'Acquire'].get() == 1:
+            camera_acquire = 1
+            log.info('stopping the camera')
+            self.control_pvs['Cam'+camera_select+'Acquire'].put('Done')
+            self.wait_pv(self.epics_pvs['Cam'+camera_select+'Acquire'], 0)
 
         binning = self.epics_pvs['CameraBinning'].get()
-        self.epics_pvs['Cam'+camera_select+'BinX'].put(binning,wait=True)
-        self.epics_pvs['Cam'+camera_select+'BinY'].put(binning,wait=True)    
+        log.info('mctOptics: Set camera %s binning to %d', camera_select, pow(2,binning))
 
-        self.epics_pvs['Cam'+camera_select+'Acquire'].put(state)  
+        self.epics_pvs['Cam'+camera_select+'BinX'].put(pow(2,binning),wait=True)
+        self.epics_pvs['Cam'+camera_select+'BinY'].put(pow(2,binning),wait=True)    
 
-    def wait_pv(pv, wait_val, max_timeout_sec=-1):
+        # if the camera was collecting images start it again
+        if camera_acquire == 1:
+            time.sleep(1)
+            log.info('restarting the camera')
+            self.control_pvs['Cam'+str(camera_select)+'Acquire'].put('Acquire', wait=True)
 
-        # wait on a pv to be a value until max_timeout (default forever)   
-        # delay for pv to change
+    def wait_pv(self, epics_pv, wait_val, timeout=-1):
+        """Wait on a pv to be a value until max_timeout (default forever)
+           delay for pv to change
+        """
+
         time.sleep(.01)
-        startTime = time.time()
-        while(True):
-            pv_val = pv.get()
-            if type(pv_val) == float:
+        start_time = time.time()
+        while True:
+            pv_val = epics_pv.get()
+            if isinstance(pv_val, float):
                 if abs(pv_val - wait_val) < EPSILON:
                     return True
-            if (pv_val != wait_val):
-                if max_timeout_sec > -1:
-                    curTime = time.time()
-                    diffTime = curTime - startTime
-                    if diffTime >= max_timeout_sec:
-                        log.error('  *** wait_pv(%s, %d, %5.2f reached max timeout. Return False' % (pv.pvname, wait_val, max_timeout_sec))
+            if pv_val != wait_val:
+                if timeout > -1:
+                    current_time = time.time()
+                    diff_time = current_time - start_time
+                    if diff_time >= timeout:
+                        log.error('  *** ERROR: DROPPED IMAGES ***')
+                        log.error('  *** wait_pv(%s, %d, %5.2f reached max timeout. Return False',
+                                      epics_pv.pvname, wait_val, timeout)
                         return False
                 time.sleep(.01)
             else:
