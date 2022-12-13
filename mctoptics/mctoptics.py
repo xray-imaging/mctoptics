@@ -440,7 +440,10 @@ class MCTOptics():
             self.epics_pvs['CameraTubeLength'].put(tube_lens)
 
             detector_pixel_size    = self.epics_pvs['DetectorPixelSize'].get()
-            image_pixel_size       = float(detector_pixel_size)/float(magnification)
+
+            binning = self.epics_pvs['CameraBinning'].get()
+            log.info('mctOptics: camera %s binning is set to %d', str(self.camera_cur), pow(2,binning))
+            image_pixel_size = float(detector_pixel_size)/float(magnification)*pow(2,binning)
             self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
         except KeyError as e:
             log.error('Lens called %s is not defined. Please add it to the ./data/lens.json file' % e)
@@ -559,7 +562,7 @@ class MCTOptics():
 
         # Synch binning with actual camera select status
         self.sync_binning_select(str(camera_select))
-        
+
         log.info('Camera: %s selected', camera_name)
 
         # Update detector pixel size, magnification and image pixel size PVs using the data stored in the camera.json file
@@ -574,7 +577,9 @@ class MCTOptics():
 
             magnification = self.epics_pvs['CameraObjective'].get()
             magnification = magnification.upper().replace("X", "") # just in case there was a manual entry ...
-            image_pixel_size = float(detector_pixel_size)/float(magnification)
+            binning = self.epics_pvs['CameraBinning'].get()
+            log.info('mctOptics: camera %s binning is set to %d', str(camera_select), pow(2,binning))
+            image_pixel_size = float(detector_pixel_size)/float(magnification)*pow(2,binning)
             self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
         except KeyError as e:
             log.error('Camera called %s is not defined. Please add it to the ./data/camera.json file' % e)
