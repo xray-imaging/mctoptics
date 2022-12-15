@@ -183,7 +183,8 @@ class MCTOptics():
         if camera_acquire == 1:
             time.sleep(1)
             log.info('restarting the camera')
-            self.control_pvs['Cam'+str(camera_id)+'Acquire'].put('Acquire', wait=True)
+            self.control_pvs['Cam'+str(camera_select)+'Acquire'].put('Acquire')
+            self.wait_pv(self.epics_pvs['Cam'+camera_select+'Acquire'], 1)
 
     def sync_bit_select(self, camera_id):
         # ConvertPixelFormat 2bmbSP1:    2bmbSP2:
@@ -892,7 +893,8 @@ class MCTOptics():
         if camera_acquire == 1:
             time.sleep(1)
             log.info('restarting the camera')
-            self.control_pvs['Cam'+str(camera_select)+'Acquire'].put('Acquire', wait=True)
+            self.control_pvs['Cam'+str(camera_select)+'Acquire'].put('Acquire')
+            self.wait_pv(self.epics_pvs['Cam'+camera_select+'Acquire'], 1)
 
     def wait_pv(self, epics_pv, wait_val, timeout=-1):
         """Wait on a pv to be a value until max_timeout (default forever)
