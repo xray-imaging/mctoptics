@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/EnergyUpdate.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/EnergyUpdate.adl"
 	version=030111
 }
 display {
 	object {
-		x=617
-		y=542
+		x=582
+		y=848
 		width=1000
-		height=250
+		height=265
 	}
 	clr=14
 	bclr=4
@@ -102,7 +102,7 @@ text {
 text {
 	object {
 		x=15
-		y=207
+		y=235
 		width=220
 		height=25
 	}
@@ -114,7 +114,7 @@ text {
 text {
 	object {
 		x=15
-		y=167
+		y=195
 		width=500
 		height=30
 	}
@@ -126,7 +126,7 @@ text {
 text {
 	object {
 		x=250
-		y=207
+		y=235
 		width=200
 		height=25
 	}
@@ -138,7 +138,7 @@ text {
 text {
 	object {
 		x=15
-		y=46
+		y=45
 		width=220
 		height=25
 	}
@@ -150,7 +150,7 @@ text {
 text {
 	object {
 		x=250
-		y=46
+		y=45
 		width=200
 		height=25
 	}
@@ -162,7 +162,7 @@ text {
 text {
 	object {
 		x=15
-		y=106
+		y=105
 		width=220
 		height=25
 	}
@@ -174,7 +174,7 @@ text {
 text {
 	object {
 		x=250
-		y=106
+		y=105
 		width=380
 		height=25
 	}
@@ -186,7 +186,7 @@ text {
 text {
 	object {
 		x=15
-		y=76
+		y=75
 		width=220
 		height=25
 	}
@@ -198,7 +198,7 @@ text {
 text {
 	object {
 		x=250
-		y=76
+		y=75
 		width=200
 		height=25
 	}
@@ -210,19 +210,19 @@ text {
 text {
 	object {
 		x=250
-		y=136
+		y=165
 		width=200
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="energy set --mode Mono --energy-value 20"
+	textix="energy --config ~/logs/energy2bm_Mono_17...."
 }
 text {
 	object {
 		x=15
-		y=136
+		y=165
 		width=220
 		height=25
 	}
@@ -242,4 +242,16 @@ text {
 		clr=20
 	}
 	textix="$(P)$(R)"
+}
+text {
+	object {
+		x=15
+		y=135
+		width=220
+		height=25
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="select in ~/log the energy configuration file you want to use"
 }
