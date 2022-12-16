@@ -7,6 +7,7 @@ import threading
 import signal
 import json
 
+
 from pathlib import Path
 from mctoptics import util
 from mctoptics import log
@@ -82,6 +83,10 @@ class MCTOptics():
         self.control_pvs['Cam0ConvertPixelFormat']   = PV(camera_prefix + 'ConvertPixelFormat')
         self.control_pvs['Cam0PixelFormat']          = PV(camera_prefix + 'PixelFormat')
         self.control_pvs['Cam0GC_AdcBitDepth']       = PV(camera_prefix + 'GC_AdcBitDepth')
+        self.control_pvs['Cam0BinX']                 = PV(camera_prefix + 'BinX')
+        self.control_pvs['Cam0BinY']                 = PV(camera_prefix + 'BinY')
+        self.control_pvs['Cam0BinXRBV']              = PV(camera_prefix + 'BinX_RBV')
+        self.control_pvs['Cam0BinYRBV']              = PV(camera_prefix + 'BinY_RBV')
 
         prefix = self.pv_prefixes['Camera1']
         camera_prefix = prefix + 'cam1:'
@@ -103,6 +108,10 @@ class MCTOptics():
         self.control_pvs['Cam1ConvertPixelFormat']   = PV(camera_prefix + 'ConvertPixelFormat')
         self.control_pvs['Cam1PixelFormat']          = PV(camera_prefix + 'PixelFormat')
         self.control_pvs['Cam1GC_AdcBitDepth']       = PV(camera_prefix + 'GC_AdcBitDepth')
+        self.control_pvs['Cam1BinX']                 = PV(camera_prefix + 'BinX')
+        self.control_pvs['Cam1BinY']                 = PV(camera_prefix + 'BinY')
+        self.control_pvs['Cam1BinXRBV']              = PV(camera_prefix + 'BinX_RBV')
+        self.control_pvs['Cam1BinYRBV']              = PV(camera_prefix + 'BinY_RBV')
 
         prefix = self.pv_prefixes['OverlayPlugin0']
         self.control_pvs['OP0EnableCallbacks'] = PV(prefix + 'EnableCallbacks')
@@ -126,7 +135,7 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
         for epics_pv in ('Sync', 'Cut', 'EnergySet', 'EnergyBusy'):
             self.epics_pvs[epics_pv].put(0)
@@ -146,8 +155,36 @@ class MCTOptics():
         self.sync_bit_select(0)
         self.sync_bit_select(1)
 
+        # Synch binning with actual camera select status
+        self.sync_binning_select(str(camera_select))
+
         self.epics_pvs['MCTStatus'].put('Done')
+
         log.setup_custom_logger("./mctoptics.log")
+        print("./mctoptics.log")
+
+    def sync_binning_select(self, camera_id):
+
+        # if the camera is collecting images stop it
+        camera_acquire = 0
+        if self.control_pvs['Cam'+camera_id+'Acquire'].get() == 1:
+            camera_acquire = 1
+            log.info('stopping the camera')
+            self.control_pvs['Cam'+camera_id+'Acquire'].put('Done')
+            self.wait_pv(self.epics_pvs['Cam'+camera_id+'Acquire'], 0)
+
+        bin_x = self.epics_pvs['Cam'+camera_id+'BinX'].get()
+        if bin_x == 1 or bin_x == 2 or bin_x == 4:
+            self.epics_pvs['Cam'+camera_id+'BinY'].put(bin_x, wait=True)
+            self.epics_pvs['CameraBinning'].put(int(np.log2(bin_x)))
+            log.info('mctOptics: Set camera %s binning to %d', camera_id, self.epics_pvs['CameraBinning'].get(as_string=True))
+
+        # if the camera was collecting images start it again
+        if camera_acquire == 1:
+            time.sleep(1)
+            log.info('restarting the camera')
+            self.control_pvs['Cam'+str(camera_select)+'Acquire'].put('Acquire')
+            self.wait_pv(self.epics_pvs['Cam'+camera_select+'Acquire'], 1)
 
     def sync_bit_select(self, camera_id):
         # ConvertPixelFormat 2bmbSP1:    2bmbSP2:
@@ -293,6 +330,9 @@ class MCTOptics():
         elif (pvname.find('Camera1Bit') != -1) and ((value == 0) or (value == 1) or (value == 2) or (value == 3)):
             thread = threading.Thread(target=self.camera_bit, args=(1,))
             thread.start()
+        elif (pvname.find('CameraBinning') != -1) and ((value == 0) or (value == 1) or (value == 2)):
+            thread = threading.Thread(target=self.camera_binning, args=())
+            thread.start()
 
     def take_lens_offsets(self, lens, cam):
         if lens == 0:
@@ -401,7 +441,10 @@ class MCTOptics():
             self.epics_pvs['CameraTubeLength'].put(tube_lens)
 
             detector_pixel_size    = self.epics_pvs['DetectorPixelSize'].get()
-            image_pixel_size       = float(detector_pixel_size)/float(magnification)
+
+            binning = self.epics_pvs['CameraBinning'].get()
+            log.info('mctOptics: camera %s binning is set to %d', str(self.camera_cur), pow(2,binning))
+            image_pixel_size = float(detector_pixel_size)/float(magnification)*pow(2,binning)
             self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
         except KeyError as e:
             log.error('Lens called %s is not defined. Please add it to the ./data/lens.json file' % e)
@@ -518,6 +561,9 @@ class MCTOptics():
         camera_rotation = self.take_camera_rotation(self.lens_cur, camera_select)        
         self.control_pvs['Camera'+str(camera_select)+'RotationPosition'].put(camera_rotation, wait=True)
 
+        # Synch binning with actual camera select status
+        self.sync_binning_select(str(camera_select))
+
         log.info('Camera: %s selected', camera_name)
 
         # Update detector pixel size, magnification and image pixel size PVs using the data stored in the camera.json file
@@ -532,7 +578,9 @@ class MCTOptics():
 
             magnification = self.epics_pvs['CameraObjective'].get()
             magnification = magnification.upper().replace("X", "") # just in case there was a manual entry ...
-            image_pixel_size = float(detector_pixel_size)/float(magnification)
+            binning = self.epics_pvs['CameraBinning'].get()
+            log.info('mctOptics: camera %s binning is set to %d', str(camera_select), pow(2,binning))
+            image_pixel_size = float(detector_pixel_size)/float(magnification)*pow(2,binning)
             self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
         except KeyError as e:
             log.error('Camera called %s is not defined. Please add it to the ./data/camera.json file' % e)
@@ -820,25 +868,54 @@ class MCTOptics():
         # if the camera was collecting images start it again
         if camera_acquire == 1:
             time.sleep(1)
+            log.info('restarting the camera')
             self.control_pvs['Cam'+str(camera_id)+'Acquire'].put('Acquire', wait=True)
 
-    def wait_pv(pv, wait_val, max_timeout_sec=-1):
+    def camera_binning(self):
+        """camera binning"""
 
-        # wait on a pv to be a value until max_timeout (default forever)   
-        # delay for pv to change
+        camera_select = str(self.epics_pvs['CameraSelect'].get())
+        # if the camera is collecting images stop it
+        camera_acquire = 0
+        if self.control_pvs['Cam'+camera_select+'Acquire'].get() == 1:
+            camera_acquire = 1
+            log.info('stopping the camera')
+            self.control_pvs['Cam'+camera_select+'Acquire'].put('Done')
+            self.wait_pv(self.epics_pvs['Cam'+camera_select+'Acquire'], 0)
+
+        binning = self.epics_pvs['CameraBinning'].get()
+        log.info('mctOptics: Set camera %s binning to %d', camera_select, pow(2,binning))
+
+        self.epics_pvs['Cam'+camera_select+'BinX'].put(pow(2,binning),wait=True)
+        self.epics_pvs['Cam'+camera_select+'BinY'].put(pow(2,binning),wait=True)    
+
+        # if the camera was collecting images start it again
+        if camera_acquire == 1:
+            time.sleep(1)
+            log.info('restarting the camera')
+            self.control_pvs['Cam'+str(camera_select)+'Acquire'].put('Acquire')
+            self.wait_pv(self.epics_pvs['Cam'+camera_select+'Acquire'], 1)
+
+    def wait_pv(self, epics_pv, wait_val, timeout=-1):
+        """Wait on a pv to be a value until max_timeout (default forever)
+           delay for pv to change
+        """
+
         time.sleep(.01)
-        startTime = time.time()
-        while(True):
-            pv_val = pv.get()
-            if type(pv_val) == float:
+        start_time = time.time()
+        while True:
+            pv_val = epics_pv.get()
+            if isinstance(pv_val, float):
                 if abs(pv_val - wait_val) < EPSILON:
                     return True
-            if (pv_val != wait_val):
-                if max_timeout_sec > -1:
-                    curTime = time.time()
-                    diffTime = curTime - startTime
-                    if diffTime >= max_timeout_sec:
-                        log.error('  *** wait_pv(%s, %d, %5.2f reached max timeout. Return False' % (pv.pvname, wait_val, max_timeout_sec))
+            if pv_val != wait_val:
+                if timeout > -1:
+                    current_time = time.time()
+                    diff_time = current_time - start_time
+                    if diff_time >= timeout:
+                        log.error('  *** ERROR: DROPPED IMAGES ***')
+                        log.error('  *** wait_pv(%s, %d, %5.2f reached max timeout. Return False',
+                                      epics_pv.pvname, wait_val, timeout)
                         return False
                 time.sleep(.01)
             else:

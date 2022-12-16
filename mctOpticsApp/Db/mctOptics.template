@@ -551,9 +551,9 @@ record(stringout, "$(P)$(R)EnergyCalibrationFileTwo")
    field(VAL,  "$(EN_FILE2)")
 }
 
-###################
-# Detector cropping
-###################
+####################
+# Detectors cropping
+####################
 record(longout, "$(P)$(R)CutLeft")
 {
 }
@@ -613,4 +613,19 @@ record(mbbi, "$(P)$(R)Camera1Bit")
    field(TWST, "12-bit")
    field(THVL, "3")
    field(THST, "16-bit")
+}
+
+
+###################
+# Detectors binning
+###################
+
+record(mbbo, "$(P)$(R)CameraBinning")
+{
+   field(ZRVL, "0")
+   field(ZRST, "1x")
+   field(ONVL, "1")
+   field(ONST, "2x")
+   field(TWVL, "2")
+   field(TWST, "4x")
 }
