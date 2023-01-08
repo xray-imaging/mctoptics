@@ -89,24 +89,8 @@ display {
 }
 "text entry" {
 	object {
-		x=640
+		x=625
 		y=430
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Energy"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=640
-		y=455
 		width=100
 		height=20
 	}
@@ -121,13 +105,13 @@ display {
 }
 menu {
 	object {
-		x=640
+		x=625
 		y=405
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyMode"
+		chan="$(P)$(R)Energy"
 		clr=14
 		bclr=51
 	}
@@ -136,31 +120,19 @@ text {
 	object {
 		x=510
 		y=405
-		width=120
+		width=100
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Energy mode"
+	textix="Energy"
 }
 text {
 	object {
 		x=510
 		y=430
-		width=120
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy (keV)"
-}
-text {
-	object {
-		x=510
-		y=455
-		width=120
+		width=100
 		height=20
 	}
 	"basic attribute" {
@@ -248,10 +220,10 @@ text {
 }
 "message button" {
 	object {
-		x=745
-		y=430
+		x=800
+		y=405
 		width=40
-		height=23
+		height=20
 	}
 	control {
 		chan="$(P)$(R)EnergySet"
@@ -1592,5 +1564,42 @@ rectangle {
 	}
 	format="string"
 	limits {
+	}
+}
+text {
+	object {
+		x=745
+		y=405
+		width=45
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="keV"
+}
+text {
+	object {
+		x=510
+		y=455
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Testing"
+}
+menu {
+	object {
+		x=625
+		y=455
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyTesting"
+		clr=14
+		bclr=51
 	}
 }

@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=344
-		y=445
+		x=2
+		y=702
 		width=1570
 		height=865
 	}
@@ -7026,87 +7026,6 @@ composite {
 		}
 	}
 }
-"text entry" {
-	object {
-		x=952
-		y=402
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Energy"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=952
-		y=426
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Filters"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-menu {
-	object {
-		x=952
-		y=375
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMode"
-		clr=14
-		bclr=51
-	}
-}
-text {
-	object {
-		x=825
-		y=375
-		width=120
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy mode"
-}
-text {
-	object {
-		x=825
-		y=402
-		width=120
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy (keV)"
-}
-text {
-	object {
-		x=825
-		y=426
-		width=120
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Filters"
-}
 rectangle {
 	object {
 		x=808
@@ -7147,7 +7066,7 @@ text {
 "related display" {
 	object {
 		x=887
-		y=557
+		y=577
 		width=100
 		height=20
 	}
@@ -7175,7 +7094,7 @@ text {
 text {
 	object {
 		x=849
-		y=473
+		y=493
 		width=120
 		height=16
 	}
@@ -7185,26 +7104,10 @@ text {
 	textix="Use calibration"
 	align="horiz. right"
 }
-"message button" {
-	object {
-		x=1056
-		y=402
-		width=40
-		height=23
-	}
-	control {
-		chan="$(P)$(R)EnergySet"
-		clr=14
-		bclr=15
-	}
-	label="Set"
-	press_msg="1"
-	release_msg="0"
-}
 "choice button" {
 	object {
 		x=977
-		y=468
+		y=488
 		width=90
 		height=25
 	}
@@ -7218,7 +7121,7 @@ text {
 "text entry" {
 	object {
 		x=846
-		y=498
+		y=518
 		width=220
 		height=25
 	}
@@ -7233,7 +7136,7 @@ text {
 "text entry" {
 	object {
 		x=846
-		y=529
+		y=549
 		width=220
 		height=25
 	}
@@ -7248,7 +7151,7 @@ text {
 text {
 	object {
 		x=1004
-		y=557
+		y=577
 		width=60
 		height=20
 	}
@@ -8101,4 +8004,110 @@ text {
 	}
 	textix="Bin"
 	align="horiz. centered"
+}
+"text entry" {
+	object {
+		x=935
+		y=405
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Filters"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+menu {
+	object {
+		x=935
+		y=380
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Energy"
+		clr=14
+		bclr=51
+	}
+}
+text {
+	object {
+		x=820
+		y=380
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy"
+}
+text {
+	object {
+		x=820
+		y=405
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Filters"
+}
+"message button" {
+	object {
+		x=1050
+		y=450
+		width=40
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergySet"
+		clr=14
+		bclr=15
+	}
+	label="Set"
+	press_msg="1"
+	release_msg="0"
+}
+text {
+	object {
+		x=1055
+		y=381
+		width=45
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="keV"
+}
+text {
+	object {
+		x=820
+		y=430
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Testing"
+}
+menu {
+	object {
+		x=935
+		y=430
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyTesting"
+		clr=14
+		bclr=51
+	}
 }
