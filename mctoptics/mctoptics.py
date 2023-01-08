@@ -766,9 +766,13 @@ class MCTOptics():
             file_name = 'energy2bm_' + energy_mode +"_" + energy + ".conf"
             full_file_name = os.path.join(data_path, file_name)
 
-            command = 'energy set --config %s --testing --force' % (full_file_name)
-            subprocess.Popen(command, shell=True)
+            if (self.epics_pvs["EnergyTesting"].get()):
+                command = 'energy set --config %s --testing --force' % (full_file_name)
+            else:
+                command = 'energy set --config %s --force' % (full_file_name)
+  
             log.info(command)
+            subprocess.Popen(command, shell=True)
 
             time.sleep(1)# possible backlash/stabilization, more??
 
