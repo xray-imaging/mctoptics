@@ -7,6 +7,7 @@ import threading
 import signal
 import json
 
+import subprocess
 
 from pathlib import Path
 from mctoptics import util
@@ -741,63 +742,85 @@ class MCTOptics():
         self.epics_pvs['SuggestedAngleStep'].put(suggested_angle_step)
 
     def energy_change(self):
-        if self.epics_pvs['EnergyBusy'].get() == 0:
-            self.epics_pvs['EnergyBusy'].put(1)
-            energy = float(self.epics_pvs["Energy"].get())
-            energy_mode = self.epics_pvs["EnergyMode"].get(as_string=True)
-            log.info("mctOptics: change energy to %.2f keV",energy)
-            log.info("mctOptics: energy mode = %s",energy_mode)
+
+        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
+            return
             
+        self.epics_pvs['MCTStatus'].put('Changing energy')
+        self.epics_pvs['EnergyBusy'].put(1)
+
+        with open(os.path.join(data_path, 'energy.json')) as json_file:
+            energy_lookup = json.load(json_file)
+
+        energy_index = str(self.epics_pvs["Energy"].get())
+        energy = self.epics_pvs["Energy"].get(as_string=True)
+        log.info("mctOptics: energy mode = %s",energy)
+
+        try:
+            energy_mode    = str(energy_lookup[energy_index]['mode'])
+            energy         = energy_lookup[energy_index]['energy']
             log.info('move monochromator')
-            log.info('energy set --mode %s --energy-value %f' % (energy_mode, energy))
+            log.info('energy set --mode %s --energy-value %s' % (energy_mode, energy))
+            self.epics_pvs['MCTStatus'].put('Changing energy: %s %s keV' %(energy_mode, energy))
+
+            file_name = 'energy2bm_' + energy_mode +"_" + energy + ".conf"
+            full_file_name = os.path.join(data_path, file_name)
+
+            command = 'energy set --config %s --testing --force' % (full_file_name)
+            subprocess.Popen(command, shell=True)
+            log.info(command)
 
             time.sleep(1)# possible backlash/stabilization, more??
-            # if self.epics_pvs['EnergyUseCalibration'].get(as_string=True) == 'Yes':                
-            #     try:
-            #         # read pvs for 2 energies
-            #         pvs1, pvs2, vals1, vals2 = [],[],[],[]
-            #         with open(self.epics_pvs['EnergyCalibrationFileOne'].get()) as fid:
-            #             for pv_val in fid.readlines():
-            #                 pv, val = pv_val[:-1].split(' ')
-            #                 pvs1.append(pv)
-            #                 vals1.append(float(val))
-            #         with open(self.epics_pvs['EnergyCalibrationFileTwo'].get()) as fid:
-            #             for pv_val in fid.readlines():
-            #                 pv, val = pv_val[:-1].split(' ')
-            #                 pvs2.append(pv)
-            #                 vals2.append(float(val))                    
-                    
-            #         for k in range(len(pvs1)):
-            #             if(pvs1[k]!=pvs2[k]):                            
-            #                 raise Exception()                            
-            #         if(np.abs(vals2[0]-vals1[0])<0.001):            
-            #             raise Exception()           
-            #         vals = []                     
-            #         for k in range(len(pvs1)):
-            #             vals.append(vals1[k]+(energy-vals1[0])*(vals2[k]-vals1[k])/(vals2[0]-vals1[0]))               
-            #         # set new pvs  
-            #         for k in range(1,len(pvs1)):# skip energy line                        
-            #             if pvs1[k]==self.epics_pvs['DetectorZ'].pvname:                            
-            #                 log.info('old Detector Z %3.3f', self.epics_pvs['DetectorZ'].get())
-            #                 self.epics_pvs['DetectorZ'].put(vals[k],wait=True)                                                        
-            #                 log.info('new Detector Z %3.3f', self.epics_pvs['DetectorZ'].get())
-            #             if pvs1[k]==self.epics_pvs['ZonePlateZ'].pvname:                            
-            #                 log.info('old Zone plate Z %3.3f', self.epics_pvs['ZonePlateZ'].get())
-            #                 self.epics_pvs['ZonePlateZ'].put(vals[k],wait=True)                                                        
-            #                 log.info('new Zone plate Z %3.3f', self.epics_pvs['ZonePlateZ'].get())
-            #             if pvs1[k]==self.epics_pvs['ZonePlateX'].pvname:                            
-            #                 log.info('old Zone plate X %3.3f', self.epics_pvs['ZonePlateX'].get())
-            #                 self.epics_pvs['ZonePlateX'].put(vals[k],wait=True)                                                        
-            #                 log.info('new Zone plate X %3.3f', self.epics_pvs['ZonePlateX'].get())
-            #             #maybe  y too..                        
-            #     except:
-            #         log.error('Calibration files are wrong.')
 
-                
             log.info('energy change is done')
+            self.epics_pvs['MCTStatus'].put('Done')
             self.epics_pvs['EnergyBusy'].put(0)   
-            self.epics_pvs['EnergySet'].put(0)      
+            self.epics_pvs['EnergySet'].put(0)   
 
+        except KeyError as e:
+            log.error('Enegy selected %s is not defined. Please add it to the ./data/energy.json file' % e)
+            log.error('Failed to update: Energy')
+
+        # if self.epics_pvs['EnergyUseCalibration'].get(as_string=True) == 'Yes':                
+        #     try:
+        #         # read pvs for 2 energies
+        #         pvs1, pvs2, vals1, vals2 = [],[],[],[]
+        #         with open(self.epics_pvs['EnergyCalibrationFileOne'].get()) as fid:
+        #             for pv_val in fid.readlines():
+        #                 pv, val = pv_val[:-1].split(' ')
+        #                 pvs1.append(pv)
+        #                 vals1.append(float(val))
+        #         with open(self.epics_pvs['EnergyCalibrationFileTwo'].get()) as fid:
+        #             for pv_val in fid.readlines():
+        #                 pv, val = pv_val[:-1].split(' ')
+        #                 pvs2.append(pv)
+        #                 vals2.append(float(val))                    
+                
+        #         for k in range(len(pvs1)):
+        #             if(pvs1[k]!=pvs2[k]):                            
+        #                 raise Exception()                            
+        #         if(np.abs(vals2[0]-vals1[0])<0.001):            
+        #             raise Exception()           
+        #         vals = []                     
+        #         for k in range(len(pvs1)):
+        #             vals.append(vals1[k]+(energy-vals1[0])*(vals2[k]-vals1[k])/(vals2[0]-vals1[0]))               
+        #         # set new pvs  
+        #         for k in range(1,len(pvs1)):# skip energy line                        
+        #             if pvs1[k]==self.epics_pvs['DetectorZ'].pvname:                            
+        #                 log.info('old Detector Z %3.3f', self.epics_pvs['DetectorZ'].get())
+        #                 self.epics_pvs['DetectorZ'].put(vals[k],wait=True)                                                        
+        #                 log.info('new Detector Z %3.3f', self.epics_pvs['DetectorZ'].get())
+        #             if pvs1[k]==self.epics_pvs['ZonePlateZ'].pvname:                            
+        #                 log.info('old Zone plate Z %3.3f', self.epics_pvs['ZonePlateZ'].get())
+        #                 self.epics_pvs['ZonePlateZ'].put(vals[k],wait=True)                                                        
+        #                 log.info('new Zone plate Z %3.3f', self.epics_pvs['ZonePlateZ'].get())
+        #             if pvs1[k]==self.epics_pvs['ZonePlateX'].pvname:                            
+        #                 log.info('old Zone plate X %3.3f', self.epics_pvs['ZonePlateX'].get())
+        #                 self.epics_pvs['ZonePlateX'].put(vals[k],wait=True)                                                        
+        #                 log.info('new Zone plate X %3.3f', self.epics_pvs['ZonePlateX'].get())
+        #             #maybe  y too..                        
+        #     except:
+        #         log.error('Calibration files are wrong.')
 
     def camera_bit(self, camera_id):
         
