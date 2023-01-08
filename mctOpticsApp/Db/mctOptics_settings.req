@@ -146,7 +146,6 @@ $(P)$(R)Camera1Name
 # Energy information
 ####################
 $(P)$(R)Energy
-$(P)$(R)EnergyMode
 $(P)$(R)Filters
 
 ###############
@@ -157,6 +156,7 @@ $(P)$(R)EnergyBusy
 $(P)$(R)EnergyUseCalibration
 $(P)$(R)EnergyCalibrationFileOne
 $(P)$(R)EnergyCalibrationFileTwo
+$(P)$(R)EnergyTesting
 
 ###################
 # Detector cropping
