@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOptics.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mctOptics.adl"
 	version=030111
 }
 display {
 	object {
-		x=894
-		y=337
+		x=406
+		y=246
 		width=885
 		height=605
 	}
@@ -156,7 +156,7 @@ rectangle {
 rectangle {
 	object {
 		x=485
-		y=380
+		y=377
 		width=380
 		height=20
 	}
@@ -167,7 +167,7 @@ rectangle {
 text {
 	object {
 		x=626
-		y=380
+		y=377
 		width=100
 		height=20
 	}
@@ -179,8 +179,8 @@ text {
 }
 "related display" {
 	object {
-		x=640
-		y=570
+		x=765
+		y=377
 		width=100
 		height=20
 	}
@@ -196,7 +196,7 @@ text {
 text {
 	object {
 		x=487
-		y=382
+		y=379
 		width=125
 		height=15
 	}
@@ -205,23 +205,10 @@ text {
 	}
 	textix="$(P)$(R)"
 }
-text {
-	object {
-		x=562
-		y=485
-		width=120
-		height=16
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Use calibration"
-	align="horiz. right"
-}
 "message button" {
 	object {
-		x=800
-		y=405
+		x=824
+		y=453
 		width=40
 		height=20
 	}
@@ -234,29 +221,15 @@ text {
 	press_msg="1"
 	release_msg="0"
 }
-"choice button" {
-	object {
-		x=690
-		y=480
-		width=90
-		height=25
-	}
-	control {
-		chan="$(P)$(R)EnergyUseCalibration"
-		clr=14
-		bclr=51
-	}
-	stacking="column"
-}
 "text entry" {
 	object {
-		x=560
-		y=510
-		width=220
+		x=545
+		y=540
+		width=270
 		height=25
 	}
 	control {
-		chan="$(P)$(R)EnergyCalibrationFileOne"
+		chan="$(P)$(R)EnergyCalibrationFile0"
 		clr=14
 		bclr=51
 	}
@@ -265,13 +238,13 @@ text {
 }
 "text entry" {
 	object {
-		x=560
-		y=540
-		width=220
+		x=545
+		y=570
+		width=270
 		height=25
 	}
 	control {
-		chan="$(P)$(R)EnergyCalibrationFileTwo"
+		chan="$(P)$(R)EnergyCalibrationFile1"
 		clr=14
 		bclr=51
 	}
@@ -280,8 +253,8 @@ text {
 }
 text {
 	object {
-		x=760
-		y=570
+		x=756
+		y=452
 		width=60
 		height=20
 	}
@@ -1601,5 +1574,273 @@ menu {
 		chan="$(P)$(R)EnergyTesting"
 		clr=14
 		bclr=51
+	}
+}
+text {
+	object {
+		x=825
+		y=540
+		width=30
+		height=20
+	}
+	"basic attribute" {
+		clr=20
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(R)EnergyCalibrationFile0Exists"
+	}
+	textix="Bad"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=825
+		y=570
+		width=30
+		height=20
+	}
+	"basic attribute" {
+		clr=20
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(R)EnergyCalibrationFile1Exists"
+	}
+	textix="Bad"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=480
+		y=540
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="File 1"
+}
+text {
+	object {
+		x=480
+		y=570
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="File 2"
+}
+text {
+	object {
+		x=480
+		y=510
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Folder"
+}
+"text entry" {
+	object {
+		x=545
+		y=510
+		width=270
+		height=25
+	}
+	control {
+		chan="$(P)$(R)EnergyCalibrationDir"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=825
+		y=510
+		width=30
+		height=20
+	}
+	"basic attribute" {
+		clr=20
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(R)EnergyCalibrationDirExists"
+	}
+	textix="Bad"
+	align="horiz. centered"
+}
+"choice button" {
+	object {
+		x=695
+		y=480
+		width=175
+		height=25
+	}
+	control {
+		chan="$(P)$(R)EnergyUseCalibration"
+		clr=14
+		bclr=51
+	}
+	stacking="column"
+}
+text {
+	object {
+		x=481
+		y=480
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Use Calibration Files"
+}
+composite {
+	object {
+		x=825
+		y=510
+		width=30
+		height=80
+	}
+	"composite name"=""
+	children {
+		text {
+			object {
+				x=825
+				y=570
+				width=30
+				height=20
+			}
+			"basic attribute" {
+				clr=15
+				fill="outline"
+			}
+			"dynamic attribute" {
+				vis="if not zero"
+				chan="$(P)$(R)EnergyCalibrationFile1Exists"
+			}
+			textix="OK"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=825
+				y=540
+				width=30
+				height=20
+			}
+			"basic attribute" {
+				clr=15
+				fill="outline"
+			}
+			"dynamic attribute" {
+				vis="if not zero"
+				chan="$(P)$(R)EnergyCalibrationFile0Exists"
+			}
+			textix="OK"
+			align="horiz. centered"
+		}
+		text {
+			object {
+				x=825
+				y=510
+				width=30
+				height=20
+			}
+			"basic attribute" {
+				clr=15
+				fill="outline"
+			}
+			"dynamic attribute" {
+				vis="if not zero"
+				chan="$(P)$(R)EnergyCalibrationDirExists"
+			}
+			textix="OK"
+			align="horiz. centered"
+		}
+	}
+}
+rectangle {
+	object {
+		x=473
+		y=396
+		width=400
+		height=35
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==0"
+		chan="$(P)$(R)EnergyUseCalibration.VAL"
+	}
+}
+rectangle {
+	object {
+		x=473
+		y=533
+		width=400
+		height=35
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==1"
+		chan="$(P)$(R)EnergyUseCalibration.VAL"
+	}
+}
+rectangle {
+	object {
+		x=473
+		y=564
+		width=400
+		height=35
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==2"
+		chan="$(P)$(R)EnergyUseCalibration.VAL"
+	}
+}
+rectangle {
+	object {
+		x=473
+		y=533
+		width=400
+		height=65
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==3"
+		chan="$(P)$(R)EnergyUseCalibration.VAL"
 	}
 }

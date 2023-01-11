@@ -1,4 +1,5 @@
 import os
+import pathlib
 import pvaccess as pva
 import numpy as np
 import queue
@@ -6,15 +7,16 @@ import time
 import threading
 import signal
 import json
+import configparser
 
 import subprocess
 
-from pathlib import Path
 from mctoptics import util
 from mctoptics import log
 from epics import PV
+from collections import OrderedDict
 
-data_path = Path(__file__).parent / 'data'
+data_path = pathlib.Path(__file__).parent / 'data'
 
 EPSILON = 0.1
 
@@ -136,7 +138,7 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning', 'EnergyCalibrationFile0', 'EnergyCalibrationFile1', 'EnergyCalibrationDir'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
         for epics_pv in ('Sync', 'Cut', 'EnergySet', 'EnergyBusy'):
             self.epics_pvs[epics_pv].put(0)
@@ -334,6 +336,12 @@ class MCTOptics():
         elif (pvname.find('CameraBinning') != -1) and ((value == 0) or (value == 1) or (value == 2)):
             thread = threading.Thread(target=self.camera_binning, args=())
             thread.start()
+        elif (pvname.find('EnergyCalibration') != -1):
+            thread = threading.Thread(target=self.energy_calibration, args=())
+            thread.start()
+
+
+
 
     def take_lens_offsets(self, lens, cam):
         if lens == 0:
@@ -686,7 +694,8 @@ class MCTOptics():
         if((camera_select_sync == -1) or (lens_select_sync == -1)):
             self.epics_pvs['MCTStatus'].put('Sync error: check log for details')
         else:
-            self.epics_pvs['MCTStatus'].put('Sync done!')
+            self.epics_pvs['MCTStatus'].put('Done')
+
         self.epics_pvs['Sync'].put('Done')
 
     def crop_detector(self):
@@ -741,6 +750,42 @@ class MCTOptics():
         suggested_angle_step = 180.0 / suggested_angles
         self.epics_pvs['SuggestedAngleStep'].put(suggested_angle_step)
 
+
+    def energy_calibration(self):
+
+        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
+            return
+
+        self.epics_pvs['MCTStatus'].put('Check energy calibration files')
+
+        directory = self.epics_pvs['EnergyCalibrationDir'].get()
+        file0 = self.epics_pvs['EnergyCalibrationFile0'].get()
+        file1 = self.epics_pvs['EnergyCalibrationFile1'].get()
+
+        log.info("mctOptics: energy calibration dir = %s", directory)
+        log.info("mctOptics: energy calibration file = %s",file0)
+        log.info("mctOptics: energy calibration file = %s",file1)
+
+        if pathlib.Path(directory).exists():
+            self.epics_pvs['EnergyCalibrationDirExists'].put(1)
+        else:
+            self.epics_pvs['EnergyCalibrationDirExists'].put(0)
+
+        if pathlib.Path(directory, file0).exists() and file0 != '':
+
+            self.epics_pvs['EnergyCalibrationFile0Exists'].put(1)
+        else:
+            self.epics_pvs['EnergyCalibrationFile0Exists'].put(0)
+
+        if pathlib.Path(directory, file1).exists()and file1 != '':
+            self.epics_pvs['EnergyCalibrationFile1Exists'].put(1)
+        else:
+            self.epics_pvs['EnergyCalibrationFile1Exists'].put(0)
+        
+        time.sleep(1) # for testing
+
+        self.epics_pvs['MCTStatus'].put('Done')
+
     def energy_change(self):
 
         if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
@@ -749,42 +794,67 @@ class MCTOptics():
         self.epics_pvs['MCTStatus'].put('Changing energy')
         self.epics_pvs['EnergyBusy'].put(1)
 
-        with open(os.path.join(data_path, 'energy.json')) as json_file:
-            energy_lookup = json.load(json_file)
+        directory = self.epics_pvs['EnergyCalibrationDir'].get()
+        file0 = self.epics_pvs['EnergyCalibrationFile0'].get()
+        file1 = self.epics_pvs['EnergyCalibrationFile1'].get()
 
-        energy_index = str(self.epics_pvs["Energy"].get())
-        energy = self.epics_pvs["Energy"].get(as_string=True)
-        log.info("mctOptics: energy mode = %s",energy)
+        if self.epics_pvs["EnergyUseCalibration"].get(as_string=True) == "None":
+            self.epics_pvs['MCTStatus'].put('Changing energy: using presets')
+            with open(os.path.join(data_path, 'energy.json')) as json_file:
+                energy_lookup = json.load(json_file)
 
-        try:
-            energy_mode    = str(energy_lookup[energy_index]['mode'])
-            energy         = energy_lookup[energy_index]['energy']
-            log.info('move monochromator')
-            log.info('energy set --mode %s --energy-value %s' % (energy_mode, energy))
-            self.epics_pvs['MCTStatus'].put('Changing energy: %s %s keV' %(energy_mode, energy))
+            energy_index = str(self.epics_pvs["Energy"].get())
+            energy = self.epics_pvs["Energy"].get(as_string=True)
+            log.info("mctOptics: energy mode = %s",energy)
 
-            file_name = 'energy2bm_' + energy_mode +"_" + energy + ".conf"
-            full_file_name = os.path.join(data_path, file_name)
+            try:
+                energy_mode    = str(energy_lookup[energy_index]['mode'])
+                energy         = energy_lookup[energy_index]['energy']
+                log.info('move monochromator')
+                log.info('energy set --mode %s --energy-value %s' % (energy_mode, energy))
+                self.epics_pvs['MCTStatus'].put('Changing energy: %s %s keV' %(energy_mode, energy))
 
-            if (self.epics_pvs["EnergyTesting"].get()):
-                command = 'energy set --config %s --testing --force' % (full_file_name)
-            else:
-                command = 'energy set --config %s --force' % (full_file_name)
-  
-            log.info(command)
-            subprocess.Popen(command, shell=True)
+                file_name = 'energy2bm_' + energy_mode +"_" + energy + ".conf"
+                full_file_name = os.path.join(data_path, file_name)
+                if (self.epics_pvs["EnergyTesting"].get()):
+                    command = 'energy set --config %s --testing --force' % (full_file_name)
+                else:
+                    command = 'energy set --config %s --force' % (full_file_name)
+                log.info(command)
+                subprocess.Popen(command, shell=True)
+                log.info('energy change is done using: %s', file_name)
+            except KeyError as e:
+                log.error('Enegy selected %s is not defined. Please add it to the ./data/energy.json file' % e)
+                log.error('Failed to update: Energy')
+        elif self.epics_pvs["EnergyUseCalibration"].get(as_string=True) == "One" and (pathlib.Path(directory, file0).exists() and file0 != ''):
+            full_file_name = os.path.join(directory, file0)
+            self.epics_pvs['MCTStatus'].put('Energy file: %s' % file0)
+            log.info('energy change is done using: %s', file0)
+            # if (self.epics_pvs["EnergyTesting"].get()):
+            #     command = 'energy set --config %s --testing --force' % (full_file_name)
+            # else:
+            #     command = 'energy set --config %s --force' % (full_file_name)
+        elif self.epics_pvs["EnergyUseCalibration"].get(as_string=True) == "Two" and (pathlib.Path(directory, file1).exists() and file1 != ''):
+            full_file_name = os.path.join(directory, file1)
+            self.epics_pvs['MCTStatus'].put('Energy file: %s' % file1)
+            log.info('energy change is done using: %s', file1)
+            # if (self.epics_pvs["EnergyTesting"].get()):
+            #     command = 'energy set --config %s --testing --force' % (full_file_name)
+            # else:
+            #     command = 'energy set --config %s --force' % (full_file_name)
+        elif self.epics_pvs["EnergyUseCalibration"].get(as_string=True) == "Both" and (pathlib.Path(directory, file0).exists() and file0 != '') and (pathlib.Path(directory, file1).exists() and file1 != ''):
+            full_file_name0 = os.path.join(directory, file0)
+            full_file_name1 = os.path.join(directory, file1)
+            self.epics_pvs['MCTStatus'].put('Energy files: %s and %s' % (file0, file1))
+            log.info('energy change is done using: %s and %s' % (file0, file1))
+        else:
+            self.epics_pvs['MCTStatus'].put('Failed to update energy')
+            log.error('Failed to update Energy. Check configuration files!')
 
-            time.sleep(1)# possible backlash/stabilization, more??
-
-            log.info('energy change is done')
-            self.epics_pvs['MCTStatus'].put('Done')
-            self.epics_pvs['EnergyBusy'].put(0)   
-            self.epics_pvs['EnergySet'].put(0)   
-
-        except KeyError as e:
-            log.error('Enegy selected %s is not defined. Please add it to the ./data/energy.json file' % e)
-            log.error('Failed to update: Energy')
-
+        time.sleep(2) # for testing
+        self.epics_pvs['MCTStatus'].put('Done')
+        self.epics_pvs['EnergyBusy'].put(0)   
+        self.epics_pvs['EnergySet'].put(0)   
         # if self.epics_pvs['EnergyUseCalibration'].get(as_string=True) == 'Yes':                
         #     try:
         #         # read pvs for 2 energies

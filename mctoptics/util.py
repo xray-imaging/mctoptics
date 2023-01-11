@@ -16,3 +16,10 @@ type_dict = {
 # add others
 }
 
+def positive_int(value):
+    """Convert *value* to an integer and make sure it is positive."""
+    result = int(value)
+    if result < 0:
+        raise argparse.ArgumentTypeError('Only positive integers are allowed')
+
+    return result

@@ -544,19 +544,48 @@ record(mbbo, "$(P)$(R)EnergyUseCalibration") {
   field(NOBT, "3")
   field(ZRVL, "0x0")
   field(ONVL, "0x1")
-  field(ZRST, "Yes")
-  field(ONST, "No")
+  field(TWVL, "0x2")
+  field(THVL, "0x3")
+  field(ZRST, "None")
+  field(ONST, "One")
+  field(TWST, "Two")
+  field(THST, "Both")
 }
 
-record(stringout, "$(P)$(R)EnergyCalibrationFileOne")
+record(stringout, "$(P)$(R)EnergyCalibrationDir")
+{
+   field(VAL,  "$(EN_DIR)")
+}
+
+record(stringout, "$(P)$(R)EnergyCalibrationFile0")
+{
+   field(VAL,  "$(EN_FILE0)")
+}
+
+record(stringout, "$(P)$(R)EnergyCalibrationFile1")
 {
    field(VAL,  "$(EN_FILE1)")
 }
 
-record(stringout, "$(P)$(R)EnergyCalibrationFileTwo")
+
+record(bo, "$(P)$(R)EnergyCalibrationDirExists")
 {
-   field(VAL,  "$(EN_FILE2)")
+   field(ZNAM, "No")
+   field(ONAM, "Yes")
 }
+
+record(bo, "$(P)$(R)EnergyCalibrationFile0Exists")
+{
+   field(ZNAM, "No")
+   field(ONAM, "Yes")
+}
+
+record(bo, "$(P)$(R)EnergyCalibrationFile1Exists")
+{
+   field(ZNAM, "No")
+   field(ONAM, "Yes")
+}
+
 
 record(bo, "$(P)$(R)EnergyTesting")
 {
