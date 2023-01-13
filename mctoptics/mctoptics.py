@@ -779,7 +779,7 @@ class MCTOptics():
         if energy_select < energy_max and energy_select >= energy_min:
             energy_calibrated = util.find_nearest(energies_flt, energy_select)
             
-            log.info('   ***   Selected energy %s; nearest calibrated: %s ' % (energy_select, energy_calibrated))
+            log.info('   ***   Selected energy %s; Nearest calibrated: %s ' % (energy_select, energy_calibrated))
             # print(energies_str)
 
             energy_closer_index  = np.where(energies_str == str(energy_calibrated))[0][0]
@@ -791,10 +791,11 @@ class MCTOptics():
                 energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=2)
                 energy_high = np.around(float(energies_str[energy_closer_index]), decimals=2)
                
-            log.info("   ***   Selected %4.2f calibrated range [%4.2f, %4.2f]" % (energy_select, energy_low, energy_high))
+            log.info("   ***   Calibrated range [%4.2f, %4.2f]" % (energy_low, energy_high))
             n = int(100*(energy_high-energy_low))
             interp_energies = np.linspace(energy_low, energy_high, n).round(decimals=2)
 
+            log.info("   ***   Calibrated range [%4.2f, %4.2f]" % (energy_low, energy_high))
             file_name0 = 'energy2bm_Mono_' + str('{0:.2f}'.format(interp_energies[0]))  + '.conf'
             file_name1 = 'energy2bm_Mono_' + str('{0:.2f}'.format(interp_energies[-1])) + '.conf'
     
@@ -849,7 +850,6 @@ class MCTOptics():
         else:
             self.epics_pvs['EnergyCalibrationFile0Exists'].put(0)
         
-        # util.interpolate_energy_config_files(full_file_name0, full_file_name1, energy_steps)
         time.sleep(2) # for testing
 
         self.epics_pvs['MCTStatus'].put('Done')
@@ -904,7 +904,7 @@ class MCTOptics():
             else:
                 command = 'energy set --config %s --force' % (full_file_name)
             log.info(command)
-            # subprocess.Popen(command, shell=True)
+            subprocess.Popen(command, shell=True)
         else:
             self.epics_pvs['MCTStatus'].put('Failed to update energy')
             log.error('Failed to update Energy. Check configuration files!')
