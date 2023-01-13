@@ -138,7 +138,7 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning', 'EnergyCalibrationFile0', 'EnergyCalibrationFile1', 'EnergyCalibrationDir'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning', 'EnergyArbitrarySet', 'EnergyCalibrationFile0', 'EnergyCalibrationDir'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
         for epics_pv in ('Sync', 'Cut', 'EnergySet', 'EnergyBusy'):
             self.epics_pvs[epics_pv].put(0)
@@ -339,9 +339,9 @@ class MCTOptics():
         elif (pvname.find('EnergyCalibration') != -1):
             thread = threading.Thread(target=self.energy_calibration, args=())
             thread.start()
-
-
-
+        elif (pvname.find('EnergyArbitrarySet') != -1) and (value == 1):
+            thread = threading.Thread(target=self.energy_arbitrary_change, args=())
+            thread.start()
 
     def take_lens_offsets(self, lens, cam):
         if lens == 0:
@@ -751,8 +751,82 @@ class MCTOptics():
         self.epics_pvs['SuggestedAngleStep'].put(suggested_angle_step)
 
 
+    def energy_arbitrary_change(self):
+
+        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done':
+            return
+        self.epics_pvs['MCTStatus'].put('Interpolation')
+        log.info('Intepolation starts')
+
+        energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
+
+        energy_select = np.around(energy_arbitrary, decimals=2)
+
+        with open(os.path.join(data_path, 'energy.json')) as json_file:
+            energy_lookup = json.load(json_file)
+
+        energy_list = []
+
+        for value in energy_lookup.values():
+            if value['mode'] == 'Mono':
+                energy_list.append(value['energy'])
+
+        energies_str = np.array(energy_list)
+        energies_flt = [float(i) for i in  energies_str]
+        energy_max = np.max(energies_flt)
+        energy_min = np.min(energies_flt)
+
+        if energy_select < energy_max and energy_select >= energy_min:
+            energy_calibrated = util.find_nearest(energies_flt, energy_select)
+            
+            log.info('   ***   Selected energy %s; nearest calibrated: %s ' % (energy_select, energy_calibrated))
+            # print(energies_str)
+
+            energy_closer_index  = np.where(energies_str == str(energy_calibrated))[0][0]
+
+            if energy_select >= float(energy_calibrated):
+                energy_low  = np.around(float(energies_str[energy_closer_index]), decimals=2)
+                energy_high = np.around(float(energies_str[energy_closer_index+1]), decimals=2)
+            else:
+                energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=2)
+                energy_high = np.around(float(energies_str[energy_closer_index]), decimals=2)
+               
+            log.info("   ***   Selected %4.2f calibrated range [%4.2f, %4.2f]" % (energy_select, energy_low, energy_high))
+            n = int(100*(energy_high-energy_low))
+            interp_energies = np.linspace(energy_low, energy_high, n).round(decimals=2)
+
+            file_name0 = 'energy2bm_Mono_' + str('{0:.2f}'.format(interp_energies[0]))  + '.conf'
+            file_name1 = 'energy2bm_Mono_' + str('{0:.2f}'.format(interp_energies[-1])) + '.conf'
+    
+            full_file_name0 = os.path.join(data_path, file_name0)
+            full_file_name1 = os.path.join(data_path, file_name1)
+             
+            log.info("   ***   Calibrated files used for intepolation:")
+            log.info("   ***   *** %s" , full_file_name0)
+            log.info("   ***   *** %s" , full_file_name1)
+            log.info("   ***   Interpolation steps: %d", n)
+
+            interp_energies_dict = util.interpolate_energy_config_files(full_file_name0, full_file_name1, n, energy_select)
+            for key in  interp_energies_dict:
+                if str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))) == str('{0:.2f}'.format(np.around(float(key), decimals=2))):
+                    file_name = 'energy2bm_interp_' + str('{0:.2f}'.format(np.around(float(key), decimals=2))) + '.conf'
+                    if self.epics_pvs['EnergyCalibrationDirExists'].get():
+                        directory = self.epics_pvs['EnergyCalibrationDir'].get()
+                        self.epics_pvs['EnergyCalibrationFile0'].put(file_name)
+                        full_file_name = pathlib.Path(directory, file_name)
+                        util.save_energy_config(full_file_name, str(key), interp_energies_dict[key])
+                        log.info("   ***   Created calibration file: %s" % full_file_name)
+        else:
+            log.error('Error: energy selected %4.2f is outside the calibrated range [%4.2f, %4.2f]' %(energy_select, energy_min, energy_max))
+            self.epics_pvs['MCTStatus'].put('Error: energy out of range')
+
+        time.sleep(2) # for testing
+
+        self.epics_pvs['MCTStatus'].put('Done')
+
     def energy_calibration(self):
 
+        print('energy_calibration')
         if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
             return
 
@@ -760,34 +834,29 @@ class MCTOptics():
 
         directory = self.epics_pvs['EnergyCalibrationDir'].get()
         file0 = self.epics_pvs['EnergyCalibrationFile0'].get()
-        file1 = self.epics_pvs['EnergyCalibrationFile1'].get()
 
         log.info("mctOptics: energy calibration dir = %s", directory)
         log.info("mctOptics: energy calibration file = %s",file0)
-        log.info("mctOptics: energy calibration file = %s",file1)
 
         if pathlib.Path(directory).exists():
             self.epics_pvs['EnergyCalibrationDirExists'].put(1)
         else:
             self.epics_pvs['EnergyCalibrationDirExists'].put(0)
 
+        print(directory, file0, pathlib.Path(directory, file0).exists())
         if pathlib.Path(directory, file0).exists() and file0 != '':
-
             self.epics_pvs['EnergyCalibrationFile0Exists'].put(1)
         else:
             self.epics_pvs['EnergyCalibrationFile0Exists'].put(0)
-
-        if pathlib.Path(directory, file1).exists()and file1 != '':
-            self.epics_pvs['EnergyCalibrationFile1Exists'].put(1)
-        else:
-            self.epics_pvs['EnergyCalibrationFile1Exists'].put(0)
         
-        time.sleep(1) # for testing
+        # util.interpolate_energy_config_files(full_file_name0, full_file_name1, energy_steps)
+        time.sleep(2) # for testing
 
         self.epics_pvs['MCTStatus'].put('Done')
 
     def energy_change(self):
 
+        print('energy_change')
         if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
             return
             
@@ -796,20 +865,20 @@ class MCTOptics():
 
         directory = self.epics_pvs['EnergyCalibrationDir'].get()
         file0 = self.epics_pvs['EnergyCalibrationFile0'].get()
-        file1 = self.epics_pvs['EnergyCalibrationFile1'].get()
 
-        if self.epics_pvs["EnergyUseCalibration"].get(as_string=True) == "None":
+        if self.epics_pvs["EnergyCalibrationUse"].get(as_string=True) == "No":
             self.epics_pvs['MCTStatus'].put('Changing energy: using presets')
             with open(os.path.join(data_path, 'energy.json')) as json_file:
                 energy_lookup = json.load(json_file)
 
-            energy_index = str(self.epics_pvs["Energy"].get())
-            energy = self.epics_pvs["Energy"].get(as_string=True)
-            log.info("mctOptics: energy mode = %s",energy)
+            energy_choice_index = str(self.epics_pvs["EnergyChoice"].get())
+            energy_choice       = self.epics_pvs["EnergyChoice"].get(as_string=True)
+
+            log.info("mctOptics: energy choice = %s",energy_choice)
 
             try:
-                energy_mode    = str(energy_lookup[energy_index]['mode'])
-                energy         = energy_lookup[energy_index]['energy']
+                energy_mode    = str(energy_lookup[energy_choice_index]['mode'])
+                energy         = energy_lookup[energy_choice_index]['energy']
                 log.info('move monochromator')
                 log.info('energy set --mode %s --energy-value %s' % (energy_mode, energy))
                 self.epics_pvs['MCTStatus'].put('Changing energy: %s %s keV' %(energy_mode, energy))
@@ -826,27 +895,16 @@ class MCTOptics():
             except KeyError as e:
                 log.error('Enegy selected %s is not defined. Please add it to the ./data/energy.json file' % e)
                 log.error('Failed to update: Energy')
-        elif self.epics_pvs["EnergyUseCalibration"].get(as_string=True) == "One" and (pathlib.Path(directory, file0).exists() and file0 != ''):
+        elif self.epics_pvs["EnergyCalibrationUse"].get(as_string=True) == "Yes" and (pathlib.Path(directory, file0).exists() and file0 != ''):
             full_file_name = os.path.join(directory, file0)
             self.epics_pvs['MCTStatus'].put('Energy file: %s' % file0)
             log.info('energy change is done using: %s', file0)
-            # if (self.epics_pvs["EnergyTesting"].get()):
-            #     command = 'energy set --config %s --testing --force' % (full_file_name)
-            # else:
-            #     command = 'energy set --config %s --force' % (full_file_name)
-        elif self.epics_pvs["EnergyUseCalibration"].get(as_string=True) == "Two" and (pathlib.Path(directory, file1).exists() and file1 != ''):
-            full_file_name = os.path.join(directory, file1)
-            self.epics_pvs['MCTStatus'].put('Energy file: %s' % file1)
-            log.info('energy change is done using: %s', file1)
-            # if (self.epics_pvs["EnergyTesting"].get()):
-            #     command = 'energy set --config %s --testing --force' % (full_file_name)
-            # else:
-            #     command = 'energy set --config %s --force' % (full_file_name)
-        elif self.epics_pvs["EnergyUseCalibration"].get(as_string=True) == "Both" and (pathlib.Path(directory, file0).exists() and file0 != '') and (pathlib.Path(directory, file1).exists() and file1 != ''):
-            full_file_name0 = os.path.join(directory, file0)
-            full_file_name1 = os.path.join(directory, file1)
-            self.epics_pvs['MCTStatus'].put('Energy files: %s and %s' % (file0, file1))
-            log.info('energy change is done using: %s and %s' % (file0, file1))
+            if (self.epics_pvs["EnergyTesting"].get()):
+                command = 'energy set --config %s --testing --force' % (full_file_name)
+            else:
+                command = 'energy set --config %s --force' % (full_file_name)
+            log.info(command)
+            # subprocess.Popen(command, shell=True)
         else:
             self.epics_pvs['MCTStatus'].put('Failed to update energy')
             log.error('Failed to update Energy. Check configuration files!')
@@ -855,46 +913,6 @@ class MCTOptics():
         self.epics_pvs['MCTStatus'].put('Done')
         self.epics_pvs['EnergyBusy'].put(0)   
         self.epics_pvs['EnergySet'].put(0)   
-        # if self.epics_pvs['EnergyUseCalibration'].get(as_string=True) == 'Yes':                
-        #     try:
-        #         # read pvs for 2 energies
-        #         pvs1, pvs2, vals1, vals2 = [],[],[],[]
-        #         with open(self.epics_pvs['EnergyCalibrationFileOne'].get()) as fid:
-        #             for pv_val in fid.readlines():
-        #                 pv, val = pv_val[:-1].split(' ')
-        #                 pvs1.append(pv)
-        #                 vals1.append(float(val))
-        #         with open(self.epics_pvs['EnergyCalibrationFileTwo'].get()) as fid:
-        #             for pv_val in fid.readlines():
-        #                 pv, val = pv_val[:-1].split(' ')
-        #                 pvs2.append(pv)
-        #                 vals2.append(float(val))                    
-                
-        #         for k in range(len(pvs1)):
-        #             if(pvs1[k]!=pvs2[k]):                            
-        #                 raise Exception()                            
-        #         if(np.abs(vals2[0]-vals1[0])<0.001):            
-        #             raise Exception()           
-        #         vals = []                     
-        #         for k in range(len(pvs1)):
-        #             vals.append(vals1[k]+(energy-vals1[0])*(vals2[k]-vals1[k])/(vals2[0]-vals1[0]))               
-        #         # set new pvs  
-        #         for k in range(1,len(pvs1)):# skip energy line                        
-        #             if pvs1[k]==self.epics_pvs['DetectorZ'].pvname:                            
-        #                 log.info('old Detector Z %3.3f', self.epics_pvs['DetectorZ'].get())
-        #                 self.epics_pvs['DetectorZ'].put(vals[k],wait=True)                                                        
-        #                 log.info('new Detector Z %3.3f', self.epics_pvs['DetectorZ'].get())
-        #             if pvs1[k]==self.epics_pvs['ZonePlateZ'].pvname:                            
-        #                 log.info('old Zone plate Z %3.3f', self.epics_pvs['ZonePlateZ'].get())
-        #                 self.epics_pvs['ZonePlateZ'].put(vals[k],wait=True)                                                        
-        #                 log.info('new Zone plate Z %3.3f', self.epics_pvs['ZonePlateZ'].get())
-        #             if pvs1[k]==self.epics_pvs['ZonePlateX'].pvname:                            
-        #                 log.info('old Zone plate X %3.3f', self.epics_pvs['ZonePlateX'].get())
-        #                 self.epics_pvs['ZonePlateX'].put(vals[k],wait=True)                                                        
-        #                 log.info('new Zone plate X %3.3f', self.epics_pvs['ZonePlateX'].get())
-        #             #maybe  y too..                        
-        #     except:
-        #         log.error('Calibration files are wrong.')
 
     def camera_bit(self, camera_id):
         

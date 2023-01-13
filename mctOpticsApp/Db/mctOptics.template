@@ -491,7 +491,25 @@ record(stringout, "$(P)$(R)Camera1Name")
 # Energy information
 ####################
 
-record(mbbo, "$(P)$(R)Energy")
+
+record(ao, "$(P)$(R)Energy") 
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(PREC, 2)
+}
+
+record(mbbo, "$(P)$(R)EnergyMode")
+{
+   field(ZRVL, "0")
+   field(ZRST, "Mono")
+   field(ONVL, "1")
+   field(ONST, "Pink")
+   field(TWVL, "2")
+   field(TWST, "White")
+}
+
+record(mbbo, "$(P)$(R)EnergyChoice")
 {
    field(ZRVL, "0")
    field(ZRST, "Pink 30.00")
@@ -539,17 +557,13 @@ record(busy, "$(P)$(R)EnergyBusy")
    field(ONAM, "Busy")
 }
 
-record(mbbo, "$(P)$(R)EnergyUseCalibration") {
+record(mbbo, "$(P)$(R)EnergyCalibrationUse") {
   field(DTYP, "Raw Soft Channel")
   field(NOBT, "3")
   field(ZRVL, "0x0")
   field(ONVL, "0x1")
-  field(TWVL, "0x2")
-  field(THVL, "0x3")
-  field(ZRST, "None")
-  field(ONST, "One")
-  field(TWST, "Two")
-  field(THST, "Both")
+  field(ZRST, "No")
+  field(ONST, "Yes")
 }
 
 record(stringout, "$(P)$(R)EnergyCalibrationDir")
@@ -561,12 +575,6 @@ record(stringout, "$(P)$(R)EnergyCalibrationFile0")
 {
    field(VAL,  "$(EN_FILE0)")
 }
-
-record(stringout, "$(P)$(R)EnergyCalibrationFile1")
-{
-   field(VAL,  "$(EN_FILE1)")
-}
-
 
 record(bo, "$(P)$(R)EnergyCalibrationDirExists")
 {
@@ -580,12 +588,21 @@ record(bo, "$(P)$(R)EnergyCalibrationFile0Exists")
    field(ONAM, "Yes")
 }
 
-record(bo, "$(P)$(R)EnergyCalibrationFile1Exists")
+record(busy,"$(P)$(R)EnergyArbitrarySet")
 {
-   field(ZNAM, "No")
-   field(ONAM, "Yes")
+   field(ZNAM,"Done")
+   field(ZSV, "NO_ALARM")
+   field(ONAM,"Set")
+   field(OSV, "MINOR")
+   field(VAL, "0")
 }
 
+record(ao, "$(P)$(R)EnergyArbitrary") 
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(PREC, 2)
+}
 
 record(bo, "$(P)$(R)EnergyTesting")
 {

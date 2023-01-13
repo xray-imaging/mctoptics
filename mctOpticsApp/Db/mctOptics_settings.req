@@ -146,6 +146,8 @@ $(P)$(R)Camera1Name
 # Energy information
 ####################
 $(P)$(R)Energy
+$(P)$(R)EnergyMode
+$(P)$(R)EnergyChoice
 $(P)$(R)Filters
 
 ###############
@@ -153,13 +155,13 @@ $(P)$(R)Filters
 ###############
 $(P)$(R)EnergySet
 $(P)$(R)EnergyBusy
-$(P)$(R)EnergyUseCalibration
+$(P)$(R)EnergyCalibrationUse
 $(P)$(R)EnergyCalibrationDir
 $(P)$(R)EnergyCalibrationDirExists
 $(P)$(R)EnergyCalibrationFile0
-$(P)$(R)EnergyCalibrationFile1
 $(P)$(R)EnergyCalibrationFile0Exists
-$(P)$(R)EnergyCalibrationFile1Exists
+$(P)$(R)EnergyArbitrary
+$(P)$(R)EnergyArbitrarySet
 $(P)$(R)EnergyTesting
 
 ###################

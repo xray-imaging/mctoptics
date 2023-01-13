@@ -5,10 +5,10 @@ file {
 }
 display {
 	object {
-		x=406
-		y=246
+		x=396
+		y=238
 		width=885
-		height=605
+		height=635
 	}
 	clr=14
 	bclr=4
@@ -87,187 +87,18 @@ display {
 		1a7309,
 	}
 }
-"text entry" {
-	object {
-		x=625
-		y=430
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Filters"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-menu {
-	object {
-		x=625
-		y=405
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Energy"
-		clr=14
-		bclr=51
-	}
-}
-text {
-	object {
-		x=510
-		y=405
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy"
-}
-text {
-	object {
-		x=510
-		y=430
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Filters"
-}
 rectangle {
 	object {
 		x=468
 		y=370
 		width=410
-		height=230
+		height=260
 	}
 	"basic attribute" {
 		clr=14
 		fill="outline"
 		width=5
 	}
-}
-rectangle {
-	object {
-		x=485
-		y=377
-		width=380
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=626
-		y=377
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="Energy"
-	align="horiz. centered"
-}
-"related display" {
-	object {
-		x=765
-		y=377
-		width=100
-		height=20
-	}
-	display[0] {
-		label="EnergyUpdate"
-		name="EnergyUpdate.adl"
-		args="P=$(P),R=$(R)"
-	}
-	clr=14
-	bclr=51
-	label="-CLI"
-}
-text {
-	object {
-		x=487
-		y=379
-		width=125
-		height=15
-	}
-	"basic attribute" {
-		clr=20
-	}
-	textix="$(P)$(R)"
-}
-"message button" {
-	object {
-		x=824
-		y=453
-		width=40
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergySet"
-		clr=14
-		bclr=15
-	}
-	label="Set"
-	press_msg="1"
-	release_msg="0"
-}
-"text entry" {
-	object {
-		x=545
-		y=540
-		width=270
-		height=25
-	}
-	control {
-		chan="$(P)$(R)EnergyCalibrationFile0"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=545
-		y=570
-		width=270
-		height=25
-	}
-	control {
-		chan="$(P)$(R)EnergyCalibrationFile1"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-text {
-	object {
-		x=756
-		y=452
-		width=60
-		height=20
-	}
-	"basic attribute" {
-		clr=20
-		fill="outline"
-	}
-	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P)$(R)EnergyBusy"
-	}
-	textix="Busy"
-	align="horiz. centered"
 }
 composite {
 	object {
@@ -1539,205 +1370,164 @@ rectangle {
 	limits {
 	}
 }
-text {
-	object {
-		x=745
-		y=405
-		width=45
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="keV"
-}
-text {
-	object {
-		x=510
-		y=455
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Testing"
-}
-menu {
-	object {
-		x=625
-		y=455
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyTesting"
-		clr=14
-		bclr=51
-	}
-}
-text {
-	object {
-		x=825
-		y=540
-		width=30
-		height=20
-	}
-	"basic attribute" {
-		clr=20
-		fill="outline"
-	}
-	"dynamic attribute" {
-		vis="if zero"
-		chan="$(P)$(R)EnergyCalibrationFile0Exists"
-	}
-	textix="Bad"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=825
-		y=570
-		width=30
-		height=20
-	}
-	"basic attribute" {
-		clr=20
-		fill="outline"
-	}
-	"dynamic attribute" {
-		vis="if zero"
-		chan="$(P)$(R)EnergyCalibrationFile1Exists"
-	}
-	textix="Bad"
-	align="horiz. centered"
-}
-text {
-	object {
-		x=480
-		y=540
-		width=60
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="File 1"
-}
-text {
-	object {
-		x=480
-		y=570
-		width=60
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="File 2"
-}
-text {
-	object {
-		x=480
-		y=510
-		width=60
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Folder"
-}
-"text entry" {
-	object {
-		x=545
-		y=510
-		width=270
-		height=25
-	}
-	control {
-		chan="$(P)$(R)EnergyCalibrationDir"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-text {
-	object {
-		x=825
-		y=510
-		width=30
-		height=20
-	}
-	"basic attribute" {
-		clr=20
-		fill="outline"
-	}
-	"dynamic attribute" {
-		vis="if zero"
-		chan="$(P)$(R)EnergyCalibrationDirExists"
-	}
-	textix="Bad"
-	align="horiz. centered"
-}
-"choice button" {
-	object {
-		x=695
-		y=480
-		width=175
-		height=25
-	}
-	control {
-		chan="$(P)$(R)EnergyUseCalibration"
-		clr=14
-		bclr=51
-	}
-	stacking="column"
-}
-text {
-	object {
-		x=481
-		y=480
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Use Calibration Files"
-}
 composite {
 	object {
-		x=825
-		y=510
-		width=30
-		height=80
+		x=473
+		y=377
+		width=400
+		height=246
 	}
 	"composite name"=""
 	children {
-		text {
+		rectangle {
 			object {
-				x=825
-				y=570
-				width=30
+				x=485
+				y=377
+				width=380
 				height=20
 			}
 			"basic attribute" {
-				clr=15
-				fill="outline"
+				clr=2
 			}
-			"dynamic attribute" {
-				vis="if not zero"
-				chan="$(P)$(R)EnergyCalibrationFile1Exists"
+		}
+		text {
+			object {
+				x=626
+				y=377
+				width=100
+				height=20
 			}
-			textix="OK"
+			"basic attribute" {
+				clr=54
+			}
+			textix="Energy"
 			align="horiz. centered"
+		}
+		"related display" {
+			object {
+				x=765
+				y=377
+				width=100
+				height=20
+			}
+			display[0] {
+				label="EnergyUpdate"
+				name="EnergyUpdate.adl"
+				args="P=$(P),R=$(R)"
+			}
+			clr=14
+			bclr=51
+			label="-CLI"
+		}
+		text {
+			object {
+				x=487
+				y=379
+				width=125
+				height=15
+			}
+			"basic attribute" {
+				clr=20
+			}
+			textix="$(P)$(R)"
+		}
+		"text entry" {
+			object {
+				x=660
+				y=603
+				width=50
+				height=20
+			}
+			control {
+				chan="$(P)$(R)EnergyArbitrary"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		text {
+			object {
+				x=480
+				y=603
+				width=175
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Arb. Energy value"
+		}
+		text {
+			object {
+				x=715
+				y=603
+				width=45
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="keV"
+		}
+		"text entry" {
+			object {
+				x=545
+				y=571
+				width=270
+				height=25
+			}
+			control {
+				chan="$(P)$(R)EnergyCalibrationFile0"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
+		}
+		text {
+			object {
+				x=480
+				y=571
+				width=60
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="File"
+		}
+		text {
+			object {
+				x=480
+				y=541
+				width=60
+				height=20
+			}
+			"basic attribute" {
+				clr=14
+			}
+			textix="Folder"
+		}
+		"text entry" {
+			object {
+				x=545
+				y=541
+				width=270
+				height=25
+			}
+			control {
+				chan="$(P)$(R)EnergyCalibrationDir"
+				clr=14
+				bclr=51
+			}
+			limits {
+			}
 		}
 		text {
 			object {
 				x=825
-				y=540
+				y=571
 				width=30
 				height=20
 			}
@@ -1752,10 +1542,28 @@ composite {
 			textix="OK"
 			align="horiz. centered"
 		}
+		rectangle {
+			object {
+				x=473
+				y=535
+				width=400
+				height=65
+			}
+			"basic attribute" {
+				clr=62
+				fill="outline"
+				width=5
+			}
+			"dynamic attribute" {
+				vis="calc"
+				calc="A==1"
+				chan="$(P)$(R)EnergyCalibrationUse.VAL"
+			}
+		}
 		text {
 			object {
 				x=825
-				y=510
+				y=541
 				width=30
 				height=20
 			}
@@ -1770,77 +1578,314 @@ composite {
 			textix="OK"
 			align="horiz. centered"
 		}
-	}
-}
-rectangle {
-	object {
-		x=473
-		y=396
-		width=400
-		height=35
-	}
-	"basic attribute" {
-		clr=62
-		fill="outline"
-		width=5
-	}
-	"dynamic attribute" {
-		vis="calc"
-		calc="A==0"
-		chan="$(P)$(R)EnergyUseCalibration.VAL"
-	}
-}
-rectangle {
-	object {
-		x=473
-		y=533
-		width=400
-		height=35
-	}
-	"basic attribute" {
-		clr=62
-		fill="outline"
-		width=5
-	}
-	"dynamic attribute" {
-		vis="calc"
-		calc="A==1"
-		chan="$(P)$(R)EnergyUseCalibration.VAL"
-	}
-}
-rectangle {
-	object {
-		x=473
-		y=564
-		width=400
-		height=35
-	}
-	"basic attribute" {
-		clr=62
-		fill="outline"
-		width=5
-	}
-	"dynamic attribute" {
-		vis="calc"
-		calc="A==2"
-		chan="$(P)$(R)EnergyUseCalibration.VAL"
-	}
-}
-rectangle {
-	object {
-		x=473
-		y=533
-		width=400
-		height=65
-	}
-	"basic attribute" {
-		clr=62
-		fill="outline"
-		width=5
-	}
-	"dynamic attribute" {
-		vis="calc"
-		calc="A==3"
-		chan="$(P)$(R)EnergyUseCalibration.VAL"
+		composite {
+			object {
+				x=825
+				y=541
+				width=30
+				height=51
+			}
+			"composite name"=""
+			children {
+				text {
+					object {
+						x=825
+						y=572
+						width=30
+						height=20
+					}
+					"basic attribute" {
+						clr=20
+						fill="outline"
+					}
+					"dynamic attribute" {
+						vis="if zero"
+						chan="$(P)$(R)EnergyCalibrationFile0Exists"
+					}
+					textix="Bad"
+					align="horiz. centered"
+				}
+				text {
+					object {
+						x=825
+						y=541
+						width=30
+						height=20
+					}
+					"basic attribute" {
+						clr=20
+						fill="outline"
+					}
+					"dynamic attribute" {
+						vis="if zero"
+						chan="$(P)$(R)EnergyCalibrationDirExists"
+					}
+					textix="Bad"
+					align="horiz. centered"
+				}
+			}
+		}
+		"message button" {
+			object {
+				x=775
+				y=603
+				width=90
+				height=20
+			}
+			control {
+				chan="$(P)$(R)EnergyArbitrarySet"
+				clr=14
+				bclr=15
+			}
+			label="Interpolate"
+			press_msg="1"
+			release_msg="0"
+		}
+		composite {
+			object {
+				x=510
+				y=405
+				width=355
+				height=20
+			}
+			"composite name"=""
+			children {
+				"message button" {
+					object {
+						x=825
+						y=405
+						width=40
+						height=20
+					}
+					control {
+						chan="$(P)$(R)EnergySet"
+						clr=14
+						bclr=15
+					}
+					label="Set"
+					press_msg="1"
+					release_msg="0"
+				}
+				text {
+					object {
+						x=760
+						y=405
+						width=60
+						height=20
+					}
+					"basic attribute" {
+						clr=20
+						fill="outline"
+					}
+					"dynamic attribute" {
+						vis="if not zero"
+						chan="$(P)$(R)EnergyBusy"
+					}
+					textix="Busy"
+					align="horiz. centered"
+				}
+				text {
+					object {
+						x=510
+						y=405
+						width=60
+						height=20
+					}
+					"basic attribute" {
+						clr=14
+					}
+					textix="Status:"
+				}
+				text {
+					object {
+						x=720
+						y=405
+						width=45
+						height=20
+					}
+					"basic attribute" {
+						clr=14
+					}
+					textix="keV"
+				}
+				"text update" {
+					object {
+						x=585
+						y=405
+						width=65
+						height=20
+					}
+					monitor {
+						chan="$(P)$(R)EnergyMode"
+						clr=14
+						bclr=51
+					}
+					align="horiz. centered"
+					limits {
+					}
+				}
+				"text update" {
+					object {
+						x=650
+						y=405
+						width=65
+						height=20
+					}
+					monitor {
+						chan="$(P)$(R)Energy"
+						clr=14
+						bclr=51
+					}
+					align="horiz. centered"
+					limits {
+					}
+				}
+			}
+		}
+		composite {
+			object {
+				x=473
+				y=430
+				width=400
+				height=100
+			}
+			"composite name"=""
+			children {
+				"text entry" {
+					object {
+						x=625
+						y=490
+						width=100
+						height=20
+					}
+					control {
+						chan="$(P)$(R)Filters"
+						clr=14
+						bclr=51
+					}
+					format="string"
+					limits {
+					}
+				}
+				text {
+					object {
+						x=510
+						y=490
+						width=100
+						height=20
+					}
+					"basic attribute" {
+						clr=14
+					}
+					textix="Filters"
+				}
+				text {
+					object {
+						x=510
+						y=510
+						width=100
+						height=20
+					}
+					"basic attribute" {
+						clr=14
+					}
+					textix="Testing"
+				}
+				menu {
+					object {
+						x=625
+						y=510
+						width=100
+						height=20
+					}
+					control {
+						chan="$(P)$(R)EnergyTesting"
+						clr=14
+						bclr=51
+					}
+				}
+				"choice button" {
+					object {
+						x=625
+						y=430
+						width=100
+						height=25
+					}
+					control {
+						chan="$(P)$(R)EnergyCalibrationUse"
+						clr=14
+						bclr=51
+					}
+					stacking="column"
+				}
+				text {
+					object {
+						x=510
+						y=430
+						width=100
+						height=20
+					}
+					"basic attribute" {
+						clr=14
+					}
+					textix="Use File"
+				}
+				menu {
+					object {
+						x=625
+						y=462
+						width=100
+						height=20
+					}
+					control {
+						chan="$(P)$(R)EnergyChoice"
+						clr=14
+						bclr=51
+					}
+				}
+				rectangle {
+					object {
+						x=473
+						y=455
+						width=400
+						height=35
+					}
+					"basic attribute" {
+						clr=62
+						fill="outline"
+						width=5
+					}
+					"dynamic attribute" {
+						vis="calc"
+						calc="A==0"
+						chan="$(P)$(R)EnergyCalibrationUse.VAL"
+					}
+				}
+				text {
+					object {
+						x=510
+						y=462
+						width=100
+						height=20
+					}
+					"basic attribute" {
+						clr=14
+					}
+					textix="Energy"
+				}
+				text {
+					object {
+						x=730
+						y=463
+						width=45
+						height=20
+					}
+					"basic attribute" {
+						clr=14
+					}
+					textix="keV"
+				}
+			}
+		}
 	}
 }
