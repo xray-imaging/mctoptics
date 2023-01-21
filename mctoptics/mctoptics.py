@@ -138,7 +138,7 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning', 'EnergyArbitrarySet', 'EnergyCalibrationFile0', 'EnergyCalibrationDir'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning', 'EnergyArbitrarySet'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
         for epics_pv in ('Sync', 'Cut', 'EnergySet', 'EnergyBusy'):
             self.epics_pvs[epics_pv].put(0)
@@ -335,9 +335,6 @@ class MCTOptics():
             thread.start()
         elif (pvname.find('CameraBinning') != -1) and ((value == 0) or (value == 1) or (value == 2)):
             thread = threading.Thread(target=self.camera_binning, args=())
-            thread.start()
-        elif (pvname.find('EnergyCalibration') != -1):
-            thread = threading.Thread(target=self.energy_calibration, args=())
             thread.start()
         elif (pvname.find('EnergyArbitrarySet') != -1) and (value == 1):
             thread = threading.Thread(target=self.energy_arbitrary_change, args=())
@@ -821,35 +818,6 @@ class MCTOptics():
             log.error('Error: energy selected %4.2f is outside the calibrated range [%4.2f, %4.2f]' %(energy_select, energy_min, energy_max))
             self.epics_pvs['MCTStatus'].put('Error: energy out of range')
 
-        time.sleep(2) # for testing
-
-        self.epics_pvs['MCTStatus'].put('Done')
-
-    def energy_calibration(self):
-
-        print('energy_calibration')
-        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
-            return
-
-        self.epics_pvs['MCTStatus'].put('Check energy calibration files')
-
-        directory = self.epics_pvs['EnergyCalibrationDir'].get()
-        file0 = self.epics_pvs['EnergyCalibrationFile0'].get()
-
-        log.info("mctOptics: energy calibration dir = %s", directory)
-        log.info("mctOptics: energy calibration file = %s",file0)
-
-        if pathlib.Path(directory).exists():
-            self.epics_pvs['EnergyCalibrationDirExists'].put(1)
-        else:
-            self.epics_pvs['EnergyCalibrationDirExists'].put(0)
-
-        print(directory, file0, pathlib.Path(directory, file0).exists())
-        if pathlib.Path(directory, file0).exists() and file0 != '':
-            self.epics_pvs['EnergyCalibrationFile0Exists'].put(1)
-        else:
-            self.epics_pvs['EnergyCalibrationFile0Exists'].put(0)
-        
         time.sleep(2) # for testing
 
         self.epics_pvs['MCTStatus'].put('Done')

@@ -156,10 +156,6 @@ $(P)$(R)Filters
 $(P)$(R)EnergySet
 $(P)$(R)EnergyBusy
 $(P)$(R)EnergyCalibrationUse
-$(P)$(R)EnergyCalibrationDir
-$(P)$(R)EnergyCalibrationDirExists
-$(P)$(R)EnergyCalibrationFile0
-$(P)$(R)EnergyCalibrationFile0Exists
 $(P)$(R)EnergyArbitrary
 $(P)$(R)EnergyArbitrarySet
 $(P)$(R)EnergyTesting

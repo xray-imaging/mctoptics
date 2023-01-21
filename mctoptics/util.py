@@ -12,7 +12,7 @@ def interpolate_energy_config_files(fname0, fname1, n, select):
 
     keys = list(energies.keys())
     interp_energies                 = np.linspace(float(keys[0]), float(keys[1]), n)
-    interp_mirror_angle             = np.linspace(float(energies[keys[0]]['mirror-angle']),             float(energies[keys[0]]['mirror-angle']), n)
+    interp_mirror_angle             = np.linspace(float(energies[keys[0]]['mirror-angle']),             float(energies[keys[1]]['mirror-angle']), n)
     interp_mirror_vertical_position = np.linspace(float(energies[keys[0]]['mirror-vertical-position']), float(energies[keys[1]]['mirror-vertical-position']), n)
     interp_dmm_usy_ob               = np.linspace(float(energies[keys[0]]['dmm-usy-ob']),               float(energies[keys[1]]['dmm-usy-ob']), n)
     interp_dmm_usy_ib               = np.linspace(float(energies[keys[0]]['dmm-usy-ib']),               float(energies[keys[1]]['dmm-usy-ib']), n)
