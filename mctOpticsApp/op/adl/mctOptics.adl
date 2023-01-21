@@ -1482,25 +1482,9 @@ rectangle {
 }
 "message button" {
 	object {
-		x=775
-		y=545
-		width=90
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyArbitrarySet"
-		clr=14
-		bclr=15
-	}
-	label="Interpolate"
-	press_msg="1"
-	release_msg="0"
-}
-"message button" {
-	object {
-		x=825
-		y=405
-		width=40
+		x=770
+		y=585
+		width=100
 		height=20
 	}
 	control {
@@ -1514,8 +1498,8 @@ rectangle {
 }
 text {
 	object {
-		x=760
-		y=405
+		x=700
+		y=585
 		width=60
 		height=20
 	}
@@ -1723,4 +1707,40 @@ text {
 		clr=14
 	}
 	textix="keV"
+}
+text {
+	object {
+		x=765
+		y=545
+		width=30
+		height=20
+	}
+	"basic attribute" {
+		clr=15
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(R)EnergyInRange"
+	}
+	textix="OK"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=765
+		y=545
+		width=30
+		height=20
+	}
+	"basic attribute" {
+		clr=20
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(R)EnergyInRange"
+	}
+	textix="Bad"
+	align="horiz. centered"
 }

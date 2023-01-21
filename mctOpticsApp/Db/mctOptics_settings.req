@@ -148,6 +148,7 @@ $(P)$(R)Camera1Name
 $(P)$(R)Energy
 $(P)$(R)EnergyMode
 $(P)$(R)EnergyChoice
+$(P)$(R)EnergyInRange
 $(P)$(R)Filters
 
 ###############
@@ -157,7 +158,6 @@ $(P)$(R)EnergySet
 $(P)$(R)EnergyBusy
 $(P)$(R)EnergyCalibrationUse
 $(P)$(R)EnergyArbitrary
-$(P)$(R)EnergyArbitrarySet
 $(P)$(R)EnergyTesting
 
 ###################

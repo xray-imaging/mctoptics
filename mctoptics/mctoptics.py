@@ -138,7 +138,7 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning', 'EnergyArbitrarySet'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning', 'EnergyArbitrary'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
         for epics_pv in ('Sync', 'Cut', 'EnergySet', 'EnergyBusy'):
             self.epics_pvs[epics_pv].put(0)
@@ -336,10 +336,10 @@ class MCTOptics():
         elif (pvname.find('CameraBinning') != -1) and ((value == 0) or (value == 1) or (value == 2)):
             thread = threading.Thread(target=self.camera_binning, args=())
             thread.start()
-        elif (pvname.find('EnergyArbitrarySet') != -1) and (value == 1):
-            thread = threading.Thread(target=self.energy_arbitrary_change, args=())
+        elif (pvname.find('EnergyArbitrary') != -1):
+            thread = threading.Thread(target=self.energy_in_range, args=())
             thread.start()
-
+    
     def take_lens_offsets(self, lens, cam):
         if lens == 0:
             return 0,0,0
@@ -748,134 +748,67 @@ class MCTOptics():
         self.epics_pvs['SuggestedAngleStep'].put(suggested_angle_step)
 
 
-    def energy_arbitrary_change(self):
+    def energy_in_range(self):
 
-        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done':
+        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
             return
-        self.epics_pvs['MCTStatus'].put('Interpolation')
-        log.info('Intepolation starts')
+
+        energy_choice_min = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.ONST').get().split(' ')[1])
+        energy_choice_max = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.NIST').get().split(' ')[1])
 
         energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
-
-        energy_select = np.around(energy_arbitrary, decimals=2)
-
-        with open(os.path.join(data_path, 'energy.json')) as json_file:
-            energy_lookup = json.load(json_file)
-
-        energy_list = []
-
-        for value in energy_lookup.values():
-            if value['mode'] == 'Mono':
-                energy_list.append(value['energy'])
-
-        energies_str = np.array(energy_list)
-        energies_flt = [float(i) for i in  energies_str]
-        energy_max = np.max(energies_flt)
-        energy_min = np.min(energies_flt)
-
-        if energy_select < energy_max and energy_select >= energy_min:
-            energy_calibrated = util.find_nearest(energies_flt, energy_select)
-            
-            log.info('   ***   Selected energy %s; Nearest calibrated: %s ' % (energy_select, energy_calibrated))
-            # print(energies_str)
-
-            energy_closer_index  = np.where(energies_str == str(energy_calibrated))[0][0]
-
-            if energy_select >= float(energy_calibrated):
-                energy_low  = np.around(float(energies_str[energy_closer_index]), decimals=2)
-                energy_high = np.around(float(energies_str[energy_closer_index+1]), decimals=2)
-            else:
-                energy_low  = np.around(float(energies_str[energy_closer_index-1]), decimals=2)
-                energy_high = np.around(float(energies_str[energy_closer_index]), decimals=2)
-               
-            log.info("   ***   Calibrated range [%4.2f, %4.2f]" % (energy_low, energy_high))
-            n = int(100*(energy_high-energy_low))
-            interp_energies = np.linspace(energy_low, energy_high, n).round(decimals=2)
-
-            log.info("   ***   Calibrated range [%4.2f, %4.2f]" % (energy_low, energy_high))
-            file_name0 = 'energy2bm_Mono_' + str('{0:.2f}'.format(interp_energies[0]))  + '.conf'
-            file_name1 = 'energy2bm_Mono_' + str('{0:.2f}'.format(interp_energies[-1])) + '.conf'
-    
-            full_file_name0 = os.path.join(data_path, file_name0)
-            full_file_name1 = os.path.join(data_path, file_name1)
-             
-            log.info("   ***   Calibrated files used for intepolation:")
-            log.info("   ***   *** %s" , full_file_name0)
-            log.info("   ***   *** %s" , full_file_name1)
-            log.info("   ***   Interpolation steps: %d", n)
-
-            interp_energies_dict = util.interpolate_energy_config_files(full_file_name0, full_file_name1, n, energy_select)
-            for key in  interp_energies_dict:
-                if str('{0:.2f}'.format(np.around(float(energy_select), decimals=2))) == str('{0:.2f}'.format(np.around(float(key), decimals=2))):
-                    file_name = 'energy2bm_interp_' + str('{0:.2f}'.format(np.around(float(key), decimals=2))) + '.conf'
-                    if self.epics_pvs['EnergyCalibrationDirExists'].get():
-                        directory = self.epics_pvs['EnergyCalibrationDir'].get()
-                        self.epics_pvs['EnergyCalibrationFile0'].put(file_name)
-                        full_file_name = pathlib.Path(directory, file_name)
-                        util.save_energy_config(full_file_name, str(key), interp_energies_dict[key])
-                        log.info("   ***   Created calibration file: %s" % full_file_name)
+        if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
+            command = 'dmm mono --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
+            self.epics_pvs['EnergyInRange'].put(1)
         else:
-            log.error('Error: energy selected %4.2f is outside the calibrated range [%4.2f, %4.2f]' %(energy_select, energy_min, energy_max))
             self.epics_pvs['MCTStatus'].put('Error: energy out of range')
-
+            self.epics_pvs['EnergyInRange'].put(0)
+ 
         time.sleep(2) # for testing
-
         self.epics_pvs['MCTStatus'].put('Done')
+        self.epics_pvs['EnergyBusy'].put(0)   
+        self.epics_pvs['EnergySet'].put(0)   
 
     def energy_change(self):
 
-        print('energy_change')
         if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
             return
             
         self.epics_pvs['MCTStatus'].put('Changing energy')
         self.epics_pvs['EnergyBusy'].put(1)
 
-        directory = self.epics_pvs['EnergyCalibrationDir'].get()
-        file0 = self.epics_pvs['EnergyCalibrationFile0'].get()
+        energy_choice_min = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.ONST').get().split(' ')[1])
+        energy_choice_max = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.NIST').get().split(' ')[1])
 
-        if self.epics_pvs["EnergyCalibrationUse"].get(as_string=True) == "No":
+        if self.epics_pvs["EnergyCalibrationUse"].get(as_string=True) == "Pre-set":
             self.epics_pvs['MCTStatus'].put('Changing energy: using presets')
-            with open(os.path.join(data_path, 'energy.json')) as json_file:
-                energy_lookup = json.load(json_file)
 
             energy_choice_index = str(self.epics_pvs["EnergyChoice"].get())
             energy_choice       = self.epics_pvs["EnergyChoice"].get(as_string=True)
-
+            energy_choice_list  = energy_choice.split(' ')
             log.info("mctOptics: energy choice = %s",energy_choice)
-
-            try:
-                energy_mode    = str(energy_lookup[energy_choice_index]['mode'])
-                energy         = energy_lookup[energy_choice_index]['energy']
-                log.info('move monochromator')
-                log.info('energy set --mode %s --energy-value %s' % (energy_mode, energy))
-                self.epics_pvs['MCTStatus'].put('Changing energy: %s %s keV' %(energy_mode, energy))
-
-                file_name = 'energy2bm_' + energy_mode +"_" + energy + ".conf"
-                full_file_name = os.path.join(data_path, file_name)
-                if (self.epics_pvs["EnergyTesting"].get()):
-                    command = 'energy set --config %s --testing --force' % (full_file_name)
-                else:
-                    command = 'energy set --config %s --force' % (full_file_name)
-                log.info(command)
-                subprocess.Popen(command, shell=True)
-                log.info('energy change is done using: %s', file_name)
-            except KeyError as e:
-                log.error('Enegy selected %s is not defined. Please add it to the ./data/energy.json file' % e)
-                log.error('Failed to update: Energy')
-        elif self.epics_pvs["EnergyCalibrationUse"].get(as_string=True) == "Yes" and (pathlib.Path(directory, file0).exists() and file0 != ''):
-            full_file_name = os.path.join(directory, file0)
-            self.epics_pvs['MCTStatus'].put('Energy file: %s' % file0)
-            log.info('energy change is done using: %s', file0)
-            if (self.epics_pvs["EnergyTesting"].get()):
-                command = 'energy set --config %s --testing --force' % (full_file_name)
-            else:
-                command = 'energy set --config %s --force' % (full_file_name)
-            log.info(command)
-            subprocess.Popen(command, shell=True)
+            if energy_choice_list[0] == 'Pink':
+                command = 'dmm pink --force'
+            else: # Mono
+                command = 'dmm mono --energy ' + energy_choice_list[1] + ' --force'
         else:
-            self.epics_pvs['MCTStatus'].put('Failed to update energy')
-            log.error('Failed to update Energy. Check configuration files!')
+            energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
+            if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
+                command = 'dmm mono --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
+                self.epics_pvs['EnergyInRange'].put(1)
+            else:
+                self.epics_pvs['MCTStatus'].put('Error: energy out of range')
+                self.epics_pvs['EnergyInRange'].put(0)
+                time.sleep(2) # for testing
+                self.epics_pvs['MCTStatus'].put('Done')
+                self.epics_pvs['EnergyBusy'].put(0)   
+                self.epics_pvs['EnergySet'].put(0)
+                return
+        if (self.epics_pvs["EnergyTesting"].get()):
+            command =  command + ' --testing' 
+        
+        log.error(command)
+        subprocess.Popen(command, shell=True)        
 
         time.sleep(2) # for testing
         self.epics_pvs['MCTStatus'].put('Done')

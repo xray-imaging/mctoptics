@@ -533,6 +533,12 @@ record(mbbo, "$(P)$(R)EnergyChoice")
    field(NIST, "Mono 33.2")
    }
 
+record(bo, "$(P)$(R)EnergyInRange")
+{
+   field(ZNAM, "No")
+   field(ONAM, "Yes")
+}
+
 record(stringout, "$(P)$(R)Filters")
 {
    field(VAL,  "Unknown")
@@ -562,17 +568,8 @@ record(mbbo, "$(P)$(R)EnergyCalibrationUse") {
   field(NOBT, "3")
   field(ZRVL, "0x0")
   field(ONVL, "0x1")
-  field(ZRST, "pre-set")
-  field(ONST, "interpolate")
-}
-
-record(busy,"$(P)$(R)EnergyArbitrarySet")
-{
-   field(ZNAM,"Done")
-   field(ZSV, "NO_ALARM")
-   field(ONAM,"Set")
-   field(OSV, "MINOR")
-   field(VAL, "0")
+  field(ZRST, "Pre-set")
+  field(ONST, "Interpolate")
 }
 
 record(ao, "$(P)$(R)EnergyArbitrary") 
