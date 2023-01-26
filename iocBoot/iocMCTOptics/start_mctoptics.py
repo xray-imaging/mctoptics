@@ -3,4 +3,4 @@
 #     python -i start_mctoptics.py
 # The -i is needed to keep Python running, otherwise it will create the object and exit
 from mctoptics.mctoptics import MCTOptics
-ts = MCTOptics(["../../db/mctOptics_settings.req","../../db/mctOptics_settings.req"], {"$(P)":"2bm:", "$(R)":"MCTOptics:"})
+ts = MCTOptics(["../../db/mctOptics_settings.req", ], {"$(P)":"2bm:", "$(R)":"MCTOptics:"})

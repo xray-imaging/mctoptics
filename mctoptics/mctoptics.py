@@ -138,9 +138,9 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning', 'EnergyArbitrary'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergySet', 'EnergyMoveSet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning', 'EnergyArbitrary'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
-        for epics_pv in ('Sync', 'Cut', 'EnergySet', 'EnergyBusy'):
+        for epics_pv in ('Sync', 'Cut', 'EnergySet', 'EnergyMoveSet', 'EnergyBusy'):
             self.epics_pvs[epics_pv].put(0)
 
         # Start the watchdog timer thread
@@ -269,7 +269,9 @@ class MCTOptics():
             if dictentry.find('PVName') != -1:
                 pvname = epics_pv.value
                 key = dictentry.replace('PVName', '')
-                self.control_pvs[key] = PV(pvname)
+                if (pvname != ''): 
+                    print(pvname, key)
+                    self.control_pvs[key] = PV(pvname)
             if dictentry.find('PVPrefix') != -1:
                 pvprefix = epics_pv.value
                 key = dictentry.replace('PVPrefix', '')
@@ -326,6 +328,9 @@ class MCTOptics():
             thread.start()
         elif (pvname.find('EnergySet') != -1) and (value == 1):
             thread = threading.Thread(target=self.energy_change, args=())
+            thread.start()       
+        elif (pvname.find('EnergyMoveSet') != -1) and (value == 1):
+            thread = threading.Thread(target=self.energy_move_change, args=())
             thread.start()       
         elif (pvname.find('Camera0Bit') != -1) and ((value == 0) or (value == 1) or (value == 2) or (value == 3)):
             thread = threading.Thread(target=self.camera_bit, args=(0,))
@@ -758,7 +763,7 @@ class MCTOptics():
 
         energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
         if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
-            command = 'dmm mono --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
+            command = 'dmm set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
             self.epics_pvs['EnergyInRange'].put(1)
         else:
             self.epics_pvs['MCTStatus'].put('Error: energy out of range')
@@ -790,11 +795,11 @@ class MCTOptics():
             if energy_choice_list[0] == 'Pink':
                 command = 'dmm pink --force'
             else: # Mono
-                command = 'dmm mono --energy ' + energy_choice_list[1] + ' --force'
+                command = 'dmm set --energy ' + energy_choice_list[1] + ' --force'
         else:
             energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
             if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
-                command = 'dmm mono --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
+                command = 'dmm set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
                 self.epics_pvs['EnergyInRange'].put(1)
             else:
                 self.epics_pvs['MCTStatus'].put('Error: energy out of range')
@@ -814,6 +819,20 @@ class MCTOptics():
         self.epics_pvs['MCTStatus'].put('Done')
         self.epics_pvs['EnergyBusy'].put(0)   
         self.epics_pvs['EnergySet'].put(0)   
+
+    def energy_move_change(self):
+
+        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done':
+            return
+            
+        self.epics_pvs['MCTStatus'].put('Changing energy move setting')
+        self.epics_pvs['EnergyBusy'].put(1)
+        command = 'dmm status'
+        log.error(command)
+        subprocess.Popen(command, shell=True)     
+        time.sleep(2) # for testing
+        self.epics_pvs['MCTStatus'].put('Done')
+        self.epics_pvs['EnergyMoveSet'].put(0)   
 
     def camera_bit(self, camera_id):
         

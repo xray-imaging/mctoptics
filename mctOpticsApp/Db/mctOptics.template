@@ -653,7 +653,6 @@ record(mbbi, "$(P)$(R)Camera1Bit")
 ###################
 # Detectors binning
 ###################
-
 record(mbbo, "$(P)$(R)CameraBinning")
 {
    field(ZRVL, "0")
@@ -662,4 +661,224 @@ record(mbbo, "$(P)$(R)CameraBinning")
    field(ONST, "2x")
    field(TWVL, "2")
    field(TWST, "4x")
+}
+
+######################
+# Energy Move PV Names
+######################
+record(busy,"$(P)$(R)EnergyMoveSet")
+{
+   field(ZNAM,"Done")
+   field(ZSV, "NO_ALARM")
+   field(ONAM,"Set")
+   field(OSV, "MINOR")
+   field(VAL, "0")
+}
+
+record(stringout, "$(P)$(R)EnergyMove0PVName")
+{
+   field(VAL,  "$(ENERGY_M0)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove1PVName")
+{
+   field(VAL,  "$(ENERGY_M1)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove2PVName")
+{
+   field(VAL,  "$(ENERGY_M2)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove3PVName")
+{
+   field(VAL,  "$(ENERGY_M3)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove4PVName")
+{
+   field(VAL,  "$(ENERGY_M4)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove5PVName")
+{
+   field(VAL,  "$(ENERGY_M5)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove6PVName")
+{
+   field(VAL,  "$(ENERGY_M6)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove7PVName")
+{
+   field(VAL,  "$(ENERGY_M7)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove8PVName")
+{
+   field(VAL,  "$(ENERGY_M8)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove9PVName")
+{
+   field(VAL,  "$(ENERGY_M9)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove10PVName")
+{
+   field(VAL,  "$(ENERGY_M10)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove11PVName")
+{
+   field(VAL,  "$(ENERGY_M11)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove12PVName")
+{
+   field(VAL,  "$(ENERGY_M12)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove13PVName")
+{
+   field(VAL,  "$(ENERGY_M13)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove14PVName")
+{
+   field(VAL,  "$(ENERGY_M14)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove15PVName")
+{
+   field(VAL,  "$(ENERGY_M15)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove16PVName")
+{
+   field(VAL,  "$(ENERGY_M16)")
+}
+
+record(stringout, "$(P)$(R)EnergyMove0PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove1PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove2PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove3PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove4PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove5PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove6PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove7PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove8PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove9PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove10PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove11PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove12PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove13PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove14PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove15PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyMove16PVDesc")
+{
+}
+
+
+######################
+# Energy Move PV Names
+######################
+record(stringout, "$(P)$(R)EnergyPos0PVName")
+{
+   field(VAL,  "$(POS_M0)")
+}
+
+record(stringout, "$(P)$(R)EnergyPos1PVName")
+{
+   field(VAL,  "$(POS_M1)")
+}
+
+record(stringout, "$(P)$(R)EnergyPos2PVName")
+{
+   field(VAL,  "$(POS_M2)")
+}
+
+record(stringout, "$(P)$(R)EnergyPos0PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyPos1PVDesc")
+{
+}
+
+record(stringout, "$(P)$(R)EnergyPos2PVDesc")
+{
+}
+
+#################
+# Shutter control
+#################
+
+record(stringout, "$(P)$(R)CloseShutterPVName")
+{
+   field(VAL,  "$(CLOSE_SHUTTER)")
+}
+
+record(stringout, "$(P)$(R)CloseShutterValue")
+{
+   field(VAL,  "$(CLOSE_VALUE)")
+}
+
+record(stringout, "$(P)$(R)OpenShutterPVName")
+{
+   field(VAL,  "$(OPEN_SHUTTER)")
+}
+
+record(stringout, "$(P)$(R)OpenShutterValue")
+{
+   field(VAL,  "$(OPEN_VALUE)")
 }
