@@ -825,7 +825,7 @@ class MCTOptics():
         if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done':
             return
             
-        self.epics_pvs['MCTStatus'].put('Changing energy move setting')
+        self.epics_pvs['MCTStatus'].put('Changing energy move setting update')
         self.epics_pvs['EnergyBusy'].put(1)
         command = 'dmm status'
         log.error(command)
@@ -833,6 +833,7 @@ class MCTOptics():
         time.sleep(2) # for testing
         self.epics_pvs['MCTStatus'].put('Done')
         self.epics_pvs['EnergyMoveSet'].put(0)   
+        self.epics_pvs['EnergyBusy'].put(0)
 
     def camera_bit(self, camera_id):
         
