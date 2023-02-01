@@ -815,6 +815,16 @@ class MCTOptics():
         log.error(command)
         subprocess.Popen(command, shell=True)        
 
+        time.sleep(5)
+        # print(PV('2bma:alldone').get())
+        # print(PV('2bmb:alldone').get())
+        log.info('waiting on motion to complete')
+        while True:
+            time.sleep(.3)
+            if PV('2bma:alldone').get() and PV('2bmb:alldone').get():
+                break
+        log.info('motion completed')
+
         time.sleep(2) # for testing
         self.epics_pvs['MCTStatus'].put('Done')
         self.epics_pvs['EnergyBusy'].put(0)   
