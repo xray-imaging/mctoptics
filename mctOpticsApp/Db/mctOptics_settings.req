@@ -221,9 +221,9 @@ $(P)$(R)EnergyMove14PVDesc
 $(P)$(R)EnergyMove15PVDesc
 $(P)$(R)EnergyMove16PVDesc
 
-######################
-# Energy Move PV Names
-######################
+#####################
+# Energy Pos PV Names
+#####################
 $(P)$(R)EnergyPos0PVName
 $(P)$(R)EnergyPos1PVName
 $(P)$(R)EnergyPos2PVName

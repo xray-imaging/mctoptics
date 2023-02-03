@@ -829,9 +829,9 @@ record(stringout, "$(P)$(R)EnergyMove16PVDesc")
 }
 
 
-######################
-# Energy Move PV Names
-######################
+#####################
+# Energy Pos PV Names
+#####################
 record(stringout, "$(P)$(R)EnergyPos0PVName")
 {
    field(VAL,  "$(POS_M0)")
