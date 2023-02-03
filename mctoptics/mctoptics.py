@@ -131,6 +131,9 @@ class MCTOptics():
 
         self.epics_pvs = {**self.config_pvs, **self.control_pvs}
 
+        # Wait 1 second for all PVs to connect
+        time.sleep(1)
+
         ########################### VN
         # shall we run a sync() here?
         self.lens_cur = self.epics_pvs['LensSelect'].get()
@@ -815,10 +818,8 @@ class MCTOptics():
         log.error(command)
         subprocess.Popen(command, shell=True)        
 
-        time.sleep(5)
-        # print(PV('2bma:alldone').get())
-        # print(PV('2bmb:alldone').get())
-        log.info('waiting on motion to complete')
+        time.sleep(10)
+        log.info('mctOptics: waiting on motion to complete')
         while True:
             time.sleep(.3)
             if PV('2bma:alldone').get() and PV('2bmb:alldone').get():

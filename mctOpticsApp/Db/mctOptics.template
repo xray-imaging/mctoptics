@@ -882,3 +882,13 @@ record(stringout, "$(P)$(R)OpenShutterValue")
 {
    field(VAL,  "$(OPEN_VALUE)")
 }
+
+
+################
+# Shutter status
+################
+
+record(stringout, "$(P)$(R)ShutterStatusPVName")
+{
+   field(VAL,  "$(SHUTTER_STATUS)")
+}

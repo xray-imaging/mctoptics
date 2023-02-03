@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/energyMovePVs.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/energyMovePVs.adl"
 	version=030111
 }
 display {
 	object {
-		x=426
+		x=416
 		y=64
 		width=690
-		height=710
+		height=735
 	}
 	clr=14
 	bclr=4
@@ -700,9 +700,9 @@ text {
 }
 text {
 	object {
-		x=29
+		x=10
 		y=630
-		width=180
+		width=200
 		height=20
 	}
 	"basic attribute" {
@@ -713,7 +713,7 @@ text {
 }
 "text entry" {
 	object {
-		x=219
+		x=220
 		y=630
 		width=225
 		height=20
@@ -729,7 +729,7 @@ text {
 }
 "text entry" {
 	object {
-		x=219
+		x=220
 		y=655
 		width=225
 		height=20
@@ -745,31 +745,33 @@ text {
 }
 text {
 	object {
-		x=49
+		x=10
 		y=655
-		width=160
+		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
 	textix="Close shutter PV"
+	align="horiz. right"
 }
 text {
 	object {
-		x=59
+		x=10
 		y=605
-		width=150
+		width=200
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
 	textix="Open shutter PV"
+	align="horiz. right"
 }
 "text entry" {
 	object {
-		x=219
+		x=220
 		y=605
 		width=225
 		height=20
@@ -785,9 +787,9 @@ text {
 }
 text {
 	object {
-		x=19
+		x=10
 		y=680
-		width=190
+		width=200
 		height=20
 	}
 	"basic attribute" {
@@ -798,7 +800,7 @@ text {
 }
 "text entry" {
 	object {
-		x=219
+		x=220
 		y=680
 		width=225
 		height=20
@@ -853,7 +855,7 @@ rectangle {
 		x=5
 		y=600
 		width=445
-		height=105
+		height=130
 	}
 	"basic attribute" {
 		clr=14
@@ -1203,4 +1205,33 @@ rectangle {
 	label="Set"
 	press_msg="1"
 	release_msg="0"
+}
+text {
+	object {
+		x=10
+		y=705
+		width=200
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Shutter Status PV"
+	align="horiz. right"
+}
+"text entry" {
+	object {
+		x=220
+		y=705
+		width=225
+		height=20
+	}
+	control {
+		chan="$(P)$(R)ShutterStatusPVName"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
 }
