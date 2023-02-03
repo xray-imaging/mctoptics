@@ -766,7 +766,7 @@ class MCTOptics():
 
         energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
         if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
-            command = 'dmm set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
+            command = 'energy set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
             self.epics_pvs['EnergyInRange'].put(1)
         else:
             self.epics_pvs['MCTStatus'].put('Error: energy out of range')
@@ -796,13 +796,13 @@ class MCTOptics():
             energy_choice_list  = energy_choice.split(' ')
             log.info("mctOptics: energy choice = %s",energy_choice)
             if energy_choice_list[0] == 'Pink':
-                command = 'dmm pink --force'
+                command = 'energy pink --force'
             else: # Mono
-                command = 'dmm set --energy ' + energy_choice_list[1] + ' --force'
+                command = 'energy set --energy ' + energy_choice_list[1] + ' --force'
         else:
             energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
             if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
-                command = 'dmm set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
+                command = 'energy set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
                 self.epics_pvs['EnergyInRange'].put(1)
             else:
                 self.epics_pvs['MCTStatus'].put('Error: energy out of range')
@@ -838,7 +838,7 @@ class MCTOptics():
             
         self.epics_pvs['MCTStatus'].put('Changing energy move setting update')
         self.epics_pvs['EnergyBusy'].put(1)
-        command = 'dmm status'
+        command = 'energy status'
         log.error(command)
         subprocess.Popen(command, shell=True)     
         time.sleep(2) # for testing
