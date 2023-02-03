@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/EnergyUpdate.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/energyUpdate.adl"
 	version=030111
 }
 display {
 	object {
-		x=582
-		y=848
+		x=572
+		y=782
 		width=1000
 		height=265
 	}
@@ -133,7 +133,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="energy -h"
+	textix="dmm -h"
 }
 text {
 	object {
@@ -181,7 +181,7 @@ text {
 	"basic attribute" {
 		clr=20
 	}
-	textix="energy status --energyioc-prefix"
+	textix="dmm status --energyioc-prefix"
 }
 text {
 	object {
@@ -217,7 +217,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="energy --config ~/logs/energy2bm_Mono_17...."
+	textix="dmm set --energy 17.00"
 }
 text {
 	object {
@@ -253,5 +253,5 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="select in ~/log the energy configuration file you want to use"
+	textix="select in ~/logs the energy configuration file you want to use"
 }

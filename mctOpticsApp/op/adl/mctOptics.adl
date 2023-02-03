@@ -5,10 +5,10 @@ file {
 }
 display {
 	object {
-		x=894
-		y=337
+		x=198
+		y=887
 		width=885
-		height=605
+		height=635
 	}
 	clr=14
 	bclr=4
@@ -87,242 +87,18 @@ display {
 		1a7309,
 	}
 }
-"text entry" {
-	object {
-		x=640
-		y=430
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Energy"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=640
-		y=455
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)Filters"
-		clr=14
-		bclr=51
-	}
-	format="string"
-	limits {
-	}
-}
-menu {
-	object {
-		x=640
-		y=405
-		width=100
-		height=20
-	}
-	control {
-		chan="$(P)$(R)EnergyMode"
-		clr=14
-		bclr=51
-	}
-}
-text {
-	object {
-		x=510
-		y=405
-		width=120
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy mode"
-}
-text {
-	object {
-		x=510
-		y=430
-		width=120
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Energy (keV)"
-}
-text {
-	object {
-		x=510
-		y=455
-		width=120
-		height=20
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Filters"
-}
 rectangle {
 	object {
 		x=468
 		y=370
 		width=410
-		height=230
+		height=260
 	}
 	"basic attribute" {
 		clr=14
 		fill="outline"
 		width=5
 	}
-}
-rectangle {
-	object {
-		x=485
-		y=380
-		width=380
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=626
-		y=380
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="Energy"
-	align="horiz. centered"
-}
-"related display" {
-	object {
-		x=640
-		y=570
-		width=100
-		height=20
-	}
-	display[0] {
-		label="EnergyUpdate"
-		name="EnergyUpdate.adl"
-		args="P=$(P),R=$(R)"
-	}
-	clr=14
-	bclr=51
-	label="-CLI"
-}
-text {
-	object {
-		x=487
-		y=382
-		width=125
-		height=15
-	}
-	"basic attribute" {
-		clr=20
-	}
-	textix="$(P)$(R)"
-}
-text {
-	object {
-		x=562
-		y=485
-		width=120
-		height=16
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="Use calibration"
-	align="horiz. right"
-}
-"message button" {
-	object {
-		x=745
-		y=430
-		width=40
-		height=23
-	}
-	control {
-		chan="$(P)$(R)EnergySet"
-		clr=14
-		bclr=15
-	}
-	label="Set"
-	press_msg="1"
-	release_msg="0"
-}
-"choice button" {
-	object {
-		x=690
-		y=480
-		width=90
-		height=25
-	}
-	control {
-		chan="$(P)$(R)EnergyUseCalibration"
-		clr=14
-		bclr=51
-	}
-	stacking="column"
-}
-"text entry" {
-	object {
-		x=560
-		y=510
-		width=220
-		height=25
-	}
-	control {
-		chan="$(P)$(R)EnergyCalibrationFileOne"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-"text entry" {
-	object {
-		x=560
-		y=540
-		width=220
-		height=25
-	}
-	control {
-		chan="$(P)$(R)EnergyCalibrationFileTwo"
-		clr=14
-		bclr=51
-	}
-	limits {
-	}
-}
-text {
-	object {
-		x=760
-		y=570
-		width=60
-		height=20
-	}
-	"basic attribute" {
-		clr=20
-		fill="outline"
-	}
-	"dynamic attribute" {
-		vis="if not zero"
-		chan="$(P)$(R)EnergyBusy"
-	}
-	textix="Busy"
-	align="horiz. centered"
 }
 composite {
 	object {
@@ -1593,4 +1369,429 @@ rectangle {
 	format="string"
 	limits {
 	}
+}
+rectangle {
+	object {
+		x=485
+		y=380
+		width=380
+		height=20
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=625
+		y=380
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Energy"
+	align="horiz. centered"
+}
+"related display" {
+	object {
+		x=765
+		y=380
+		width=100
+		height=20
+	}
+	display[0] {
+		label="EnergyUpdate"
+		name="energyUpdate.adl"
+		args="P=$(P),R=$(R)"
+	}
+	clr=14
+	bclr=51
+	label="-CLI"
+}
+text {
+	object {
+		x=490
+		y=380
+		width=125
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	textix="$(P)$(R)"
+}
+"text entry" {
+	object {
+		x=615
+		y=545
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyArbitrary"
+		clr=14
+		bclr=51
+	}
+	limits {
+	}
+}
+text {
+	object {
+		x=500
+		y=545
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy"
+	align="horiz. right"
+}
+text {
+	object {
+		x=720
+		y=545
+		width=45
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="keV"
+}
+rectangle {
+	object {
+		x=473
+		y=535
+		width=400
+		height=35
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==1"
+		chan="$(P)$(R)EnergyCalibrationUse.VAL"
+	}
+}
+"message button" {
+	object {
+		x=770
+		y=600
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergySet"
+		clr=14
+		bclr=15
+	}
+	label="Set"
+	press_msg="1"
+	release_msg="0"
+}
+text {
+	object {
+		x=700
+		y=600
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=20
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(R)EnergyBusy"
+	}
+	textix="Busy"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=510
+		y=405
+		width=60
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Status:"
+}
+text {
+	object {
+		x=720
+		y=405
+		width=45
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="keV"
+}
+"text update" {
+	object {
+		x=585
+		y=405
+		width=65
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)EnergyMode"
+		clr=14
+		bclr=51
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=650
+		y=405
+		width=65
+		height=20
+	}
+	monitor {
+		chan="$(P)$(R)Energy"
+		clr=14
+		bclr=51
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+"text entry" {
+	object {
+		x=615
+		y=430
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)Filters"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=500
+		y=430
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Filters"
+	align="horiz. right"
+}
+text {
+	object {
+		x=500
+		y=450
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Testing"
+	align="horiz. right"
+}
+menu {
+	object {
+		x=615
+		y=450
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyTesting"
+		clr=14
+		bclr=51
+	}
+}
+"choice button" {
+	object {
+		x=615
+		y=475
+		width=250
+		height=25
+	}
+	control {
+		chan="$(P)$(R)EnergyCalibrationUse"
+		clr=14
+		bclr=51
+	}
+	stacking="column"
+}
+text {
+	object {
+		x=500
+		y=475
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Use"
+	align="horiz. right"
+}
+menu {
+	object {
+		x=615
+		y=510
+		width=100
+		height=20
+	}
+	control {
+		chan="$(P)$(R)EnergyChoice"
+		clr=14
+		bclr=51
+	}
+}
+rectangle {
+	object {
+		x=473
+		y=500
+		width=400
+		height=35
+	}
+	"basic attribute" {
+		clr=62
+		fill="outline"
+		width=5
+	}
+	"dynamic attribute" {
+		vis="calc"
+		calc="A==0"
+		chan="$(P)$(R)EnergyCalibrationUse.VAL"
+	}
+}
+text {
+	object {
+		x=500
+		y=510
+		width=110
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy"
+	align="horiz. right"
+}
+text {
+	object {
+		x=720
+		y=510
+		width=45
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="keV"
+}
+text {
+	object {
+		x=765
+		y=545
+		width=30
+		height=20
+	}
+	"basic attribute" {
+		clr=15
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="$(P)$(R)EnergyInRange"
+	}
+	textix="OK"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=765
+		y=545
+		width=30
+		height=20
+	}
+	"basic attribute" {
+		clr=20
+		fill="outline"
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="$(P)$(R)EnergyInRange"
+	}
+	textix="Bad"
+	align="horiz. centered"
+}
+text {
+	object {
+		x=480
+		y=600
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Energy PV names"
+}
+"related display" {
+	object {
+		x=635
+		y=600
+		width=50
+		height=20
+	}
+	display[0] {
+		label="Epics PV Names"
+		name="energyMovePVs.adl"
+		args="P=$(P), R=$(R)"
+	}
+	clr=14
+	bclr=51
+}
+rectangle {
+	object {
+		x=480
+		y=575
+		width=205
+		height=20
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=625
+		y=575
+		width=50
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Setup"
+	align="horiz. centered"
 }

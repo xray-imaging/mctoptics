@@ -1,4 +1,5 @@
 import time
+import numpy as np
 
 def tic():
     #Homemade version of matlab tic and toc functions
@@ -16,3 +17,17 @@ type_dict = {
 # add others
 }
 
+def positive_int(value):
+    """Convert *value* to an integer and make sure it is positive."""
+    result = int(value)
+    if result < 0:
+        raise argparse.ArgumentTypeError('Only positive integers are allowed')
+
+    return result
+
+def find_nearest(array, value):
+    array = np.asarray(array)
+    idx = (np.abs(array - value)).argmin()
+    value = "{0:4.2f}".format(array[idx])
+
+    return value
