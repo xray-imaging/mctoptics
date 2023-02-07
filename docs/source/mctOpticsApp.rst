@@ -453,7 +453,7 @@ Energy information
   * - $(P)$(R)Filters
     - stringout
     - Contains the material and thickness of the filters manually set in the beam path, e.g. Al 1mm; Glass 5mm.
-  * - $(P)$(R)EnergySet
+  * - $(P)$(R)EnergyArbitrarySet
     - busy
     - 
   * - $(P)$(R)EnergyBusy
@@ -480,7 +480,7 @@ Energy change
   * - Record name
     - Record type
     - Description
-  * - $(P)$(R)EnergySet
+  * - $(P)$(R)EnergyArbitrarySet
     - busy
     -
   * - $(P)$(R)EnergyBusy

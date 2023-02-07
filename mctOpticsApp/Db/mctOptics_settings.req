@@ -154,7 +154,7 @@ $(P)$(R)Filters
 ###############
 # Energy change
 ###############
-$(P)$(R)EnergySet
+$(P)$(R)EnergyArbitrarySet
 $(P)$(R)EnergyBusy
 $(P)$(R)EnergyCalibrationUse
 $(P)$(R)EnergyArbitrary

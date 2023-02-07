@@ -1488,7 +1488,7 @@ rectangle {
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergySet"
+		chan="$(P)$(R)EnergyArbitrarySet"
 		clr=14
 		bclr=15
 	}

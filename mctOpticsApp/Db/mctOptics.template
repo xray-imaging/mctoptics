@@ -548,7 +548,7 @@ record(stringout, "$(P)$(R)Filters")
 # Energy change
 ###############
 
-record(busy,"$(P)$(R)EnergySet")
+record(busy,"$(P)$(R)EnergyArbitrarySet")
 {
    field(ZNAM,"Done")
    field(ZSV, "NO_ALARM")
