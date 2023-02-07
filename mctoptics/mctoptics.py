@@ -940,6 +940,15 @@ class MCTOptics():
             self.control_pvs['Cam'+str(camera_select)+'Acquire'].put('Acquire')
             self.wait_pv(self.epics_pvs['Cam'+camera_select+'Acquire'], 1)
 
+        detector_pixel_size    = self.epics_pvs['DetectorPixelSize'].get()
+        log.info('binning correction of the image pixel size')
+        magnification = self.epics_pvs['CameraObjective'].get()
+        magnification = magnification.upper().replace("X", "") # just in case there was a manual entry ...
+        binning = self.epics_pvs['CameraBinning'].get()
+        log.info('mctOptics: camera %s binning is set to %d', str(self.camera_cur), pow(2,binning))
+        image_pixel_size = float(detector_pixel_size)/float(magnification)*pow(2,binning)
+        self.epics_pvs['ImagePixelSize'].put(image_pixel_size)
+
     def wait_pv(self, epics_pv, wait_val, timeout=-1):
         """Wait on a pv to be a value until max_timeout (default forever)
            delay for pv to change
