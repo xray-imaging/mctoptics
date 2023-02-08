@@ -799,7 +799,7 @@ class MCTOptics():
         else:
             energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
             if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
-                command = 'energy set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force' + ' --mode ' + energy_choice_list[0]
+                command = 'energy set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force' + ' --mode ' + "Mono"
                 self.epics_pvs['EnergyInRange'].put(1)
             else:
                 self.epics_pvs['MCTStatus'].put('Error: energy out of range')
@@ -822,6 +822,11 @@ class MCTOptics():
             if PV('2bma:alldone').get() and PV('2bmb:alldone').get():
                 break
         log.info('motion completed')
+        
+        log.info('rest default --mode Mono')
+        command = 'energy status --mode Mono'
+        log.info(command)
+        subprocess.Popen(command, shell=True)        
 
         time.sleep(2) # for testing
         self.epics_pvs['MCTStatus'].put('Done')
