@@ -141,9 +141,9 @@ class MCTOptics():
         ########################### VN
         
         # print(self.epics_pvs)
-        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'EnergyArbitrarySet', 'EnergyMoveSet', 'Camera0Bit', 'Camera1Bit', 'CameraBinning', 'EnergyArbitrary'):
+        for epics_pv in ('LensSelect', 'CameraSelect', 'CrossSelect', 'Sync', 'Cut', 'Camera0Bit', 'Camera1Bit', 'CameraBinning'):
             self.epics_pvs[epics_pv].add_callback(self.pv_callback)
-        for epics_pv in ('Sync', 'Cut', 'EnergyArbitrarySet', 'EnergyMoveSet', 'EnergyBusy'):
+        for epics_pv in ('Sync', 'Cut'):
             self.epics_pvs[epics_pv].put(0)
 
         # Start the watchdog timer thread
@@ -328,13 +328,8 @@ class MCTOptics():
             thread.start()
         elif (pvname.find('Cut') != -1) and (value ==1):
             thread = threading.Thread(target=self.crop_detector, args=())
-            thread.start()
-        elif (pvname.find('EnergyArbitrarySet') != -1) and (value == 1):
-            thread = threading.Thread(target=self.energy_change, args=())
-            thread.start()       
-        elif (pvname.find('EnergyMoveSet') != -1) and (value == 1):
-            thread = threading.Thread(target=self.energy_move_change, args=())
-            thread.start()       
+            thread.start()     
+
         elif (pvname.find('Camera0Bit') != -1) and ((value == 0) or (value == 1) or (value == 2) or (value == 3)):
             thread = threading.Thread(target=self.camera_bit, args=(0,))
             thread.start()
@@ -343,9 +338,6 @@ class MCTOptics():
             thread.start()
         elif (pvname.find('CameraBinning') != -1) and ((value == 0) or (value == 1) or (value == 2)):
             thread = threading.Thread(target=self.camera_binning, args=())
-            thread.start()
-        elif (pvname.find('EnergyArbitrary') != -1):
-            thread = threading.Thread(target=self.energy_in_range, args=())
             thread.start()
     
     def take_lens_offsets(self, lens, cam):
@@ -754,99 +746,6 @@ class MCTOptics():
         self.epics_pvs['SuggestedAngles'].put(suggested_angles)
         suggested_angle_step = 180.0 / suggested_angles
         self.epics_pvs['SuggestedAngleStep'].put(suggested_angle_step)
-
-
-    def energy_in_range(self):
-
-        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
-            return
-
-        energy_choice_min = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.ONST').get().split(' ')[1])
-        energy_choice_max = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.NIST').get().split(' ')[1])
-
-        energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
-        if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
-            # command = 'energy set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force'
-            self.epics_pvs['EnergyInRange'].put(1)
-        else:
-            self.epics_pvs['MCTStatus'].put('Error: energy out of range')
-            self.epics_pvs['EnergyInRange'].put(0)
- 
-        time.sleep(2) # for testing
-        self.epics_pvs['MCTStatus'].put('Done')
-        self.epics_pvs['EnergyBusy'].put(0)   
-        self.epics_pvs['EnergyArbitrarySet'].put(0)   
-
-    def energy_change(self):
-
-        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done' or self.epics_pvs['EnergyBusy'].get() == 1:
-            return
-            
-        self.epics_pvs['MCTStatus'].put('Changing energy')
-        self.epics_pvs['EnergyBusy'].put(1)
-
-        energy_choice_min = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.ONST').get().split(' ')[1])
-        energy_choice_max = float(PV(self.epics_pvs["EnergyChoice"].pvname + '.NIST').get().split(' ')[1])
-
-        if self.epics_pvs["EnergyCalibrationUse"].get(as_string=True) == "Pre-set":
-            self.epics_pvs['MCTStatus'].put('Changing energy: using presets')
-
-            energy_choice_index = str(self.epics_pvs["EnergyChoice"].get())
-            energy_choice       = self.epics_pvs["EnergyChoice"].get(as_string=True)
-            energy_choice_list  = energy_choice.split(' ')
-            log.info("mctOptics: energy choice = %s", energy_choice)
-            command = 'energy set --energy ' + energy_choice_list[1] + ' --force' + ' --mode ' + energy_choice_list[0]
-        else:
-            energy_arbitrary = self.epics_pvs['EnergyArbitrary'].get()
-            if  (energy_arbitrary >= energy_choice_min) & (energy_arbitrary < energy_choice_max):
-                command = 'energy set --energy ' + str(self.epics_pvs['EnergyArbitrary'].get()) + ' --force' + ' --mode ' + "Mono"
-                self.epics_pvs['EnergyInRange'].put(1)
-            else:
-                self.epics_pvs['MCTStatus'].put('Error: energy out of range')
-                self.epics_pvs['EnergyInRange'].put(0)
-                time.sleep(2) # for testing
-                self.epics_pvs['MCTStatus'].put('Done')
-                self.epics_pvs['EnergyBusy'].put(0)   
-                self.epics_pvs['EnergyArbitrarySet'].put(0)
-                return
-        if (self.epics_pvs["EnergyTesting"].get()):
-            command =  command + ' --testing' 
-        
-        log.error(command)
-        subprocess.Popen(command, shell=True)        
-
-        time.sleep(10)
-        log.info('mctOptics: waiting on motion to complete')
-        while True:
-            time.sleep(.3)
-            if PV('2bma:alldone').get() and PV('2bmb:alldone').get():
-                break
-        log.info('motion completed')
-        
-        log.info('rest default --mode Mono')
-        command = 'energy status --mode Mono'
-        log.info(command)
-        subprocess.Popen(command, shell=True)        
-
-        time.sleep(2) # for testing
-        self.epics_pvs['MCTStatus'].put('Done')
-        self.epics_pvs['EnergyBusy'].put(0)   
-        self.epics_pvs['EnergyArbitrarySet'].put(0)   
-
-    def energy_move_change(self):
-
-        if self.epics_pvs['MCTStatus'].get(as_string=True) != 'Done':
-            return
-            
-        self.epics_pvs['MCTStatus'].put('Changing energy move setting update')
-        self.epics_pvs['EnergyBusy'].put(1)
-        command = 'energy status'
-        log.error(command)
-        subprocess.Popen(command, shell=True)     
-        time.sleep(2) # for testing
-        self.epics_pvs['MCTStatus'].put('Done')
-        self.epics_pvs['EnergyMoveSet'].put(0)   
-        self.epics_pvs['EnergyBusy'].put(0)
 
     def camera_bit(self, camera_id):
         

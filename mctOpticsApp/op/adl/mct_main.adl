@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
 	object {
-		x=159
-		y=130
+		x=149
+		y=122
 		width=1570
 		height=865
 	}
@@ -7006,19 +7006,6 @@ rectangle {
 }
 rectangle {
 	object {
-		x=805
-		y=320
-		width=410
-		height=300
-	}
-	"basic attribute" {
-		clr=14
-		fill="outline"
-		width=5
-	}
-}
-rectangle {
-	object {
 		x=720
 		y=135
 		width=850
@@ -7859,67 +7846,15 @@ text {
 	textix="Suggested"
 	align="horiz. centered"
 }
-rectangle {
-	object {
-		x=822
-		y=352
-		width=380
-		height=20
-	}
-	"basic attribute" {
-		clr=2
-	}
-}
-text {
-	object {
-		x=962
-		y=352
-		width=100
-		height=20
-	}
-	"basic attribute" {
-		clr=54
-	}
-	textix="Energy"
-	align="horiz. centered"
-}
-"related display" {
-	object {
-		x=1102
-		y=352
-		width=100
-		height=20
-	}
-	display[0] {
-		label="EnergyUpdate"
-		name="energyUpdate.adl"
-		args="P=$(P),R=$(R)"
-	}
-	clr=14
-	bclr=51
-	label="-CLI"
-}
-text {
-	object {
-		x=827
-		y=352
-		width=125
-		height=15
-	}
-	"basic attribute" {
-		clr=20
-	}
-	textix="$(P)$(R)"
-}
 "text entry" {
 	object {
-		x=952
-		y=517
+		x=954
+		y=555
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyArbitrary"
+		chan="$(P)$(ER)Energy"
 		clr=14
 		bclr=51
 	}
@@ -7928,8 +7863,8 @@ text {
 }
 text {
 	object {
-		x=837
-		y=517
+		x=839
+		y=555
 		width=110
 		height=20
 	}
@@ -7941,8 +7876,8 @@ text {
 }
 text {
 	object {
-		x=1057
-		y=517
+		x=1059
+		y=555
 		width=45
 		height=20
 	}
@@ -7953,9 +7888,9 @@ text {
 }
 rectangle {
 	object {
-		x=810
-		y=507
-		width=400
+		x=812
+		y=545
+		width=375
 		height=35
 	}
 	"basic attribute" {
@@ -7966,18 +7901,18 @@ rectangle {
 	"dynamic attribute" {
 		vis="calc"
 		calc="A==1"
-		chan="$(P)$(R)EnergyCalibrationUse.VAL"
+		chan="$(P)$(ER)EnergyCalibrationUse.VAL"
 	}
 }
 "message button" {
 	object {
-		x=1107
-		y=572
+		x=1097
+		y=460
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyArbitrarySet"
+		chan="$(P)$(ER)EnergySet"
 		clr=14
 		bclr=15
 	}
@@ -7987,8 +7922,8 @@ rectangle {
 }
 text {
 	object {
-		x=1037
-		y=572
+		x=1122
+		y=430
 		width=60
 		height=20
 	}
@@ -7998,15 +7933,15 @@ text {
 	}
 	"dynamic attribute" {
 		vis="if not zero"
-		chan="$(P)$(R)EnergyBusy"
+		chan="$(P)$(ER)EnergyBusy"
 	}
 	textix="Busy"
 	align="horiz. centered"
 }
 text {
 	object {
-		x=847
-		y=377
+		x=849
+		y=415
 		width=60
 		height=20
 	}
@@ -8017,8 +7952,8 @@ text {
 }
 text {
 	object {
-		x=1057
-		y=377
+		x=1059
+		y=415
 		width=45
 		height=20
 	}
@@ -8029,13 +7964,13 @@ text {
 }
 "text update" {
 	object {
-		x=922
-		y=377
+		x=924
+		y=415
 		width=65
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)EnergyMode"
+		chan="$(P)$(ER)EnergyMode"
 		clr=14
 		bclr=51
 	}
@@ -8045,13 +7980,13 @@ text {
 }
 "text update" {
 	object {
-		x=987
-		y=377
+		x=989
+		y=415
 		width=65
 		height=20
 	}
 	monitor {
-		chan="$(P)$(R)Energy"
+		chan="$(P)$(ER)Energy"
 		clr=14
 		bclr=51
 	}
@@ -8061,13 +7996,13 @@ text {
 }
 "text entry" {
 	object {
-		x=952
-		y=402
+		x=954
+		y=440
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)Filters"
+		chan="$(P)$(ER)Filters"
 		clr=14
 		bclr=51
 	}
@@ -8077,8 +8012,8 @@ text {
 }
 text {
 	object {
-		x=837
-		y=402
+		x=839
+		y=440
 		width=110
 		height=20
 	}
@@ -8090,9 +8025,9 @@ text {
 }
 text {
 	object {
-		x=837
-		y=422
-		width=110
+		x=838
+		y=460
+		width=108
 		height=20
 	}
 	"basic attribute" {
@@ -8103,26 +8038,26 @@ text {
 }
 menu {
 	object {
-		x=952
-		y=422
+		x=954
+		y=460
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyTesting"
+		chan="$(P)$(ER)EnergyTesting"
 		clr=14
 		bclr=51
 	}
 }
 "choice button" {
 	object {
-		x=952
-		y=447
+		x=954
+		y=485
 		width=250
 		height=25
 	}
 	control {
-		chan="$(P)$(R)EnergyCalibrationUse"
+		chan="$(P)$(ER)EnergyCalibrationUse"
 		clr=14
 		bclr=51
 	}
@@ -8130,8 +8065,8 @@ menu {
 }
 text {
 	object {
-		x=837
-		y=447
+		x=839
+		y=485
 		width=110
 		height=20
 	}
@@ -8143,22 +8078,22 @@ text {
 }
 menu {
 	object {
-		x=952
-		y=482
+		x=954
+		y=520
 		width=100
 		height=20
 	}
 	control {
-		chan="$(P)$(R)EnergyChoice"
+		chan="$(P)$(ER)EnergyChoice"
 		clr=14
 		bclr=51
 	}
 }
 rectangle {
 	object {
-		x=810
-		y=472
-		width=400
+		x=812
+		y=510
+		width=375
 		height=35
 	}
 	"basic attribute" {
@@ -8169,13 +8104,13 @@ rectangle {
 	"dynamic attribute" {
 		vis="calc"
 		calc="A==0"
-		chan="$(P)$(R)EnergyCalibrationUse.VAL"
+		chan="$(P)$(ER)EnergyCalibrationUse.VAL"
 	}
 }
 text {
 	object {
-		x=837
-		y=482
+		x=839
+		y=520
 		width=110
 		height=20
 	}
@@ -8187,8 +8122,8 @@ text {
 }
 text {
 	object {
-		x=1057
-		y=482
+		x=1059
+		y=520
 		width=45
 		height=20
 	}
@@ -8199,8 +8134,8 @@ text {
 }
 text {
 	object {
-		x=1102
-		y=517
+		x=1104
+		y=555
 		width=30
 		height=20
 	}
@@ -8210,15 +8145,15 @@ text {
 	}
 	"dynamic attribute" {
 		vis="if not zero"
-		chan="$(P)$(R)EnergyInRange"
+		chan="$(P)$(ER)EnergyInRange"
 	}
 	textix="OK"
 	align="horiz. centered"
 }
 text {
 	object {
-		x=1102
-		y=517
+		x=1104
+		y=555
 		width=30
 		height=20
 	}
@@ -8228,43 +8163,73 @@ text {
 	}
 	"dynamic attribute" {
 		vis="if zero"
-		chan="$(P)$(R)EnergyInRange"
+		chan="$(P)$(ER)EnergyInRange"
 	}
 	textix="Bad"
 	align="horiz. centered"
 }
+"text update" {
+	object {
+		x=877
+		y=385
+		width=200
+		height=20
+	}
+	monitor {
+		chan="$(P)$(ER)ServerRunning"
+		clr=14
+		bclr=2
+	}
+	clrmod="alarm"
+	format="string"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=877
+		y=360
+		width=325
+		height=20
+	}
+	monitor {
+		chan="$(P)$(ER)EnergyStatus"
+		clr=14
+		bclr=51
+	}
+	format="string"
+	limits {
+	}
+}
 text {
 	object {
-		x=817
-		y=572
-		width=140
+		x=812
+		y=360
+		width=60
 		height=20
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="Energy PV names"
+	textix="Status"
 }
-"related display" {
+text {
 	object {
-		x=972
-		y=572
-		width=50
+		x=812
+		y=385
+		width=60
 		height=20
 	}
-	display[0] {
-		label="Epics PV Names"
-		name="energyMovePVs.adl"
-		args="P=$(P), R=$(R)"
+	"basic attribute" {
+		clr=14
 	}
-	clr=14
-	bclr=51
+	textix="Server"
 }
 rectangle {
 	object {
-		x=817
-		y=547
-		width=205
+		x=812
+		y=330
+		width=380
 		height=20
 	}
 	"basic attribute" {
@@ -8274,7 +8239,86 @@ rectangle {
 text {
 	object {
 		x=962
-		y=547
+		y=330
+		width=100
+		height=20
+	}
+	"basic attribute" {
+		clr=54
+	}
+	textix="Energy"
+	align="horiz. centered"
+}
+"related display" {
+	object {
+		x=1107
+		y=330
+		width=100
+		height=20
+	}
+	display[0] {
+		label="EnergyUpdate"
+		name="energyUpdate.adl"
+		args="P=$(P),R=$(ER)"
+	}
+	clr=14
+	bclr=51
+	label="-CLI"
+}
+text {
+	object {
+		x=817
+		y=330
+		width=125
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	textix="$(P)$(ER)"
+}
+text {
+	object {
+		x=1007
+		y=587
+		width=140
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Epics PV names"
+}
+"related display" {
+	object {
+		x=1151
+		y=587
+		width=50
+		height=20
+	}
+	display[0] {
+		label="Epics PV Names"
+		name="energyEPICS_PVs.adl"
+		args="P=$(P), R=$(ER)"
+	}
+	clr=14
+	bclr=51
+}
+rectangle {
+	object {
+		x=812
+		y=587
+		width=190
+		height=20
+	}
+	"basic attribute" {
+		clr=2
+	}
+}
+text {
+	object {
+		x=947
+		y=587
 		width=50
 		height=20
 	}
@@ -8283,4 +8327,17 @@ text {
 	}
 	textix="Setup"
 	align="horiz. centered"
+}
+rectangle {
+	object {
+		x=805
+		y=320
+		width=410
+		height=300
+	}
+	"basic attribute" {
+		clr=14
+		fill="outline"
+		width=5
+	}
 }
