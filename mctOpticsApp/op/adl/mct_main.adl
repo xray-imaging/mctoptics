@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=149
-		y=122
+		x=183
+		y=709
 		width=1570
 		height=865
 	}
@@ -7854,7 +7854,7 @@ text {
 		height=20
 	}
 	control {
-		chan="$(P)$(ER)Energy"
+		chan="$(P)$(ER)EnergyArbitrary"
 		clr=14
 		bclr=51
 	}
@@ -7906,24 +7906,24 @@ rectangle {
 }
 "message button" {
 	object {
-		x=1097
-		y=460
-		width=100
+		x=1125
+		y=590
+		width=80
 		height=20
 	}
 	control {
-		chan="$(P)$(ER)EnergySet"
+		chan="$(P)$(ER)EnergyMove"
 		clr=14
 		bclr=15
 	}
-	label="Set"
+	label="Move"
 	press_msg="1"
 	release_msg="0"
 }
 text {
 	object {
-		x=1122
-		y=430
+		x=1065
+		y=590
 		width=60
 		height=20
 	}
@@ -8267,7 +8267,7 @@ text {
 }
 text {
 	object {
-		x=817
+		x=815
 		y=330
 		width=125
 		height=15
@@ -8279,8 +8279,8 @@ text {
 }
 text {
 	object {
-		x=1007
-		y=587
+		x=870
+		y=590
 		width=140
 		height=20
 	}
@@ -8291,8 +8291,8 @@ text {
 }
 "related display" {
 	object {
-		x=1151
-		y=587
+		x=1014
+		y=590
 		width=50
 		height=20
 	}
@@ -8307,8 +8307,8 @@ text {
 rectangle {
 	object {
 		x=812
-		y=587
-		width=190
+		y=590
+		width=55
 		height=20
 	}
 	"basic attribute" {
@@ -8317,8 +8317,8 @@ rectangle {
 }
 text {
 	object {
-		x=947
-		y=587
+		x=815
+		y=590
 		width=50
 		height=20
 	}
