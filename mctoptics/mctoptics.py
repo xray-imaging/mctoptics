@@ -742,10 +742,14 @@ class MCTOptics():
     def update_suggested_scan_param(self):
         camera_select = str(self.epics_pvs['CameraSelect'].get())
         image_size_x = self.epics_pvs['Cam'+camera_select+'ArraySizeXRBV'].get()
-        suggested_angles = 1500.0 / 2448.0 * image_size_x
+        if image_size_x > 0:
+            suggested_angles = 1500.0 / 2448.0 * image_size_x
+            suggested_angle_step = 180.0 / suggested_angles
+        else:
+            log.error("mctOptics: Suggested scan parameters failed to update: Check camera: %s" % str(camera_select))
         self.epics_pvs['SuggestedAngles'].put(suggested_angles)
-        suggested_angle_step = 180.0 / suggested_angles
         self.epics_pvs['SuggestedAngleStep'].put(suggested_angle_step)
+
 
     def camera_bit(self, camera_id):
         
