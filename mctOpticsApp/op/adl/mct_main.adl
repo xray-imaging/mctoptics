@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
@@ -7523,20 +7523,6 @@ rectangle {
 		fill="outline"
 		width=5
 	}
-}
-"choice button" {
-	object {
-		x=480
-		y=109
-		width=600
-		height=25
-	}
-	control {
-		chan="$(P)$(R)CameraSelect.VAL"
-		clr=14
-		bclr=51
-	}
-	stacking="column"
 }
 rectangle {
 	object {
