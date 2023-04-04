@@ -1,9 +1,9 @@
 # Database for EPICS PVS for txm optics control
 # This database contains all of the PVs used by the txmoptics base class.
 
-###############################
-# TomoScan, Camera  PV Prefixes 
-###############################
+#################################
+# Cameras and Plugins PV Prefixes
+#################################
 
 record(stringout, "$(P)$(R)Camera0PVPrefix")
 {
@@ -33,6 +33,36 @@ record(stringout, "$(P)$(R)FilePlugin0PVPrefix")
 record(stringout, "$(P)$(R)FilePlugin1PVPrefix")
 {
    field(VAL,  "$(FILE_PLUGIN1)")
+}
+
+record(stringout, "$(P)$(R)PvaPlugin0PVPrefix")
+{
+   field(VAL,  "$(PVA_PLUGIN0)")
+}
+
+record(stringout, "$(P)$(R)RoiPlugin0PVPrefix")
+{
+   field(VAL,  "$(ROI_PLUGIN0)")
+}
+
+record(stringout, "$(P)$(R)CbPlugin0PVPrefix")
+{
+   field(VAL,  "$(CB_PLUGIN0)")
+}
+
+record(stringout, "$(P)$(R)PvaPlugin1PVPrefix")
+{
+   field(VAL,  "$(PVA_PLUGIN1)")
+}
+
+record(stringout, "$(P)$(R)RoiPlugin1PVPrefix")
+{
+   field(VAL,  "$(ROI_PLUGIN1)")
+}
+
+record(stringout, "$(P)$(R)CbPlugin1PVPrefix")
+{
+   field(VAL,  "$(CB_PLUGIN1)")
 }
 
 ############################

@@ -7,15 +7,21 @@
 # but they are used by txmoptics.  
 # These PVs are not saved in the txmoptics configuration file.
 
-###############################
-# TomoScan, Camera  PV Prefixes 
-###############################
+#################################
+# Cameras and Plugins PV Prefixes
+#################################
 $(P)$(R)Camera0PVPrefix
 $(P)$(R)Camera1PVPrefix
 $(P)$(R)OverlayPlugin0PVPrefix
 $(P)$(R)OverlayPlugin1PVPrefix
 $(P)$(R)FilePlugin0PVPrefix
 $(P)$(R)FilePlugin1PVPrefix
+$(P)$(R)PvaPlugin0PVPrefix
+$(P)$(R)RoiPlugin0PVPrefix
+$(P)$(R)CbPlugin0PVPrefix
+$(P)$(R)PvaPlugin1PVPrefix
+$(P)$(R)RoiPlugin1PVPrefix
+$(P)$(R)CbPlugin1PVPrefix
 
 ############################
 # Lens Sample X-Y-Z PV Names

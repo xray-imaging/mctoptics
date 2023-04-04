@@ -189,8 +189,8 @@ class MCTOptics():
         if camera_acquire == 1:
             time.sleep(1)
             log.info('restarting the camera')
-            self.control_pvs['Cam'+str(camera_select)+'Acquire'].put('Acquire')
-            self.wait_pv(self.epics_pvs['Cam'+camera_select+'Acquire'], 1)
+            self.control_pvs['Cam'+camera_id+'Acquire'].put('Acquire')
+            self.wait_pv(self.epics_pvs['Cam'+camera_id+'Acquire'], 1)
 
     def sync_bit_select(self, camera_id):
         # ConvertPixelFormat 2bmbSP1:    2bmbSP2:
@@ -742,10 +742,13 @@ class MCTOptics():
     def update_suggested_scan_param(self):
         camera_select = str(self.epics_pvs['CameraSelect'].get())
         image_size_x = self.epics_pvs['Cam'+camera_select+'ArraySizeXRBV'].get()
-        suggested_angles = 1500.0 / 2448.0 * image_size_x
-        self.epics_pvs['SuggestedAngles'].put(suggested_angles)
-        suggested_angle_step = 180.0 / suggested_angles
-        self.epics_pvs['SuggestedAngleStep'].put(suggested_angle_step)
+        if image_size_x > 0:
+            suggested_angles = 1500.0 / 2448.0 * image_size_x
+            suggested_angle_step = 180.0 / suggested_angles
+            self.epics_pvs['SuggestedAngles'].put(suggested_angles)
+            self.epics_pvs['SuggestedAngleStep'].put(suggested_angle_step)
+        else:
+            log.error("mctOptics: Suggested scan parameters failed to update: Check camera: %s" % str(camera_select))
 
     def camera_bit(self, camera_id):
         
