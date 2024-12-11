@@ -17,8 +17,13 @@ Build EPICS base
 
     $ git clone https://github.com/epics-base/epics-base.git
     $ cd epics-base
+    $ git submodule init
+    $ git submodule update
+    $ make distclean (do this in case there was an OS update)
     $ make -sj
     
+.. warning:: if you get a *configure/os/CONFIG.rhel9-x86_64.Common: No such file or directory* error issue this in your csh termimal: $ **setenv EPICS_HOST_ARCH linux-x86_64**
+
 
 Build a minimal synApps
 -----------------------
@@ -27,47 +32,50 @@ To build a minimal synApp::
 
     $ cd ~/epics
 
-- Download in ~/epics `assemble_synApps <https://github.com/EPICS-synApps/support/blob/master/assemble_synApps.sh>`_.sh
-- Edit the assemble_synApps.sh script as follows:
-    #. Set FULL_CLONE=True
-    #. Set EPICS_BASE to point to the location of EPICS base.  This could be on APSshare (the default), or a local version you built.
+- Download in ~/epics `assemble_synApps <https://github.com/EPICS-synApps/assemble_synApps/blob/18fff37055bb78bc40a87d3818777adda83c69f9/assemble_synApps>`_.sh
+- Edit the assemble_synApps.sh script to include only::
     
-    For mctoptics you need 
-    
-    #. ASYN=R4-37
-    #. AUTOSAVE=R5-10
-    #. BUSY=R1-7-2
-    #. XXX=R6-1
+    $modules{'ASYN'} = 'R4-44-2';
+    $modules{'AUTOSAVE'} = 'R5-11';
+    $modules{'BUSY'} = 'R1-7-4';
+    $modules{'XXX'} = 'R6-3';
 
-    You can comment out all of the other modules (ALLENBRADLEY, ALIVE, etc.)
+You can comment out all of the other modules (ALLENBRADLEY, ALIVE, etc.)
 
 - Run::
 
-    $ assemble_synApps.sh
+    $ cd ~/epics
+    $ ./assemble_synApps.sh --dir=synApps --base=/home/beams/FAST/epics/epics-base
+
+.. warning:: replace /home/beams/FAST/ to the full path to your home directory
 
 - This will create a synApps/support directory::
 
     $ cd synApps/support/
 
-- Edit asyn-RX-YY/configure/RELEASE to comment out the lines starting with::
-    
-    IPAC=$(SUPPORT)/
-    SNCSEQ=$(SUPPORT)/
-
-.. warning:: If building for RedHat8 uncomment **TIRPC=YES** in asyn-RX-YY/configure/CONFIG_SITE
-
-
 - Clone the mctoptics module into synApps/support::
     
-    $ git clone https://github.com/tomography/mctoptics.git
+    $ git clone https://github.com/xray-imaging/mctoptics.git
+
+.. warning:: If you are a mctoptics developer you should clone your fork.
 
 - Edit configure/RELEASE add this line to the end::
     
     MCTOPTICS=$(SUPPORT)/mctoptics
 
-- Edit Makefile add this line to the end of the MODULE_LIST::
-    
-    MODULE_LIST += MCTOPTICS
+- Verify that synApps/support/mctoptics/configure/RELEASE::
+
+    EPICS_BASE=/home/beams/FAST/epics/epics-base
+    SUPPORT=/home/beams/FAST/epics/synApps/support
+
+are set to the correct EPICS_BASE and SUPPORT directories and that::
+
+    BUSY
+    AUTOSAVE
+    ASYN
+    XXX
+
+point to the version installed.
 
 - Run the following commands::
 
@@ -77,10 +85,6 @@ To build a minimal synApp::
 Testing the installation
 ------------------------
 
-- Edit /epics/synApps/support/mctoptics/configure to set EPICS_BASE to point to the location of EPICS base, i.e.::
-
-    EPICS_BASE=/APSshare/epics/base-3.15.6
-
 - Start the epics ioc and associated medm screen with::
 
     $ cd ~/epics/synApps/support/mctoptics/iocBoot/iocMCTOptics
@@ -88,4 +92,26 @@ Testing the installation
     $ start_medm
 
 
+Python server
+-------------
 
+- create a dedicated conda environment::
+
+    $ conda create --name mctoptics python=3.9
+    $ conda activate mctoptics
+
+and install all packages listed in the `requirements <https://github.com/xray-imaging/mctoptics/blob/main/envs/requirements.txt>`_.txt 
+
+::
+
+    conda install -c epics pvapy
+    conda install -c epics pyepics
+
+then 
+
+::
+
+    $ cd ~/epics/synApps/support/mctoptics
+    $ pip install .
+    $ cd ~/epics/synApps/support/mctoptics/iocBoot/iocMCTOptics/
+    $ python -i start_mctoptics.py
