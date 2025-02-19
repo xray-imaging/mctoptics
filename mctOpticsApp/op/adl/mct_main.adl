@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams8/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
@@ -218,123 +218,112 @@ composite {
 	bclr=49
 	label="-IOCs"
 }
-composite {
+text {
+	object {
+		x=286
+		y=29
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="2-BM Beamline"
+}
+text {
+	object {
+		x=288
+		y=54
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Web cameras"
+}
+text {
+	object {
+		x=288
+		y=79
+		width=150
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="PDU"
+}
+"shell command" {
+	object {
+		x=255
+		y=25
+		width=25
+		height=25
+	}
+	command[0] {
+		label="2-BM Beamline"
+		name="/home/beams/USER2BMB/start_epics"
+	}
+	clr=0
+	bclr=53
+}
+"shell command" {
+	object {
+		x=255
+		y=50
+		width=25
+		height=25
+	}
+	command[0] {
+		label="2-BM-A"
+		name="firefox 10.54.113.31 &"
+	}
+	command[1] {
+		label="2-BM-B"
+		name="firefox 10.54.113.162 &"
+	}
+	clr=0
+	bclr=53
+	label="- 2"
+}
+"shell command" {
+	object {
+		x=255
+		y=75
+		width=25
+		height=25
+	}
+	command[0] {
+		label="2-BM-A"
+		name="firefox 10.54.113.166 &"
+	}
+	command[1] {
+		label="2-BM-B"
+		name="firefox 10.54.113.167 &"
+	}
+	clr=0
+	bclr=53
+	label="- 2"
+}
+"related display" {
 	object {
 		x=255
 		y=0
-		width=183
-		height=100
+		width=165
+		height=25
 	}
-	"composite name"=""
-	children {
-		text {
-			object {
-				x=286
-				y=29
-				width=150
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="2-BM Beamline"
-		}
-		text {
-			object {
-				x=288
-				y=54
-				width=150
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Web cameras"
-		}
-		text {
-			object {
-				x=288
-				y=79
-				width=150
-				height=20
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="PDU"
-		}
-		"shell command" {
-			object {
-				x=255
-				y=25
-				width=25
-				height=25
-			}
-			command[0] {
-				label="2-BM Beamline"
-				name="/home/beams/USER2BMB/start_epics"
-			}
-			clr=0
-			bclr=53
-		}
-		"shell command" {
-			object {
-				x=255
-				y=50
-				width=25
-				height=25
-			}
-			command[0] {
-				label="2-BM-A"
-				name="firefox 164.54.113.137 &"
-			}
-			command[1] {
-				label="2-BM-B"
-				name="firefox 164.54.113.162 &"
-			}
-			clr=0
-			bclr=53
-			label="- 2"
-		}
-		"shell command" {
-			object {
-				x=255
-				y=75
-				width=25
-				height=25
-			}
-			command[0] {
-				label="2-BM-A"
-				name="firefox 164.54.113.166 &"
-			}
-			command[1] {
-				label="2-BM-B"
-				name="firefox 164.54.113.167 &"
-			}
-			clr=0
-			bclr=53
-			label="- 2"
-		}
-		"related display" {
-			object {
-				x=255
-				y=0
-				width=165
-				height=25
-			}
-			display[0] {
-				label="Beamline status"
-				name="beamline_status.adl"
-				args="EPS=$(EPS)"
-			}
-			display[4] {
-				args=" "
-			}
-			clr=0
-			bclr=53
-			label="- EPS status"
-		}
+	display[0] {
+		label="Beamline status"
+		name="beamline_status.adl"
+		args="EPS=$(EPS)"
 	}
+	display[4] {
+		args=" "
+	}
+	clr=0
+	bclr=53
+	label="- EPS status"
 }
 composite {
 	object {
