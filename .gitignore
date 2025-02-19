@@ -172,3 +172,5 @@ envPaths
 dllPath.bat
 auto_settings.sav*
 auto_positions.sav*
+.iocsh_history
+.loglogin
