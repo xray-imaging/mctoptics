@@ -1,6 +1,6 @@
 #!/bin/csh
 
-setenv EPICS_APP_2BMTS /home/beams/USER2BMB/epics/synApps/support/tomoscan/
+setenv EPICS_APP_2BMTS /home/beams/2BMB/epics/synApps/support/tomoscan/
 setenv EPICS_APP_2BMB /net/s2dserv/xorApps/epics/synApps_5_8/ioc/2bmb
 setenv EPICS_APP_SPINNAKER /APSshare/epics/synApps_6_3/support/areaDetector-R3-14/ADSpinnaker
 setenv EPICS_APP_GENICAM /APSshare/epics/synApps_6_3/support/areaDetector-R3-14/ADGenICam
