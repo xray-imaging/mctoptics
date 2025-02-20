@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams0/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
@@ -212,7 +212,7 @@ composite {
 	}
 	command[0] {
 		label="IOCs"
-		name="medm -x /home/beams/USER2BMB/scripts/iocs_start.adl &"
+		name="medm -x /home/beams/2BMB/bin/iocs_start.adl &"
 	}
 	clr=0
 	bclr=49
@@ -5646,7 +5646,7 @@ text {
 	}
 	command[0] {
 		label="imageJ start"
-		name="/home/beams/USER2BMB/Software/ImageJ/ImageJ.sh"
+		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ"
 	}
 	clr=14
 	bclr=31
@@ -6144,7 +6144,7 @@ text {
 	}
 	command[0] {
 		label="imageJ start"
-		name="/home/beams/USER2BMB/Software/ImageJ/ImageJ.sh"
+		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ"
 	}
 	clr=14
 	bclr=31
