@@ -21,7 +21,7 @@
 
 TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 
-SUPPORT=/home/beams/2BMB/epics/synApps/support
+SUPPORT=/home/beams0/2BMB/epics/synApps/support
 
 BUSY=$(SUPPORT)/busy-R1-7-4
 AUTOSAVE=$(SUPPORT)/autosave-R5-11
