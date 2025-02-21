@@ -1,14 +1,14 @@
 
 file {
-	name="/home/beams/USER2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/DTaggingUpdate.adl"
+	name="/home/beams0/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/DTaggingUpdate.adl"
 	version=030111
 }
 display {
 	object {
-		x=627
-		y=550
+		x=2545
+		y=911
 		width=800
-		height=390
+		height=360
 	}
 	clr=14
 	bclr=4
@@ -89,8 +89,8 @@ display {
 }
 text {
 	object {
-		x=250
-		y=284
+		x=245
+		y=250
 		width=200
 		height=25
 	}
@@ -102,14 +102,14 @@ text {
 text {
 	object {
 		x=15
-		y=284
+		y=250
 		width=220
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@arcturus$"
 }
 text {
 	object {
@@ -126,19 +126,19 @@ text {
 text {
 	object {
 		x=15
-		y=361
+		y=325
 		width=220
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@arcturus$"
 }
 text {
 	object {
 		x=15
-		y=321
+		y=285
 		width=500
 		height=30
 	}
@@ -149,8 +149,8 @@ text {
 }
 text {
 	object {
-		x=250
-		y=361
+		x=245
+		y=325
 		width=200
 		height=25
 	}
@@ -162,19 +162,19 @@ text {
 text {
 	object {
 		x=15
-		y=46
+		y=45
 		width=220
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@arcturus$"
 }
 text {
 	object {
-		x=250
-		y=46
+		x=245
+		y=45
 		width=200
 		height=25
 	}
@@ -186,43 +186,19 @@ text {
 text {
 	object {
 		x=15
-		y=106
+		y=75
 		width=220
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@arcturus$"
 }
 text {
 	object {
-		x=250
-		y=106
-		width=200
-		height=25
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="source /home/dm_bm/etc/dm.setup.sh"
-}
-text {
-	object {
-		x=15
-		y=76
-		width=220
-		height=25
-	}
-	"basic attribute" {
-		clr=14
-	}
-	textix="user2bmb@arcturus$"
-}
-text {
-	object {
-		x=250
-		y=76
+		x=245
+		y=75
 		width=200
 		height=25
 	}
@@ -233,8 +209,8 @@ text {
 }
 text {
 	object {
-		x=250
-		y=136
+		x=245
+		y=105
 		width=200
 		height=25
 	}
@@ -246,19 +222,19 @@ text {
 text {
 	object {
 		x=15
-		y=136
+		y=105
 		width=220
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@arcturus$"
 }
 text {
 	object {
 		x=15
-		y=172
+		y=140
 		width=500
 		height=30
 	}
@@ -270,19 +246,19 @@ text {
 text {
 	object {
 		x=15
-		y=210
+		y=180
 		width=220
 		height=25
 	}
 	"basic attribute" {
 		clr=14
 	}
-	textix="user2bmb@arcturus$"
+	textix="2bmb@arcturus$"
 }
 text {
 	object {
-		x=250
-		y=210
+		x=245
+		y=180
 		width=200
 		height=25
 	}
@@ -294,7 +270,7 @@ text {
 text {
 	object {
 		x=15
-		y=244
+		y=210
 		width=500
 		height=30
 	}

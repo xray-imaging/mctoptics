@@ -44,22 +44,22 @@ TomoScan and Camera PV Prefixes
     - Description
   * - $(P)$(R)Camera0PVPrefix
     - stringout
-    - Contains the prefix for the detector 0, e.g. 2bmbSP1:
+    - Contains the prefix for the detector 0, e.g. 2bmSP1:
   * - $(P)$(R)Camera1PVPrefix
     - stringout
-    - Contains the prefix for the detector 1, e.g. 2bmbSP2:
+    - Contains the prefix for the detector 1, e.g. 2bmSP2:
   * - $(P)$(R)OverlayPlugin0PVPrefix
     - stringout
-    - Contains the prefix for OverlayPlugin 0, e.g. 2bmbSP1:Over1:
+    - Contains the prefix for OverlayPlugin 0, e.g. 2bmSP1:Over1:
   * - $(P)$(R)OverlayPlugin0PVPrefix
     - stringout
-    - Contains the prefix for OverlayPlugin 1, e.g. 2bmbSP2:Over1:
+    - Contains the prefix for OverlayPlugin 1, e.g. 2bmSP2:Over1:
   * - $(P)$(R)OverlayPlugin1PVPrefix
     - stringout
-    - Contains the prefix for FilePlugin 0, e.g. 2bmbSP1:HDF1:
+    - Contains the prefix for FilePlugin 0, e.g. 2bmSP1:HDF1:
   * - $(P)$(R)FilePlugin0PVPrefix
     - stringout
-    - Contains the prefix for FilePlugin 1, e.g. 2bmbSP2:HDF1:
+    - Contains the prefix for FilePlugin 1, e.g. 2bmSP2:HDF1:
 
 Lens Sample X-Y-Z PV Names
 --------------------------

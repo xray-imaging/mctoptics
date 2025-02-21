@@ -193,7 +193,7 @@ class MCTOptics():
             self.wait_pv(self.epics_pvs['Cam'+camera_id+'Acquire'], 1)
 
     def sync_bit_select(self, camera_id):
-        # ConvertPixelFormat 2bmbSP1:    2bmbSP2:
+        # ConvertPixelFormat 2bmSP1:    2bmSP2:
         # ============================================
         # STATE  0:          None        None
         # STATE  1:          Mono8       Mono8
@@ -762,13 +762,13 @@ class MCTOptics():
         # STATE  2: 12-bit")
         # STATE  3: 16-bit")
 
-        # GC_AdcBitDepth 2bmbSP1: 2bmbSP2:
+        # GC_AdcBitDepth 2bmSP1: 2bmSP2:
         # ================================
         # STATE  0:      Bit8     Bit8
         # STATE  1:      Bit10    Bit10
         # STATE  2:      Bit12    Bit12
 
-        # PixelFormat 2bmbSP1:     2bmbSP2:
+        # PixelFormat 2bmSP1:     2bmSP2:
         # ======================================
         # STATE  0:   Mono8        Mono8  
         # STATE  1:   Mono16       Mono16 
@@ -777,7 +777,7 @@ class MCTOptics():
         # STATE  4:     N/A        Mono10p
         # STATE  5:     N/A        Mono12p
 
-        # ConvertPixelFormat 2bmbSP1:    2bmbSP2:
+        # ConvertPixelFormat 2bmSP1:    2bmSP2:
         # ============================================
         # STATE  0:          None        None
         # STATE  1:          Mono8       Mono8

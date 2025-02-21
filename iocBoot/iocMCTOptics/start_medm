@@ -1,10 +1,10 @@
 #!/bin/csh
 
-setenv EPICS_APP_2BMTS /home/beams/USER2BMB/epics/synApps/support/tomoscan/
+setenv EPICS_APP_2BMTS /home/beams/2BMB/epics/synApps/support/tomoscan/
 setenv EPICS_APP_2BMB /net/s2dserv/xorApps/epics/synApps_5_8/ioc/2bmb
-setenv EPICS_APP_SPINNAKER /net/s2dserv/xorApps/PreBuilts/areaDetector-R3-10/ADSpinnaker-R3-1
-setenv EPICS_APP_GENICAM /net/s2dserv/xorApps/PreBuilts/areaDetector-R3-10/ADGenICam-R1-6
-setenv EPICS_APP_AD /net/s2dserv/xorApps/PreBuilts/areaDetector-R3-10/ADCore-R3-10
+setenv EPICS_APP_SPINNAKER /APSshare/epics/synApps_6_3/support/areaDetector-R3-14/ADSpinnaker
+setenv EPICS_APP_GENICAM /APSshare/epics/synApps_6_3/support/areaDetector-R3-14/ADGenICam
+setenv EPICS_APP_AD /APSshare/epics/synApps_6_3/support/areaDetector-R3-14/ADCore
 
 set output = `perl $EPICS_APP_2BMB/release.pl $EPICS_APP_2BMB`
 $output

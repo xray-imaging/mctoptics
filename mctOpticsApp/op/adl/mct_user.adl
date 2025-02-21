@@ -4122,7 +4122,7 @@ text {
 	}
 	command[0] {
 		label="imageJ start"
-		name="/home/beams/USER2BMB/Software/ImageJ/ImageJ.sh"
+		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ"
 	}
 	clr=14
 	bclr=31
@@ -4340,7 +4340,7 @@ text {
 	}
 	command[0] {
 		label="imageJ start"
-		name="/home/beams/USER2BMB/Software/ImageJ/ImageJ.sh"
+		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ"
 	}
 	clr=14
 	bclr=31
