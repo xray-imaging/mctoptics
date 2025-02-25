@@ -22,7 +22,7 @@ Build EPICS base
     $ make distclean (do this in case there was an OS update)
     $ make -sj
     
-.. warning:: if you get a *configure/os/CONFIG.rhel9-x86_64.Common: No such file or directory* error issue this in your csh termimal: $ **setenv EPICS_HOST_ARCH linux-x86_64**
+.. warning:: if you get a *configure/os/CONFIG.rhel9-x86_64.Common: No such file or directory* error issue this in your csh termimal: $ **setenv EPICS_HOST_ARCH linux-x86_64** or bash terminal: $ **export EPICS_HOST_ARCH=linux-x86_64**
 
 
 Build a minimal synApps
@@ -45,7 +45,7 @@ You can comment out all of the other modules (ALLENBRADLEY, ALIVE, etc.)
 - Run::
 
     $ cd ~/epics
-    $ ./assemble_synApps.sh --dir=synApps --base=/home/beams/FAST/epics/epics-base
+    $ ./assemble_synApps --dir=synApps --base=/home/beams/FAST/epics/epics-base
 
 .. warning:: replace /home/beams/FAST/ to the full path to your home directory
 
@@ -89,7 +89,7 @@ Testing the installation
 
     $ cd ~/epics/synApps/support/mctoptics/iocBoot/iocMCTOptics
     $ start_IOC
-    $ start_medm
+    $ start_medm (in another terminal)
 
 
 Python server
