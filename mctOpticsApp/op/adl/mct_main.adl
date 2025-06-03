@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams0/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
 	object {
-		x=107
-		y=579
+		x=619
+		y=1136
 		width=1810
 		height=865
 	}
@@ -4069,7 +4069,7 @@ rectangle {
 	}
 	"dynamic attribute" {
 		vis="calc"
-		calc="A>45"
+		calc="A>=45"
 		chan="$(AD0)cam1:TemperatureActual"
 	}
 }
@@ -4732,7 +4732,7 @@ rectangle {
 	}
 	"dynamic attribute" {
 		vis="calc"
-		calc="A>45"
+		calc="A>=45"
 		chan="$(AD1)cam1:TemperatureActual"
 	}
 }
