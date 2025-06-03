@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=619
-		y=1136
+		x=1602
+		y=873
 		width=1810
 		height=865
 	}
@@ -87,120 +87,109 @@ display {
 		1a7309,
 	}
 }
-composite {
+"text update" {
 	object {
-		x=700
-		y=0
-		width=218
-		height=105
+		x=838
+		y=22
+		width=65
+		height=15
 	}
-	"composite name"=""
-	children {
-		"text update" {
-			object {
-				x=764
-				y=30
-				width=65
-				height=15
-			}
-			monitor {
-				chan="S:SRcurrentAI.VAL"
-				clr=54
-				bclr=50
-			}
-			align="horiz. centered"
-			limits {
-			}
-		}
-		text {
-			object {
-				x=700
-				y=30
-				width=132
-				height=14
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="Current"
-		}
-		text {
-			object {
-				x=843
-				y=30
-				width=75
-				height=14
-			}
-			"basic attribute" {
-				clr=14
-			}
-			textix="mA"
-		}
-		"text update" {
-			object {
-				x=704
-				y=50
-				width=160
-				height=15
-			}
-			monitor {
-				chan="ACIS:ShutterPermit"
-				clr=54
-				bclr=50
-			}
-			clrmod="alarm"
-			align="horiz. centered"
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=704
-				y=70
-				width=160
-				height=15
-			}
-			monitor {
-				chan="OPS:message6"
-				clr=54
-				bclr=50
-			}
-			align="horiz. centered"
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=704
-				y=90
-				width=160
-				height=15
-			}
-			monitor {
-				chan="S:ActualMode"
-				clr=54
-				bclr=50
-			}
-			align="horiz. centered"
-			limits {
-			}
-		}
-		"text update" {
-			object {
-				x=701
-				y=0
-				width=200
-				height=15
-			}
-			monitor {
-				chan="S:IOC:timeOfDayForm2SI"
-				clr=54
-				bclr=50
-			}
-			align="horiz. centered"
-			limits {
-			}
-		}
+	monitor {
+		chan="S:SRcurrentAI.VAL"
+		clr=54
+		bclr=50
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+text {
+	object {
+		x=774
+		y=22
+		width=132
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Current"
+}
+text {
+	object {
+		x=917
+		y=22
+		width=75
+		height=14
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="mA"
+}
+"text update" {
+	object {
+		x=778
+		y=43
+		width=160
+		height=15
+	}
+	monitor {
+		chan="PA:02BM:STA_A_BEAMREADY_PL"
+		clr=54
+		bclr=50
+	}
+	clrmod="alarm"
+	align="horiz. centered"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=651
+		y=83
+		width=400
+		height=15
+	}
+	monitor {
+		chan="OPS:message6"
+		clr=54
+		bclr=50
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=778
+		y=63
+		width=160
+		height=15
+	}
+	monitor {
+		chan="S:ActualMode"
+		clr=54
+		bclr=50
+	}
+	align="horiz. centered"
+	limits {
+	}
+}
+"text update" {
+	object {
+		x=759
+		y=0
+		width=200
+		height=15
+	}
+	monitor {
+		chan="S:IOC:timeOfDayForm2SI"
+		clr=54
+		bclr=50
+	}
+	align="horiz. centered"
+	limits {
 	}
 }
 "shell command" {

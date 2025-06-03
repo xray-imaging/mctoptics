@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_user.adl"
+	name="/home/beams0/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_user.adl"
 	version=030111
 }
 display {
@@ -304,7 +304,7 @@ text {
 		height=15
 	}
 	monitor {
-		chan="ACIS:ShutterPermit"
+		chan="PA:02BM:STA_A_BEAMREADY_PL"
 		clr=54
 		bclr=50
 	}
