@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams0/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
@@ -284,12 +284,12 @@ text {
 		height=25
 	}
 	command[0] {
-		label="2-BM-A"
-		name="firefox 10.54.113.166 &"
+		label="2-BM PDU1"
+		name="firefox 10.54.113.66 &"
 	}
 	command[1] {
-		label="2-BM-B"
-		name="firefox 10.54.113.167 &"
+		label="2-BM PDU2"
+		name="firefox 10.54.113.69 &"
 	}
 	clr=0
 	bclr=53
@@ -4011,7 +4011,7 @@ text {
 	}
 	command[0] {
 		label="imageJ start"
-		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ"
+		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ&"
 	}
 	clr=14
 	bclr=31
@@ -4509,7 +4509,7 @@ text {
 	}
 	command[0] {
 		label="imageJ start"
-		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ"
+		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ&"
 	}
 	clr=14
 	bclr=31
