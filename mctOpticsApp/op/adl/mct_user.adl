@@ -1,6 +1,6 @@
 
 file {
-	name="/home/beams0/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_user.adl"
+	name="/home/beams/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_user.adl"
 	version=030111
 }
 display {
@@ -3311,7 +3311,7 @@ text {
 	}
 	command[0] {
 		label="imageJ start"
-		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ"
+		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ&"
 	}
 	clr=14
 	bclr=31
@@ -3529,7 +3529,7 @@ text {
 	}
 	command[0] {
 		label="imageJ start"
-		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ"
+		name="//home/beams/2BMB/Software/ImageJ_2bm/ImageJ&"
 	}
 	clr=14
 	bclr=31
