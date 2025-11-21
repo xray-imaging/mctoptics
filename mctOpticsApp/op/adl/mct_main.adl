@@ -1,12 +1,12 @@
 
 file {
-	name="/home/beams0/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
+	name="/home/beams/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/mct_main.adl"
 	version=030111
 }
 display {
 	object {
-		x=260
-		y=477
+		x=250
+		y=469
 		width=1750
 		height=865
 	}
@@ -9050,4 +9050,31 @@ composite {
 			label="-Debug"
 		}
 	}
+}
+"shell command" {
+	object {
+		x=1696
+		y=823
+		width=20
+		height=20
+	}
+	command[0] {
+		label="tomo main"
+		name="/home/beams/2BMB/bin/start_jena"
+	}
+	clr=14
+	bclr=32
+}
+text {
+	object {
+		x=1601
+		y=823
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Jena NV100D Piezo"
+	align="horiz. right"
 }
