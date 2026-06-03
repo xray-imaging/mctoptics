@@ -131,7 +131,7 @@ text {
 		height=35
 	}
 	control {
-		chan="$(FE)$(Q1)open.VAL"
+		chan="S02BM-PSS:FES:OpenEPICSC"
 		clr=14
 		bclr=51
 	}
@@ -146,7 +146,7 @@ text {
 		height=35
 	}
 	control {
-		chan="$(FE)$(Q1)close.VAL"
+		chan="S02BM-PSS:FES:CloseEPICSC"
 		clr=14
 		bclr=51
 	}
@@ -164,8 +164,8 @@ oval {
 		clr=60
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="PA:02BM:STA_A_FES_OPEN_PL"
+		vis="if zero"
+		chan="S02BM-PSS:FES:BeamBlockingM"
 	}
 }
 oval {
@@ -179,8 +179,8 @@ oval {
 		clr=20
 	}
 	"dynamic attribute" {
-		vis="if zero"
-		chan="PA:02BM:STA_A_FES_OPEN_PL"
+		vis="if not zero"
+		chan="S02BM-PSS:FES:BeamBlockingM"
 	}
 }
 text {
@@ -204,7 +204,7 @@ text {
 		height=35
 	}
 	control {
-		chan="$(FE)$(Q2)open.VAL"
+		chan="S02BM-PSS:SBS:OpenEPICSC"
 		clr=14
 		bclr=51
 	}
@@ -219,7 +219,7 @@ text {
 		height=35
 	}
 	control {
-		chan="$(FE)$(Q2)close.VAL"
+		chan="S02BM-PSS:SBS:CloseEPICSC"
 		clr=14
 		bclr=51
 	}
@@ -237,8 +237,8 @@ oval {
 		clr=20
 	}
 	"dynamic attribute" {
-		vis="if zero"
-		chan="PA:02BM:STA_B_SBS_OPEN_PL"
+		vis="if not zero"
+		chan="S02BM-PSS:SBS:BeamBlockingM.VAL"
 	}
 }
 oval {
@@ -252,8 +252,8 @@ oval {
 		clr=60
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="PA:02BM:STA_B_SBS_OPEN_PL"
+		vis="if zero"
+		chan="S02BM-PSS:SBS:BeamBlockingM.VAL"
 	}
 }
 "text update" {
@@ -304,7 +304,7 @@ text {
 		height=15
 	}
 	monitor {
-		chan="PA:02BM:STA_A_BEAMREADY_PL"
+		chan="S02BM-PSS:FES:FEEPSPermitM"
 		clr=54
 		bclr=50
 	}
