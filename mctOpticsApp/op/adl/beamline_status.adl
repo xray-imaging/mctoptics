@@ -172,7 +172,7 @@ oval {
 	}
 	"dynamic attribute" {
 		vis="if zero"
-		chan="PA:02BM:STA_A_BEAMREADY_PL"
+		chan="S02BM-PSS:FES:FEEPSPermitM"
 	}
 }
 oval {
@@ -187,7 +187,7 @@ oval {
 	}
 	"dynamic attribute" {
 		vis="if not zero"
-		chan="PA:02BM:STA_A_BEAMREADY_PL"
+		chan="S02BM-PSS:FES:FEEPSPermitM"
 	}
 }
 oval {
@@ -201,8 +201,8 @@ oval {
 		clr=60
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="PA:02BM:STA_A_FES_OPEN_PL"
+		vis="if zero"
+		chan="S02BM-PSS:FES:BeamBlockingM"
 	}
 }
 oval {
@@ -216,8 +216,8 @@ oval {
 		clr=20
 	}
 	"dynamic attribute" {
-		vis="if zero"
-		chan="PA:02BM:STA_A_FES_OPEN_PL"
+		vis="if not zero"
+		chan="S02BM-PSS:FES:BeamBlockingM"
 	}
 }
 oval {
@@ -231,8 +231,8 @@ oval {
 		clr=20
 	}
 	"dynamic attribute" {
-		vis="if zero"
-		chan="PA:02BM:STA_B_SBS_OPEN_PL"
+		vis="if not zero"
+		chan="S02BM-PSS:SBS:BeamBlockingM.VAL"
 	}
 }
 oval {
@@ -246,8 +246,8 @@ oval {
 		clr=60
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="PA:02BM:STA_B_SBS_OPEN_PL"
+		vis="if zero"
+		chan="S02BM-PSS:SBS:BeamBlockingM.VAL"
 	}
 }
 text {
@@ -262,7 +262,7 @@ text {
 	}
 	"dynamic attribute" {
 		vis="if not zero"
-		chan="PA:02BM:STA_A_BEAMREADY_PL"
+		chan="S02BM-PSS:FES:FEEPSPermitM"
 	}
 	textix="Enab."
 }
@@ -278,7 +278,7 @@ text {
 	}
 	"dynamic attribute" {
 		vis="if zero"
-		chan="PA:02BM:STA_A_BEAMREADY_PL"
+		chan="S02BM-PSS:FES:FEEPSPermitM"
 	}
 	textix="Disab."
 }
@@ -293,8 +293,8 @@ text {
 		clr=20
 	}
 	"dynamic attribute" {
-		vis="if zero"
-		chan="PA:02BM:STA_A_FES_OPEN_PL"
+		vis="if not zero"
+		chan="S02BM-PSS:FES:BeamBlockingM"
 	}
 	textix="Close"
 }
@@ -309,8 +309,8 @@ text {
 		clr=16
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="PA:02BM:STA_A_FES_OPEN_PL"
+		vis="if zero"
+		chan="S02BM-PSS:FES:BeamBlockingM"
 	}
 	textix="Open"
 }
@@ -325,8 +325,8 @@ text {
 		clr=16
 	}
 	"dynamic attribute" {
-		vis="if not zero"
-		chan="PA:02BM:STA_B_SBS_OPEN_PL"
+		vis="if zero"
+		chan="S02BM-PSS:SBS:BeamBlockingM.VAL"
 	}
 	textix="Open"
 }
@@ -341,8 +341,8 @@ text {
 		clr=20
 	}
 	"dynamic attribute" {
-		vis="if zero"
-		chan="PA:02BM:STA_B_SBS_OPEN_PL"
+		vis="if not zero"
+		chan="S02BM-PSS:SBS:BeamBlockingM.VAL"
 	}
 	textix="Close"
 }
@@ -358,7 +358,7 @@ text {
 	}
 	"dynamic attribute" {
 		vis="if zero"
-		chan="PA:02BM:STA_A_SRCHD_TO_B"
+		chan="S02BM-PSS:StaA:SecureM"
 	}
 	textix="IS NOT"
 	align="horiz. centered"
@@ -375,7 +375,7 @@ text {
 	}
 	"dynamic attribute" {
 		vis="if zero"
-		chan="PA:02BM:STA_B_SRCHD_TO_B"
+		chan="S02BM-PSS:StaB:SecureM"
 	}
 	textix="IS NOT"
 	align="horiz. centered"
@@ -392,7 +392,7 @@ text {
 	}
 	"dynamic attribute" {
 		vis="if not zero"
-		chan="PA:02BM:STA_A_SRCHD_TO_B"
+		chan="S02BM-PSS:StaA:SecureM"
 	}
 	textix="IS"
 	align="horiz. centered"
@@ -409,7 +409,7 @@ text {
 	}
 	"dynamic attribute" {
 		vis="if not zero"
-		chan="PA:02BM:STA_B_SRCHD_TO_B"
+		chan="S02BM-PSS:StaB:SecureM"
 	}
 	textix="IS"
 	align="horiz. centered"
@@ -450,7 +450,7 @@ oval {
 	}
 	"dynamic attribute" {
 		vis="if not zero"
-		chan="PA:02BM:STA_A_SRCHD_TO_B"
+		chan="S02BM-PSS:StaA:SecureM"
 	}
 }
 oval {
@@ -465,7 +465,7 @@ oval {
 	}
 	"dynamic attribute" {
 		vis="if not zero"
-		chan="PA:02BM:STA_B_SRCHD_TO_B"
+		chan="S02BM-PSS:StaB:SecureM"
 	}
 }
 oval {
@@ -480,7 +480,7 @@ oval {
 	}
 	"dynamic attribute" {
 		vis="if zero"
-		chan="PA:02BM:STA_B_SRCHD_TO_B"
+		chan="S02BM-PSS:StaB:SecureM"
 	}
 }
 oval {
@@ -495,7 +495,7 @@ oval {
 	}
 	"dynamic attribute" {
 		vis="if zero"
-		chan="PA:02BM:STA_A_SRCHD_TO_B"
+		chan="S02BM-PSS:StaA:SecureM"
 	}
 }
 text {
