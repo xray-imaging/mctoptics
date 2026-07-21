@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=1092
-		y=271
+		x=1082
+		y=263
 		width=1750
 		height=910
 	}
@@ -89,8 +89,8 @@ display {
 }
 "shell command" {
 	object {
-		x=256
-		y=104
+		x=255
+		y=82
 		width=120
 		height=25
 	}
@@ -105,7 +105,7 @@ display {
 text {
 	object {
 		x=286
-		y=29
+		y=9
 		width=150
 		height=20
 	}
@@ -117,7 +117,7 @@ text {
 text {
 	object {
 		x=288
-		y=54
+		y=34
 		width=150
 		height=20
 	}
@@ -129,7 +129,7 @@ text {
 text {
 	object {
 		x=288
-		y=79
+		y=59
 		width=150
 		height=20
 	}
@@ -141,7 +141,7 @@ text {
 "shell command" {
 	object {
 		x=255
-		y=25
+		y=5
 		width=25
 		height=25
 	}
@@ -155,7 +155,7 @@ text {
 "shell command" {
 	object {
 		x=255
-		y=50
+		y=30
 		width=25
 		height=25
 	}
@@ -174,7 +174,7 @@ text {
 "shell command" {
 	object {
 		x=255
-		y=75
+		y=55
 		width=25
 		height=25
 	}
@@ -189,25 +189,6 @@ text {
 	clr=0
 	bclr=53
 	label="- 2"
-}
-"related display" {
-	object {
-		x=255
-		y=0
-		width=165
-		height=25
-	}
-	display[0] {
-		label="Beamline status"
-		name="beamline_status.adl"
-		args="EPS=$(EPS)"
-	}
-	display[4] {
-		args=" "
-	}
-	clr=0
-	bclr=53
-	label="- EPS status"
 }
 composite {
 	object {
@@ -9631,4 +9612,565 @@ text {
 	}
 	textix="Jena NV200D Piezo"
 	align="horiz. right"
+}
+polyline {
+	object {
+		x=9
+		y=185
+		width=60
+		height=0
+	}
+	"basic attribute" {
+		clr=53
+	}
+	points {
+		(69,185)
+		(9,185)
+	}
+}
+oval {
+	object {
+		x=53
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:GV3_OPENED_LS"
+	}
+}
+oval {
+	object {
+		x=53
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:GV3_OPENED_LS"
+	}
+}
+oval {
+	object {
+		x=33
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:GV2_OPENED_LS"
+	}
+}
+oval {
+	object {
+		x=13
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:GV1_OPENED_LS"
+	}
+}
+oval {
+	object {
+		x=33
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:GV2_OPENED_LS"
+	}
+}
+oval {
+	object {
+		x=13
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:GV1_OPENED_LS"
+	}
+}
+polyline {
+	object {
+		x=9
+		y=148
+		width=60
+		height=0
+	}
+	"basic attribute" {
+		clr=53
+	}
+	points {
+		(69,148)
+		(9,148)
+	}
+}
+polyline {
+	object {
+		x=249
+		y=185
+		width=160
+		height=0
+	}
+	"basic attribute" {
+		clr=53
+	}
+	points {
+		(409,185)
+		(249,185)
+	}
+}
+oval {
+	object {
+		x=393
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:FLOW8_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=393
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:FLOW8_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=373
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:FLOW7_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=373
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:FLOW7_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=353
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:FLOW6_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=353
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:FLOW6_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=333
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:FLOW5_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=333
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:FLOW5_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=313
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:FLOW4_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=313
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:FLOW4_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=293
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:FLOW3_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=293
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:FLOW3_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=273
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:FLOW2_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=273
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:FLOW2_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=253
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:FLOW1_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=253
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:FLOW1_CURRENT.SEVR"
+	}
+}
+text {
+	object {
+		x=130
+		y=123
+		width=30
+		height=15
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Water Temp"
+}
+text {
+	object {
+		x=14
+		y=123
+		width=50
+		height=15
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Valve"
+}
+polyline {
+	object {
+		x=81
+		y=148
+		width=160
+		height=0
+	}
+	"basic attribute" {
+		clr=53
+	}
+	points {
+		(241,148)
+		(81,148)
+	}
+}
+polyline {
+	object {
+		x=81
+		y=185
+		width=160
+		height=0
+	}
+	"basic attribute" {
+		clr=53
+	}
+	points {
+		(241,185)
+		(81,185)
+	}
+}
+oval {
+	object {
+		x=141
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:TEMP1_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=141
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:TEMP1_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=161
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:TEMP2_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=161
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:TEMP2_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=181
+		y=151
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=15
+	}
+	"dynamic attribute" {
+		vis="if zero"
+		chan="2bmBLEPS:BLEPS:TEMP3_CURRENT.SEVR"
+	}
+}
+oval {
+	object {
+		x=181
+		y=166
+		width=15
+		height=15
+	}
+	"basic attribute" {
+		clr=20
+	}
+	"dynamic attribute" {
+		vis="if not zero"
+		chan="2bmBLEPS:BLEPS:TEMP3_CURRENT.SEVR"
+	}
+}
+text {
+	object {
+		x=289
+		y=124
+		width=30
+		height=15
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="WaterFlow"
+}
+polyline {
+	object {
+		x=253
+		y=148
+		width=160
+		height=0
+	}
+	"basic attribute" {
+		clr=53
+	}
+	points {
+		(413,148)
+		(253,148)
+	}
+}
+"shell command" {
+	object {
+		x=420
+		y=152
+		width=50
+		height=25
+	}
+	command[0] {
+		label="BLEPS"
+		name="medm -x -macro 'P=2bmBLEPS:' /home/beams/2BMB/bin/bleps_status.adl &"
+	}
+	clr=0
+	bclr=54
+	label="-BLEPS"
 }
