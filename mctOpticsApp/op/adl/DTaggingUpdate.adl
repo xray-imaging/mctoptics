@@ -1,13 +1,13 @@
 
 file {
-	name="/home/beams0/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/DTaggingUpdate.adl"
+	name="/home/beams/2BMB/epics/synApps/support/mctoptics/mctOpticsApp/op/adl/DTaggingUpdate.adl"
 	version=030111
 }
 display {
 	object {
-		x=2545
-		y=911
-		width=800
+		x=1055
+		y=634
+		width=900
 		height=360
 	}
 	clr=14
@@ -265,7 +265,7 @@ text {
 	"basic attribute" {
 		clr=14
 	}
-	textix="dmagic show --tomoscan-prefix 2bma:TomoScan:"
+	textix="dmagic show --tomoscan-prefix 2bmb:TomoScan: --set 0"
 }
 text {
 	object {

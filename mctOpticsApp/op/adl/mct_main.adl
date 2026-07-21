@@ -5,8 +5,8 @@ file {
 }
 display {
 	object {
-		x=2124
-		y=230
+		x=1092
+		y=271
 		width=1750
 		height=910
 	}
@@ -239,7 +239,7 @@ composite {
 				height=35
 			}
 			control {
-				chan="$(FE)$(Q1)open.VAL"
+				chan="S02BM-PSS:FES:OpenEPICSC"
 				clr=14
 				bclr=51
 			}
@@ -254,7 +254,7 @@ composite {
 				height=35
 			}
 			control {
-				chan="$(FE)$(Q1)close.VAL"
+				chan="S02BM-PSS:FES:CloseEPICSC"
 				clr=14
 				bclr=51
 			}
@@ -272,8 +272,8 @@ composite {
 				clr=60
 			}
 			"dynamic attribute" {
-				vis="if not zero"
-				chan="PA:02BM:STA_A_FES_OPEN_PL"
+				vis="if zero"
+				chan="S02BM-PSS:FES:BeamBlockingM"
 			}
 		}
 		oval {
@@ -287,8 +287,8 @@ composite {
 				clr=20
 			}
 			"dynamic attribute" {
-				vis="if zero"
-				chan="PA:02BM:STA_A_FES_OPEN_PL"
+				vis="if not zero"
+				chan="S02BM-PSS:FES:BeamBlockingM"
 			}
 		}
 		text {
@@ -312,7 +312,7 @@ composite {
 				height=35
 			}
 			control {
-				chan="$(FE)$(Q2)open.VAL"
+				chan="S02BM-PSS:SBS:OpenEPICSC"
 				clr=14
 				bclr=51
 			}
@@ -327,7 +327,7 @@ composite {
 				height=35
 			}
 			control {
-				chan="$(FE)$(Q2)close.VAL"
+				chan="S02BM-PSS:SBS:CloseEPICSC"
 				clr=14
 				bclr=51
 			}
@@ -345,8 +345,8 @@ composite {
 				clr=20
 			}
 			"dynamic attribute" {
-				vis="if zero"
-				chan="PA:02BM:STA_B_SBS_OPEN_PL"
+				vis="if not zero"
+				chan="S02BM-PSS:SBS:BeamBlockingM.VAL"
 			}
 		}
 		oval {
@@ -360,8 +360,8 @@ composite {
 				clr=60
 			}
 			"dynamic attribute" {
-				vis="if not zero"
-				chan="PA:02BM:STA_B_SBS_OPEN_PL"
+				vis="if zero"
+				chan="S02BM-PSS:SBS:BeamBlockingM.VAL"
 			}
 		}
 		composite {
@@ -454,9 +454,9 @@ composite {
 }
 "related display" {
 	object {
-		x=1439
+		x=1510
 		y=376
-		width=119
+		width=50
 		height=20
 	}
 	display[0] {
@@ -466,7 +466,7 @@ composite {
 	}
 	clr=14
 	bclr=51
-	label="-Update"
+	label="-Help"
 }
 rectangle {
 	object {
@@ -726,7 +726,7 @@ text {
 }
 text {
 	object {
-		x=1286
+		x=1266
 		y=375
 		width=150
 		height=20
@@ -8937,13 +8937,13 @@ composite {
 "shell command" {
 	object {
 		x=1696
-		y=871
+		y=860
 		width=20
 		height=20
 	}
 	command[0] {
 		label="tomo main"
-		name="/home/beams/2BMB/bin/start_jena"
+		name="/home/beams/2BMB/bin/start_jena100D"
 	}
 	clr=14
 	bclr=32
@@ -8951,7 +8951,7 @@ composite {
 text {
 	object {
 		x=1601
-		y=871
+		y=860
 		width=90
 		height=20
 	}
@@ -9589,4 +9589,46 @@ text {
 		clr=20
 	}
 	textix="$(AD1)$(AD1_CAM)"
+}
+"shell command" {
+	object {
+		x=1438
+		y=376
+		width=70
+		height=20
+	}
+	command[0] {
+		label="dmagic"
+		name="bash /home/beams/2BMB/bin/dmagic.sh &"
+	}
+	clr=14
+	bclr=32
+	label="- Update"
+}
+"shell command" {
+	object {
+		x=1696
+		y=887
+		width=20
+		height=20
+	}
+	command[0] {
+		label="tomo main"
+		name="/home/beams/2BMB/bin/start_jena200D"
+	}
+	clr=14
+	bclr=32
+}
+text {
+	object {
+		x=1601
+		y=887
+		width=90
+		height=20
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Jena NV200D Piezo"
+	align="horiz. right"
 }
